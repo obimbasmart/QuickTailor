@@ -1,0 +1,9 @@
+{% macro feature(name, iconName) %}
+    <div class="py-4  rounded-md gap-2 flex flex-col items-center justify-center border-1 border-sc-gray-light-active">
+        <div class="flex justify-center bg-pc-teal-light w-14 h-14 items-center rounded-md">
+            <img src="{{ url_for('static', filename='icons/customization.svg' ) }}" alt="">
+        </div>
+
+        <span class="leading-7"> {{name}} </span>
+    </div>
+{% endmacro %}

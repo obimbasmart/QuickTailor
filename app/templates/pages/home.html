@@ -1,6 +1,17 @@
 {% extends 'base.html' %} {% block content %}
+{% from 'macros/productCard.html' import productCard   %}
+{% include 'partials/hero.html'   %}
+{% from 'macros/productsContainer.html' import productsContainer %}
 
-<h1 class="text-red-500 text-3xl">This is coming form home.html</h1>
+{% include 'partials/features.html'   %}
+
+
+   <section class="p-4">
+        {{
+            productsContainer([1,2,3,4,5,6])
+    }}
+
+   </section>
 
 
 {% endblock %}
