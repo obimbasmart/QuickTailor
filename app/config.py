@@ -4,15 +4,23 @@
 """
 
 import os
-
+from dotenv import load_dotenv
+from flask_mail import Mail
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+load_dotenv()
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+# Flask-Mail Configurations
+    MAIL_SERVER = 'smtp.gmail.com'
+    MAIL_PORT = 587
+    MAIL_USE_TLS = True
+    MAIL_USERNAME = os.getenv('MAIL_USERNAME')
+    MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
 
 class DevConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get(
