@@ -1,0 +1,45 @@
+{% from 'macros/tailorBadge.html' import tailorBadge   %}
+  
+  
+{% macro promotionCard(args) %}
+    <!-- Item 1 -->
+  <div class="relative duration-700 ease-in-out w-5/6 aspect-[1.91]">
+    <img
+      class="w-full h-full object-cover rounded-md"
+      src="https://s3-alpha-sig.figma.com/img/cec8/ba82/e0061b75f858a1848f5cc86fac549693?Expires=1716768000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=XAu3g74bnUC3ZYu-trgOAsNlYXqEdElJQgAg5xXFLayqgZ1Hbj1SkXNJ6N0CcUpxv6Z02gxcn2O4urDCtOloEZFalJtaENoOIELiarYwT1Ky4d7055HewWzbbFZiSmltnAxPahDdvQrD1QnSamBlGHqnryWGqt5k9D9DGcql~ln60oaVNhXXx2D1IC5D3aaqH5acBABWiX7~UPeN5tgBGUIid~nNV9wz8AkVQTO6nyXWn8kFY6F3WXa6bFKmQF-hGZYW60b83hNrKdnVzWsFoWamVM4CPHmtSyX3gKqQzk7Vb9tva6LvGyo~eKQp4fmGbNBy4RklNT5cOOOmZJZjOg__"
+      class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+      alt="..."
+    />
+
+    <div class="px-3 py-1 bg-black text-white bg-opacity-80 backdrop-blur-[0.75px] rounded-b-md absolute bottom-0 w-full">
+            <div class="flex justify-between items-center">
+                <h5
+                class="overflow-hidden whitespace-nowrap text-ellipsis text-sm tablet:text-base leading-7 text- font-roboto font-normal tracking-wide  dark:text-white"
+              >
+                White Agbada and dansiki
+              </h5>
+        
+              <div class="flex items-center  justify-center -space-x-1 rtl:space-x-reverse">
+                <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                </svg>
+        
+                <span
+                class="font-montserrat leading-7 text-white text-xs  px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3"
+                >5.0</span
+              >
+              </div>
+            </div>
+            
+            <hr class="h-[0.5px] my-0 bg-gray-200 border-0 dark:bg-gray-700">
+        
+        
+              <div class="flex items-center justify-between mt-2  w-full">
+                {{ tailorBadge() }}
+                
+              </div>
+          
+          </div>
+
+  </div>
+{% endmacro %}

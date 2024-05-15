@@ -10,6 +10,7 @@ module.exports = {
     extend: {
       colors: {
         "pc-teal-normal": "#006060",
+        "pc-teal-light": "#E6F2F2",
         "sc-gray-normal": "#F2F2F2",
         "sc-gray-dark": "#606060",
         "sc-gray-light-active": "#D8D8D8",
@@ -23,9 +24,11 @@ module.exports = {
         "roboto": ["Roboto", "serif"],
         "montserrat": ["Montserrat", "sans-serif"],
         "montserrat-alternates": ["Montserrat Alternates", "sans-serif"],
-        "obitron": ["Orbitron", "sans-serif"]
+        "trajanpro": [ 'Trajan Pro', "sans-serif"]
       },
-
+      lineHeight: {
+        '7': '21px',
+      },
       borderWidth: {
         "1": "1px"
       },
