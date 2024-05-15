@@ -1,7 +1,7 @@
 {% macro navbarLink(name, link, icon_name) %}
 <a
   href="{{link}}"
-  class="flex items-center gap-1 py-4 px-[18px] text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+  class="flex items-center gap-1 py-4 px-[18px] rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
 >
   <img
     src="{{ url_for('static', filename='/icons/' + icon_name + '.svg' ) }}"
