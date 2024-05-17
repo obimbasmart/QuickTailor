@@ -32,6 +32,17 @@ USER_SIDEBAR_LINKS = [
     {"name": "login", "link": "/aboutus", "is_protected": 0, "icon_name": "login"},
     # Add more "link"s as needed
 ]
+USER_SIDEBAR_VISITORS = [
+
+    {"name": "home", "link": "/", "is_protected": 0, "icon_name": "home"},
+    {"name": "products", "link": "/products", "is_protected": 0, "icon_name": "products"},
+    {"name": "cart", "link": "/aboutus", "is_protected": 0, "icon_name": "cart"},
+    {"name": "saved", "link": "/aboutus", "is_protected": 0, "icon_name": "saved"},
+    {"name": "How it works", "link": "/howitworks", "is_protected": 0, "icon_name": "howitworks"},
+    {"name": "about us", "link": "/aboutus", "is_protected": 0, "icon_name": "aboutus"},
+    {"name": "login", "link": "/aboutus", "is_protected": 0, "icon_name": "login"},
+    # Add more "link"s as needed
+]
 
 ADMIN_NAV_LINKS = [
 
