@@ -37,7 +37,7 @@
         {% for link in user_sidebar_links %}
 
         <li class="rounded-lg"
-        x-bind:class="{ 'bg-sc-gray-normal': page === '{{link.name}}' }"
+        x-bind:class="{ 'bg-pc-teal-light': page === '{{link.name}}' }"
         @click="console.log(page)"
             >
           {{ navbarLink(link.name, link.link, link.icon_name) }}

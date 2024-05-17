@@ -7,3 +7,4 @@ email_views = Blueprint("email_views", __name__)
 
 
 from . import verification
+from . import email_send

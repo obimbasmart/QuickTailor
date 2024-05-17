@@ -1,0 +1,19 @@
+
+{% from 'macros/promotionCard.html' import promotionCard   %}
+{% from 'macros/categoryCard.html' import categoryCard   %}
+
+
+{% macro categories(title, categories) %}
+<section class="p-4 w-full  bg-pc-teal-norma text-xl font-roboto leading-8 text-white text-center font-medium">
+    <h3 class="text-xl font-roboto leading-8 text-black text-center font-medium mb-2">{{title}}</h3>
+        <div class="overflow-scroll rounded-lg md:h-96 flex gap-4 w-full h-auto">
+            {% for category in categories %}
+                {{
+                    categoryCard("Agbada")
+                }}
+            {% endfor %}
+        </div>
+</section>
+{% endmacro %}
+
+

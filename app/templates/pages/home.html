@@ -1,17 +1,36 @@
-{% extends 'base.html' %} {% block content %}
-{% from 'macros/productCard.html' import productCard   %}
-{% include 'partials/hero.html'   %}
+{% extends 'base.html' %} 
 {% from 'macros/productsContainer.html' import productsContainer %}
+{% from 'macros/productCard.html' import productCard %}
+{% from 'macros/categories.html' import categories   %}
+{% from 'macros/promotionCard.html' import promotionCard   %}
+{% from 'macros/tailorCard.html' import tailorCard   %}
+{% from 'macros/tailors.html' import tailors   %}
 
-{% include 'partials/features.html'   %}
+{% block content %} 
+    {% include 'partials/hero.html' %} 
+
+    {% include 'partials/features.html' %}
+
+        <section class="p-4">
+            {{ productsContainer("Trendin this week", [1,2,3,4]) }}
+        </section>
+
+     
+        {% include 'partials/promotions.html' %} 
+  
+            <section class="p-4">
+            {{ productsContainer("Based on your search", [1,2,3,4]) }}
+
+        </section>
+
+        {% include 'partials/promotions.html' %} 
 
 
-   <section class="p-4">
-        {{
-            productsContainer([1,2,3,4,5,6])
-    }}
+        {{tailors("Popular tailors", [1,2,3,4,5,])}}
 
-   </section>
+        {% include 'partials/howItWorks.html'   %}
 
+        {% include 'partials/testimonials.html'   %}
 
+        {% include 'partials/footer.html'   %}
 {% endblock %}
