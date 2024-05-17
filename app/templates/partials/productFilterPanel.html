@@ -1,0 +1,240 @@
+<aside id="sidebar-product-filter-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+    <div class="h-full px-3 py-2 font-normal overflow-y-auto bg-white text-sc-gray-darker dark:bg-gray-800 text-sm font-roboto leading-5">
+      
+      <div class="flex py-6 items-center justify-center gap-3 rounded-md  w-full" role="group">
+         <button type="button" class="leading-7 px-8 py-2 font-medium text-sm text-pc-teal-normal bg-sc-gray-normal  rounded-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
+           Reset
+         </button>
+         <button type="button" class=" font-medium px-8 leading-7 py-2 text-sm  text-white bg-pc-teal-normal  rounded-md border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
+           Apply
+         </button>
+      
+       </div>
+
+       <ul class="space-y-2 font-normal">
+          <li>
+             <button type="button" class="flex items-center w-full p-2 text-base text-sc-gray-darker transition duration-75 rounded-lg group hover:bg-pc-teal-light dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-gender" aria-expanded="true">
+                  
+                   <span class="text-base leading-6  flex-1 ms-2 text-left rtl:text-right whitespace-nowrap">Gender</span>
+                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                     <path d="M19 9L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L5 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                   </svg>
+             </button>
+             <ul id="dropdown-gender" class="py-2 space-y-2">
+         
+                   <li>
+                     <div class="flex items-center w-full p-2 rounded-lg pl-8 group">
+                        <input id="default-checkbox" type="checkbox" value="" class="w-5 h-5 text-pc-teal-normal bg-white border-pc-teal-normal rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="default-checkbox" class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">Male</label>
+                    </div>
+                   </li>
+                   <li>
+                     <div class="flex items-center w-full p-2 rounded-lg pl-8 group">
+                        <input id="default-checkbox" type="checkbox" value="" class="w-5 h-5 text-pc-teal-normal bg-white border-pc-teal-normal rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="default-checkbox" class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">Female</label>
+                    </div>
+                   </li>
+                   <li>
+                     <div class="flex items-center w-full p-2 rounded-lg pl-8 group">
+                        <input id="default-checkbox" type="checkbox" value="" class="w-5 h-5 text-pc-teal-normal bg-white border-pc-teal-normal rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="default-checkbox" class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">Unisex</label>
+                    </div>
+                   </li>
+                 
+             
+             </ul>
+          </li>
+          <li>
+            <button type="button" class="flex items-center w-full p-2 text-base text-sc-gray-darker transition duration-75 rounded-lg group hover:bg-pc-teal-light dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-male-category" data-collapse-toggle="dropdown-male-category">
+                 
+                  <span class="text-base leading-6  flex-1 ms-2 text-left rtl:text-right whitespace-nowrap">Categories</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M19 9L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L5 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+            </button>
+            <ul id="dropdown-male-category" class="hidden py-2 space-y-2">
+        
+                  <li>
+                    <div class="flex items-center w-full p-2 rounded-lg pl-8 group">
+                       <input id="default-checkbox" type="checkbox" value="" class="w-5 h-5 text-pc-teal-normal bg-white border-pc-teal-normal rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                       <label for="default-checkbox" class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">Native</label>
+                   </div>
+                  </li>
+                  <li>
+                    <div class="flex items-center w-full p-2 rounded-lg pl-8 group">
+                       <input id="default-checkbox" type="checkbox" value="" class="w-5 h-5 text-pc-teal-normal bg-white border-pc-teal-normal rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                       <label for="default-checkbox" class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">Casual</label>
+                   </div>
+                  </li>
+                  <li>
+                     <div class="flex items-center w-full p-2 rounded-lg pl-8 group">
+                        <input id="default-checkbox" type="checkbox" value="" class="w-5 h-5 text-pc-teal-normal bg-white border-pc-teal-normal rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="default-checkbox" class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">Coperate</label>
+                    </div>
+                   </li>
+                   <li>
+                     <div class="flex items-center w-full p-2 rounded-lg pl-8 group">
+                        <input id="default-checkbox" type="checkbox" value="" class="w-5 h-5 text-pc-teal-normal bg-white border-pc-teal-normal rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="default-checkbox" class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">Shirts</label>
+                    </div>
+                   </li>
+                   <li>
+                     <div class="flex items-center w-full p-2 rounded-lg pl-8 group">
+                        <input id="default-checkbox" type="checkbox" value="" class="w-5 h-5 text-pc-teal-normal bg-white border-pc-teal-normal rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="default-checkbox" class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">Tops</label>
+                    </div>
+                   </li>
+
+                   <li>
+                     <div class="flex items-center w-full p-2 rounded-lg pl-8 group">
+                        <input id="default-checkbox" type="checkbox" value="" class="w-5 h-5 text-pc-teal-normal bg-white border-pc-teal-normal rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="default-checkbox" class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">Gown</label>
+                    </div>
+                   </li>
+
+                
+            
+            </ul>
+         </li>
+
+         <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+
+         <li>
+            <ul class="py-2">
+                     <div class="relative mb-6 text-pc-teal-normal p-2">
+                        <label for="small-range" class="text-sc-gray-darker text-base leading-6  flex-1 ms-2 text-left rtl:text-right whitespace-nowrap">Price</label>
+                        <input id="small-range" type="range" value="50" class="w-full h-1 mb-6 bg-pc-teal-normal rounded-lg appearance-none cursor-pointer range-sm dark:bg-gray-700">
+                        <span class="mx-3 px-6 p-1 leading-5 rounded-md border-1 border-sc-gray-light-active text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6">₦10,500</span>
+                        <span class="mx-3 px-6 p-1 border-1 rounded-md leading-5 border-sc-gray-light-active text-sm absolute end-0 -bottom-6">₦10,500</span>
+                     </div>     
+            </ul>
+         </li>
+         <li>
+            <button type="button" class="flex items-center w-full p-2 text-base text-sc-gray-darker transition duration-75 rounded-lg group hover:bg-pc-teal-light dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-rating">
+                 
+                  <span class="text-base leading-6  flex-1 ms-2 text-left rtl:text-right whitespace-nowrap">Rating</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M19 9L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L5 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+            </button>
+            <ul id="dropdown-rating" class="hidden py-2 space-y-2">
+        
+                  <li>
+                     <div class="flex items-center w-full p-2 rounded-lg pl-8 group">
+                        <input id="default-radio-5" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-pc-teal-normal focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="default-checkbox" class="flex items-center ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">
+                           <svg class="w-4 h-4 text-yellow-300 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                              <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                           </svg>
+                           <p class="ms-2 text-sm  text-gray-900 dark:text-white">5</p>
+   
+                        </label>
+                     </div>
+                  </li>
+
+                  <li>
+                     <div class="flex items-center w-full p-2 rounded-lg pl-8 group">
+                        <input id="default-radio-4" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-pc-teal-normal focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="default-checkbox" class="flex items-center ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">
+                           <svg class="w-4 h-4 text-yellow-300 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                              <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                           </svg>
+                           <p class="ms-2 text-sm  text-gray-900 dark:text-white">4</p>
+   
+                        </label>
+                     </div>
+                  </li>
+
+                  <li>
+                     <div class="flex items-center w-full p-2 rounded-lg pl-8 group">
+                        <input id="default-radio-3" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-pc-teal-normal focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="default-checkbox" class="flex items-center ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">
+                           <svg class="w-4 h-4 text-yellow-300 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                              <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                           </svg>
+                           <p class="ms-2 text-sm  text-gray-900 dark:text-white">3</p>
+   
+                        </label>
+                     </div>
+                  </li>
+
+                  <li>
+                     <div class="flex items-center w-full p-2 rounded-lg pl-8 group">
+                        <input id="default-radio-2" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-pc-teal-normal focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="default-checkbox" class="flex items-center ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">
+                           <svg class="w-4 h-4 text-yellow-300 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                              <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                           </svg>
+                           <p class="ms-2 text-sm  text-gray-900 dark:text-white">2</p>
+   
+                        </label>
+                     </div>
+                  </li>
+
+                  <li>
+                     <div class="flex items-center w-full p-2 rounded-lg pl-8 group">
+                        <input id="default-radio-1" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-pc-teal-normal focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="default-checkbox" class="flex items-center ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">
+                           <svg class="w-4 h-4 text-yellow-300 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                              <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                           </svg>
+                           <p class="ms-2 text-sm  text-gray-900 dark:text-white">1</p>
+   
+                        </label>
+                     </div>
+                  </li>
+
+            
+            </ul>
+      
+         </li>
+
+         <li>
+            <button type="button" class="flex items-center w-full p-2 text-base text-sc-gray-darker transition duration-75 rounded-lg group hover:bg-pc-teal-light dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-location">
+                 
+                  <span class="text-base leading-6  flex-1 ms-2 text-left rtl:text-right whitespace-nowrap">Location</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M19 9L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L5 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+            </button>
+            <ul id="dropdown-location" class="hidden py-2 space-y-2">
+        
+                  <li>
+                    <div class="flex items-center w-full p-2 rounded-lg pl-8 group">
+                       <input id="default-checkbox" type="checkbox" value="" class="w-5 h-5 text-pc-teal-normal bg-white border-pc-teal-normal rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                       <label for="default-checkbox" class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">Abia</label>
+                   </div>
+                  </li>
+                  <li>
+                    <div class="flex items-center w-full p-2 rounded-lg pl-8 group">
+                       <input id="default-checkbox" type="checkbox" value="" class="w-5 h-5 text-pc-teal-normal bg-white border-pc-teal-normal rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                       <label for="default-checkbox" class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">Owerri</label>
+                   </div>
+                  </li>
+                  <li>
+                    <div class="flex items-center w-full p-2 rounded-lg pl-8 group">
+                       <input id="default-checkbox" type="checkbox" value="" class="w-5 h-5 text-pc-teal-normal bg-white border-pc-teal-normal rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                       <label for="default-checkbox" class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">Lagos</label>
+                   </div>
+                  </li>
+                  <li>
+                     <div class="flex items-center w-full p-2 rounded-lg pl-8 group">
+                        <input id="default-checkbox" type="checkbox" value="" class="w-5 h-5 text-pc-teal-normal bg-white border-pc-teal-normal rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="default-checkbox" class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">Abuja</label>
+                    </div>
+                   </li>
+                   <li>
+                     <div class="flex items-center w-full p-2 rounded-lg pl-8 group">
+                        <input id="default-checkbox" type="checkbox" value="" class="w-5 h-5 text-pc-teal-normal bg-white border-pc-teal-normal rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="default-checkbox" class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">Edo</label>
+                    </div>
+                   </li>
+                
+            
+            </ul>
+         </li>
+         
+       </ul>
+    </div>
+ </aside>
+ 
