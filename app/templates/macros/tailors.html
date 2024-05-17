@@ -1,0 +1,14 @@
+{% from 'macros/tailorCard.html' import tailorCard   %}
+
+{% macro tailors(title, tailors) %}
+  <section class="p-4">
+    <h3 class="text-fdt-brown-dark text-xl leading-9 capitalize font-montserrat">
+      {{title}}
+  </h3>
+    <section class="flex overflow-scroll gap-4">
+        {% for tailor in [1,2,3,3,3] %}
+            {{tailorCard("Belda Designz")}}
+        {% endfor %}
+    </section>
+  </section>
+{% endmacro %}

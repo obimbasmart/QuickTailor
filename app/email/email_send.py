@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-from flask import 
 from flask import Flask 
 from flask_mail import Mail, Message
-from config import Config
+from app.config import Config
 
 app = Flask(__name__)
 app.config.from_object(Config)

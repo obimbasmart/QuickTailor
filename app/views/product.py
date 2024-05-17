@@ -25,9 +25,6 @@ def upload_product():
         storage = S3StorageService('quicktailor-products-bucket')
         img_key = storage.upload_file(file, '444', '111')
         img_url = storage.generate_presigned_url('get_object', img_key)
-        print(img_key)
-        print(file.mimetype)
-        print(file.filename)
         return f"<h1>Done. Url is <a href='{img_url}'>imgLink</a></h1>"
     return render_template('forms/create_product.html',
                            user_sidebar_links=USER_SIDEBAR_LINKS, form=form)
