@@ -16,14 +16,14 @@
         </section>
 
      
-        {% include 'partials/promotions.html' %} 
+        {{ categories("Explore Male Categories", [1,2,3,4])}}
   
             <section class="p-4">
             {{ productsContainer("Based on your search", [1,2,3,4]) }}
 
         </section>
 
-        {% include 'partials/promotions.html' %} 
+        {{ categories("Explore Female Categories", [1,2,3,4])}}
 
 
         {{tailors("Popular tailors", [1,2,3,4,5,])}}
