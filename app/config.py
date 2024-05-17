@@ -18,11 +18,11 @@ class Config:
     SEND_FILE_MAX_AGE_DEFAULT = 0
 
 # Flask-Mail Configurations
-    MAIL_SERVER = 'smtp.gmail.com'
+    MAIL_SERVER = os.getenv("MAIL_SERVER")
     MAIL_PORT = 587
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.getenv('MAIL_USERNAME')
-    MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
+    MAIL_PASSWORD = os.getenv('SENDGRID_API_KEY')
 
 class DevConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get(

@@ -31,3 +31,4 @@ if getenv("APP_ENV") == "production":
 app = create_app(config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+mail = Mail(app)

@@ -16,6 +16,11 @@ def get_all_products():
     return render_template('pages/products.html',
                            user_sidebar_links=USER_SIDEBAR_LINKS, page="products")
 
+@app_views.route('/products/1234', methods=["GET", "POST"])
+def get_product_by_id():
+    return render_template('pages/product.html',
+                           user_sidebar_links=USER_SIDEBAR_LINKS, page="products")
+
 
 @app_views.route('/products/upload', methods=["GET", "POST"])
 def upload_product():
