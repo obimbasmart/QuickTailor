@@ -16,6 +16,8 @@ module.exports = {
         "sc-gray-light-active": "#D8D8D8",
         "sc-gray-light": "#D8D8D8",
         "blue-500": "#006060",
+        "blue-600": "#006060",
+        "blue-700": "#006060",
         "sc-gray-darker": "#2D2D2D"
       },
 
