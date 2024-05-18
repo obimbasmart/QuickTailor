@@ -12,7 +12,7 @@
 
  {% for field in forms_field %}
 
-          {{ authField(field.label, field.placeholder) }}
+          {{ authField(field.label, field.placeholder, field.type) }}
 
         {% endfor %}
 
@@ -27,9 +27,7 @@
     </div>
     <label for="remember" class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300" style="color: #666; font-size:14px;">Remember me</label>
   </div>
-<div>
 {{ btn( submit) }}
-</div>
 </form>
 
 <div class="flex justify-center items-center text-center  text-sm font-normal text-gray-700" style="margin-top:12px; margin-bottom: 20px; font-size:14px;">

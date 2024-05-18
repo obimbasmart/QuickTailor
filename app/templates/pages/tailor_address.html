@@ -1,6 +1,7 @@
 {% from 'macros/authField.html' import authField %}
 {% from 'macros/authField.html' import top %}
 {% from 'macros/authField.html' import btn %}
+{% from 'macros/authField.html' import btn_2 %}
 
 {% extends 'base.html' %}
 {% block content %}
@@ -15,7 +16,7 @@
         {% endfor %}
 
 
-        {{ btn( submit) }}
+        {{ btn_2( submit[0], submit[1], submit[2]) }}
 </form>
 
 </div>
