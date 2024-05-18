@@ -1,0 +1,128 @@
+{% extends 'base.html' %} {% block content %}
+
+<div
+  class="flex w-full px-16 p-4 flex-col justify-center font-roboto items-center gap-16 rounded-t-lg rounded-b-lg bg-white"
+  style="margin-top: 25px"
+>
+  <div
+    class="flex justify-center items-center text-center mb-1 text-base font-medium text-gray-700"
+    style="font-size: 20px; padding: 5px 0px"
+  >
+    Welcome back
+  </div>
+  <div
+    class="flex justify-center items-center text-center text-sm font-normal text-gray-700"
+    style="margin-top: 12px; margin-bottom: 20px; font-size: 14px"
+  >
+    Sign in to continue
+  </div>
+  <form action="" , class="w-full" method="post">
+    <div class="w-full relative" style="margin-bottom: 25px">
+      <label
+        for="floating_outlined"
+        class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
+        style="top: -10px; padding: 0px 3px; margin-left: 20px"
+        >Email</label
+      >
+      <input
+        type="text"
+        id="floating_outlined"
+        class="rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+        style="height: 41px; border-radius: 6px"
+        placeholder="example@gmail.com "
+      />
+    </div>
+
+    <div class="w-full relative">
+      <label
+        for="floating_outlined"
+        class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
+        style="top: -10px; padding: 0px 3px; margin-left: 20px"
+      >
+        Password</label
+      >
+      <input
+        type="text"
+        id="floating_outlined"
+        class="rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+        style="height: 41px; border-radius: 6px"
+        placeholder="Password "
+      />
+
+      <button
+        type="button"
+        class="absolute inset-y-0 end-0 flex items-center pe-3"
+      >
+        <svg
+          class="w-6 h-6 text-gray-500 dark:text-gray-400"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M15.0009 12C15.0009 13.6569 13.6578 15 12.0009 15C10.3441 15 9.00098 13.6569 9.00098 12C9.00098 10.3431 10.3441 9 12.0009 9C13.6578 9 15.0009 10.3431 15.0009 12Z"
+            stroke="#888888"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M12.0012 5C7.52354 5 3.73326 7.94288 2.45898 12C3.73324 16.0571 7.52354 19 12.0012 19C16.4788 19 20.2691 16.0571 21.5434 12C20.2691 7.94291 16.4788 5 12.0012 5Z"
+            stroke="#888888"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </div>
+    <div
+      class="flex justify-end items-center mt-4 text-center text-sm font-normal text-gray-700"
+      style="
+        line-height: 21px;
+        text-decoration-line: underline;
+        margin-bottom: 10px;
+        font-size: 14px;
+      "
+    >
+      Forgot password?
+    </div>
+    <div class="flex items-start mb-5">
+      <div class="flex items-center h-5">
+        <input
+          id="remember"
+          type="checkbox"
+          value=""
+          class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+          required
+        />
+      </div>
+      <label
+        for="remember"
+        class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+        >Remember me</label
+      >
+    </div>
+    <div
+      class="flex justify-center items-center mt-4 text-center text-sm font-normal text-gray-700"
+      style="line-height: 21px; margin-bottom: 10px; font-size: 14px"
+    >
+      <button
+        type="submit"
+        class="text-white bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        style="height: 41px; border-radius: 6px"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+
+  <div
+    class="flex justify-center items-center text-center text-sm font-normal text-gray-700"
+    style="margin-top: 12px; margin-bottom: 20px; font-size: 14px"
+  >
+    Sign in to continue
+  </div>
+</div>
+{% endblock %}
