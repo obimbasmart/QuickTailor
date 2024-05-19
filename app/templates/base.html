@@ -20,14 +20,18 @@
     <title>Document</title>
   </head>
   <body>
-    {% include 'partials/sidebar.html' %}
+    {% include 'partials/sidebar_1.html' %}
+
 
     <div class="sm:ml-64">
-     
-                {% block content %}
+      <div class="dark:border-gray-700 mt-14">
+         
+        {% block content %}
                     
-                {% endblock %}
-    </div>
+        {% endblock %}
+            
+      </div>
+   </div>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>

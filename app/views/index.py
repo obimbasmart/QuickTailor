@@ -14,3 +14,8 @@ from app.views import app_views
 def home():
     return render_template('pages/home.html',
                            user_sidebar_links = USER_SIDEBAR_LINKS, page='home')
+
+@app_views.route("/how-it-works")
+def how_it_works():
+    return render_template('pages/home.html',
+                           user_sidebar_links = USER_SIDEBAR_LINKS, page='home')
