@@ -18,7 +18,8 @@ module.exports = {
         "blue-500": "#006060",
         "blue-600": "#006060",
         "blue-700": "#006060",
-        "sc-gray-darker": "#2D2D2D"
+        "sc-gray-darker": "#2D2D2D",
+	"t3": '#333'
       },
 
       fontFamily: {
