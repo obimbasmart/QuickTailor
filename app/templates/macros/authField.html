@@ -1,0 +1,129 @@
+{# This is the macro that generates the input fields #}
+{% macro authField(label, placeholder, form, index=None) %}
+
+<div class="w-full relative" style="margin-bottom:28px;">
+    {{ form[label.lower()].label(class_="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1", style="top: -10px; padding:0px 3px; margin-left:20px; font-size: 12px; color: var(--Grey-Darker, #2D2D2D);") }}
+
+    {% set input_id = 'floating_outlined_' + (index | string if index else '0') %}
+    {% set eye_icon_id = 'eye_icon_' + (index | string if index else '0') %}
+
+    {% if label.lower() == 'password' or label.lower() == 'confirm_password' %}
+        {{ form[label.lower()](id=input_id, class_="rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-[#E6F2F2] rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer", style="height:41px; border-radius:6px", placeholder=placeholder) }}
+        <button type="button" class="absolute inset-y-0 end-0 flex items-center pe-3" onclick="togglePasswordVisibility('{{ input_id }}', '{{ eye_icon_id }}')">
+            <svg class="w-6 h-6 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <path d="M15.0009 12C15.0009 13.6569 13.6578 15 12.0009 15C10.3441 15 9.00098 13.6569 9.00098 12C9.00098 10.3431 10.3441 9 12.0009 9C13.6578 9 15.0009 10.3431 15.0009 12Z" stroke="#888888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12.0012 5C7.52354 5 3.73326 7.94288 2.45898 12C3.73324 16.0571 7.52354 19 12.0012 19C16.4788 19 20.2691 16.0571 21.5434 12C20.2691 7.94291 16.4788 5 12.0012 5Z" stroke="#888888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path id="eye_slash_{{ index }}" d="M-10 3L40 25" stroke="#888888" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+    {% else %}
+        {{ form[label.lower()](id=input_id, class_="rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-[#E6F2F2] rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer", style="height:41px; border-radius:6px", placeholder=placeholder) }}
+    {% endif %}
+</div>
+
+<script>
+    function togglePasswordVisibility(inputId, iconId) {
+        var input = document.getElementById(inputId);
+        var icon = document.getElementById(iconId);
+        var slash = document.getElementById('eye_slash_' + iconId.split('_').pop());
+
+        if (input.type === "password") {
+            input.type = "text";
+            slash.style.display = 'none';
+        } else {
+            input.type = "password";
+            slash.style.display = 'block';
+        }
+    }
+</script>
+
+{% endmacro %}
+
+
+
+
+
+{# This is the macro for all authentication  pages top header after the main headers example "Create an Account" or you can call it topic of the pages  #}
+
+{% macro top(msg1, msg2) %}
+<div class="flex justify-center items-center text-center mb-1  text-base font-medium text-gray-700" style=" font-size: 20px; letter-spacing: 0.1px; align-self: stretch;  padding:5px 0px; color: #333;">
+	{{ msg1 }}
+</div>
+<div class="flex justify-center items-center text-center  text-sm font-normal text-gray-700" style="margin-top:5px; margin-bottom: 30px; align-self: stretch; font-size:14px; color: #333;">
+	{{ msg2 }}
+</div>
+
+{% endmacro %}
+
+
+
+
+
+{% macro password(repeat=1) %}
+
+{% for i in range(repeat) %}
+<div class="w-full relative" style="margin-bottom: 16px;">
+    {% if i == 0 %}
+        <label for="floating_outlined_{{ loop.index }}" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1" style="top: -10px; padding:0px 3px; margin-left:20px; font-size: 12px; color: var(--Grey-Darker, #2D2D2D);">
+            Password
+        </label>
+        <input type="password" id="floating_outlined_{{ loop.index }}" class="rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" style="height:41px; border-radius:6px;" placeholder="Password" />
+    {% else %}
+        <input type="password" id="floating_outlined_{{ loop.index }}" class="rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" style="height:41px; border-radius:6px;" placeholder="Confirm Password" />
+    {% endif %}
+    <button type="button" class="absolute inset-y-0 end-0 flex items-center pe-3" onclick="togglePasswordVisibility('floating_outlined_{{ loop.index }}', 'eye_icon_{{ loop.index }}')">
+        <svg class="w-6 h-6 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <path d="M15.0009 12C15.0009 13.6569 13.6578 15 12.0009 15C10.3441 15 9.00098 13.6569 9.00098 12C9.00098 10.3431 10.3441 9 12.0009 9C13.6578 9 15.0009 10.3431 15.0009 12Z" stroke="#888888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12.0012 5C7.52354 5 3.73326 7.94288 2.45898 12C3.73324 16.0571 7.52354 19 12.0012 19C16.4788 19 20.2691 16.0571 21.5434 12C20.2691 7.94291 16.4788 5 12.0012 5Z" stroke="#888888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+	     <path id="eye_slash_{{ loop.index }}" d="M-10 3L40 25" stroke="#888888" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+
+        </svg>
+    </button>
+</div>
+{% endfor %}
+
+
+<script>
+    function togglePasswordVisibility(inputId, iconId) {
+        var input = document.getElementById(inputId);
+        var icon = document.getElementById(iconId);
+        var slash = document.getElementById('eye_slash_' + iconId.split('_').pop());
+
+        if (input.type === "password") {
+            input.type = "text";
+            slash.style.display = 'none';
+        } else {
+            input.type = "password";
+            slash.style.display = 'block';
+        }
+    }
+</script>
+
+{% endmacro %}
+{# Macro for single submit button it is generated usig flask wtf form which was passed as argument from the server #}
+
+{% macro btn(log, form) %}
+
+ <div class="flex justify-center  w-full items-center mt-4 text-center  text-sm font-normal text-gray-700" style=" line-height: 21px;  margin-bottom: 10px; font-size:14px;">
+         {{ form['submit'](class_="text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full  bg-pc-teal-normal sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700
+                 dark:focus:ring-blue-800",style ="height:41px; border-radius:6px;", value=log) }}
+
+ </div>
+{% endmacro %}
+
+{# This macro is used to generate double button for authentication pages with two button options to skip and continue 
+   The first button didn't actually submit to the server but rather redirect the user to next page since it is used to skip
+   but the second button is of type submit which submit to the server
+#}
+
+{% macro btn_2(log1, log2, redirect, form) %}
+<div class="flex flex-row">
+  <div class="flex-1 flex justify-center items-center  text-center text-sm font-normal text-gray-700" style="line-height: 21px; margin-right:10px;  margin-bottom: 10px; font-size: 14px;">
+	  <a href="{{ redirect }}" class="w-full"><button type="button" class=" focus:ring-4 focus:outline-none focus:ring-blue-300  font-medium rounded-lg text-pc-teal-normal w-full  sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" style="height: 41px;  border-radius: 6px; background: var(--Grey-Light, #F2F2F2);">{{ log1 }}</button></a>
+  </div>
+  <div class="flex-1 flex justify-center items-center  text-center text-sm font-normal text-gray-700" style="line-height: 21px; margin-bottom:10px; margin-left:10px; font-size: 14px;">
+	  {{ form['submit']( class_="text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full bg-pc-teal-normal sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ", style ="height:41px; border-radius: 6px;", value = log2) }}
+  </div>
+</div>
+{% endmacro %}
+

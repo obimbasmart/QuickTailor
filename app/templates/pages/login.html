@@ -1,7 +1,5 @@
-{% from 'macros/authField.html' import authField %}
 {% from 'macros/authField.html' import top %}
 {% from 'macros/authField.html' import btn %}
-{% from 'macros/authField.html' import password %}
 
 
 {% extends 'base.html' %}
@@ -9,14 +7,10 @@
 <div class="flex w-full px-16 p-4  flex-col justify-center font-roboto items-center gap-16 rounded-t-lg rounded-b-lg bg-white" style="margin-top: 25px;">
 {{ top(top_div[0], top_div[1]) }}
 <form action="", class = "w-full"  method="post">
+{{ form['hidden'] }}
 
- {% for field in forms_field %}
+ {% include 'partials/auth_inputs.html' %}
 
-          {{ authField(field.label, field.placeholder, field.type) }}
-
-        {% endfor %}
-
-  {{ password() }}
 
 <div class="flex justify-end items-center mt-4 text-center  text-sm font-normal text-gray-700" style=" line-height: 21px; text-decoration-line: underline;  margin-bottom: 10px; font-size:14px; color: #666;">
 	<a href="/password_reset"> Forgot password? </a>
@@ -27,7 +21,7 @@
     </div>
     <label for="remember" class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300" style="color: #666; font-size:14px;">Remember me</label>
   </div>
-{{ btn( submit) }}
+{{ btn( submit, form) }}
 </form>
 
 <div class="flex justify-center items-center text-center  text-sm font-normal text-gray-700" style="margin-top:12px; margin-bottom: 20px; font-size:14px;">

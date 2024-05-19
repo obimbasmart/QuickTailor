@@ -69,3 +69,67 @@ measurement_names = [
 default_measurement = {
     name: 0.0 for name in measurement_names
 }
+
+Login_fields = [
+        {"label": "Email", "placeholder": "example@gmail.com",  "type": "email"},
+        {"label": "Password", "placeholder": "password",  "type": "password"},
+
+
+        ]
+Password_reset_fields = [
+        {"label": "Email", "placeholder": "example@gmail.com", "type": "email"}
+        ]
+
+Reset_fields = [
+
+        {"label": "Password", "placeholder": "New Password", "type": "password"},
+        {"label": "Confirm_password", "placeholder": "Confirm Password", "type": "password"}
+
+
+            ]
+Create_user_fields = [
+
+        {"label": "Name", "placeholder": "Okereke Uzochukwu", "type": "text"},
+        {"label": "Email", "placeholder": "example@gmail.com", "type": "email"},
+        {"label": "Phone_number", "placeholder": "07033734183", "type": "number"},
+        {"label": "Password", "placeholder": "password",  "type": "password"}
+
+            ]
+Create_tailor_fields = [
+
+         {"label": "Name", "placeholder": "Okereke Uzochukwu", "type": "text"},
+         {"label": "Email ", "placeholder":"example@gmail.com", "type": "email"},
+         {"label": "Phone_nNumber ", "placeholder": "07033734183", "type": "number"},
+         {"label": "Password", "placeholder": "password",  "type": "password"}
+
+
+            ]
+Tailor_address_fields = [
+
+         {"label": "Street", "placeholder": "#1 Danosa Street, Benin auchi road", "type": "text"},
+         {"label": "City", "placeholder": "Benin City", "type": "text"},
+         {"label": "State", "placeholder": "Edo", "type": "text"}
+
+            ]
+
+Tailor_verification_fields = [
+
+         {"label": "NIN", "placeholder": "12345678909", "type": "number"},
+         {"label": "Upload_NIN_Slip", "placeholder": "Benin City", "type": "file"},
+         {"label": "Upload_your_photo", "placeholder": "Edo", "type": "file"}
+
+            ]
+
+
+auth_top = {
+        "login":[ "Welcome back", "Sign in to continue"],
+        "password_reset":["Forgot Password", "Enter the email associated with your account and we will send an email instruction to reset your password"],
+        "reset":[ "Reset", "Now, let's set up your new password. "],
+        "create_user": ["Create an account", "Signup to get started"],
+        "create_tailor": ["Create an account", "Signup to get started"],
+        "tailor_address": ["Address", " "],
+        "tailor_verification": ["Verification", " "]
+
+
+        }
+

@@ -1,7 +1,5 @@
-{% from 'macros/authField.html' import authField %}
 {% from 'macros/authField.html' import top %}
 {% from 'macros/authField.html' import btn %}
-{% from 'macros/authField.html' import password %}
 
 
 {% extends 'base.html' %}
@@ -9,24 +7,20 @@
 <div class="flex w-full px-16 p-4  flex-col justify-center font-roboto items-center gap-16 rounded-t-lg rounded-b-lg bg-white" style="margin-top: 25px;">
 {{ top(top_div[0], top_div[1]) }}
 <form action="", class = "w-full"  method="post">
+{{ form['hidden'] }}
 
- {% for field in forms_field %}
+{% include 'partials/auth_inputs.html' %}
 
-          {{ authField(field.label, field.placeholder, field.type) }}
-
-        {% endfor %}
-
-  {{ password() }}
 
 <div style="margin-top: 28px">
-{{ btn( submit) }}
+{{ btn( submit, form) }}
 </div>
 </form>
-<div class="flex justify-center items-center text-center overflow-hidden text-sm font-normal text-gray-700" style=" color: var(--Grey-Normal, #808080); margin-top:28px;  margin-bottom: 28px; font-size:14px;">
-___________________________________________________  <span >  or </span>____________________________________________________
+<div class="flex w-full justify-center items-center text-center overflow-hidden text-sm font-normal text-gray-700" style=" color: var(--Grey-Normal, #808080); margin-top:28px;  margin-bottom: 28px; font-size:14px;">
+___________________________________________________  <span style="font-size:14px" >  or </span>____________________________________________________
 </div>
 
-<div class="flex justify-center items-center text-center overflow-hidden text-sm font-normal text-gray-700" style="border-radius: 100px; background: var(--Primary-Color-Teal-Light, #E6F2F2); padding: 10px; color: var(--Grey-Normal, #808080); width: 50px; height: 50px; margin:auto;    margin-bottom: 28px; font-size:14px;">
+<div class="flex justify-center items-center text-center  text-sm font-normal text-gray-700" style="border-radius: 100px; background: var(--Primary-Color-Teal-Light, #E6F2F2); padding: 10px; color: var(--Grey-Normal, #808080); width: 50px; height: 50px; margin:auto;    margin-bottom: 28px; font-size:14px;">
 <a href="/#">
 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none">
 <path d="M20.9992 12.2161C20.9992 11.6082 20.9392 10.9808 20.8392 10.3926H12.1768V13.8631H17.1381C16.9381 14.9807 16.2779 15.9611 15.2976 16.5885L18.2584 18.8434C19.9989 17.2552 20.9992 14.9415 20.9992 12.2161Z" fill="#4280EF"/>
