@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
-{% from 'macros/tailorBadge.html' import   tailorBadge %}
 {% from 'macros/tailorProductCard.html' import tailorProductCard   %}
 {% from 'macros/productReview.html' import productReview   %}
+{% from 'macros/tailorBadge.html' import tailorBadge  %}
 {% from 'macros/productCard.html' import productCard   %}
+{% from 'macros/bottomSheet.html' import bottomSheet   %}
 {% block content %}
 <div  class="md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
    
@@ -103,9 +104,10 @@
                        </span>
                     </div> -->
 
-                <a href="">
-                    <button type="button" class="text-white  text-sm  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">Order</button>
-                </a>
+                    <button 
+                    data-drawer-target="bottom-sheet-select-measurement" data-drawer-show="bottom-sheet-select-measurement"
+                    data-drawer-placement="bottom" aria-controls="bottom-sheet-select-measurement"
+                    type="button" class="text-white  text-sm  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">Order</button>
 
 
                 <div>
@@ -141,16 +143,11 @@
                              <span>64 reviews</span>
                         </p>
                 </div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <g clip-path="url(#clip0_6138_7445)">
-                      <path d="M0.75 6.74827C0.75 6.55871 0.825298 6.36426 0.972378 6.21876C1.26583 5.92708 1.74507 5.92708 2.03852 6.21876L12.0764 16.192L21.9638 6.36426C22.2572 6.07257 22.7365 6.07257 23.0299 6.36426C23.3234 6.65594 23.3234 7.13229 23.0299 7.42397L12.6099 17.7812C12.3164 18.0729 11.8372 18.0729 11.5437 17.7812L0.972378 7.27848C0.826002 7.13299 0.75 6.93783 0.75 6.74827Z" fill="black"/>
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_6138_7445">
-                        <rect width="24" height="24" fill="white" transform="translate(24) rotate(90)"/>
-                      </clipPath>
-                    </defs>
+                
+                <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5 5 1 1 5"/>
                   </svg>
+
               </button>
             </h3>
             
@@ -222,6 +219,61 @@
                 </div>
             {% endfor %}
     </section>
+
+    {% set select_measurement %}
+            <div class="py-3 space-y-5 text-sm text-sc-gray-darker leading-5">
+                <div class="flex items-center gap-3 font-normal">
+                    <input  id="default-radio-1" type="radio" value="" name="default-radio" class="w-4 h-4 ml-1 text-blue-600  border-pc-teal-normal border-1 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="default-radio-1" class="leading-5 ms-2 text-sm dark:text-gray-300">Use my saved measurements</label>
+                </div>
+
+                <div class="flex items-center gap-2"
+                data-drawer-target="bottom-sheet-measurement" data-drawer-show="bottom-sheet-measurement"
+                data-drawer-placement="bottom" aria-controls="bottom-sheet-measurement"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M15 12H12M12 12H9M12 12V9M12 12V15M17 21H7C4.79086 21 3 19.2091 3 17V7C3 4.79086 4.79086 3 7 3H17C19.2091 3 21 4.79086 21 7V17C21 19.2091 19.2091 21 17 21Z" stroke="#008080" stroke-width="1.5" stroke-linecap="round"/>
+                      </svg>
+                    <label for="default-radio-2" class="leading-5 ms-2 text-sm  dark:text-gray-300">Add new measurements</label>
+                </div>
+
+
+            </div>
+    {% endset %}
+
+    {% set add_measurement %}
+        <div class="grid grid-cols-2 gap-x-4 gap-y-5 py-3 font-roboto">
+            
+            {% for measurement in [1,2,1,1,1,1,1,1,1,1] %}
+            <div class="relative">
+                <input type="number" id="default_outlined" class="font-roboto leading-6 block px-3 pb-2.5 pt-4 w-full text-sm text-sc-gray-dark bg-transparent rounded-md border-1 border-[#888] appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                <label for="default_outlined" class="absolute text-sm text-sc-gray-darker dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 start-1 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Top Length</label>
+            </div>
+            {% endfor %}
+            
+        </div>
+    {% endset %}
+
+
+    {{
+        bottomSheet(title="Select a measurements", 
+                    content=select_measurement,
+                    buttonName="Add Measurement",
+                    warning="Select a measurement to proceed",
+                    sheetName="bottom-sheet-select-measurement")
+    }}
+
+    {{
+        bottomSheet(title="Measurement", 
+                    content=add_measurement,
+                    buttonName="Add Measurement",
+                    warning="All measurements are in cm",
+                    sheetName="bottom-sheet-measurement")
+    }}
+
+
+
+
     
 </div>
 
