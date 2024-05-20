@@ -71,52 +71,52 @@ default_measurement = {
 }
 
 Login_fields = [
-        {"label": "Email", "placeholder": "example@gmail.com",  "type": "email"},
-        {"label": "Password", "placeholder": "password",  "type": "password"},
+        {"label": "Email", "placeholder": "example@gmail.com",  "type": "email", "id": "name_id"},
+        {"label": "Password", "placeholder": "password",  "type": "password", "id": "password_id"},
 
 
         ]
 Password_reset_fields = [
-        {"label": "Email", "placeholder": "example@gmail.com", "type": "email"}
+        {"label": "Email", "placeholder": "example@gmail.com", "type": "email", "id": "email_id"}
         ]
 
 Reset_fields = [
 
-        {"label": "Password", "placeholder": "New Password", "type": "password"},
-        {"label": "Confirm_password", "placeholder": "Confirm Password", "type": "password"}
+        {"label": "Password", "placeholder": "New Password", "type": "password", "id": "password_1"},
+        {"label": "Confirm_password", "placeholder": "Confirm Password", "type": "password", "id": "password_2"}
 
 
             ]
 Create_user_fields = [
 
-        {"label": "Name", "placeholder": "Okereke Uzochukwu", "type": "text"},
-        {"label": "Email", "placeholder": "example@gmail.com", "type": "email"},
-        {"label": "Phone_number", "placeholder": "07033734183", "type": "number"},
-        {"label": "Password", "placeholder": "password",  "type": "password"}
+        {"label": "Name", "placeholder": "Okereke Uzochukwu", "type": "name_id", "id": "name_id"},
+        {"label": "Email", "placeholder": "example@gmail.com", "type": "email", "id": "email_id"},
+        {"label": "Phone_number", "placeholder": "07033734183", "type": "number", "id": "phone_id"},
+        {"label": "Password", "placeholder": "password",  "type": "password", "id": "password_id"}
 
             ]
 Create_tailor_fields = [
 
-         {"label": "Name", "placeholder": "Okereke Uzochukwu", "type": "text"},
-         {"label": "Email ", "placeholder":"example@gmail.com", "type": "email"},
-         {"label": "Phone_nNumber ", "placeholder": "07033734183", "type": "number"},
-         {"label": "Password", "placeholder": "password",  "type": "password"}
+        {"label": "Name", "placeholder": "Okereke Uzochukwu", "type": "text", "id": "name_id"},
+        {"label": "Email", "placeholder": "example@gmail.com", "type": "email", "id": "email_id"},
+        {"label": "Phone_number", "placeholder": "07033734183", "type": "number", "id": "phone_id"},
+        {"label": "Password", "placeholder": "password",  "type": "password", "id": "password_id"}
 
 
             ]
 Tailor_address_fields = [
 
-         {"label": "Street", "placeholder": "#1 Danosa Street, Benin auchi road", "type": "text"},
-         {"label": "City", "placeholder": "Benin City", "type": "text"},
-         {"label": "State", "placeholder": "Edo", "type": "text"}
+        {"label": "Street", "placeholder": "#1 Danosa Street, Benin auchi road", "type": "text", "id": "street_id"},
+        {"label": "City", "placeholder": "Benin City", "type": "text", "id": "city_id"},
+        {"label": "State", "placeholder": "Edo", "type": "text", "id": "state_id"}
 
             ]
 
 Tailor_verification_fields = [
 
-         {"label": "NIN", "placeholder": "12345678909", "type": "number"},
-         {"label": "Upload_NIN_Slip", "placeholder": "Benin City", "type": "file"},
-         {"label": "Upload_your_photo", "placeholder": "Edo", "type": "file"}
+        {"label": "NIN", "placeholder": "12345678909", "type": "number", "id": "nin_id"},
+        {"label": "Upload_NIN_Slip", "placeholder": "Benin City", "type": "file", "id": "nin_slip"},
+        {"label": "Upload_your_photo", "placeholder": "Edo", "type": "file", "id": "photo_id"}
 
             ]
 

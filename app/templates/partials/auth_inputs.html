@@ -2,6 +2,6 @@
 
 
 {% for field in forms_field %}
-    {{ authField(field.label, field.placeholder, form, loop.index0) }}
+    {{ authField(field.label, field.placeholder, form, field.id,  field.type,  loop.index0) }}
 {% endfor %}
 
