@@ -2,7 +2,6 @@
 
 from flask import Flask, jsonify, make_response
 from app.config import DevConfig, Config, ProdConfig
-from  flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from os import getenv
@@ -31,4 +30,4 @@ if getenv("APP_ENV") == "production":
 app = create_app(config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-mail = Mail(app)
+
