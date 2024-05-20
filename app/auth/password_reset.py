@@ -27,7 +27,7 @@ def password_reset():
         email = form.email.data
 
     if request.method == "GET":
-        return render_template('pages/password_reset.html',
+        return render_template('forms/password_reset.html',
                            user_sidebar_links = USER_SIDEBAR_VISITORS,
                            top_div = auth_top['password_reset'], 
                            forms_field=Password_reset_fields, 
