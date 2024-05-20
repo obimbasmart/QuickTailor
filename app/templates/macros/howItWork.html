@@ -1,0 +1,11 @@
+{% macro howItWork(title, desc, iconName) %}
+    <div class="space-y-2 leading-6 font-roboto border-1 border-sc-gray rounded-md p-3">
+            <span class="bg-pc-teal-light w-16 h-16 flex justify-center items-center rounded-md">
+                <img src="{{ url_for('static', filename='/icons/' + iconName + '.svg' ) }}" alt="">
+            </span>
+
+            <h3 class="capitalize text-base text-sc-gray-darker">{{title}}</h3>
+
+            <p class="text-sm text-sc-gray-dark"> {{desc}} </p>
+    </div>
+{% endmacro %}
