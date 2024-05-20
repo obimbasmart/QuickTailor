@@ -11,7 +11,7 @@ from wtforms import StringField, SubmitField, PasswordField
 from wtforms.validators import DataRequired, Email, Length
 from app.constants import (USER_SIDEBAR_VISITORS, Create_user_fields,
         Create_tailor_fields, Tailor_address_fields,
-        Tailor_verification_fields, auth_top)
+        Tailor_verification_fields, auth_top, Registration_page_options)
 
 @auth_views.route("/register/user", methods=["GET", "POST"])
 def register_user():
@@ -127,19 +127,29 @@ def register_tailor_verification():
 
 @auth_views.route("/register", methods=["GET", "POST"])
 def register():
+    """ This is the route for registration selectio where user can select 
+    either to register as tailor or normal user
+    """
+    form = RegistrationForm()
+    field_methods = {
+    "submit" : form.submit,
+    "input_field": form.hidden,
+    "hidden": form.hidden_tag()
+
+    }
+
+
     form = RegistrationForm()
     if form.validate_on_submit():
-        # Process the registration data
-        first_name = form.first_name.data
-        last_name = form.last_name.data
-        email = form.email.data
-        phone_number = form.phone_number.data
-        password = form.password.data
+        # Process the user choice of registration
+        option = form.submi.data
+        
         # For demonstration purposes, I'll just print the data
-        print(f'First Name: {first_name}, Last Name: {last_name}, Email: {email}, Phone Number: {phone_number}, Password: {password}')
-        flash('Registration successful!', 'success')
-        return redirect(url_for('login'))
+        """flash('Registration successful!', 'success')"""
+        return option
     if request.method == "GET":
-        return render_template('pages/register.html',
-                           user_sidebar_links = USER_SIDEBAR_LINKS, form=form)
-
+        return render_template('pages/register.html', 
+                            user_sidebar_links = USER_SIDEBAR_VISITORS,
+                            top_div = ['Join Us today'], options =Registration_page_options,
+                            submit = "Create account", form=field_methods)
+    return "hello"
