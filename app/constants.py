@@ -23,15 +23,13 @@ USER_SIDEBAR_LINKS = [
     {"name": "orders", "link": "/orders", "is_protected": 1, "icon_name": "orders"},
     {"name": "cart", "link": "/aboutus", "is_protected": 0, "icon_name": "cart"},
     {"name": "saved", "link": "/aboutus", "is_protected": 0, "icon_name": "saved"},
-    {"name": "notification", "link": "/aboutus", "is_protected": 1, "icon_name": "notifications"},
     {"name": "measurements", "link": "/aboutus", "is_protected": 1, "icon_name": "measurements"},
-    {"name": "messages", "link": "/aboutus", "is_protected": 1, "icon_name": "messages"},
-    {"name": "account", "link": "/aboutus", "is_protected": 1, "icon_name": "account"},
     {"name": "about us", "link": "/aboutus", "is_protected": 0, "icon_name": "aboutus"},
-    {"name": "logout", "link": "/aboutus", "is_protected": 0, "icon_name": "logout"},
-    {"name": "login", "link": "/aboutus", "is_protected": 0, "icon_name": "login"},
+    {"name": "how it works", "link": "/how-it-works", "is_protected": 0, "icon_name": "howitworks"},
     # Add more "link"s as needed
 ]
+
+
 USER_SIDEBAR_VISITORS = [
 
     {"name": "home", "link": "/", "is_protected": 0, "icon_name": "home"},

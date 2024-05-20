@@ -17,5 +17,5 @@ def home():
 
 @app_views.route("/how-it-works")
 def how_it_works():
-    return render_template('pages/home.html',
-                           user_sidebar_links = USER_SIDEBAR_LINKS, page='home')
+    return render_template('pages/howItWorks.html',
+                           user_sidebar_links = USER_SIDEBAR_LINKS, page='how it works')

@@ -9,6 +9,8 @@ node_modules
 .*
 venv/
 .vscode
+sidebar.old.html
+sidebar_1.html
 # *.env
 # .env
 # **/.env

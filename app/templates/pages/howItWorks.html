@@ -1,0 +1,64 @@
+{% extends 'base.html' %} {% from '/macros/howItWork.html' import howItWork %}
+{% block content %}
+<section
+    class="w-full h-[20vh] bg-cover bg-center bg-no-repeat bg-[url('/static/images/hero_img_1.png')] bg-black/30 bg-blend-multiply">
+</section>
+
+<section class="p-4 grid grid-cols-1 md:grid-cols-2 gap-2">
+    {{ howItWork("Style Selection", "Discover different looks that match your
+    taste and event, whether it's timeless or trendy.", "style") }} {{
+    howItWork("Personalize your look", "Discover different looks that match your
+    taste and event, whether it's timeless or trendy.", "personalize") }} {{
+    howItWork("Order Placement", "Discover different looks that match your taste
+    and event, whether it's timeless or trendy.", "order") }} {{
+    howItWork("Progress Tracking", "Discover different looks that match your taste
+    and event, whether it's timeless or trendy.", "progress") }} {{
+    howItWork("Enjoy Your Style", "When your unique creation arrives, wear it
+    proudly, and feel the confidence of owning a special piece that's uniquely
+    you.", "enjoy") }}
+</section>
+
+<div class="p-4">
+    <button type="button"
+        class="font-roboto leading-5 w-full py-2.5 px-6 text-sm font-medium text-pc-teal-normal focus:outline-none bg-sc-gray-light rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+        Get Started
+    </button>
+</div>
+
+<section class="p-4">
+    <h3 class="font-montserrat text-xl text-sc-gray-darker leading-8 text-center mb-3">For Tailors</h3>
+
+    <div class="bg-pc-teal-normal rounded-md pb-4">
+        <div>
+            <img class="rounded-t-md object-cover object-center"
+                src="{{ url_for('static', filename='/images/forTailors.png' ) }}" alt="" />
+        </div>
+
+        <div class="text-sm font-roboto space-y-4 p-4 text-sc-gray-light-hover leading-6">
+            <h4 class="text-base">Join QuickTailor</h4>
+
+            <p class="leading-6 text-balance">
+                Are you a skilled tailor looking to expand your clientele and showcase
+                your craftsmanship to a broader audience? Join us at QuickTailor, where
+                we're revolutionizing the way custom clothing is made and experienced. As
+                a part of our platform, you'll have access to showcase your expertise,
+                connect with customers who appreciate quality, and take your craft to new
+                heights. Join QuickTailor today and become a part of a movement where
+                every stitch tells a story of excellence and individuality. Let's create
+                something extraordinary together."
+            </p>
+        </div>
+
+        <a href="#" class="font-roboto mx-4 space-x-2.5 inline-flex justify-start items-start py-2.5 px-6 text-sm font-medium text-center text-pc-teal-normal rounded-md bg-white focus:ring-4 focus:ring-pc-teal-normal dark:focus:ring-blue-900">
+            <span>Join</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
+                <path d="M7.5 17L17.5 7L7.5 17ZM17.5 7H8.5H17.5ZM17.5 7V16V7Z" fill="#008080"/>
+                <path d="M7.5 17L17.5 7M17.5 7H8.5M17.5 7V16" stroke="#008080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+        </a>
+    </div>
+</section>
+
+{% include 'partials/footer.html'   %}
+
+{% endblock %}
