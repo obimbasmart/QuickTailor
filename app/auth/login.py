@@ -28,7 +28,7 @@ def login():
 
 
     if request.method == "GET":
-        return render_template('pages/login.html',
+        return render_template('forms/login.html',
                            user_sidebar_links = USER_SIDEBAR_VISITORS, 
                            top_div = auth_top['login'], 
                            forms_field=Login_fields, submit="Login", form=field_methods)

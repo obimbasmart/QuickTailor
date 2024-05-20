@@ -35,7 +35,7 @@ def register_user():
         name = form.name.data
      
     if request.method == "GET":
-        return render_template('pages/register_user.html',
+        return render_template('forms/register_user.html',
                            user_sidebar_links = USER_SIDEBAR_VISITORS,
                            top_div = auth_top['create_user'],
                            forms_field=Create_user_fields, submit="Create my account", form=field_methods)
@@ -63,7 +63,7 @@ def register_tailor():
 
 
     if request.method == "GET":
-        return render_template('pages/register_user.html',
+        return render_template('forms/register_user.html',
                            user_sidebar_links = USER_SIDEBAR_VISITORS,
                            top_div = auth_top['create_tailor'],
                            forms_field=Create_user_fields, submit="Create my account", form=field_methods)
@@ -148,7 +148,7 @@ def register():
         """flash('Registration successful!', 'success')"""
         return option
     if request.method == "GET":
-        return render_template('pages/register.html', 
+        return render_template('forms/register.html', 
                             user_sidebar_links = USER_SIDEBAR_VISITORS,
                             top_div = ['Join Us today'], options =Registration_page_options,
                             submit = "Create account", form=field_methods)
