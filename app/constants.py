@@ -120,6 +120,7 @@ Tailor_verification_fields = [
 
             ]
 
+Registration_page_options = ["Customer Signup", "Tailor Signup"]
 
 auth_top = {
         "login":[ "Welcome back", "Sign in to continue"],
@@ -127,8 +128,8 @@ auth_top = {
         "reset":[ "Reset", "Now, let's set up your new password. "],
         "create_user": ["Create an account", "Signup to get started"],
         "create_tailor": ["Create an account", "Signup to get started"],
-        "tailor_address": ["Address", " "],
-        "tailor_verification": ["Verification", " "]
+        "tailor_address": ["Address"],
+        "tailor_verification": ["Verification"]
 
 
         }

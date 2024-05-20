@@ -1,0 +1,97 @@
+{% from 'macros/authField.html' import top %}
+{% from 'macros/authField.html' import btn %}
+
+
+{% extends 'base.html' %}
+{% block content %}
+<style>
+        .selected {
+            background: var(--Primary-Color-Teal-Light, #CCE8E8);
+	    border: 1px solid var(--Primary-Color-Teal-Dark, #006060);
+        }
+        .deselected {
+            background: var(--Primary-Color-Teal-Light, #E6F2F2);
+        }
+    </style>
+<div class="flex w-full  flex-col justify-center font-roboto items-center  rounded-t-lg rounded-b-lg bg-white" style="margin-top: 10px; padding: 0px 20px;">
+	<div class=" w-full flex justify-left items-center text-center mb-4  font-normal  text-pc-teal-normal" style=" font-family: Montserrat; font-weight: 700; font-size: 40px; letter-spacing: 0.15px; align-self: stretch; margin-top: 20px;  padding:5px 0px;">
+        {{ top_div[0]}}
+	</div>
+
+	<form action="" class="w-full" method="post">
+        {{ form['hidden'] }}
+
+	{{ form['input_field'](id="selected_option") }}
+
+	<div id="option1" class="flex flex-row justify-between items-center deselected cursor-pointer" style="border-radius: 8px; height: 108px; margin-bottom: 16px;" onclick="selectOption('Customer signup', 'option1')">
+            <div class="text-pc-teal-normal" style="margin-left: 32px; font-size: 14px; letter-spacing: 1.25px; font-weight: 500; line-height: 150%; font-weight: 500; font-style: normal;">
+                Customer signup
+            </div>
+            <div style="margin-right: 32px;">
+                <svg id="svg-option1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 19.5C16.1421 19.5 19.5 16.1421 19.5 12C19.5 7.85786 16.1421 4.5 12 4.5C7.85786 4.5 4.5 7.85786 4.5 12C4.5 16.1421 7.85786 19.5 12 19.5ZM12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" fill="#006060"/>
+                </svg>
+            </div>
+        </div>
+
+        <div id="option2" class="flex flex-row justify-between items-center deselected cursor-pointer" style="border-radius: 8px; height: 108px; margin-bottom: 23px;" onclick="selectOption('Tailor signup', 'option2')">
+            <div class="text-pc-teal-normal" style="margin-left: 32px; font-size: 14px; letter-spacing: 1.25px; font-weight: 500; line-height: 150%; font-weight: 500; font-style: normal;">
+                Tailor signup
+            </div>
+            <div style="margin-right: 32px;">
+                <svg id="svg-option2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 19.5C16.1421 19.5 19.5 16.1421 19.5 12C19.5 7.85786 16.1421 4.5 12 4.5C7.85786 4.5 4.5 7.85786 4.5 12C4.5 16.1421 7.85786 19.5 12 19.5ZM12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" fill="#006060"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="flex justify-center w-full items-center mt-4 text-center text-sm font-normal text-gray-700" style="line-height: 21px; border-radius: 6px; margin-bottom: 10px; font-size: 14px;">
+            {{ form.submit( id ="submit", class_="text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800", style="height: 41px; color: var(--Grey-Normal, #808080); background: var(--Grey-Light, #F2F2F2); border-radius: 6px;", value=submit, disabled=True) }}
+        </div>
+    </form>
+
+    <div class="flex justify-center items-center text-center text-sm font-normal text-gray-700" style="margin-top: 12px; margin-bottom: 20px; font-size: 14px;">
+        <div style="margin-right: 10px; color: var(--Grey-Dark, #606060);"> Already have an account?</div>
+        <a href="/login" class="no-underline hover:text-blue-500 text-pc-teal-normal ml-0">Login</a>
+    </div>
+</div>
+
+<script>
+    function selectOption(optionText, optionId) {
+        // Update hidden input value
+        document.getElementById('selected_option').value = optionText;
+
+
+        // Deselect all options
+        document.getElementById('option1').classList.remove('selected');
+        document.getElementById('option1').classList.add('deselected');
+        document.getElementById('option2').classList.remove('selected');
+        document.getElementById('option2').classList.add('deselected');
+
+        // Reset all SVGs to initial state
+        document.getElementById('svg-option1').innerHTML = `
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 19.5C16.1421 19.5 19.5 16.1421 19.5 12C19.5 7.85786 16.1421 4.5 12 4.5C7.85786 4.5 4.5 7.85786 4.5 12C4.5 16.1421 7.85786 19.5 12 19.5ZM12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" fill="#006060"/>
+        `;
+        document.getElementById('svg-option2').innerHTML = `
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 19.5C16.1421 19.5 19.5 16.1421 19.5 12C19.5 7.85786 16.1421 4.5 12 4.5C7.85786 4.5 4.5 7.85786 4.5 12C4.5 16.1421 7.85786 19.5 12 19.5ZM12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" fill="#006060"/>
+        `;
+
+        // Select the chosen option
+        document.getElementById(optionId).classList.remove('deselected');
+        document.getElementById(optionId).classList.add('selected');
+
+        // Update the SVG of the selected option
+        document.getElementById('svg-' + optionId).innerHTML = `
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 19.5C16.1421 19.5 19.5 16.1421 19.5 12C19.5 7.85786 16.1421 4.5 12 4.5C7.85786 4.5 4.5 7.85786 4.5 12C4.5 16.1421 7.85786 19.5 12 19.5ZM12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" fill="#006060"/>
+            <path d="M12 17.25C14.8995 17.25 17.25 14.8995 17.25 12C17.25 9.10051 14.8995 6.75 12 6.75C9.10051 6.75 6.75 9.10051 6.75 12C6.75 14.8995 9.10051 17.25 12 17.25Z" fill="#006060"/>
+        `;
+
+        // Enable the submit button and change its background
+        document.getElementById("submit").disabled = false;
+        document.getElementById("submit").style.background =  "var(--Primary-Color-Teal-Dark, #006060)";
+         document.getElementById("submit").style.color = " var(--White, #FFF)";
+
+    }
+</script>
+{% endblock %}
+

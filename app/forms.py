@@ -7,7 +7,9 @@ from wtforms import (
     FileField,
     SubmitField,
     PasswordField,
-    StringField
+    StringField,
+    HiddenField,
+    RadioField
 )
 from wtforms.validators import (DataRequired, InputRequired, Email, Regexp, 
         NumberRange, Length)
@@ -29,9 +31,8 @@ class RegistrationForm(FlaskForm):
     nin  = StringField('NIN', validators=[InputRequired(), Regexp('^[0-9]*$',
     message= "only number") ])
     nin_slip = FileField("Upload NIN Slip", validators=[FileRequired()])
+    hidden = HiddenField("Hidden", validators=[FileRequired()])
     your_photo = FileField("Upload your photo", validators=[FileRequired()])
-
-
     password = PasswordField('Password', validators=[DataRequired(), Length(min=6)])
 
     submit = SubmitField('Submit')

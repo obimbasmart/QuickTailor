@@ -52,12 +52,21 @@
 {# This is the macro for all authentication  pages top header after the main headers example "Create an Account" or you can call it topic of the pages  #}
 
 {% macro top(msg1, msg2) %}
+{% if msg2 %}
 <div class=" w-full flex justify-center items-center text-center mb-1  text-base font-medium text-gray-700" style=" font-size: 20px; letter-spacing: 0.1px; align-self: stretch; margin-top: 20px;  padding:5px 0px; color: #333;">
-	{{ msg1 }}
+        {{ msg1 }}
 </div>
 <div class="flex justify-center items-center text-center  text-sm font-normal text-gray-700" style="margin-top:5px; margin-bottom: 30px; align-self: stretch;  font-size:14px; color: #333;">
 	{{ msg2 }}
 </div>
+{% else %}
+
+<div class=" w-full flex justify-center items-center mb-8  text-center  text-base font-medium text-gray-700" style=" font-size: 20px; letter-spacing: 0.1px; align-self: stretch; margin-top: 20px;  padding:5px 0px; color: #333;">
+        {{ msg1 }}
+</div>
+
+{% endif %}
+
 {% endmacro %}
 
 
