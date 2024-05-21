@@ -15,8 +15,8 @@ class Config:
 
 # Flask-Mail Configurations
     MAIL_SERVER = os.getenv("MAIL_SERVER")
-    MAIL_PORT = 25
-    MAIL_USE_TLS = 1
+    MAIL_PORT = 587
+    MAIL_USE_TLS = True
     MAIL_USERNAME = os.getenv('MAIL_USERNAME')
     MAIL_PASSWORD = os.getenv('SENDGRID_API_KEY')
 
