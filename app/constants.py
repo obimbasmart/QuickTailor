@@ -23,7 +23,6 @@ USER_SIDEBAR_LINKS = [
     {"name": "orders", "link": "/orders", "is_protected": 1, "icon_name": "orders"},
     {"name": "cart", "link": "/aboutus", "is_protected": 0, "icon_name": "cart"},
     {"name": "saved", "link": "/aboutus", "is_protected": 0, "icon_name": "saved"},
-    {"name": "measurements", "link": "/aboutus", "is_protected": 1, "icon_name": "measurements"},
     {"name": "about us", "link": "/aboutus", "is_protected": 0, "icon_name": "aboutus"},
     {"name": "how it works", "link": "/how-it-works", "is_protected": 0, "icon_name": "howitworks"},
     # Add more "link"s as needed

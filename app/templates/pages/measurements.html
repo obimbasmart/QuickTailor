@@ -1,0 +1,45 @@
+{% extends 'page_wrapper.html' %}
+
+{% block page_content %}
+<div>
+
+    {% set input_styles = "font-roboto leading-6 block px-3 pb-2.5 pt-4 w-full text-sm text-sc-gray-dark bg-transparent rounded-md border-1 border-[#888] appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" %}
+    {% set label_styles = "absolute text-sm text-sc-gray-darker dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 start-1 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto" %}
+
+    <h1 class="text-xl mb-10 font-montserrat leading-8 text-center">Measurements</h1>
+    <form action="post" class="w-full flex flex-col gap-10 items-center">
+
+        {{form.hidden_tag()}}
+    
+        <div class="grid grid-cols-2 gap-4">
+            {% for field in form %}
+                {% if field.type != 'CSRFTokenField' and field.type != 'SubmitField' %}
+                <p class="relative">
+                    <!-- input -->
+                    {{field(class=input_styles, placeholder="",
+                            type="number", id="default_outlined")}}
+                    <!-- label  -->
+                    {{field.label(class=label_styles, for="default_outlined")}}
+                   
+                </p>
+            {%endif%}
+        {% endfor %}
+        </div>
+        
+        <!-- button -->
+        <div class="w-full">
+            <div class="inline-flex items-center space-x-1 justify-center w-full">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none">
+                <path d="M9.5 13.5C9.91421 13.5 10.25 13.1642 10.25 12.75C10.25 12.3358 9.91421 12 9.5 12C9.08579 12 8.75 12.3358 8.75 12.75C8.75 13.1642 9.08579 13.5 9.5 13.5Z" fill="#606060"/>
+                <path d="M9.5 7.5V10.5" stroke="#606060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M3.08608 13.5791L8.15899 3.43318C8.71181 2.32761 10.2895 2.32761 10.8423 3.43318L15.9153 13.5791C16.4139 14.5764 15.6887 15.7499 14.5736 15.7499H4.42772C3.31264 15.7499 2.5874 14.5764 3.08608 13.5791Z" stroke="#606060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="text-xs text-sc-gray-dark leading-4 tracking-wider">All measurements are in cm</span>
+            </div>
+
+                    {{form.submit(type='button', class="inline-block  text-white  text-sm  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center")}}
+        </div>        
+
+    </form>
+</div>
+{% endblock %}

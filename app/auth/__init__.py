@@ -5,5 +5,6 @@ from flask import Blueprint
 
 auth_views = Blueprint("auth_views", __name__)
 
-from . import login, register, password_reset
+from . import register, password_reset
+from . import authentication
 

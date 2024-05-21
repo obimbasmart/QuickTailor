@@ -2,18 +2,22 @@
 
 '''App forms'''
 
+from app import db
 from flask_wtf import FlaskForm
 from wtforms import (
     FileField,
     SubmitField,
     PasswordField,
     StringField,
-    HiddenField,
-    RadioField
+    DecimalField,
+    BooleanField
 )
-from wtforms.validators import (DataRequired, InputRequired, Email, Regexp, 
-        NumberRange, Length)
-from flask_wtf.file import FileRequired
+from wtforms.validators import (DataRequired, 
+                                Email,
+                                ValidationError)
+from .models.user import User
+from .models.tailor import Tailor
+
 
 class CreateProductForm(FlaskForm):
     file = FileField("Choose file")
@@ -21,24 +25,35 @@ class CreateProductForm(FlaskForm):
 
 class RegistrationForm(FlaskForm):
     first_name = StringField('First Name', validators=[DataRequired()])
-    name = StringField('Name', validators=[DataRequired()])
-    last_name = StringField('Last Name', validators=[DataRequired()])
+    # last_name = StringField('Last Name', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
     phone_number = StringField('Phone Number', validators=[DataRequired()])
-    street = StringField('Street', validators=[DataRequired()])
-    city = StringField('City', validators=[DataRequired()])
-    state = StringField('State', validators=[DataRequired()])
-    nin  = StringField('NIN', validators=[InputRequired(), Regexp('^[0-9]*$',
-    message= "only number") ])
-    nin_slip = FileField("Upload NIN Slip", validators=[FileRequired()])
-    hidden = HiddenField("Hidden", validators=[FileRequired()])
-    your_photo = FileField("Upload your photo", validators=[FileRequired()])
-    password = PasswordField('Password', validators=[DataRequired(), Length(min=6)])
+    password = PasswordField("Password", validators=[DataRequired()])
+    submit = SubmitField('Create account')
 
-    submit = SubmitField('Submit')
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).one_or_none()
+        tailor = User.query.filter_by(email=email.data).one_or_none()
+        if not user is None or not tailor is None:
+            raise ValidationError("Email already exist")
+
+
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired(), Length(min=6)])
-    confirm_password = PasswordField('', validators=[DataRequired(), Length(min=6)])
-    submit = SubmitField('Submit')
+    password = PasswordField('Password', validators=[DataRequired()])
+    remember_me = BooleanField('Remember Me')
+    submit = SubmitField('Login')
 
+
+class MeasurementForm(FlaskForm):
+    top_length = DecimalField("Top Length", places=2)
+    shoulder = DecimalField("Shoulder", places=2)
+    sleeve_length = DecimalField("Sleeve Length", places=2)
+    neck = DecimalField("Neck", places=2)
+    muscle = DecimalField("Muscle", places=2)
+    waist = DecimalField("Waist", places=2)
+    laps = DecimalField("Laps", places=2)
+    knee = DecimalField("Knee", places=2)
+    stomach = DecimalField("Stomach", places=2)
+    chest_burst = DecimalField("Chest/Burst", places=2)
+    submit = SubmitField("Save")
