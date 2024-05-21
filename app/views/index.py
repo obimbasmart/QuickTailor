@@ -19,3 +19,11 @@ def home():
 def how_it_works():
     return render_template('pages/howItWorks.html',
                            user_sidebar_links = USER_SIDEBAR_LINKS, page='how it works')
+
+
+@app_views.route("/register")
+def register():
+    return render_template('pages/register.html',
+                           user_sidebar_links = USER_SIDEBAR_LINKS, page='home')
+
+
