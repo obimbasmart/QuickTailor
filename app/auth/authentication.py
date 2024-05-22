@@ -8,12 +8,16 @@ from app.forms import RegistrationForm, LoginForm
 from app.models.user import User
 from app.models.tailor import Tailor
 from app import db
-from flask import render_template, abort, flash, redirect, url_for
-from flask_login import login_user, logout_user, login_required
+from flask import render_template, abort, flash, redirect, request, url_for
+from flask_login import login_user, logout_user, current_user, login_required
 from app.constants import (USER_SIDEBAR_LINKS)
+from app.decorators import redirect_if_authenticated
 
 @auth_views.route("/register/<user_type>", methods=["GET", "POST"])
+@redirect_if_authenticated
 def register(user_type=None):
+    if current_user.is_authenticated:
+        return redirect(request.referrer)
 
     if user_type is None:
         return render_template('pages/register.html')
@@ -45,8 +49,11 @@ def register(user_type=None):
 
 
 @auth_views.route("/login", methods=["GET", "POST"])
+@redirect_if_authenticated
 def login():
     form = LoginForm()
+    if current_user.is_authenticated:
+        return redirect(request.referrer or url_for('app_views.home'))
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).one_or_none()
         tailor = Tailor.query.filter_by(email=form.email.data).one_or_none()
