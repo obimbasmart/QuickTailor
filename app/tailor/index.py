@@ -15,5 +15,5 @@ def dashboard():
 
 @tailor_views.route("/account")
 def account():
-    return render_template('pages/home.html',
+    return render_template('pages/tailor/account.html',
                            page='account')
