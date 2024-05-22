@@ -1,7 +1,7 @@
 from app import app
 from app.views import app_views
 from app.auth import auth_views
-from app.sendgrid import email_service
+from app.email import email_service
 from app.About_us import page_viewer
 
 

@@ -1,0 +1,12 @@
+{% macro error(message) %}
+    <span class="flex items-center gap-1 text-sm mt-1">
+        <svg
+            class="-mt-[2px]" 
+            xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 17 17" fill="none">
+            <path d="M8.00065 12.5001C8.36884 12.5001 8.66732 12.2016 8.66732 11.8334C8.66732 11.4652 8.36884 11.1667 8.00065 11.1667C7.63246 11.1667 7.33398 11.4652 7.33398 11.8334C7.33398 12.2016 7.63246 12.5001 8.00065 12.5001Z" fill="#E20808"/>
+            <path d="M8 7.16675V9.83342" stroke="#E20808" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2.29874 12.5703L6.80799 3.55174C7.29939 2.56901 8.70179 2.56902 9.19319 3.55174L13.7025 12.5703C14.1457 13.4569 13.5011 14.4999 12.5099 14.4999H3.4913C2.50012 14.4999 1.85546 13.4569 2.29874 12.5703Z" stroke="#E20808" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        <span class="text-[#E20808] text-xs font-normal">{{ message }}</span>
+        </span>
+{% endmacro %}
