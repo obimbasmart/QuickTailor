@@ -71,7 +71,7 @@ def login():
                         form=form)
 
 @auth_views.route("/logout", methods=["GET", "POST"])
-
+@login_required
 def logout():
     logout_user()
     flash("Successfully logout")

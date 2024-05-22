@@ -23,7 +23,7 @@
             <img src="{{ url_for('static', filename='/icons/qt-logo.svg' ) }}" class="h-8 me-3" alt="FlowBite Logo" />
           </a>
         <div class="flex items-center">
-            <div class="flex items-center ms-3">
+            <div class="hidden flex items-center ms-3">
               <div>
                 <button type="button" class="w-8 h-8 flex items-center  p-2 justify-center  text-sm bg-pc-teal-light rounded-full   dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                   <span class="sr-only">Open user menu</span>
@@ -63,7 +63,12 @@
                 </ul>
               </div>
             </div>
+
+            <a href="{{ url_for('auth_views.login' ) }}">
+              <span class="text-pc-teal-normal font-medium text-sm font-roboto leading-6">Login</span>
+            </a>
         </div>
+
       </div>
     </div>
 </nav>

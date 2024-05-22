@@ -14,3 +14,4 @@ sidebar_1.html
 # *.env
 # .env
 # **/.env
+sendgrid.env
