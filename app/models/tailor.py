@@ -7,8 +7,9 @@ from sqlalchemy import String, Boolean, Integer
 from sqlalchemy.orm import Mapped, mapped_column
 from ..models.base_model import BaseModel
 from .base_user import BaseUser
+from flask_login import UserMixin
 
-class Tailor(BaseUser, BaseModel):
+class Tailor(BaseUser, BaseModel, UserMixin):
     __tablename__ = 'tailors'
 
     #basic attrs

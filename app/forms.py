@@ -33,7 +33,7 @@ class RegistrationForm(FlaskForm):
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).one_or_none()
-        tailor = User.query.filter_by(email=email.data).one_or_none()
+        tailor = Tailor.query.filter_by(email=email.data).one_or_none()
         if not user is None or not tailor is None:
             raise ValidationError("Email already exist")
 
@@ -43,6 +43,13 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Login')
+    
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).one_or_none()
+        tailor = Tailor.query.filter_by(email=email.data).one_or_none()
+        if  user is None and  tailor is None:
+            raise ValidationError("Email not registered")
+
 
 
 class MeasurementForm(FlaskForm):

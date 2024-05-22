@@ -35,10 +35,10 @@
               <div class="font-roboto z-50 px-4 hidden my-4 text-base list-none bg-white divide-y divide-sc-gray-light-hover rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
                 <div class="px-4 py-3" role="none">
                   <p class="text-base text-sc-gray-darker leading-6 dark:text-white" role="none">
-                    Oleg Bionic
+		  {{ current_user.first_name }}
                   </p>
                   <p class="text-xs  text-sc-gray-dark leading-5 truncate dark:text-gray-300" role="none">
-                    oleg.bionic@gmail.com
+		  {{ current_user.email }}
                   </p>
                 </div>
                 <ul class="tracking-normal py-1 text-sc-gray-darker text-sm leading-6" role="none">
@@ -58,7 +58,7 @@
                     <a href="#" class="block px-4 py-2  hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Message</a>
                   </li>
                   <li>
-                    <a href="#" class="block px-4 py-2 text-[#C20000]  hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
+                    <a href="/logout" class="block px-4 py-2 text-[#C20000]  hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
                   </li>
                 </ul>
               </div>

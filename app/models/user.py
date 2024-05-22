@@ -9,8 +9,9 @@ from ..models.base_model import BaseModel
 from sqlalchemy import JSON, String
 from sqlalchemy.orm import mapped_column
 from app.constants import default_measurement
+from flask_login import UserMixin
 
-class User(BaseModel, BaseUser):
+class User(BaseModel, BaseUser, UserMixin):
     __tablename__ = 'users'
     first_name: Mapped[str] = mapped_column(String(128), nullable=False)
     last_name: Mapped[str] = mapped_column(String(128), nullable=False)
