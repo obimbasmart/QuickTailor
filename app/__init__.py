@@ -7,6 +7,8 @@ from flask_migrate import Migrate
 from os import getenv
 from dotenv import load_dotenv
 from flask_login import LoginManager
+from flask_login import current_user
+from app.constants import USER_SIDEBAR_LINKS, ADMIN_SIDEBAR_LINKS
 
 
 load_dotenv()
@@ -21,6 +23,13 @@ def create_app(config=None) -> Flask:
     def resource_not_found(self):
         """handle 404 error"""
         return make_response(jsonify({"error": "Not found"}), 404)
+    
+    @app.context_processor
+    def inject_sidebar_links():
+        if not current_user.is_anonymous and current_user.is_tailor:
+            if current_user.is_tailor:
+                return dict(user_sidebar_links=ADMIN_SIDEBAR_LINKS)
+        return dict(user_sidebar_links=USER_SIDEBAR_LINKS)
 
     return app
 
@@ -34,11 +43,13 @@ migrate = Migrate(app, db)
 login_manager = LoginManager(app)
 login_manager.login_view = 'auth_views.login'
 
-# Import for models are done here to prevent circular import error
-from .models.user import User
-from .models.tailor import Tailor
+from app.models.user import User
+from app.models.tailor import Tailor
+
 @login_manager.user_loader
-def load_user(user_id):
-    user = User.query.get(user_id)
-    tailor = Tailor.query.get(user_id)
-    return tailor if tailor is not None else user
+def load_user(id: str):
+    user = db.session.get(User, id)
+    if user is not None:
+        return user
+    return db.session.get(Tailor, id)
+    

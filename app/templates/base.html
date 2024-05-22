@@ -20,8 +20,33 @@
     <title>Document</title>
   </head>
   <body>
+
     {% include 'partials/sidebar.html' %}
 
+    {% from 'macros/flash.html' import toast_danger, toast_success %}
+
+    <!-- fOR flashing notifications -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul x-data="{ show: true }"
+                x-show="show"
+                x-transition
+                x-transition.scale.origin.top
+                x-transition:enter.duration.500ms
+                x-transition:leave.duration.400ms
+                x-init="setTimeout(() => show = false, 3000)"
+                class="w-full flex flex-col absolute top-16 justify-center items-center">
+                {% for category, message in messages %}
+                    {% if category == "error" %}
+                        {{ toast_danger(message) }}
+                    {% else %}
+                        {{ toast_success(message) }}
+                    {% endif %}
+
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
 
     <div class="sm:ml-64">
       <div class="dark:border-gray-700 mt-14">

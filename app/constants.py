@@ -1,19 +1,3 @@
-FOOTER_QUICK_LINKS = [
-
-    {"name": "Home", "link": "/", "is_protected": False},
-    {"name": "Products", "link": "/products", "is_protected": False},
-    {"name": "Orders", "link": "/orders", "is_protected": True},
-    {"name": "About Us", "link": "/aboutus", "is_protected": False},
-    # Add more links as needed
-]
-
-FOOTER_SUPPORT_LINKS = [
-
-    {"name": "Privacy Policy", "link": "/privacyPolicy"},
-    {"name": "Return & Refund Policy", "link": "/refund"},
-    {"name": "FAQ", "link": "/faq"},
-    # Add more "link"s as needed
-]
 
 
 USER_SIDEBAR_LINKS = [
@@ -41,19 +25,16 @@ USER_SIDEBAR_VISITORS = [
     # Add more "link"s as needed
 ]
 
-ADMIN_NAV_LINKS = [
+ADMIN_SIDEBAR_LINKS = [
 
-    {"name": "Privacy Policy", "link": "/privacyPolicy"},
-    {"name": "Return & Refund Policy", "link": "/refund"},
-    {"name": "FAQ", "link": "/faq"},
+    {"name": "dashboard", "link": "/dashboard", "is_protected": 0, "icon_name": "products"},
+    {"name": "products", "link": "/products", "is_protected": 0, "icon_name": "products"},
+    {"name": "orders", "link": "/orders", "is_protected": 0, "icon_name": "orders"},
+    {"name": "notifications", "link": "/dashboard", "is_protected": 0, "icon_name": "notifications"},
+    {"name": "messages", "link": "/products", "is_protected": 0, "icon_name": "messages"},
+    {"name": "account", "link": "/account", "is_protected": 0, "icon_name": "account"},
+     {"name": "logout", "link": "/logout", "is_protected": 0, "icon_name": "logout"}
     # Add more "link"s as needed
-]
-
-AdminNavLinks = [
-    {"name": "Dashboard", "link": "/dashboard"},
-    {"name": "Upload product", "link": "/uploadProduct"},
-    {"name": "Manage orders", "link": "/adminOrders"},
-    {"name": "Contacts", "link": "/#contactUs"},
 ]
 
 
