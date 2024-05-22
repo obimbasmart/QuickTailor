@@ -18,8 +18,15 @@ class BaseModel(db.Model):
     updated_at: Mapped[datetime] = mapped_column(default=lambda: datetime.now(timezone.utc),
                                                  onupdate=lambda: datetime.now(timezone.utc))
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
+        """Initialization of the base model"""
+
+        if kwargs:
+            for key, value in kwargs.items():
+                setattr(self, key, value)
+    
         self.id = str(uuid.uuid4())
+        self.created_at = datetime.utcnow()
 
     def __str__(self):
         """String representation of the BaseModel class"""

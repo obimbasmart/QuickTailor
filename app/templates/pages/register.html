@@ -1,0 +1,27 @@
+{% extends 'page_wrapper.html' %}
+
+{% block page_content %}
+    <section class="flex flex-col gap-6">
+
+                <h1 class="mt-2 font-montserrat text-4xl text-pc-teal-normal font-medium leading-snug">Join Us today</h1>
+
+                <div class="grid grid-cols-1 gap-y-4">
+                          <!--  Button-->
+                    <a href="{{ url_for('auth_views.register', user_type='user' ) }}">
+                        <button type="button" class="bg-pc-teal-normal text-white text-sm  w-full border-1 border-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">Sign Up as User</button>
+
+                    </a>
+                    <!--  Button-->
+                    <a href="{{ url_for('auth_views.register', user_type='tailor' ) }}">
+                        <button type="button" class="text-pc-teal-normal text-sm  w-full border-1 border-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">Sign Up as Tailor</button>
+                    </a>
+                </div>
+
+                <div class="text-center">
+                    <span class="text-sm font-roboto leading-7 inline-flex justify-center items-center space-x-2.5">
+                            <p class="text-sc-gray-dark">Already have an account? </p>
+                            <a class="underline text-pc-teal-normal" href="/login">Login</a>
+                    </span>
+        </div>
+    </section>
+{% endblock %}
