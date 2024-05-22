@@ -3552,3 +3552,29 @@ input:checked + .toggle-bg {
 .\[\&\:nth-last-child\(2\)\]\:border-t-1:nth-last-child(2) {
   border-top-width: 1px;
 }
+.custom-cancel-button,
+.custom-save-button {
+  width: 500px;
+  height: 80px; 
+  padding: 30px 24px 10px 24px;
+  border-radius: 6px; 
+  opacity: 1; 
+  display: inline-flex; 
+  justify-content: center;
+  font-size: 16px; 
+  font-weight: 500; 
+  border: 1px solid transparent; 
+  margin-left: 20px;
+}
+
+.custom-cancel-button {
+  background: #E6F2F2;
+  color: #000;
+  border-color: #E6F2F2;
+}
+
+.custom-save-button {
+  background: #006060;
+  color: #FFF; 
+  border-color: #006060;
+}
