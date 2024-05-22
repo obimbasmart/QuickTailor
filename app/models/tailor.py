@@ -7,9 +7,8 @@ from sqlalchemy import String, Boolean, Integer
 from sqlalchemy.orm import Mapped, mapped_column
 from ..models.base_model import BaseModel
 from .base_user import BaseUser
-from flask_login import UserMixin
 
-class Tailor(BaseUser, BaseModel, UserMixin):
+class Tailor(BaseUser, BaseModel):
     __tablename__ = 'tailors'
 
     #basic attrs
@@ -28,5 +27,9 @@ class Tailor(BaseUser, BaseModel, UserMixin):
     is_available = mapped_column(Boolean, default=True)
     no_of_completed_jobs: Mapped[int] = mapped_column(Integer, default=0)
     reputation: Mapped[int] = mapped_column(Integer, nullable=True)
+
+    @property
+    def is_tailor(self):
+        return True
 
 

@@ -94,12 +94,16 @@
                        
                 </div>
 
+                    {% if current_user.is_authenticated %}
                     <button 
                     data-drawer-target="bottom-sheet-select-measurement" data-drawer-show="bottom-sheet-select-measurement"
                     data-drawer-placement="bottom" aria-controls="bottom-sheet-select-measurement"
                     type="button" class="text-white  text-sm  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">Order</button>
 
-
+                    {% else %}
+                            <a href="{{ url_for('auth_views.login', next='products/1234' ) }}"
+                               class="text-white  text-sm  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">Order</a>
+                    {% endif %}
                 <div>
                     <h3 class="text-base leading-6 tracking-[0.5px]">Description</h3>
                     <p class="text-sm leading-6 text-sc-gray-darker">

@@ -9,12 +9,11 @@ from app.models.user import User
 from app.models.tailor import Tailor
 from app import db
 from flask import render_template, abort, flash, redirect, request, url_for
-from flask_login import login_user, logout_user, current_user, login_required
+from urllib.parse import urlsplit
+from flask_login import login_user, logout_user, current_user
 from app.constants import (USER_SIDEBAR_LINKS)
-from app.decorators import redirect_if_authenticated
 
 @auth_views.route("/register/<user_type>", methods=["GET", "POST"])
-@redirect_if_authenticated
 def register(user_type=None):
     if current_user.is_authenticated:
         return redirect(request.referrer)
@@ -49,37 +48,36 @@ def register(user_type=None):
 
 
 @auth_views.route("/login", methods=["GET", "POST"])
-@redirect_if_authenticated
 def login():
     form = LoginForm()
     if current_user.is_authenticated:
         return redirect(request.referrer or url_for('app_views.home'))
+    
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).one_or_none()
+        normal_user = User.query.filter_by(email=form.email.data).one_or_none()
         tailor = Tailor.query.filter_by(email=form.email.data).one_or_none()
 
-        #check if the email is a user or tailor before comparing password
-        if user is None:
-            if tailor.check_password(form.password.data):
-                login_user(tailor)
-                flash("Login Successful")
-                return redirect(url_for('app_views.get_all_products'))
-        elif tailor is None:
-            if user.check_password(form.password.data):
-                login_user(user)
-                flash("Login Successful")
-                return redirect(url_for('app_views.home'))
+        user = normal_user or tailor
+
+        if user is None or not user.check_password(form.password.data):
+            flash('Invalid email or password', "error")
+            return redirect(url_for('auth_views.login'))
+
+        login_user(user, remember=form.remember_me.data)
+
+        # redirect to the url that led to the login page
+        next_page = request.args.get("next")
+        if not next_page or urlsplit(next_page).netloc != "":
+            next_page = url_for("app_views.home")
+        flash('Login successfull')
+        return redirect(next_page)
         
-    flash("Incorrect password")
-    a = User.query.filter_by(email="smartcukwunenye@gmail.com").first()
-    print(a.first_name)
     return render_template('forms/login.html',
                         user_sidebar_links = USER_SIDEBAR_LINKS, 
                         form=form)
 
 @auth_views.route("/logout", methods=["GET", "POST"])
-@login_required
 def logout():
     logout_user()
-    flash("Successfully logout")
-    return redirect(url_for('auth_views.login'))
+    flash("Logout successfull")
+    return redirect(url_for('app_views.home'))
