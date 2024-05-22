@@ -32,7 +32,7 @@ app = create_app(config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login_manager = LoginManager(app)
-login_manager.login_view = 'app.auth_views.login'
+login_manager.login_view = 'auth_views.login'
 
 # Import for models are done here to prevent circular import error
 from .models.user import User
@@ -41,4 +41,4 @@ from .models.tailor import Tailor
 def load_user(user_id):
     user = User.query.get(user_id)
     tailor = Tailor.query.get(user_id)
-    return tailor.to_dict() if tailor is not None else user.to_dict()
+    return tailor if tailor is not None else user

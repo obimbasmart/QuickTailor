@@ -5,12 +5,13 @@ Index
 
 from app.constants import USER_SIDEBAR_LINKS
 
-from flask_login import current_user
+from flask_login import current_user, login_required
 from flask import render_template
 from app.views import app_views
 
 
 @app_views.route("/")
+@login_required
 def home():
     print(current_user)
     return render_template('pages/home.html',
