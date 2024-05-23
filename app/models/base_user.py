@@ -28,8 +28,7 @@ class BaseUser(UserMixin):
         self.reset_token = None
         self.reset_token_expires = None
         db.session.commit()
-~
-~
+   
     @property
     def is_tailor(self):
         return False

@@ -6,7 +6,7 @@
 from ..models.base_user import BaseUser
 from sqlalchemy.orm import Mapped, mapped_column
 from ..models.base_model import BaseModel
-from sqlalchemy import JSON, String
+from sqlalchemy import JSON, String, DateTime
 from sqlalchemy.orm import mapped_column
 from app.constants import default_measurement
 
@@ -19,4 +19,8 @@ class User(BaseModel, BaseUser):
     phone_no: Mapped[str] = mapped_column(String(128), nullable=False)
 
     measurements = mapped_column(JSON, nullable=True,
-                                 default=default_measurement)
+            default=default_measurement)
+    
+    # Password reset attributes
+    reset_token: Mapped[str] = mapped_column(String(128), nullable=True)
+    reset_token_expires: Mapped[DateTime] = mapped_column(DateTime, nullable=True)
