@@ -1228,6 +1228,10 @@ input:checked + .toggle-bg {
   z-index: 50;
 }
 
+.m-0 {
+  margin: 0px;
+}
+
 .mx-20 {
   margin-left: 5rem;
   margin-right: 5rem;
@@ -1330,6 +1334,10 @@ input:checked + .toggle-bg {
   margin-left: 0.25rem;
 }
 
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
 .ml-3 {
   margin-left: 0.75rem;
 }
@@ -1388,6 +1396,22 @@ input:checked + .toggle-bg {
 
 .mt-8 {
   margin-top: 2rem;
+}
+
+.mt-\[50px\] {
+  margin-top: 50px;
+}
+
+.mt-44 {
+  margin-top: 11rem;
+}
+
+.mt-\[72px\] {
+  margin-top: 72px;
+}
+
+.mt-\[720px\] {
+  margin-top: 720px;
 }
 
 .block {
@@ -1522,6 +1546,10 @@ input:checked + .toggle-bg {
   height: 60vh;
 }
 
+.h-\[75px\] {
+  height: 75px;
+}
+
 .h-auto {
   height: auto;
 }
@@ -1611,12 +1639,12 @@ input:checked + .toggle-bg {
   width: 2.25rem;
 }
 
-.w-\[100\%\] {
-  width: 100%;
-}
-
 .w-\[203px\] {
   width: 203px;
+}
+
+.w-\[25\%\] {
+  width: 25%;
 }
 
 .w-\[40\%\] {
@@ -1666,10 +1694,6 @@ input:checked + .toggle-bg {
 
 .max-w-3xl {
   max-width: 48rem;
-}
-
-.max-w-60 {
-  max-width: 15rem;
 }
 
 .max-w-\[180px\] {
@@ -2019,6 +2043,10 @@ input:checked + .toggle-bg {
   border-color: rgb(236 236 236 / var(--tw-divide-opacity));
 }
 
+.self-start {
+  align-self: flex-start;
+}
+
 .self-end {
   align-self: flex-end;
 }
@@ -2280,6 +2308,10 @@ input:checked + .toggle-bg {
 
 .bg-inherit {
   background-color: inherit;
+}
+
+.bg-notif {
+  background-color: var(--Primary-Color-Teal-Light, #E6F2F2);
 }
 
 .bg-orange-100 {
@@ -2565,6 +2597,10 @@ input:checked + .toggle-bg {
   padding-left: 2.75rem;
 }
 
+.pl-4 {
+  padding-left: 1rem;
+}
+
 .pl-8 {
   padding-left: 2rem;
 }
@@ -2626,6 +2662,14 @@ input:checked + .toggle-bg {
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
+}
+
+.text-\[10px\] {
+  font-size: 10px;
+}
+
+.text-\[14px\] {
+  font-size: 14px;
 }
 
 .text-base {
@@ -2705,6 +2749,10 @@ input:checked + .toggle-bg {
   line-height: 2.25rem;
 }
 
+.leading-\[21px\] {
+  line-height: 21px;
+}
+
 .leading-\[30px\] {
   line-height: 30px;
 }
@@ -2723,10 +2771,6 @@ input:checked + .toggle-bg {
 
 .tracking-\[0\.5px\] {
   letter-spacing: 0.5px;
-}
-
-.tracking-\[1\.25px\] {
-  letter-spacing: 1.25px;
 }
 
 .tracking-normal {
@@ -2783,6 +2827,11 @@ input:checked + .toggle-bg {
 .text-gray-500 {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
+.text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
 .text-gray-700 {
