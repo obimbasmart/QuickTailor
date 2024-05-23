@@ -5,5 +5,4 @@ from flask import Blueprint
 
 page_viewer = Blueprint("page_viewer", __name__)
 
-from . import about_us
 from . import notification, profile
