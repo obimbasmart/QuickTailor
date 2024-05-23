@@ -6,7 +6,8 @@ import os
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from typing import List
-
+from flask import render_template
+from app import app
 
 
 def send_email(subject: str, body: str, recievers: List[str], html_content=None) -> int:
@@ -23,3 +24,12 @@ def send_email(subject: str, body: str, recievers: List[str], html_content=None)
     except Exception as e:
         print(e)
         return response.status_code
+
+
+def send_password_reset_email(user):
+    token = user.generate_reset_token()
+    send_email(
+        subject='[QuickTailor] Reset Password',
+        recievers=[user.email],
+        body=render_template('emails/reset_password.txt',
+                                           user=user, token=token))

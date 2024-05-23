@@ -21,7 +21,7 @@ def how_it_works():
 
 @app_views.route("/register")
 def register():
-    return render_template('pages/register.html',page='home')
+    return render_template('pages/register.html',page='auth_page')
 
 @app_views.route('/about')
 def about_us():

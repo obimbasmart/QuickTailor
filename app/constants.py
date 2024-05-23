@@ -1,13 +1,13 @@
 
 USER_SIDEBAR_LINKS = [
 
-    {"name": "home", "link": "/", "is_protected": 0, "icon_name": "home"},
-    {"name": "products", "link": "/products", "is_protected": 0, "icon_name": "products"},
-    {"name": "orders", "link": "/orders", "is_protected": 1, "icon_name": "orders"},
-    {"name": "cart", "link": "/aboutus", "is_protected": 0, "icon_name": "cart"},
-    {"name": "saved", "link": "/aboutus", "is_protected": 0, "icon_name": "saved"},
-    {"name": "about us", "link": "/about", "is_protected": 0, "icon_name": "aboutus"},
-    {"name": "how it works", "link": "/how-it-works", "is_protected": 0, "icon_name": "howitworks"},
+    {"name": "home", "link": "app_views.home", "is_protected": 0, "icon_name": "home"},
+    {"name": "products", "link": "app_views.get_all_products", "is_protected": 0, "icon_name": "products"},
+    {"name": "orders", "link": "app_views.about_us", "is_protected": 1, "icon_name": "orders"},
+    {"name": "cart", "link": "app_views.about_us", "is_protected": 0, "icon_name": "cart"},
+    {"name": "saved", "link": "app_views.about_us", "is_protected": 0, "icon_name": "saved"},
+    {"name": "about us", "link": "app_views.about_us", "is_protected": 0, "icon_name": "aboutus"},
+    {"name": "how it works", "link": "app_views.how_it_works", "is_protected": 0, "icon_name": "howitworks"},
     # Add more "link"s as needed
 ]
 

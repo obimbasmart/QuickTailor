@@ -74,7 +74,7 @@ def login():
         
     return render_template('forms/login.html',
                         user_sidebar_links = USER_SIDEBAR_LINKS, 
-                        form=form)
+                        form=form, page="auth_page")
 
 @auth_views.route("/logout", methods=["GET", "POST"])
 def logout():
