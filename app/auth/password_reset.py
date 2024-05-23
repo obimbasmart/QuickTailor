@@ -25,7 +25,6 @@ def password_reset():
 
         user = normal_user or tailor
         response = send_password_reset_email(user)
-        print(response.status_code)
         flash("reset link has been sent to you")
 
     return render_template('forms/password_reset.html',
@@ -53,7 +52,6 @@ def set_new_password(token):
         return redirect(url_for("auth_views.login"))
 
     return render_template('forms/reset_password_page.html',
-                           user_sidebar_links = USER_SIDEBAR_VISITORS,
                            form=form, page='auth_page')
 
 
