@@ -1,5 +1,4 @@
 
-
 USER_SIDEBAR_LINKS = [
 
     {"name": "home", "link": "/", "is_protected": 0, "icon_name": "home"},
@@ -7,7 +6,7 @@ USER_SIDEBAR_LINKS = [
     {"name": "orders", "link": "/orders", "is_protected": 1, "icon_name": "orders"},
     {"name": "cart", "link": "/aboutus", "is_protected": 0, "icon_name": "cart"},
     {"name": "saved", "link": "/aboutus", "is_protected": 0, "icon_name": "saved"},
-    {"name": "about us", "link": "/aboutus", "is_protected": 0, "icon_name": "aboutus"},
+    {"name": "about us", "link": "/about", "is_protected": 0, "icon_name": "aboutus"},
     {"name": "how it works", "link": "/how-it-works", "is_protected": 0, "icon_name": "howitworks"},
     # Add more "link"s as needed
 ]
@@ -20,20 +19,20 @@ USER_SIDEBAR_VISITORS = [
     {"name": "cart", "link": "/aboutus", "is_protected": 0, "icon_name": "cart"},
     {"name": "saved", "link": "/aboutus", "is_protected": 0, "icon_name": "saved"},
     {"name": "How it works", "link": "/howitworks", "is_protected": 0, "icon_name": "howitworks"},
-    {"name": "about us", "link": "/aboutus", "is_protected": 0, "icon_name": "aboutus"},
-    {"name": "login", "link": "/aboutus", "is_protected": 0, "icon_name": "login"},
+    {"name": "about us", "link": "/about", "is_protected": 0, "icon_name": "aboutus"},
+    {"name": "login", "link": "/about", "is_protected": 0, "icon_name": "login"},
     # Add more "link"s as needed
 ]
 
 ADMIN_SIDEBAR_LINKS = [
 
-    {"name": "dashboard", "link": "/dashboard", "is_protected": 0, "icon_name": "products"},
-    {"name": "products", "link": "/products", "is_protected": 0, "icon_name": "products"},
-    {"name": "orders", "link": "/orders", "is_protected": 0, "icon_name": "orders"},
-    {"name": "notifications", "link": "/dashboard", "is_protected": 0, "icon_name": "notifications"},
-    {"name": "messages", "link": "/products", "is_protected": 0, "icon_name": "messages"},
-    {"name": "account", "link": "/account", "is_protected": 0, "icon_name": "account"},
-     {"name": "logout", "link": "/logout", "is_protected": 0, "icon_name": "logout"}
+    {"name": "dashboard", "link": "tailor_views.dashboard", "is_protected": 0, "icon_name": "products"},
+    {"name": "my products", "link": 'tailor_views.get_all_products', "is_protected": 0, "icon_name": "products"},
+    {"name": "orders", "link": "tailor_views.account", "is_protected": 0, "icon_name": "orders"},
+    {"name": "notifications", "link": "tailor_views.dashboard", "is_protected": 0, "icon_name": "notifications"},
+    {"name": "messages", "link": "tailor_views.get_all_products", "is_protected": 0, "icon_name": "messages"},
+    {"name": "account", "link": "tailor_views.account", "is_protected": 0, "icon_name": "account"},
+     {"name": "logout", "link": "auth_views.logout", "is_protected": 0, "icon_name": "logout"}
     # Add more "link"s as needed
 ]
 
