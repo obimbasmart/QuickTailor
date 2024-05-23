@@ -3,15 +3,6 @@
 
 {% block page_content %}
     <div class="text-center space-y-1 mb-5 mt-7">
-	      <div class="text-center bg-pc-teal-normal   mx-auto w-1/2 text-white">
-      {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                        {{ message }}
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-	      </div>
 
         <h1 class="font-montserrat text-xl leading-8 font-medium">Welcome back</h1>
         <p class="text-sc-gray-dark font-roboto text-sm leading-6">Sign in to continue</p>
@@ -42,7 +33,7 @@
             </div>
 
             <p class="my-4 inline-flex items-center justify-end w-full text-sc-gray">
-              <a href="/">
+              <a href="/password_reset">
                   <span class="text-sm underline font-roboto leading-6">Forgot password ?</span>
               </a>
             </p>
