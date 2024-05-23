@@ -30,7 +30,6 @@ notification= [
 
 @app_views.route("/")
 def home():
-    print(current_user)
     return render_template('pages/home.html',page='home', current_user=current_user)
 
 @app_views.route("/how-it-works")
