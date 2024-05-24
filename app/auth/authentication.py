@@ -4,7 +4,7 @@
 
 """ register route """
 from app.auth import auth_views
-from app.forms import RegistrationForm, LoginForm
+from app.forms.auth_forms import RegistrationForm, LoginForm
 from app.models.user import User
 from app.models.tailor import Tailor
 from app import db

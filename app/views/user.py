@@ -2,8 +2,7 @@
 
 from flask import render_template
 from app.views import app_views
-from app.constants import USER_SIDEBAR_LINKS
-from app.forms import MeasurementForm, LoginForm, RegistrationForm
+from app.forms.main_forms import MeasurementForm
 
 @app_views.route('/yomi-casual')
 def tailor_profile():

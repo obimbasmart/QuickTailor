@@ -7,7 +7,7 @@ Testing cloud storage module
 from app.views import app_views
 from flask import render_template, request
 from app.constants import USER_SIDEBAR_LINKS
-from app.forms import CreateProductForm
+from app.forms.tailor_forms import CreateProductForm
 from cloud_storage.s3_cloud_storage import S3StorageService
 
 
