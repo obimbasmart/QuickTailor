@@ -1,0 +1,31 @@
+{% macro productItem(name, price, material) %}
+<li class="font-roboto flex py-6">
+    <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+      <img src="{{ url_for('static', filename='/images/product_image_3.png' ) }}" alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt." class="h-full w-full object-cover object-center">
+    </div>
+
+    <div class="ml-4 flex flex-1 flex-col">
+      <div>
+        <div class="flex justify-between text-base font-medium text-gray-900">
+          <h3 class="text-sm text-sc-gray-darker leading-6">
+            <a href="#">Agbada Esemble</a>
+          </h3>
+        </div>
+        <p class="mt-1 text-xs text-sc-gray-dark">Royal black and blue</p>
+      </div>
+      <div class="flex flex-1 items-end justify-between text-sm">
+        <p class="text-black text-base font-normal leading-6 tracking-wide">₦10,500</p>
+
+        <div class="flex">
+          <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="29" viewBox="0 0 28 29" fill="none">
+            <path d="M11.666 14.5V20.3333" stroke="#2D2D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16.334 14.5V20.3333" stroke="#2D2D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M4.66602 8.66699H23.3327" stroke="#2D2D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7 12.167V21.5003C7 23.4334 8.56701 25.0003 10.5 25.0003H17.5C19.433 25.0003 21 23.4334 21 21.5003V12.167" stroke="#2D2D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10.5 6.33333C10.5 5.04467 11.5447 4 12.8333 4H15.1667C16.4554 4 17.5 5.04467 17.5 6.33333V8.66667H10.5V6.33333Z" stroke="#2D2D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg></button>
+        </div>
+      </div>
+    </div>
+  </li>
+{% endmacro %}

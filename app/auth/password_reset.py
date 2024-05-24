@@ -2,11 +2,10 @@
 
 """ Password reset routes """
 from app.auth import auth_views
-from app.forms import ResetForm,  ResetPasswordForm
+from app.forms.reset_forms import ResetForm,  ResetPasswordForm
 from app.models.user  import User
 from app.models.tailor import Tailor
 from flask import (render_template, flash,  redirect, url_for)
-from app.constants import (USER_SIDEBAR_VISITORS)
 from app import db
 from flask_login import current_user
 from app.models.base_user import BaseUser
