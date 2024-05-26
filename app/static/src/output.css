@@ -3889,7 +3889,6 @@ input:checked + .toggle-bg {
 .\[\&\:nth-last-child\(2\)\]\:border-t-1:nth-last-child(2) {
   border-top-width: 1px;
 }
-<<<<<<< HEAD
 .custom-cancel-button,
 .custom-save-button {
   width: 500px;
@@ -3975,6 +3974,10 @@ input:checked + .toggle-bg {
   right: 800px;
 
 }
-
-=======
->>>>>>> b7302414251aa02f75a6b61e539244f79f61595e
+.review_submit {
+  background-color: #006060;
+  font-size: medium;
+  padding: 10px;
+  border-radius: 4px;
+  color: white;
+}
