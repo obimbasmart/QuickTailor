@@ -169,20 +169,21 @@
         });
     });
 
-    document.querySelector('button').addEventListener('click', () => {
+   const submitButton = document.getElementById('submitReview');
+
+    submitButton.addEventListener('click', () => {
         const reviewText = document.querySelector('textarea').value;
-        console.log(`Rating: ${rating}, Review: ${reviewText}`);
-        // Submit the rating and review as needed
-    });
+        if (reviewText.trim() === '') {
+            alert('Please write a review before submitting.');
+            return;
+        }
+        
+        // Show alert message
+        alert('Well Done! Your review has been submitted');
 
-    const reviewSection = document.getElementById('reviewSection');
-    const closeReviewButton = document.getElementById('closeReview');
-
-    closeReviewButton.addEventListener('click', () => {
-        reviewSection.classList.toggle('hidden');
+        // Optionally, clear the textarea
+        document.querySelector('textarea').value = '';
     });
 </script>
-
-
 
     {% endblock %}
