@@ -1443,6 +1443,14 @@ input:checked + .toggle-bg {
   margin-top: 72px;
 }
 
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
+.mr-auto {
+  margin-right: auto;
+}
+
 .block {
   display: block;
 }
@@ -1616,12 +1624,20 @@ input:checked + .toggle-bg {
   height: 100vh;
 }
 
+.h-32 {
+  height: 8rem;
+}
+
 .max-h-16 {
   max-height: 4rem;
 }
 
 .min-h-16 {
   min-height: 4rem;
+}
+
+.min-h-screen {
+  min-height: 100vh;
 }
 
 .w-1\/2 {
@@ -1741,6 +1757,10 @@ input:checked + .toggle-bg {
   width: 50%;
 }
 
+.w-32 {
+  width: 8rem;
+}
+
 .min-w-16 {
   min-width: 4rem;
 }
@@ -1811,6 +1831,10 @@ input:checked + .toggle-bg {
 
 .shrink-0 {
   flex-shrink: 0;
+}
+
+.flex-grow {
+  flex-grow: 1;
 }
 
 .origin-\[0\] {
@@ -2364,6 +2388,11 @@ input:checked + .toggle-bg {
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }
 
+.border-green-400 {
+  --tw-border-opacity: 1;
+  border-color: rgb(49 196 141 / var(--tw-border-opacity));
+}
+
 .border-b-\[\#939393\] {
   --tw-border-opacity: 1;
   border-bottom-color: rgb(147 147 147 / var(--tw-border-opacity));
@@ -2501,6 +2530,26 @@ input:checked + .toggle-bg {
 
 .bg-white\/50 {
   background-color: rgb(255 255 255 / 0.5);
+}
+
+.bg-blue-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 96 96 / var(--tw-bg-opacity));
+}
+
+.bg-gray-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
+}
+
+.bg-green-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(14 159 110 / var(--tw-bg-opacity));
+}
+
+.bg-teal-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(6 148 162 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-80 {
@@ -3070,6 +3119,26 @@ input:checked + .toggle-bg {
 .text-yellow-300 {
   --tw-text-opacity: 1;
   color: rgb(250 202 21 / var(--tw-text-opacity));
+}
+
+.text-green-800 {
+  --tw-text-opacity: 1;
+  color: rgb(3 84 63 / var(--tw-text-opacity));
+}
+
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(240 82 82 / var(--tw-text-opacity));
+}
+
+.text-yellow-400 {
+  --tw-text-opacity: 1;
+  color: rgb(227 160 8 / var(--tw-text-opacity));
+}
+
+.text-yellow-500 {
+  --tw-text-opacity: 1;
+  color: rgb(194 120 3 / var(--tw-text-opacity));
 }
 
 .underline {
@@ -3694,6 +3763,11 @@ input:checked + .toggle-bg {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.dark\:text-green-400:is(.dark *) {
+  --tw-text-opacity: 1;
+  color: rgb(49 196 141 / var(--tw-text-opacity));
+}
+
 .dark\:placeholder-gray-400:is(.dark *)::-moz-placeholder {
   --tw-placeholder-opacity: 1;
   color: rgb(156 163 175 / var(--tw-placeholder-opacity));
@@ -4039,96 +4113,4 @@ input:checked + .toggle-bg {
 
 .\[\&\:nth-last-child\(2\)\]\:border-t-1:nth-last-child(2) {
   border-top-width: 1px;
-}
-.custom-cancel-button,
-.custom-save-button {
-  width: 500px;
-  height: 80px; 
-  padding: 6px 6px 6px 6px;
-  border-radius: 6px; 
-  opacity: 1; 
-  display: inline-flex; 
-  justify-content: center;
-  font-size: 16px; 
-  font-weight: 500; 
-  border: 1px solid transparent; 
-  margin-left: 20px;
-}
-
-.custom-cancel-button {
-  background: #E6F2F2;
-  color: #000;
-  border-color: #E6F2F2;
-}
-
-.custom-save-button {
-  background: #006060;
-  color: #FFF; 
-  border-color: #006060;
-}
-.custom-unique-button {
-    display: flex;
-    padding: 6px;
-    justify-content: start; 
-    align-items: center;
-    width: 100%;
-    height: 60px;
-    background-color: #006060;
-    color: white;
-    border-radius: 8px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 30px;
-    letter-spacing: 0.1px;
-}
-
-.custom-unique-button img {
-    height: 1.5rem; /* 24px */
-    width: 1.5rem; /* 24px */
-    margin-right: 0.5rem; /* 8px */
-}
-
-
-.custom-unique-button span {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: 0.5px;
-}
-
-
-.custom-unique-button .mr-auto {
-    margin-right: auto;
-}
-
-
-.order_details {
-
-    font-family: Roboto;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 150%; /* 21px */
-    text-align: center;
-    padding: 0%;
-    display: block;
-    margin: 0 auto;
-
-}
-
-.pending_order { 
-
-  color:rgba(14, 13, 13, 0.623);
-  position:relative;
-  right: 800px;
-
-}
-.review_submit {
-  background-color: #006060;
-  font-size: medium;
-  padding: 10px;
-  border-radius: 4px;
-  color: white;
 }
