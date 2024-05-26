@@ -3974,7 +3974,7 @@ input:checked + .toggle-bg {
   right: 800px;
 
 }
-.review_submit {
+#review_submit {
   background-color: #006060;
   font-size: medium;
   padding: 10px;
