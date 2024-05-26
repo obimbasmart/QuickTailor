@@ -20,7 +20,7 @@
                         {% if field.type != 'CSRFTokenField' and field.type != 'SubmitField' and field.type != 'BooleanField' %}
                                 <p class="relative">
                                 <!--  input -->
-                                {{field(class=input_styles, placeholder="")}}
+                                {{field(class=input_styles, placeholder="") }}
                                 <!-- label -->
                                 {{field.label(class=label_styles, for="default_outlined")}}
                                 <!-- error message on validate -->
