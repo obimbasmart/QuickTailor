@@ -32,7 +32,6 @@ class BaseModel(db.Model):
         """String representation of the BaseModel class"""
         return "[{:s}] ({:s}) {}".format(self.__class__.__name__, self.id,
                                          self.__dict__)
-
     def to_dict(self):
         """returns a dictionary containing all keys/values of the instance"""
         new_dict = self.__dict__.copy()
@@ -45,4 +44,8 @@ class BaseModel(db.Model):
             del new_dict["_sa_instance_state"]
         if "password_hash" in new_dict:
             del new_dict["password_hash"]
+        if "reset_token" in new_dict:
+            del new_dict["reset_token"]
+        if "reset_token_expires" in new_dict:
+            del new_dict["reset_token_expires"]
         return new_dict

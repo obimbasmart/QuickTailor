@@ -1,30 +1,13 @@
-FOOTER_QUICK_LINKS = [
-
-    {"name": "Home", "link": "/", "is_protected": False},
-    {"name": "Products", "link": "/products", "is_protected": False},
-    {"name": "Orders", "link": "/orders", "is_protected": True},
-    {"name": "About Us", "link": "/aboutus", "is_protected": False},
-    # Add more links as needed
-]
-
-FOOTER_SUPPORT_LINKS = [
-
-    {"name": "Privacy Policy", "link": "/privacyPolicy"},
-    {"name": "Return & Refund Policy", "link": "/refund"},
-    {"name": "FAQ", "link": "/faq"},
-    # Add more "link"s as needed
-]
-
 
 USER_SIDEBAR_LINKS = [
 
-    {"name": "home", "link": "/", "is_protected": 0, "icon_name": "home"},
-    {"name": "products", "link": "/products", "is_protected": 0, "icon_name": "products"},
-    {"name": "orders", "link": "/orders", "is_protected": 1, "icon_name": "orders"},
-    {"name": "cart", "link": "/aboutus", "is_protected": 0, "icon_name": "cart"},
-    {"name": "saved", "link": "/aboutus", "is_protected": 0, "icon_name": "saved"},
-    {"name": "about us", "link": "/aboutus", "is_protected": 0, "icon_name": "aboutus"},
-    {"name": "how it works", "link": "/how-it-works", "is_protected": 0, "icon_name": "howitworks"},
+    {"name": "home", "link": "app_views.home", "is_protected": 0, "icon_name": "home"},
+    {"name": "products", "link": "app_views.get_all_products", "is_protected": 0, "icon_name": "products"},
+    {"name": "orders", "link": "app_views.about_us", "is_protected": 1, "icon_name": "orders"},
+    {"name": "cart", "link": "app_views.about_us", "is_protected": 0, "icon_name": "cart"},
+    {"name": "saved", "link": "app_views.about_us", "is_protected": 0, "icon_name": "saved"},
+    {"name": "about us", "link": "app_views.about_us", "is_protected": 0, "icon_name": "aboutus"},
+    {"name": "how it works", "link": "app_views.how_it_works", "is_protected": 0, "icon_name": "howitworks"},
     # Add more "link"s as needed
 ]
 
@@ -36,24 +19,21 @@ USER_SIDEBAR_VISITORS = [
     {"name": "cart", "link": "/aboutus", "is_protected": 0, "icon_name": "cart"},
     {"name": "saved", "link": "/aboutus", "is_protected": 0, "icon_name": "saved"},
     {"name": "How it works", "link": "/howitworks", "is_protected": 0, "icon_name": "howitworks"},
-    {"name": "about us", "link": "/aboutus", "is_protected": 0, "icon_name": "aboutus"},
-    {"name": "login", "link": "/aboutus", "is_protected": 0, "icon_name": "login"},
+    {"name": "about us", "link": "/about", "is_protected": 0, "icon_name": "aboutus"},
+    {"name": "login", "link": "/about", "is_protected": 0, "icon_name": "login"},
     # Add more "link"s as needed
 ]
 
-ADMIN_NAV_LINKS = [
+ADMIN_SIDEBAR_LINKS = [
 
-    {"name": "Privacy Policy", "link": "/privacyPolicy"},
-    {"name": "Return & Refund Policy", "link": "/refund"},
-    {"name": "FAQ", "link": "/faq"},
+    {"name": "dashboard", "link": "tailor_views.dashboard", "is_protected": 0, "icon_name": "products"},
+    {"name": "my products", "link": 'tailor_views.get_all_products', "is_protected": 0, "icon_name": "products"},
+    {"name": "orders", "link": "tailor_views.account", "is_protected": 0, "icon_name": "orders"},
+    {"name": "notifications", "link": "tailor_views.dashboard", "is_protected": 0, "icon_name": "notifications"},
+    {"name": "messages", "link": "tailor_views.get_all_products", "is_protected": 0, "icon_name": "messages"},
+    {"name": "account", "link": "tailor_views.account", "is_protected": 0, "icon_name": "account"},
+     {"name": "logout", "link": "auth_views.logout", "is_protected": 0, "icon_name": "logout"}
     # Add more "link"s as needed
-]
-
-AdminNavLinks = [
-    {"name": "Dashboard", "link": "/dashboard"},
-    {"name": "Upload product", "link": "/uploadProduct"},
-    {"name": "Manage orders", "link": "/adminOrders"},
-    {"name": "Contacts", "link": "/#contactUs"},
 ]
 
 

@@ -1,35 +1,53 @@
-{% extends 'page_wrapper.html' %}
+{% extends 'base.html' %}
+ {% from '/macros/howItWork.html' import howItWork %}
+{% block content %}
+  <section class="w-full h-[20vh] bg-cover bg-center bg-no-repeat bg-[url('/static/images/about.png')] bg-black/30 bg-blend-multiply">
+  </section>
 
-{% block page_content %}
-  <img src="static/images/about.png" alt="quick tailor image with text" class="w-full h-[154px] rounded-[10%] border-[10px] border-[#006060]">
-  <div class="container mx-auto px-4 py-8">
-    <h1 class="text-xl font-medium text-left mb-6 text-gray-800 font-montserrat leading-loose tracking-wide w-[398px] h-[30px]">About Us</h1>
-    <div class="max-w-3xl mx-auto text-lg leading-relaxed">
-      <p class="mb-4 w-[398px] h-[192px] font-roboto text-base font-normal leading-6 tracking-wide text-gray-800">
-        QuickTailor is where style meets individuality. Our platform connects
-        you with tailors to create custom garments tailored to your unique
-        vision. With a focus on craftsmanship, attention to detail, and
-        exceptional service, QuickTailor empowers you to express yourself
-        through clothing that's made just for you. Welcome to QuickTailor, where
-        every stitch tells your story.
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+    <section class="p-4 space-y-4 font-roboto text-base font-normal text-sc-gray-dark leading-6">
+      <h1 class="text-xl font-montserrat leading-8 text-sc-gray-darker">
+        About Us
+      </h1>
+      <p class="tracking-wide">
+        QuickTailor is where style meets individuality. 
+        Our platform connects you with tailors to create custom 
+        garments tailored to your unique vision. With a focus on
+         craftsmanship, attention to detail, and exceptional service, 
+         QuickTailor empowers you to express yourself through clothing 
+         that's made just for you. Welcome to QuickTailor, where every stitch tells your story.
       </p>
-      <img src="static/images/mission.png" alt="mission pic" class="w-full h-[80px] p-2 border-none">
-      <h2 class="w-[398px] h-[30px] font-montserrat font-medium text-[20px] leading-[30px] tracking-[0.1px]">Mission</h2>
-      
-      <p class="mb-4 w-[398px] h-[120px] font-roboto text-base font-normal leading-6 tracking-wide text-grey-dark">
-        Empowering seamless interactions and fostering trust between tailors and
-        clients through QuickTailor, ensures timely delivery, professionalism,
-        and unparalleled quality in every stitch.
-      </p>
+    </section>
 
-      <h2 class="w-[398px] h-[30px] text-xl font-medium mt-8 mb-4 font-montserrat text-gray-800 leading-[30px] tracking-[0.1px]">Vision</h2>
-      <p class="mb-8 w-[398px] h-[120px] font-roboto text-base font-normal leading-6 tracking-wide text-gray-800">
-        Revolutionizing the traditional tailoring experience in Nigeria by
-        providing a platform where tailors and clients can effortlessly connect,
-        ensuring exceptional customer experiences, and setting new standards of
-        professionalism and quality, anytime, anywhere—SEW ON THE GO.
-      </p>
-      <img src="static/images/footer.png" alt="footerpic" class="w-full h-[154px] rounded-[10%] border-[10px] border-[#006060]">
+    <div class="px-4 py-2.5 flex flex-col items-end bg-pc-teal-normal text-white justify-center">
+        <p class="font-roboto text-base">Our</p>
+        <p class="font-montserrat text-xl">Mission</p>
     </div>
+
+
+    <section class="px-4 py-2 space-y-4 font-roboto text-base font-normal text-sc-gray-dark leading-6">
+      <h1 class="text-xl font-montserrat leading-8 text-sc-gray-darker">
+        Mission
+      </h1>
+      <p class="tracking-wide">
+        Empowering seamless interactions and fostering trust between 
+        tailors and clients through QuickTailor, ensures timely delivery, 
+        professionalism, and unparalleled quality in every stitch
+      </p>
+    </section>
+
+    <section class="px-4 py-2 space-y-4 font-roboto text-base font-normal text-sc-gray-dark leading-6">
+      <h1 class="text-xl font-montserrat leading-8 text-sc-gray-darker">
+        Vision
+      </h1>
+      <p class="tracking-wide font-normal">
+        Revolutionizing the traditional tailoring experience in Nigeria by providing a platform where tailors and clients can effortlessly connect, ensuring exceptional customer experiences, and setting new standards of professionalism and quality, anytime, anywhere—SEW ON THE GO
+      </p>
+    </section>
   </div>
+
+
+  {% include 'partials/footer.html' %}
+
+
 {% endblock %}

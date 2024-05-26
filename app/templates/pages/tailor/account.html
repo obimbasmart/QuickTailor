@@ -1,0 +1,139 @@
+{% extends 'page_wrapper.html' %}
+
+{% block page_content %}
+    <h1 class="text-center font-montserrat text-2xl mb-6">
+        Account
+    </h1>
+
+    <section class="flex flex-col gap-y-2 font-roboto text-sc-gray-darker">
+
+        <div class="flex items-center gap-4 mb-4">
+            <img class="object-cover w-11 h-11 rounded-full"
+                 src="{{ url_for('static', filename='/images/tailor.jpeg') }}"
+                 alt="" />
+            <div class="font-medium dark:text-white space-y-1">
+                <div class="tracking-wide text-base font-normal">
+                    talibybonnie@yahoo.com
+                </div>
+                <div class="inline-flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
+                    <span class="text-sc-gray-dark text-xs tracking-wide">Account unverified</span>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="19"
+                         height="18"
+                         viewBox="0 0 19 18"
+                         fill="none">
+                        <g clip-path="url(#clip0_6997_25310)">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.45204 1.2691L12.3876 0L13.9971 2.73997L17.119 3.43767L16.811 6.59964L18.9256 8.99923L16.8187 11.3773L17.119 14.5623L14.0156 15.2477L12.3876 18L9.4736 16.7294L6.53803 18L4.92855 15.26L1.80662 14.5623L2.11466 11.3988L0 8.99923L2.10696 6.6212L1.80662 3.43767L4.91007 2.75229L6.53803 0L9.45204 1.2691Z" fill="#808080" />
+                        <path d="M5.8397 10.0111C4.90482 9.00537 6.34026 7.50678 7.37987 8.45553C7.74643 8.78975 8.27933 9.27798 8.64898 9.60912L11.4983 6.1083C12.4902 5.08255 14.0565 6.58884 13.077 7.62075L9.49761 11.8901C9.30184 12.0969 9.0334 12.2195 8.74892 12.2322C8.46445 12.2448 8.18619 12.1465 7.97284 11.9579C7.36601 11.3803 6.47579 10.5502 5.8397 10.0111Z" fill="white" />
+                        </g>
+                        <defs>
+                        <clipPath id="clip0_6997_25310">
+                        <rect width="18.9256" height="18" fill="white" />
+                        </clipPath>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Item 01 -->
+        <div class="flex items-center justify-between bg-pc-teal-light rounded-lg py-4 px-[18px]">
+            <div class="inline-flex items-center space-x-4">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="24"
+                     height="24"
+                     viewBox="0 0 24 24"
+                     fill="none">
+                    <path d="M20.9099 11.1203C20.9099 16.0103 17.3599 20.5903 12.5099 21.9303C12.1799 22.0203 11.8199 22.0203 11.4899 21.9303C6.63983 20.5903 3.08984 16.0103 3.08984 11.1203V6.73027C3.08984 5.91027 3.70985 4.98028 4.47985 4.67028L10.0499 2.39031C11.2999 1.88031 12.7099 1.88031 13.9599 2.39031L19.5299 4.67028C20.2899 4.98028 20.9199 5.91027 20.9199 6.73027L20.9099 11.1203Z" stroke="#006060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span class="text-sm leading-6">Identity Verification</span>
+            </div>
+
+            <a href="">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="24"
+                     height="24"
+                     viewBox="0 0 24 24"
+                     fill="none">
+                    <path d="M9.5 5L15.7929 11.2929C16.1834 11.6834 16.1834 12.3166 15.7929 12.7071L9.5 19" stroke="#2D2D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </a>
+        </div>
+
+        <div class="flex items-center justify-between bg-pc-teal-light rounded-lg py-4 px-[18px]">
+            <div class="inline-flex items-center space-x-4">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="24"
+                     height="24"
+                     viewBox="0 0 24 24"
+                     fill="none">
+                    <path d="M20.9099 11.1203C20.9099 16.0103 17.3599 20.5903 12.5099 21.9303C12.1799 22.0203 11.8199 22.0203 11.4899 21.9303C6.63983 20.5903 3.08984 16.0103 3.08984 11.1203V6.73027C3.08984 5.91027 3.70985 4.98028 4.47985 4.67028L10.0499 2.39031C11.2999 1.88031 12.7099 1.88031 13.9599 2.39031L19.5299 4.67028C20.2899 4.98028 20.9199 5.91027 20.9199 6.73027L20.9099 11.1203Z" stroke="#006060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span class="text-sm leading-6">Security</span>
+            </div>
+
+            <a href="">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="24"
+                     height="24"
+                     viewBox="0 0 24 24"
+                     fill="none">
+                    <path d="M9.5 5L15.7929 11.2929C16.1834 11.6834 16.1834 12.3166 15.7929 12.7071L9.5 19" stroke="#2D2D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </a>
+        </div>
+
+        <div class="flex items-center justify-between bg-pc-teal-light rounded-lg py-4 px-[18px]">
+            <div class="inline-flex items-center space-x-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M22 22H2H22Z" fill="#006060"/>
+                    <path d="M22 22H2" stroke="#006060" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M20 22V11" stroke="#006060" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M4 22V11" stroke="#006060" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M16.5277 2H7.47201C6.26919 2 5.66778 2 5.18448 2.2987C4.70117 2.5974 4.43221 3.13531 3.8943 4.21114L2.49068 7.75929C2.16639 8.57905 1.88266 9.54525 2.42854 10.2375C2.79476 10.7019 3.36244 11 3.99978 11C5.10435 11 5.99978 10.1046 5.99978 9C5.99978 10.1046 6.89521 11 7.99978 11C9.10435 11 9.99978 10.1046 9.99978 9C9.99978 10.1046 10.8952 11 11.9998 11C13.1044 11 13.9998 10.1046 13.9998 9C13.9998 10.1046 14.8952 11 15.9998 11C17.1044 11 17.9998 10.1046 17.9998 9C17.9998 10.1046 18.8952 11 19.9998 11C20.6372 11 21.2049 10.7019 21.5711 10.2375C22.117 9.54525 21.8333 8.57905 21.509 7.75929L20.1054 4.21114C19.5675 3.13531 19.2985 2.5974 18.8152 2.2987C18.3319 2 17.7305 2 16.5277 2Z" stroke="#006060" stroke-width="1.5" stroke-linejoin="round"/>
+                    <path d="M9.5 21.5V18.5C9.5 17.5654 9.5 17.0981 9.70096 16.75C9.83261 16.522 10.022 16.3326 10.25 16.201C10.5981 16 11.0654 16 12 16C12.9346 16 13.4019 16 13.75 16.201C13.978 16.3326 14.1674 16.522 14.299 16.75C14.5 17.0981 14.5 17.5654 14.5 18.5V21.5" stroke="#006060" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                <span class="text-sm leading-6">Business Information</span>
+            </div>
+
+            <a href="">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="24"
+                     height="24"
+                     viewBox="0 0 24 24"
+                     fill="none">
+                    <path d="M9.5 5L15.7929 11.2929C16.1834 11.6834 16.1834 12.3166 15.7929 12.7071L9.5 19" stroke="#2D2D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </a>
+        </div>
+
+        <div class="flex items-center justify-between bg-pc-teal-light rounded-lg py-4 px-[18px]">
+            <div class="inline-flex items-center space-x-4">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="24"
+                     height="24"
+                     viewBox="0 0 24 24"
+                     fill="none">
+                    <path d="M20.9099 11.1203C20.9099 16.0103 17.3599 20.5903 12.5099 21.9303C12.1799 22.0203 11.8199 22.0203 11.4899 21.9303C6.63983 20.5903 3.08984 16.0103 3.08984 11.1203V6.73027C3.08984 5.91027 3.70985 4.98028 4.47985 4.67028L10.0499 2.39031C11.2999 1.88031 12.7099 1.88031 13.9599 2.39031L19.5299 4.67028C20.2899 4.98028 20.9199 5.91027 20.9199 6.73027L20.9099 11.1203Z" stroke="#006060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span class="text-sm leading-6">Turn on avialability</span>
+                <span data-tooltip-target="tooltip-dark"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M8.00008 13.7599C11.2696 13.7599 13.9201 11.1094 13.9201 7.83992C13.9201 4.5704 11.2696 1.91992 8.00008 1.91992C4.73055 1.91992 2.08008 4.5704 2.08008 7.83992C2.08008 11.1094 4.73055 13.7599 8.00008 13.7599Z" stroke="#606060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8.59539 5.21631C8.592 5.37135 8.52761 5.51881 8.41619 5.62666C8.3047 5.73451 8.1552 5.79401 8.00012 5.79229C7.8871 5.78852 7.77772 5.75158 7.68556 5.68603C7.59334 5.6205 7.52256 5.52925 7.48192 5.42373C7.44121 5.31821 7.43251 5.20304 7.45689 5.09259C7.48121 4.98215 7.53753 4.88136 7.61881 4.80271C7.70009 4.72407 7.80268 4.67108 7.91385 4.65037C8.02502 4.62966 8.1399 4.64212 8.24403 4.68623C8.34816 4.73033 8.43699 4.80411 8.49945 4.89838C8.56198 4.99264 8.59532 5.10322 8.59539 5.21631ZM7.54579 10.5795V7.13634C7.54406 7.07586 7.55456 7.01563 7.5767 6.95938C7.59884 6.90312 7.63212 6.85192 7.67462 6.80891C7.71705 6.76584 7.7678 6.73179 7.82374 6.70888C7.87968 6.68597 7.93971 6.67458 8.00012 6.67547C8.05977 6.67541 8.11884 6.68744 8.17369 6.71087C8.22854 6.73423 8.27814 6.76847 8.31942 6.81154C8.3607 6.85461 8.39276 6.90555 8.41382 6.96136C8.43488 7.01717 8.44435 7.07669 8.44172 7.13634V10.5795C8.44172 10.6384 8.43014 10.6966 8.40768 10.7509C8.38515 10.8053 8.35212 10.8547 8.31052 10.8963C8.26892 10.9379 8.21958 10.9708 8.16524 10.9934C8.11084 11.0159 8.0526 11.0275 7.99379 11.0275C7.93497 11.0275 7.87667 11.0159 7.82233 10.9934C7.768 10.9708 7.71859 10.9379 7.67699 10.8963C7.63539 10.8547 7.60236 10.8053 7.5799 10.7509C7.55737 10.6966 7.54579 10.6384 7.54579 10.5795Z" fill="#606060"/>
+                  </svg></span>
+
+                  <div id="tooltip-dark" role="tooltip" class="w-[203px] text-white font-roboto absolute z-10 invisible inline-block px-3 py-2 text-xs   bg-sc-gray rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                    Set to 'Available' to accept new orders and 'Unavailable'
+                     to pause orders temporarily." 
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+            </div>
+
+            <label class="inline-flex items-center cursor-pointer">
+                <input type="checkbox" value="" class="sr-only peer">
+                <div class="relative w-11 h-6 bg-sc-gray peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-pc-teal-light dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+            </label>
+        </div>
+
+    </section>
+{% endblock %}
