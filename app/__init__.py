@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 from flask_login import LoginManager
 from flask_login import current_user
 from app.constants import USER_SIDEBAR_LINKS, ADMIN_SIDEBAR_LINKS
-
+from flask_wtf.csrf import CSRFProtect
 
 load_dotenv()
 
@@ -52,4 +52,4 @@ def load_user(id: str):
     if user is not None:
         return user
     return db.session.get(Tailor, id)
-    
+csrf = CSRFProtect(app) 

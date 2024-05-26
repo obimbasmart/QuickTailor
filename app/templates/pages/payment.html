@@ -1,0 +1,254 @@
+{% from 'macros/tailorBadge.html' import tailorBadge   %}
+
+{% extends 'base.html' %} 
+
+{% block content %} 
+
+ <div class="text-center space-y-1 mb-2 mt-7">
+
+        <h1 class="font-montserrat text-xl leading-8 font-medium pt-4">Payment</h1>
+ </div>
+<div class="mx-3">
+ <div id= "product-container" class=" flex flex-col w-full  gap-[40px] items-start mb-[300px]">
+ </div>
+ <div  style="color:white;margin-top:380px;">
+ _  
+ </div>
+
+<div id="Checkout" class="w-[96%] fixed   bottom-0 "  style=" width:96%; background:white; ">
+     <div class="flex flex-col p-[12px] justify-center items-center mt-[24px]   gap-[10px] mb-[50px] self-stretch border-[1px] border-solid border-[var(--grey-light-active, #D8D8D8)] rounded-md ">
+        <div class="flex flex-row justify-between self-stretch items-start">
+                <div class="leading-[21px] font-normal font-roboto tracking-[0.25px] text-[var(--Grey-Darker, #2D2D2D)]  text-[14px]">
+                 No of items
+                </div>
+                 <div id="no" class="leading-[21px] font-normal font-roboto tracking-[0.5px] text-gray-[var(--Grey-Darker, #2D2D2D)]  text-[16px]">
+                    0
+                 </div>
+
+        </div>
+        <div class="flex flex-row justify-between self-stretch items-start">
+                <div class="leading-[21px] font-normal font-roboto tracking-[0.25px] text-[var(--Grey-Darker, #2D2D2D)]  text-[14px]">
+                Sub Total
+                </div>
+               <div id="sub-total" class="leading-[21px] font-normal font-roboto tracking-[0.5px] text-gray-[var(--Grey-Darker, #2D2D2D)]  text-[16px]">
+                ₦ 0
+               </div>
+
+
+        </div>
+        <div class="flex flex-row justify-between self-stretch items-start">
+
+               <div class="leading-[21px] font-normal font-roboto tracking-[0.25px] text-[var(--Grey-Darker, #2D2D2D)]  text-[14px]">
+              Customization value
+               </div>
+               <div id ="c-value"class="leading-[21px] font-normal font-roboto tracking-[0.5px] text-gray-[var(--Grey-Darker, #2D2D2D)]  text-[16px]">
+                + ₦ 0
+               </div>
+
+
+        </div>
+        <div class="flex flex-row justify-between self-stretch items-start mt-1 pt-2 border-t-2 border-solid border-[var(--grey-light-active, #D8D8D8)]">
+               <div class="leading-[21px] font-normal font-roboto tracking-[0.25px] text-[var(--Grey-Darker, #2D2D2D)]  text-[14px]">
+                Total
+               </div>
+               <div id ="total" class="leading-[21px] font-normal font-roboto tracking-[0.5px] text-gray-[var(--Grey-Darker, #2D2D2D)]  text-[16px]">
+                ₦ 0
+               </div>
+
+        </div>
+
+
+
+     </div>
+     <div class="w-[96%] m-[auto] mb-4">
+                <button id="checkout-btn"  class="my-5 inline-block  text-white  text-sm  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center">
+                
+                </button>
+
+     </div>
+
+</div>
+
+</div>
+<div id="processing" class="fixed  flex flex-col p-4 hidden justify-center items-center gap-[12px] w-full mb-1  bottom-0 mt-4" style="z-index:100; border-top-right-radius:24px; border-top-left-radius:24px;   box-shadow: 0px -5px 20px 0px rgba(0, 0, 0, 0.10); background:white;">
+
+         <div class="flex flex-col justify-between">
+               <svg xmlns="http://www.w3.org/2000/svg" width="100" height="4" viewBox="0 0 100 4" fill="none">
+                        <rect width="100" height="4" rx="2" fill="#D8D8D8"/>
+               </svg>
+         </div>
+
+       <div class="flex flex-row justify-center mt-1 self-stretch mb-2">
+                       <div style="margin:auto; position:relative;"> Delete from draft </div>
+                       <div class="mr-4" style=" position:absolute; right:0;">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M6.75781 17.2426L12.0004 12M12.0004 12L17.243 6.75732M12.0004 12L6.75781 6.75732M12.0004 12L17.243 17.2426" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                              </svg>
+                       </div>
+       </div>
+
+        <div class="flex flex-col p-[6px] justify-between self-stretch items-start mb-8 gap-2  h-[101px] border-t border-gray-500   mx-[4px]" style="border-top:1px solid #D8D8D8; padding-top:20px;" >
+
+            <div class="self-center">
+	        <svg xmlns="http://www.w3.org/2000/svg" width="84" height="84" viewBox="0 0 84 84" fill="none">
+                         <path opacity="0.5" d="M84 42C84 65.1958 65.1958 84 42 84C18.804 84 0 65.1958 0 42C0 18.804 18.804 0 42 0C65.1958 0 84 18.804 84 42Z" fill="#03CB2F" fill-opacity="0.15"/>
+                         <path d="M58.9276 29.2727C60.1578 30.5028 60.1578 32.4973 58.9276 33.7273L37.9276 54.7273C36.6975 55.9575 34.7033 55.9575 33.473 54.7273L25.073 46.3273C23.8429 45.0972 23.8429 43.103 25.073 41.8728C26.3031 40.6426 28.2976 40.6426 29.5278 41.8728L35.7004 48.0451L45.0865 38.659L54.4731 29.2727C55.7033 28.0426 57.6975 28.0426 58.9276 29.2727Z" fill="#03CB2F"/>
+                </svg>
+	   </div>
+	   <div class="self-center leading-[21px] font-normal font-roboto tracking-[0.25px]  text-[var(--Grey-Dark, #606060)] text-[14px]" style="color:var(--Grey-Dark, #606060);">
+		   Your order has been sent!
+	   </div>
+	</div>
+
+         <div class="flex flex-row justify-between w-full gap-4 mt-4  mb-4">
+
+                 <button id="cancel"   class="text-pc-teal-normal   p-3 text-smm bg-gradient-to-r   w-[90%] bg-[var(--Gr-[var(--Grey-Light, #F2F2F2)]  font-medium rounded-md px-5 py-2.5 text-center", style="border:1px solid;">
+                         No, cancel
+                 </button>
+                 <button id="remove"  class="text-white  p-3 text-smm bg-gradient-to-r   w-[90%] from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-md px-5 py-2.5 text-center">
+                         Yes, continue
+                 </button>
+
+
+         </div>
+</div>
+
+<div id="overlay" class=" fixed w-full h-[100%]  hidden  top-0 mt-8 bg-[rgba(0, 0, 0, 0.15)] " style= " background:rgba(0, 0, 0, 0.15); height:100%;"></div>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', loading)
+// Asynchronous function to handle cart loading and checkout process
+async function loading() {
+    // Get elements from the DOM
+    const num = document.getElementById("no");
+    const sub = document.getElementById("sub-total");
+    const c_value = document.getElementById("c-value");
+    const total = document.getElementById("total");
+    const checkoutBtn = document.getElementById("checkout-btn");
+    const processing = document.getElementById("processing");
+    const container = document.getElementById('product-container');
+
+    // Function to clear checkout details
+    function clearCheckout() {
+        num.innerText = 0;
+        sub.innerText = 0;
+        c_value.innerText = 0;
+        total.innerText = 0;
+        checkoutBtn.classList.add("disable-btn-now", "hidden");
+    }
+
+    // Function to handle payment transfer
+    function payTransfer() {
+        overlay.classList.remove("hidden");
+        processing.classList.remove("hidden");
+        setTimeout(() => {
+            processing.classList.add("hidden");
+            overlay.classList.add("hidden");
+        }, 30000);
+    }
+
+    // Function to fetch CSRF token
+    const getCSRFToken = async () => {
+        const response = await fetch('/get_csrf_token');
+        const data = await response.json();
+        return data.csrf_token;
+    };
+
+    console.log("hi");
+
+    // Fetch CSRF token
+    const csrfToken = await getCSRFToken();
+
+    // Retrieve cart data from local storage
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // If cart is empty, display a message and return
+    if (cart.length === 0) {
+        clearCheckout();
+        container.innerHTML = `<h1 class="text-[50px]" style="z-index:100; text-align:center; font-size:35px; margin:auto; margin-top:150px;"><b>Cart is empty</b></h1>`;
+        return;
+    }
+
+    // Send cart data to the server
+    const response = await fetch('/user/cart', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+        },
+ body: JSON.stringify({ cart_items: cart })
+    });
+
+    // Parse the server response
+    const data = await response.json();
+
+    // Clear the container
+    container.innerHTML = '';
+
+    // Populate the container with the server response
+    if (data.length > 0) {
+        let i = 0;
+        let sub_total = 0;
+
+        data.forEach(item => {
+            const productHTML = `
+                  <div class="flex flex-col p-[6px]  w-full justify-between self-stretch items-start gap-4  h-[101px]   mx-[4px]"  data-id="${item.id}" >
+                      <div class="">
+                              <a href="/yomi-casual">
+                                 {{ tailorBadge() }}
+                              </a>
+
+                      </div>
+                      <div   class="flex w-full  flex-row gap-[15px] border-b border-[#D8D8D8] pb-4"> 
+
+                      <a href="/products/${item.id}">
+                         <div class="">
+                             <img src="{{ url_for('static', filename='images/product_image_3.png' ) }}" class="h-[75px] rounded-md  w-[78px]" alt="...">
+
+                        </div>
+                      </a>
+
+                      <div class="flex  w-full flex-col justify-between py-0">
+                
+       <a class="w-1/2"  href="/products/${item.id}" > <p class="leading-[21px] font-normal font-roboto tracking-[0.25px] text-gray-800  text-[14px]" style=" color: var(--Black, #000);">${item.name}a</p> </a>
+                                <div class=" flex flex-row justify-between gap-[45px]"  >
+       <p class="leading-[21px] font-normal font-roboto tracking-[0.25px]  text-[var(--Grey-Dark, #606060)] text-[14px]" style="color:var(--Grey-Dark, #606060);">₦ ${item.price}</p>
+       <p class="leading-[21px] font-normal font-roboto tracking-[0.25px]  text-[var(--Grey-Dark, #606060)] text-[14px]" style="color:var(--Grey-Dark, #606060);">₦ ${item.total_price} </p>
+                                </div>
+                                <div class=" flex flex-row justify-between gap-[45px]"  >
+                                        <p class="leading-[21px] font-normal font-roboto tracking-[0.25px]  text-[var(--Grey-Dark, #606060)] text-[14px]" style="color:var(--Grey-Dark, #606060);">Customization value </p>
+       <p class="leading-[21px] font-normal font-roboto tracking-[0.25px]  text-[var(--Grey-Dark, #606060)] text-[14px]" style="color:var(--Grey-Dark, #606060);"> +₦${item.customization_value} </p>
+                                </div>
+                        </div>
+                    </div>
+
+         </div>
+`;
+            container.innerHTML += productHTML;
+            i++;
+            sub_total += Number(item.price);
+        });
+
+        // Update checkout details
+        num.innerText = i;
+        sub.innerText = '₦' + sub_total;
+        c_value.innerText = "+ " + "₦" + (sub_total - 25000);
+        total.innerText = "₦" + (sub_total + (sub_total - 25000));
+        checkoutBtn.innerText = "Pay  ₦" + (sub_total + (sub_total - 25000));
+
+
+        // Add event listener to checkout button
+        checkoutBtn.addEventListener('click', payTransfer);
+
+    } else {
+        clearCheckout();
+        container.innerHTML = `<h1 class="text-[50px]" style="z-index:100; text-align:center; font-size:35px; margin:auto; margin-top:150px;"><b>Cart is empty</b></h1>`;
+    }
+}
+
+
+</script>
+{% endblock %}
+
+

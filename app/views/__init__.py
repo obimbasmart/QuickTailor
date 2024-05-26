@@ -9,3 +9,5 @@ app_views = Blueprint("app_views", __name__)
 from . import index
 from . import product
 from . import user
+from . import cart_save
+from . import payment
