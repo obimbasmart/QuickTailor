@@ -4040,3 +4040,95 @@ input:checked + .toggle-bg {
 .\[\&\:nth-last-child\(2\)\]\:border-t-1:nth-last-child(2) {
   border-top-width: 1px;
 }
+.custom-cancel-button,
+.custom-save-button {
+  width: 500px;
+  height: 80px; 
+  padding: 6px 6px 6px 6px;
+  border-radius: 6px; 
+  opacity: 1; 
+  display: inline-flex; 
+  justify-content: center;
+  font-size: 16px; 
+  font-weight: 500; 
+  border: 1px solid transparent; 
+  margin-left: 20px;
+}
+
+.custom-cancel-button {
+  background: #E6F2F2;
+  color: #000;
+  border-color: #E6F2F2;
+}
+
+.custom-save-button {
+  background: #006060;
+  color: #FFF; 
+  border-color: #006060;
+}
+.custom-unique-button {
+    display: flex;
+    padding: 6px;
+    justify-content: start; 
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    background-color: #006060;
+    color: white;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+    letter-spacing: 0.1px;
+}
+
+.custom-unique-button img {
+    height: 1.5rem; /* 24px */
+    width: 1.5rem; /* 24px */
+    margin-right: 0.5rem; /* 8px */
+}
+
+
+.custom-unique-button span {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+}
+
+
+.custom-unique-button .mr-auto {
+    margin-right: auto;
+}
+
+
+.order_details {
+
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 21px */
+    text-align: center;
+    padding: 0%;
+    display: block;
+    margin: 0 auto;
+
+}
+
+.pending_order { 
+
+  color:rgba(14, 13, 13, 0.623);
+  position:relative;
+  right: 800px;
+
+}
+.review_submit {
+  background-color: #006060;
+  font-size: medium;
+  padding: 10px;
+  border-radius: 4px;
+  color: white;
+}
