@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="bg-white p-4 min-h-screen">
+    <button class="custom-unique-button">
+        <img src="{{ url_for('static', filename='icons/ChiChiseal.svg') }}" alt="tailor's profile Icon" class="h-6 w-6 mr-2">
+        <span class="mr-auto">ChicChiseal Creations</span>
+        <span class="ml-2">Chat</span>
+        <img src="{{ url_for('static', filename='icons/Chat.svg') }}" alt="Chat Icon" class="h-6 w-6 ml-2">
+    </button>
+</div>
+<section class="flex items-center">
+    <img src="{{ url_for('static', filename='images/agbada.png') }}" alt="Agbada Image" class="p-2 w-32 h-32 object-cover mr-4">
+    <div>
+        <h2 class="order_details">White Agbada with one Kufi Cap</h2>
+        <h2 class="order_details">#30,219.33</h2>
+    </div>
+</section>
+
+<!-- First horizontal line -->
+<hr class="w-88 h-1 bg-gray-400 my-4">
+
+<div class="flex justify-between items-center">
+    <h2>Estimated completion date</h2>
+    <hr class="flex-grow mx-4 h-1 bg-gray-400">
+    <span><h2>Nov, 10th 2024</h2></span>
+</div>
+
+<div class="flex justify-between items-center mt-4">
+    <h2>Order ID</h2>
+    <hr class="flex-grow mx-4 h-1 bg-gray-400">
+    <span><h2>#232102</h2></span>
+</div>
+
+
+
+<!-- Order Status Section -->
+<div class="bg-white p-4 min-h-screen">
+    <hr class="w-88 h-1 bg-gray-400 my-4">
+    <div class="flex justify-between items-center mb-4">
+        <h1 class="text-xl">Order Status</h1>
+    <span class="pending_order"><button class="bg-gray-400 text-lg border-2 rounded px-4 py-2">Pending</button></span>
+    </div>
+
+    <div class="flex justify-end">
+        <button id="toggleContentButton" class="bg-gray-400 text-lg border-2 rounded px-4 py-2 flex items-center">
+            <svg id="arrowIcon" class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </button>
+    </div>
+
+    <div id="contentSection" class="hidden">
+        <ul class="list-none space-y-4">
+            <li class="flex items-center">
+                <div class="relative mr-4 p-2">
+                    <img src="{{ url_for('static', filename='icons/order-outline.svg') }}" class="w-8 h-8 p-1">
+                </div>
+                <div>
+                    <h2 class="font-semibold">Order Confirmed</h2>
+                    <p>We've got your order! Now, onto making your dream garment.</p>
+                </div>
+            </li>
+
+            <li class="flex items-center">
+                <div class="relative mr-4 p-2">
+                    <img src="{{ url_for('static', filename='icons/Material.svg') }}" class="w-8 h-8 p-1">
+                </div>
+                <div>
+                    <h2 class="font-semibold">Material Sourcing</h2>
+                    <p>Sourcing materials now.</p>
+                </div>
+            </li>
+
+            <li class="flex items-center">
+                <div class="relative mr-4 p-2">
+                    <img src="{{ url_for('static', filename='icons/SewingMachine.svg') }}" class="w-8 h-8 p-1">
+                </div>
+                <div>
+                    <h2 class="font-semibold">Sewing</h2>
+                    <p>In progress.</p>
+                </div>
+            </li>
+
+            <li class="flex items-center">
+                <div class="relative mr-4 p-2">
+                    <img src="{{ url_for('static', filename='icons/Packaging.svg') }}" class="w-8 h-8 p-1">
+                </div>
+                <div>
+                    <h2 class="font-semibold">Packaging</h2>
+                    <p>Your custom creation is carefully packaged.</p>
+                </div>
+            </li>
+
+            <li class="flex items-center">
+                <div class="relative mr-4 p-2">
+                    <img src="{{ url_for('static', filename='icons/Pickup.svg') }}" class="w-8 h-8 p-1">
+                </div>
+                <div>
+                    <h2 class="font-semibold">Ready for Pickup</h2>
+                    <p>Your order is ready! Swing by to pick it up.</p>
+                </div>
+            </li>
+        </ul>
+
+
+        <footer class="mt-8">
+            <h2 class="text-lg font-semibold mb-2 text-center">Leave a Review</h2>
+            <div class="flex items-center justify-end mb-2">
+                <button id="closeReview" class="text-red-500 text-sm font-semibold">X</button>
+            </div>
+            <div id="reviewSection" class="hidden">
+                <div class="flex justify-center mb-2">
+                    <svg id="star1" class="w-6 h-6 text-gray-400 cursor-pointer p-1" fill="yellow" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.375 2.454a1 1 0 00-.364 1.118l1.287 3.973c.3.921-.755 1.688-1.538 1.118l-3.374-2.454a1 1 0 00-1.175 0l-3.374 2.454c-.783.57-1.838-.197-1.538-1.118l1.287-3.973a1 1 0 00-.364-1.118L2.24 9.401c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69L9.049 2.927z"></path></svg>
+                    <svg id="star2" class="w-6 h-6 text-gray-400 cursor-pointer p-1" fill="yellow" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.375 2.454a1 1 0 00-.364 1.118l1.287 3.973c.3.921-.755 1.688-1.538 1.118l-3.374-2.454a1 1 0 00-1.175 0l-3.374 2.454c-.783.57-1.838-.197-1.538-1.118l1.287-3.973a1 1 0 00-.364-1.118L2.24 9.401c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69L9.049 2.927z"></path></svg>
+                    <svg id="star3" class="w-6 h-6 text-gray-400 cursor-pointer p-1" fill="yellow" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.375 2.454a1 1 0 00-.364 1.118l1.287 3.973c.3.921-.755 1.688-1.538 1.118l-3.374-2.454a1 1 0 00-1.175 0l-3.374 2.454c-.783.57-1.838-.197-1.538-1.118l1.287-3.973a1 1 0 00-.364-1.118L2.24 9.401c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69L9.049 2.927z"></path></svg>
+                    <svg id="star4" class="w-6 h-6 text-gray-400 cursor-pointer p-1" fill="yellow" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.375 2.454a1 1 0 00-.364 1.118l1.287 3.973c.3.921-.755 1.688-1.538 1.118l-3.374-2.454a1 1 0 00-1.175 0l-3.374 2.454c-.783.57-1.838-.197-1.538-1.118l1.287-3.973a1 1 0 00-.364-1.118L2.24 9.401c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69L9.049 2.927z"></path></svg>
+                    <svg id="star5" class="w-6 h-6 text-gray-400 cursor-pointer p-1" fill="yellow" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.375 2.454a1 1 0 00-.364 1.118l1.287 3.973c.3.921-.755 1.688-1.538 1.118l-3.374-2.454a1 1 0 00-1.175 0l-3.374 2.454c-.783.57-1.838-.197-1.538-1.118l1.287-3.973a1 1 0 00-.364-1.118L2.24 9.401c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69L9.049 2.927z"></path></svg>
+                </div>
+                <form method="POST" action="/submit_review" class="w-full">
+                    <textarea class="w-full p-2 border border-gray-300 rounded" placeholder="Write your review here..."></textarea>
+                    <button type="submit" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded">Submit</button>
+                </form>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<script>
+    // JavaScript to toggle the content and arrow direction
+    document.getElementById('toggleContentButton').addEventListener('click', function() {
+        var contentSection = document.getElementById('contentSection');
+        var arrowIcon = document.getElementById('arrowIcon');
+        if (contentSection.classList.contains('hidden')) {
+            contentSection.classList.remove('hidden');
+            arrowIcon.classList.add('rotate-180');
+        } else {
+            contentSection.classList.add('hidden');
+            arrowIcon.classList.remove('rotate-180');
+        }
+    });
+
+    // JavaScript for star rating functionality
+    const stars = document.querySelectorAll('svg');
+    stars.forEach((star, index) => {
+        star.addEventListener('click', () => {
+            stars.forEach((s, i) => {
+                if (i <= index) {
+                    s.classList.add('text-yellow-500');
+                    s.classList.remove('text-gray-400');
+                } else {
+                    s.classList.add('text-gray-400');
+                    s.classList.remove('text-yellow-500');
+                }
+            });
+        });
+    });
+
+    // JavaScript to toggle the review section visibility
+    document.getElementById('closeReview').addEventListener('click', function() {
+        var reviewSection = document.getElementById('reviewSection');
+        if (reviewSection.classList.contains('hidden')) {
+            reviewSection.classList.remove('hidden');
+        } else {
+            reviewSection.classList.add('hidden');
+        }
+    });
+</script>
+{% endblock %}
