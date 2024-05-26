@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="bg-white p-4 min-h-screen">
+    <button class="custom-unique-button">
+        <img src="{{ url_for('static', filename='icons/ChiChiseal.svg') }}" alt="tailor's profile Icon" class="h-6 w-6 mr-2">
+        <span class="mr-auto">ChicChiseal Creations</span>
+        <span class="ml-2">Chat</span>
+        <img src="{{ url_for('static', filename='icons/Chat.svg') }}" alt="Chat Icon" class="h-6 w-6 ml-2">
+    </button>
+</div>
+<section class="flex items-center">
+    <img src="{{ url_for('static', filename='images/agbada.png') }}" alt="Agbada Image" class="p-2 w-32 h-32 object-cover mr-4">
+    <div>
+        <h2 class="order_details">White Agbada with one Kufi Cap</h2>
+        <h2 class="order_details">#30,219.33</h2>
+    </div>
+</section>
+
+<!-- First horizontal line -->
+<hr class="w-88 h-1 bg-gray-400 my-4">
+
+<div class="flex justify-between items-center">
+    <h2>Estimated completion date</h2>
+    <hr class="flex-grow mx-4 h-1 bg-gray-400">
+    <span><h2>Nov, 10th 2024</h2></span>
+</div>
+
+<div class="flex justify-between items-center mt-4">
+    <h2>Order ID</h2>
+    <hr class="flex-grow mx-4 h-1 bg-gray-400">
+    <span><h2>#232102</h2></span>
+</div>
+
+
+
+<!-- Order Status Section -->
+<div class="bg-white p-4 min-h-screen">
+    <hr class="w-88 h-1 bg-gray-400 my-4">
+    <div class="flex justify-between items-center mb-4">
+        <h1 class="text-xl">Order Status</h1>
+        <span class="bg-green text-green-800 text-lg px-2.5 py-0.5 rounded dark:text-green-400 border border-green-400">Completed</span>
+    </div>
+
+    <ul class="list-none space-y-4">
+        <li class="flex items-center">
+            <div class="relative mr-2">
+                <input type="checkbox" id="orderConfirmed" class="hidden">
+                <label for="orderConfirmed" class="flex items-center justify-center w-8 h-8 border-2 border-gray-500 rounded-full cursor-pointer bg-teal-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="#006060">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                </label>
+            </div>
+            <div>
+                <h2 class="font-semibold">Order Confirmed</h2>
+                <p>We've got your order! Now, onto making your dream garment.</p>
+            </div>
+        </li>
+
+        <li class="flex items-center">
+            <div class="relative mr-2">
+                <input type="checkbox" id="materialSourcing" class="hidden">
+                <label for="materialSourcing" class="flex items-center justify-center w-8 h-8 border-2 border-gray-500 rounded-full cursor-pointer bg-teal-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="#006060">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                </label>
+            </div>
+            <div>
+                <h2 class="font-semibold">Material Sourcing</h2>
+                <p>Sourcing materials now.</p>
+            </div>
+        </li>
+
+        <li class="flex items-center">
+            <div class="relative mr-2">
+                <input type="checkbox" id="sewing" class="hidden">
+                <label for="sewing" class="flex items-center justify-center w-8 h-8 border-2 border-gray-500 rounded-full cursor-pointer bg-teal-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="#006060">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                </label>
+            </div>
+            <div>
+                <h2 class="font-semibold">Sewing</h2>
+                <p>In progress.</p>
+            </div>
+        </li>
+
+        <li class="flex items-center">
+            <div class="relative mr-2">
+                <input type="checkbox" id="packaging" class="hidden">
+                <label for="packaging" class="flex items-center justify-center w-8 h-8 border-2 border-gray-500 rounded-full cursor-pointer bg-teal-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="#006060">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                </label>
+            </div>
+            <div>
+                <h2 class="font-semibold">Packaging</h2>
+                <p>Your custom creation is carefully packaged.</p>
+            </div>
+        </li>
+
+        <li class="flex items-center">
+            <div class="relative mr-2">
+                <input type="checkbox" id="readyForPickup" class="hidden">
+                <label for="readyForPickup" class="flex items-center justify-center w-8 h-8 border-2 border-gray-500 rounded-full cursor-pointer bg-teal-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="#006060">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                </label>
+            </div>
+            <div>
+                <h2 class="font-semibold">Ready for Pickup</h2>
+                <p>Your order is ready! Swing by to pick it up.</p>
+            </div>
+        </li>
+    </ul>
+
+    <footer class="mt-8">
+        <h2 class="text-lg font-semibold mb-2 text-center">Leave a Review</h2>
+        <div class="flex items-center justify-end mb-2">
+            <button id="closeReview" class="text-red-500 text-sm font-semibold">X</button>
+        </div>
+        <div id="reviewSection" class="hidden">
+            <div class="flex justify-center mb-2">
+                <svg id="star1" class="w-6 h-6 text-gray-400 cursor-pointer" fill="yellow" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.375 2.454a1 1 0 00-.364 1.118l1.287 3.973c.3.921-.755 1.688-1.538 1.118l-3.374-2.454a1 1 0 00-1.175 0l-3.374 2.454c-.783.57-1.838-.197-1.538-1.118l1.287-3.973a1 1 0 00-.364-1.118L2.24 9.401c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69L9.049 2.927z"></path></svg>
+                <svg id="star2" class="w-6 h-6 text-gray-400 cursor-pointer" fill="yellow" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.375 2.454a1 1 0 00-.364 1.118l1.287 3.973c.3.921-.755 1.688-1.538 1.118l-3.374-2.454a1 1 0 00-1.175 0l-3.374 2.454c-.783.57-1.838-.197-1.538-1.118l1.287-3.973a1 1 0 00-.364-1.118L2.24 9.401c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69L9.049 2.927z"></path></svg>
+                <svg id="star3" class="w-6 h-6 text-gray-400 cursor-pointer" fill="yellow" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.375 2.454a1 1 0 00-.364 1.118l1.287 3.973c.3.921-.755 1.688-1.538 1.118l-3.374-2.454a1 1 0 00-1.175 0l-3.374 2.454c-.783.57-1.838-.197-1.538-1.118l1.287-3.973a1 1 0 00-.364-1.118L2.24 9.401c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69L9.049 2.927z"></path></svg>
+                <svg id="star4" class="w-6 h-6 text-gray-400 cursor-pointer" fill="yellow" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.375 2.454a1 1 0 00-.364 1.118l1.287 3.973c.3.921-.755 1.688-1.538 1.118l-3.374-2.454a1 1 0 00-1.175 0l-3.374 2.454c-.783.57-1.838-.197-1.538-1.118l1.287-3.973a1 1 0 00-.364-1.118L2.24 9.401c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69L9.049 2.927z"></path></svg>
+                <svg id="star5" class="w-6 h-6 text-gray-400 cursor-pointer" fill="yellow" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.375 2.454a1 1 0 00-.364 1.118l1.287 3.973c.3.921-.755 1.688-1.538 1.118l-3.374-2.454a1 1 0 00-1.175 0l-3.374 2.454c-.783.57-1.838-.197-1.538-1.118l1.287-3.973a1 1 0 00-.364-1.118L2.24 9.401c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69L9.049 2.927z"></path></svg>
+            </div>
+            <div class="flex items-center">
+                <textarea class="w-full p-2 border rounded mr-2" rows="2" placeholder="Write your review here..."></textarea>
+                <button class="bg-#006060 text-white py-2 px-4 rounded">Submit Review</button>
+            </div> 
+        </div>
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('change', (event) => {
+            const label = event.target.nextElementSibling;
+            label.classList.add('bg-green-500');
+        });
+    });
+
+    const stars = document.querySelectorAll('svg[id^="star"]');
+    let rating = 0;
+
+    stars.forEach((star, index) => {
+        star.addEventListener('click', () => {
+            rating = index + 1;
+            stars.forEach((s, i) => {
+                if (i < rating) {
+                    s.classList.remove('text-gray-400');
+                    s.classList.add('text-yellow-400');
+                } else {
+                    s.classList.remove('text-yellow-400');
+                    s.classList.add('text-gray-400');
+                }
+            });
+        });
+    });
+
+    document.querySelector('button').addEventListener('click', () => {
+        const reviewText = document.querySelector('textarea').value;
+        console.log(`Rating: ${rating}, Review: ${reviewText}`);
+        // Submit the rating and review as needed
+    });
+
+    const reviewSection = document.getElementById('reviewSection');
+    const closeReviewButton = document.getElementById('closeReview');
+
+    closeReviewButton.addEventListener('click', () => {
+        reviewSection.classList.toggle('hidden');
+    });
+</script>
+
+
+
+    {% endblock %}
