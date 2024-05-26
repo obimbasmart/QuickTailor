@@ -10,21 +10,26 @@ from app.views import app_views
 
 
 notification= [
+    {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "10, 000"},
+      {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "30,000"},
+  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "200, 000"},
+  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "1, 000, 000"},
+  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
+  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
+  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
+  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
+  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
+  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
+  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
+  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
+  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
+  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
+  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
     {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
-      {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
   {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
   {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
   {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"}
+
 ]
 
 
