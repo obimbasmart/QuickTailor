@@ -1,92 +1,139 @@
-{% from 'macros/navbarLink.html' import navbarLink   %}
+{% from 'macros/navbarLink.html' import navbarLink %}
 
 <nav class="nav-shadow fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-    <div class="px-4 py-3 lg:px-5 lg:pl-3">
-      <div class="flex items-center justify-between">
-          <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center  text-sm text-black rounded-lg sm:hidden focus:outline-none  dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
-            <span class="sr-only">Open sidebar</span>
-            <svg
-              class="w-6 h-6"
-              aria-hidden="true"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                clip-rule="evenodd"
-                fill-rule="evenodd"
-                d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
-              ></path>
-            </svg>
-           </button>
-           <a href="https://flowbite.com" class="flex ms-2 md:me-24">
-            <img src="{{ url_for('static', filename='/icons/qt-logo.svg' ) }}" class="h-8 me-3" alt="FlowBite Logo" />
-          </a>
+  <div class="px-4 py-3 lg:px-5 lg:pl-3">
+    <div x-data="{page: '{{ page }}'}"
+         class="flex items-center justify-between">
+
+      <template x-if="page != 'auth_page'">
+        <button data-drawer-target="logo-sidebar"
+                data-drawer-toggle="logo-sidebar"
+                aria-controls="logo-sidebar"
+                type="button"
+                class="inline-flex items-center  text-sm text-black rounded-lg sm:hidden focus:outline-none  dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+          <span class="sr-only">Open sidebar</span>
+          <svg class="w-6 h-6"
+               aria-hidden="true"
+               fill="currentColor"
+               viewBox="0 0 20 20"
+               xmlns="http://www.w3.org/2000/svg">
+            <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
+            </path>
+          </svg>
+        </button>
+      </template>
+
+      <a href="{{ url_for("app_views.home") }}" class="flex ms-2 md:me-24">
+        <img src="{{ url_for('static', filename='/icons/qt-logo.svg') }}"
+             class="h-8 me-3"
+             alt="FlowBite Logo" />
+      </a>
+
+      {% if current_user.is_tailor %}
+        <a href="{{ url_for("tailor_views.account") }}">
+          <button type="button"
+                  class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                  aria-expanded="false"
+                  data-dropdown-toggle="dropdown-user">
+            <span class="sr-only">Open user menu</span>
+            <img class="object-cover object-center w-8 h-8 rounded-full"
+                 src="{{ url_for('static', filename='/images/tailor.jpeg') }}"
+                 alt="user photo" />
+          </button>
+        </a>
+      {% else %}
         <div class="flex items-center">
-            <div class="hidden flex items-center ms-3">
+          {% if current_user.is_authenticated %}
+            <div class="flex items-center ms-3">
               <div>
-                <button type="button" class="w-8 h-8 flex items-center  p-2 justify-center  text-sm bg-pc-teal-light rounded-full   dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
+                <button type="button"
+                        class="w-8 h-8 flex items-center  p-2 justify-center  text-sm bg-pc-teal-light rounded-full   dark:focus:ring-gray-600"
+                        aria-expanded="false"
+                        data-dropdown-toggle="dropdown-user">
                   <span class="sr-only">Open user menu</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 18 18" fill="none">
-                    <path d="M9.15037 9C11.2214 9 12.9004 7.32106 12.9004 5.25C12.9004 3.17893 11.2214 1.5 9.15037 1.5C7.07932 1.5 5.40039 3.17893 5.40039 5.25C5.40039 7.32106 7.07932 9 9.15037 9Z" stroke="#006060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M2.25 16.5C2.67778 15.0249 3.56097 13.7228 4.7733 12.7799C5.98562 11.837 7.46501 11.3015 9 11.25C12.09 11.25 14.7225 13.4325 15.75 16.5" stroke="#006060" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>                </button>
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                       width="32"
+                       height="32"
+                       viewBox="0 0 18 18"
+                       fill="none">
+                    <path d="M9.15037 9C11.2214 9 12.9004 7.32106 12.9004 5.25C12.9004 3.17893 11.2214 1.5 9.15037 1.5C7.07932 1.5 5.40039 3.17893 5.40039 5.25C5.40039 7.32106 7.07932 9 9.15037 9Z" stroke="#006060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M2.25 16.5C2.67778 15.0249 3.56097 13.7228 4.7733 12.7799C5.98562 11.837 7.46501 11.3015 9 11.25C12.09 11.25 14.7225 13.4325 15.75 16.5" stroke="#006060" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </button>
               </div>
-              <div class="font-roboto z-50 px-4 hidden my-4 text-base list-none bg-white divide-y divide-sc-gray-light-hover rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
+              <div class="w-[62%] max-w-64 font-roboto z-50 px-4 hidden my-4 text-base list-none bg-white divide-y divide-sc-gray-light-hover rounded shadow dark:bg-gray-700 dark:divide-gray-600"
+                   id="dropdown-user">
                 <div class="px-4 py-3" role="none">
-                  <p class="text-base text-sc-gray-darker leading-6 dark:text-white" role="none">
-                    Oleg Bionic
+                  <p class="text-base text-sc-gray-darker leading-6 dark:text-white"
+                     role="none">
+                    {{ current_user.first_name }}
                   </p>
-                  <p class="text-xs  text-sc-gray-dark leading-5 truncate dark:text-gray-300" role="none">
-                    oleg.bionic@gmail.com
+                  <p class="overflow-hidden whitespace-nowrap text-ellipsis text-xs  text-sc-gray-dark leading-5 truncate dark:text-gray-300"
+                     role="none">
+                    {{ current_user.email }}
                   </p>
                 </div>
-                <ul class="tracking-normal py-1 text-sc-gray-darker text-sm leading-6" role="none">
+                <ul class="tracking-normal py-1 text-sc-gray-darker text-sm leading-6"
+                    role="none">
                   <li>
-                    <a href="#" class="block px-4 py-2  hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Orders</a>
+                    <a href="#"
+                       class="block px-4 py-2  hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                       role="menuitem">Orders</a>
                   </li>
                   <li>
-                    <a href="#" class="flex items-center px-4 py-2 text-gray-900  dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                       <span class="flex-1  whitespace-nowrap">Notifications</span>
-                       <span class="text-xs inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sc-gray-darker font-medium  bg-pc-teal-light rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
+                    <a href="/notification"
+                       class="flex items-center px-4 py-2 text-gray-900  dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                      <span class="flex-1  whitespace-nowrap">Notifications</span>
+                      <span class="text-xs inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sc-gray-darker font-medium  bg-pc-teal-light rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
                     </a>
-                 </li>
-                  <li>
-                    <a href="/measurement" class="block px-4 py-2  hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Measurement</a>
                   </li>
                   <li>
-                    <a href="#" class="block px-4 py-2  hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Message</a>
+                    <a href="/measurement"
+                       class="block px-4 py-2  hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                       role="menuitem">Measurement</a>
                   </li>
                   <li>
-                    <a href="#" class="block px-4 py-2 text-[#C20000]  hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
+                    <a href="#"
+                       class="block px-4 py-2  hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                       role="menuitem">Message</a>
+                  </li>
+                  <li>
+                    <a href="{{ url_for("auth_views.logout") }}"
+                       class="block px-4 py-2 text-[#C20000]  hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                       role="menuitem">Sign out</a>
                   </li>
                 </ul>
               </div>
             </div>
 
-            <a href="{{ url_for('auth_views.login' ) }}">
+          {% else %}
+            <a href="{{ url_for("auth_views.login") }}">
               <span class="text-pc-teal-normal font-medium text-sm font-roboto leading-6">Login</span>
             </a>
+          {% endif %}
+
         </div>
 
-      </div>
+      {% endif %}
+
+
     </div>
+  </div>
 </nav>
-  
-<aside  id="logo-sidebar" class="font-roboto text-sm fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar" x-data="{page: '{{page}}'}">
-     <div class="h-full px-4 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
-        <ul
-        class="space-y-1 font-medium"
-      >
-        {% for link in user_sidebar_links %}
+
+<aside id="logo-sidebar"
+       class="font-roboto text-sm fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+       aria-label="Sidebar"
+       x-data="{page: '{{ page }}'}">
+  <div class="h-full px-4 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+    <ul class="space-y-1 font-medium">
+      {% for link in user_sidebar_links %}
 
         <li class="rounded-lg [&:nth-last-child(2)]:border-t-1 border-t-sc-gray-light-active"
-        x-bind:class="{ 'bg-pc-teal-light': page === '{{link.name}}' }"
-            >
+            x-bind:class="{ 'bg-pc-teal-light': page === '{{ link.name }}' }">
           {{ navbarLink(link.name, link.link, link.icon_name) }}
         </li>
-        {% endfor %}
-      </ul>
-     </div>
-  </aside>
-  
+      {% endfor %}
+    </ul>
+  </div>
+</aside>

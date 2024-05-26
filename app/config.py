@@ -19,6 +19,7 @@ class Config:
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.getenv('MAIL_USERNAME')
     MAIL_PASSWORD = os.getenv('SENDGRID_API_KEY')
+    ADMINS = os.getenv('ADMINS')
 
 class DevConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get(

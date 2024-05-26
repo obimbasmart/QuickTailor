@@ -2,13 +2,11 @@
 
 from flask import render_template
 from app.views import app_views
-from app.constants import USER_SIDEBAR_LINKS
-from app.forms import MeasurementForm, LoginForm, RegistrationForm
+from app.forms.main_forms import MeasurementForm
 
 @app_views.route('/yomi-casual')
 def tailor_profile():
-    return render_template('pages/tailor_profile.html', 
-                           user_sidebar_links=USER_SIDEBAR_LINKS)
+    return render_template('pages/tailor_profile.html')
 
 @app_views.route('/measurement', methods=["GET","POST"])
 def get_set_measurement():
@@ -16,5 +14,4 @@ def get_set_measurement():
     if form.validate_on_submit():
         return "Submitted"
     return render_template('pages/measurements.html',
-                           form=form,
-                           user_sidebar_links=USER_SIDEBAR_LINKS)
+                           form=form)
