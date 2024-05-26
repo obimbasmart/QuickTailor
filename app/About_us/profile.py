@@ -5,6 +5,6 @@ from flask import render_template
 from app.About_us import page_viewer
 
 
-@page_viewer.route('/signup')
+@page_viewer.route('/profile')
 def user_profile():
     return render_template('forms/profile.html')
