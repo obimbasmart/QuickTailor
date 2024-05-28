@@ -1,194 +1,278 @@
 {% extends 'base.html' %}
-{% from 'macros/tailorProductCard.html' import tailorProductCard   %}
-{% from 'macros/productReview.html' import productReview   %}
-{% from 'macros/tailorBadge.html' import tailorBadge  %}
-{% from 'macros/productCard.html' import productCard   %}
-{% from 'macros/bottomSheet.html' import bottomSheet   %}
+
+{% from 'macros/tailorProductCard.html' import tailorProductCard %}
+{% from 'macros/productReview.html' import productReview %}
+{% from 'macros/tailorBadge.html' import tailorBadge %}
+{% from 'macros/productCard.html' import productCard %}
+{% from 'macros/bottomSheet.html' import bottomSheet %}
 {% block content %}
-<div  class="md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
-   
+    <div class="md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
 
-<div id="default-carousel" class="relative w-full" data-carousel="slide">
-    <!-- Carousel wrapper -->
-    <div class="relative aspect-[0.977] overflow-hidden md:h-96">
-         <!-- Item 1 -->
-        <div class="hidden w-full duration-700 ease-in-out]" data-carousel-item>
-            <img src="{{ url_for('static', filename='images/product_image_1.png' ) }}" class="absolute object-cover bg-center block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-        </div>
-        <!-- Item 2 -->
-        <div class="hidden w-full duration-700 ease-in-out]" data-carousel-item>
-            <img src="{{ url_for('static', filename='images/product_image_2.png' ) }}" class="absolute object-cover bg-center block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-        </div>
-
-        <!-- Item 2 -->
-        <div class="hidden w-full duration-700 ease-in-out]" data-carousel-item>
-            <img src="{{ url_for('static', filename='images/product_image_3.png' ) }}" class="absolute object-cover bg-center block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-        </div>
-    </div>
-
-    <!-- Like button -->
-    <div class="absolute top-0 end-0 z-30 p-2 space-x-3 rtl:space-x-reverse">
-        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-1 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 18 18" fill="none">
-                <path d="M15.1151 8.21402L15.1151 8.21405C14.784 9.92327 13.26 11.5924 11.7086 12.8782C10.9472 13.5092 10.2066 14.0259 9.65586 14.385C9.38264 14.5631 9.15704 14.7018 8.99998 14.7959C8.84292 14.7018 8.61732 14.5631 8.3441 14.385C7.79334 14.0259 7.05275 13.5092 6.29139 12.8782C4.73998 11.5924 3.21601 9.92327 2.88485 8.21405L2.88485 8.21402C2.5438 6.45434 2.88558 5.18506 3.50015 4.36701C4.11727 3.54555 5.04786 3.12491 5.99998 3.12491H6.01589L6.03176 3.12389C6.53156 3.09206 7.03087 3.19328 7.47881 3.41725C7.92675 3.64122 8.30731 3.97993 8.58172 4.39887L8.99998 5.03743L9.41824 4.39887C9.69265 3.97993 10.0732 3.64122 10.5212 3.41725C10.9691 3.19328 11.4684 3.09206 11.9682 3.12389L11.9841 3.12491H12C12.9521 3.12491 13.8827 3.54555 14.4998 4.36701C15.1144 5.18506 15.4562 6.45434 15.1151 8.21402Z" stroke="white"/>
-              </svg>
-            <span class="sr-only">Like</span>
-        </span>
-
-        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-1 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M5.75 9.125L10.25 11.375M10.25 4.625L5.75 6.875M12.5 14.75C11.2573 14.75 10.25 13.7427 10.25 12.5C10.25 11.2573 11.2573 10.25 12.5 10.25C13.7427 10.25 14.75 11.2573 14.75 12.5C14.75 13.7427 13.7427 14.75 12.5 14.75ZM3.5 10.25C2.25736 10.25 1.25 9.24268 1.25 8C1.25 6.75732 2.25736 5.75 3.5 5.75C4.74264 5.75 5.75 6.75732 5.75 8C5.75 9.24268 4.74264 10.25 3.5 10.25ZM12.5 5.75C11.2573 5.75 10.25 4.74264 10.25 3.5C10.25 2.25736 11.2573 1.25 12.5 1.25C13.7427 1.25 14.75 2.25736 14.75 3.5C14.75 4.74264 13.7427 5.75 12.5 5.75Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            <span class="sr-only">Share</span>
-        </span>
-
-    </div>
-    <!-- Slider indicators -->
-    <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-        <button type="button" class="w-2 h-2 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-        <button type="button" class="w-2 h-2 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-        <button type="button" class="w-2 h-2 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-        <button type="button" class="w-2 h-2 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
-        <button type="button" class="w-2 h-2 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
-    </div>
-
-
-    <!-- Slider controls -->
-    <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-1 group-focus:ring-white/5 dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 1 1 5l4 4"/>
-            </svg>
-            <span class="sr-only">Previous</span>
-        </span>
-    </button>
-    <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-1 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m1 9 4-4-4-4"/>
-            </svg>
-            <span class="sr-only">Next</span>
-        </span>
-    </button>
-</div>
-
-    <!-- Product Information -->
-    <div class="px-4 w-full font-roboto font-normal space-y-8">
-            <div role="info" class="flex flex-col gap-y-3 text-black">
-                <h2 class="text-xl leading-8">Grandeur Agbada Ensemble</h2>
-                <div class="flex justify-between">
-                        <h3 class="inline-flex items-center space-x-3 rounded-md px-2 bg-sc-gray-normal">
-                            <span class="text-xs leading-5">starts at</span>
-                            <p class="leading-9 text-xl">₦10,500</p>
-                        </h3>
-
-                        <p class="inline-flex items-center space-x-2">
-                            <span class="text-xs text-sc-gray-darker leading-5">Royal Black and blue</span>
-                            <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="19" viewBox="0 0 18 19" fill="none">
-                                    <path d="M5.28735 5.78735H5.29485M7.88385 2.75H5.85C4.58988 2.75 3.95982 2.75 3.47852 2.99524C3.05515 3.21095 2.71095 3.55515 2.49524 3.97852C2.25 4.45982 2.25 5.08988 2.25 6.35V8.38385C2.25 8.93412 2.25 9.2093 2.31217 9.46827C2.36729 9.69785 2.45819 9.9173 2.58156 10.1187C2.7207 10.3457 2.91527 10.5402 3.30442 10.9294L6.82942 14.4544C7.72042 15.3454 8.166 15.791 8.67967 15.9579C9.13162 16.1047 9.61837 16.1047 10.0703 15.9579C10.584 15.791 11.0296 15.3454 11.9206 14.4544L13.9544 12.4206C14.8454 11.5296 15.291 11.084 15.4579 10.5703C15.6047 10.1184 15.6047 9.63162 15.4579 9.17967C15.291 8.666 14.8454 8.22042 13.9544 7.32942L10.4294 3.80442C10.0402 3.41527 9.8457 3.2207 9.61867 3.08156C9.4173 2.95819 9.19785 2.86729 8.96827 2.81217C8.7093 2.75 8.43412 2.75 7.88385 2.75ZM5.66235 5.78735C5.66235 5.99446 5.49446 6.16235 5.28735 6.16235C5.08024 6.16235 4.91235 5.99446 4.91235 5.78735C4.91235 5.58024 5.08024 5.41235 5.28735 5.41235C5.49446 5.41235 5.66235 5.58024 5.66235 5.78735Z" stroke="#2D2D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                  </svg>
-                            </span>
-                        </p>
-
-                       
+        <div id="default-carousel" class="relative w-full" data-carousel="slide">
+            <!-- Carousel wrapper -->
+            <div class="relative aspect-[0.977] overflow-hidden md:h-96">
+                <!-- Item 1 -->
+                {% for img_url in product.img_urls %}
+                <div class="hidden w-full duration-700 ease-in-out]" data-carousel-item>
+                    <img src="{{img_url}}"
+                         class="absolute object-cover bg-center block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                         alt="..." />
                 </div>
+                {% endfor %}
+            </div>
 
-                    {% if current_user.is_authenticated %}
-                    <button 
-                    data-drawer-target="bottom-sheet-select-measurement" data-drawer-show="bottom-sheet-select-measurement"
-                    data-drawer-placement="bottom" aria-controls="bottom-sheet-select-measurement"
-                    type="button" class="text-white  text-sm  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">Order</button>
+            <!-- Like button -->
+            <div class="absolute top-0 end-0 z-30 p-2 space-x-3 rtl:space-x-reverse">
+                <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-1 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="16"
+                         height="16"
+                         viewBox="0 0 18 18"
+                         fill="none">
+                        <path d="M15.1151 8.21402L15.1151 8.21405C14.784 9.92327 13.26 11.5924 11.7086 12.8782C10.9472 13.5092 10.2066 14.0259 9.65586 14.385C9.38264 14.5631 9.15704 14.7018 8.99998 14.7959C8.84292 14.7018 8.61732 14.5631 8.3441 14.385C7.79334 14.0259 7.05275 13.5092 6.29139 12.8782C4.73998 11.5924 3.21601 9.92327 2.88485 8.21405L2.88485 8.21402C2.5438 6.45434 2.88558 5.18506 3.50015 4.36701C4.11727 3.54555 5.04786 3.12491 5.99998 3.12491H6.01589L6.03176 3.12389C6.53156 3.09206 7.03087 3.19328 7.47881 3.41725C7.92675 3.64122 8.30731 3.97993 8.58172 4.39887L8.99998 5.03743L9.41824 4.39887C9.69265 3.97993 10.0732 3.64122 10.5212 3.41725C10.9691 3.19328 11.4684 3.09206 11.9682 3.12389L11.9841 3.12491H12C12.9521 3.12491 13.8827 3.54555 14.4998 4.36701C15.1144 5.18506 15.4562 6.45434 15.1151 8.21402Z" stroke="white" />
+                    </svg>
+                    <span class="sr-only">Like</span>
+                </span>
 
-                    {% else %}
-                            <a href="{{ url_for('auth_views.login', next='products/1234' ) }}"
-                               class="text-white  text-sm  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">Order</a>
-                    {% endif %}
-                <div>
-                    <h3 class="text-base leading-6 tracking-[0.5px]">Description</h3>
-                    <p class="text-sm leading-6 text-sc-gray-darker">
-    
-                        The Agbada is a traditional Nigerian attire for men, 
-                        featuring a loose, flowing robe with intricate embroidery. 
-                        It's a symbol of elegance and cultural pride, often worn for 
-                        special occasions like weddings and festivals.
-                    </p>
-                </div>
+                <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-1 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="16"
+                         height="16"
+                         viewBox="0 0 16 16"
+                         fill="none">
+                        <path d="M5.75 9.125L10.25 11.375M10.25 4.625L5.75 6.875M12.5 14.75C11.2573 14.75 10.25 13.7427 10.25 12.5C10.25 11.2573 11.2573 10.25 12.5 10.25C13.7427 10.25 14.75 11.2573 14.75 12.5C14.75 13.7427 13.7427 14.75 12.5 14.75ZM3.5 10.25C2.25736 10.25 1.25 9.24268 1.25 8C1.25 6.75732 2.25736 5.75 3.5 5.75C4.74264 5.75 5.75 6.75732 5.75 8C5.75 9.24268 4.74264 10.25 3.5 10.25ZM12.5 5.75C11.2573 5.75 10.25 4.74264 10.25 3.5C10.25 2.25736 11.2573 1.25 12.5 1.25C13.7427 1.25 14.75 2.25736 14.75 3.5C14.75 4.74264 13.7427 5.75 12.5 5.75Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <span class="sr-only">Share</span>
+                </span>
 
             </div>
-    </div>
+            <!-- Slider indicators -->
 
-    <!-- Tailor Info -->
-    <div class="p-4">
-        {{tailorProductCard("Yomi Casual")}}
-    </div>
 
-    <!-- Reviews -->
+            <div x-data="{ imgUrls: {{ product.img_urls }} }" class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+                <button type="button"
+                        class="w-2 h-2 rounded-full"
+                        aria-current="true"
+                        aria-label="Slide 1"
+                        x-show="imgUrls[0]"
+                        data-carousel-slide-to="0">
+                </button>
+                <button type="button"
+                        class="w-2 h-2 rounded-full"
+                        aria-current="false"
+                        aria-label="Slide 2"
+                        x-show="imgUrls[1]"
+                        data-carousel-slide-to="1">
+                </button>
+                <button type="button"
+                        class="w-2 h-2 rounded-full"
+                        aria-current="false"
+                        x-show="imgUrls[2]"
+                        aria-label="Slide 3"
+                        data-carousel-slide-to="2">
+                </button>
+                <button type="button"
+                        class="w-2 h-2 rounded-full"
+                        aria-current="false"
+                        aria-label="Slide 4"
+                        x-show="imgUrls[3]"
+                        data-carousel-slide-to="3">
+                </button>
+            </div>
+  
+    
+            {% if product.img_urls | length > 1  %}
+                    <button type="button"
+                    class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                    data-carousel-prev>
+                <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-1 group-focus:ring-white/5 dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 6 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 1 1 5l4 4" />
+                    </svg>
+                    <span class="sr-only">Previous</span>
+                </span>
+                    </button>
+                    <button type="button"
+                            class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                            data-carousel-next>
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-1 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                            <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m1 9 4-4-4-4" />
+                            </svg>
+                            <span class="sr-only">Next</span>
+                        </span>
+                    </button>
+
+            {% endif %}
+            <!-- Slider controls -->
+            
+
+
+        </div>
+
+        <!-- Product Information -->
+        <div class="px-4 w-full font-roboto font-normal space-y-8">
+            <div role="info" class="flex py-4 flex-col gap-y-3 text-black">
+                <h2 class="text-xl leading-8">
+                   {{product.name}}
+                </h2>
+                <div class="flex justify-between">
+                    <h3 class="inline-flex items-center space-x-3 rounded-md px-2 bg-sc-gray-normal">
+                        <span class="text-xs leading-5">starts at</span>
+                        <p class="leading-9 text-[18px] leading-8">
+                            {{product.price | currency}}
+                        </p>
+                    </h3>
+
+                    <p class="inline-flex items-center space-x-2">
+                        <span class="max-w-20 text-xs text-sc-gray-darker leading-5"> {{product.material}}</span>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="18"
+                                 height="19"
+                                 viewBox="0 0 18 19"
+                                 fill="none">
+                                <path d="M5.28735 5.78735H5.29485M7.88385 2.75H5.85C4.58988 2.75 3.95982 2.75 3.47852 2.99524C3.05515 3.21095 2.71095 3.55515 2.49524 3.97852C2.25 4.45982 2.25 5.08988 2.25 6.35V8.38385C2.25 8.93412 2.25 9.2093 2.31217 9.46827C2.36729 9.69785 2.45819 9.9173 2.58156 10.1187C2.7207 10.3457 2.91527 10.5402 3.30442 10.9294L6.82942 14.4544C7.72042 15.3454 8.166 15.791 8.67967 15.9579C9.13162 16.1047 9.61837 16.1047 10.0703 15.9579C10.584 15.791 11.0296 15.3454 11.9206 14.4544L13.9544 12.4206C14.8454 11.5296 15.291 11.084 15.4579 10.5703C15.6047 10.1184 15.6047 9.63162 15.4579 9.17967C15.291 8.666 14.8454 8.22042 13.9544 7.32942L10.4294 3.80442C10.0402 3.41527 9.8457 3.2207 9.61867 3.08156C9.4173 2.95819 9.19785 2.86729 8.96827 2.81217C8.7093 2.75 8.43412 2.75 7.88385 2.75ZM5.66235 5.78735C5.66235 5.99446 5.49446 6.16235 5.28735 6.16235C5.08024 6.16235 4.91235 5.99446 4.91235 5.78735C4.91235 5.58024 5.08024 5.41235 5.28735 5.41235C5.49446 5.41235 5.66235 5.58024 5.66235 5.78735Z" stroke="#2D2D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                    </p>
+
+
+                </div>
+
+                {% if current_user.is_authenticated %}
+                    <button data-drawer-target="bottom-sheet-select-measurement"
+                            data-drawer-show="bottom-sheet-select-measurement"
+                            data-drawer-placement="bottom"
+                            aria-controls="bottom-sheet-select-measurement"
+                            type="button"
+                            class="text-white  text-sm  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">
+                        Order
+                    </button>
+
+                {% else %}
+                    <a href="{{ url_for('auth_views.login', next='products/1234') }}"
+                       class="text-white  text-sm  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">Order</a>
+                {% endif %}
+                <div>
+                    <h3 class="text-base leading-6 tracking-[0.5px]">
+                        Description
+                    </h3>
+                    <p class="text-sm leading-6 text-sc-gray-darker">
+
+                            {{product.description}}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tailor Info -->
+        <div 
+            class="p-4">
+            {{ tailorProductCard(product.tailor) }}
+        </div>
+
+        <!-- Reviews -->
         <section class="p-4" id="accordion-collapse" data-accordion="collapse">
             <h3 id="accordion-collapse-heading-1">
-              <button type="button" class="border-0 flex items-center justify-between w-full py-2 font-medium rtl:text-right border-b-1 border-b-[#939393]  bg-inherit dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400  dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-collapse-body-1" aria-expanded="true" aria-controls="accordion-collapse-body-1">
-                <div class="flex flex-col justify-center items-start gap-y-3">
-                    <h3 class="text-base leading-6 tracking-[0.5px]">Reviews</h3>
+                <button type="button"
+                        class="border-0 flex items-center justify-between w-full py-2 font-medium rtl:text-right border-b-1 border-b-[#939393]  bg-inherit dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400  dark:hover:bg-gray-800 gap-3"
+                        data-accordion-target="#accordion-collapse-body-1"
+                        aria-expanded="true"
+                        aria-controls="accordion-collapse-body-1">
+                    <div class="flex flex-col justify-center items-start gap-y-3">
+                        <h3 class="text-base leading-6 tracking-[0.5px]">
+                            Reviews
+                        </h3>
                         <p class="flex gap-2 text-black leading-5 text-xs">
-                             <span class="bg-[#EFBF13] p-1 rounded-sm text-xs">4.4/5</span>
-                             <span>64 reviews</span>
+                            <span class="bg-[#EFBF13] p-1 rounded-sm text-xs">4.4/5</span>
+                            <span>64 reviews</span>
                         </p>
-                </div>
-                
-                <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5 5 1 1 5"/>
-                  </svg>
+                    </div>
 
-              </button>
+                    <svg data-accordion-icon
+                         class="w-6 h-6 rotate-180 shrink-0"
+                         aria-hidden="true"
+                         xmlns="http://www.w3.org/2000/svg"
+                         fill="none"
+                         viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5 5 1 1 5" />
+                    </svg>
+
+                </button>
             </h3>
-            
-            <div id="accordion-collapse-body-1" class="hidden" aria-labelledby="accordion-collapse-heading-1">
-              
-                    
 
-                <div id="animation-carousel" class="relative w-full" data-carousel="static">
+            <div id="accordion-collapse-body-1"
+                 class="hidden"
+                 aria-labelledby="accordion-collapse-heading-1">
+
+
+
+                <div id="animation-carousel"
+                     class="relative w-full"
+                     data-carousel="static">
                     <!-- Carousel wrapper -->
                     <div class="relative h-[400px] overflow-hidden rounded-lg md:h-96">
                         <!-- Item 1 -->
                         <div class="hidden duration-200 ease-linear" data-carousel-item>
-                            {{productReview("Givenchy Leo")}}
-                                    {{productReview("Nwachukwu David")}}
+                            {{ productReview("Givenchy Leo") }}
+                            {{ productReview("Nwachukwu David") }}
                         </div>
                         <!-- Item 2 -->
                         <div class="hidden duration-200 ease-linear" data-carousel-item>
-                            {{productReview("Bionic Obimba")}}
-                                    {{productReview("Jegede Lugbe")}}
+                            {{ productReview("Bionic Obimba") }}
+                            {{ productReview("Jegede Lugbe") }}
                         </div>
                         <!-- Item 3 -->
                         <div class="hidden duration-200 ease-linear" data-carousel-item="active">
-                            {{productReview("Nnenna Taoma")}}
-                                    {{productReview("Breadwinner Nkechi")}}
+                            {{ productReview("Nnenna Taoma") }}
+                            {{ productReview("Breadwinner Nkechi") }}
                         </div>
                         <!-- Item 4 -->
                         <div class="hidden duration-200 ease-linear" data-carousel-item>
-                            {{productReview("Givenchy Leo")}}
-                                    {{productReview("Nwachukwu David")}}
+                            {{ productReview("Givenchy Leo") }}
+                            {{ productReview("Nwachukwu David") }}
                         </div>
                         <!-- Item 5 -->
                         <div class="hidden duration-200 ease-linear" data-carousel-item>
-                            {{productReview("Givenchy Leo")}}
-                                    {{productReview("Nwachukwu David")}}
+                            {{ productReview("Givenchy Leo") }}
+                            {{ productReview("Nwachukwu David") }}
                         </div>
                     </div>
                     <!-- Slider controls -->
-                    <button type="button" class="absolute bottom-0 start-1/4 z-30 flex items-end justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+                    <button type="button"
+                            class="absolute bottom-0 start-1/4 z-30 flex items-end justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                            data-carousel-prev>
                         <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-sc-gray-light-active dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M15.4998 19L9.20696 12.7071C8.81643 12.3166 8.81643 11.6834 9.20696 11.2929L15.4998 5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                              </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="24"
+                                 height="24"
+                                 viewBox="0 0 24 24"
+                                 fill="none">
+                                <path d="M15.4998 19L9.20696 12.7071C8.81643 12.3166 8.81643 11.6834 9.20696 11.2929L15.4998 5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
                             <span class="sr-only">Previous</span>
                         </span>
                     </button>
-                    <button type="button" class="absolute bottom-0 end-1/4 z-30 flex items-end justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+                    <button type="button"
+                            class="absolute bottom-0 end-1/4 z-30 flex items-end justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                            data-carousel-next>
                         <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-sc-gray-light-active dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M9.5 5L15.7929 11.2929C16.1834 11.6834 16.1834 12.3166 15.7929 12.7071L9.5 19" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                              </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="24"
+                                 height="24"
+                                 viewBox="0 0 24 24"
+                                 fill="none">
+                                <path d="M9.5 5L15.7929 11.2929C16.1834 11.6834 16.1834 12.3166 15.7929 12.7071L9.5 19" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
                             <span class="sr-only">Next</span>
                         </span>
                     </button>
@@ -198,74 +282,137 @@
             </div>
 
 
-    </section>
+        </section>
 
-    <h3 class="px-4 text-fdt-brown-dark text-xl leading-9 capitalize font-montserrat">
-        Similar Products
-    </h3>
-    <section class=" mx-4 py-4 relative overflow-x-scroll  md:h-96 flex gap-4 py-4">
-            {% for product in [1,2,3,4] %}
+        <h3 class="px-4 text-fdt-brown-dark text-xl leading-9 capitalize font-montserrat">
+            Similar Products
+        </h3>
+        <section class=" mx-4 py-4 relative overflow-x-scroll  md:h-96 flex gap-4 py-4">
+            {% for product in product.tailor.products %}
                 <div class="w-[40%]">
-                    {{productCard("Obimba")}}
+                    {{ productCard(product.name, product.price, 'akd', product.id) }}
                 </div>
             {% endfor %}
-    </section>
+        </section>
 
-    {% set select_measurement %}
+        {% set select_measurement %}
             <div class="py-3 space-y-5 text-sm text-sc-gray-darker leading-5">
                 <div class="flex items-center gap-3 font-normal">
-                    <input  id="default-radio-1" type="radio" value="" name="default-radio" class="w-4 h-4 ml-1 text-blue-600  border-pc-teal-normal border-1 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="default-radio-1" class="leading-5 ms-2 text-sm dark:text-gray-300">Use my saved measurements</label>
+                    <input id="default-radio-1"
+                           type="radio"
+                           value=""
+                           name="default-radio"
+                           class="w-4 h-4 ml-1 text-blue-600  border-pc-teal-normal border-1 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                    <label for="default-radio-1"
+                           class="leading-5 ms-2 text-sm dark:text-gray-300">
+                        Use my saved measurements
+                    </label>
                 </div>
 
                 <div class="flex items-center gap-2"
-                data-drawer-target="bottom-sheet-measurement" data-drawer-show="bottom-sheet-measurement"
-                data-drawer-placement="bottom" aria-controls="bottom-sheet-measurement"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M15 12H12M12 12H9M12 12V9M12 12V15M17 21H7C4.79086 21 3 19.2091 3 17V7C3 4.79086 4.79086 3 7 3H17C19.2091 3 21 4.79086 21 7V17C21 19.2091 19.2091 21 17 21Z" stroke="#008080" stroke-width="1.5" stroke-linecap="round"/>
-                      </svg>
-                    <label for="default-radio-2" class="leading-5 ms-2 text-sm  dark:text-gray-300">Add new measurements</label>
+                     data-drawer-target="bottom-sheet-measurement"
+                     data-drawer-show="bottom-sheet-measurement"
+                     data-drawer-placement="bottom"
+                     aria-controls="bottom-sheet-measurement">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="24"
+                         height="24"
+                         viewBox="0 0 24 24"
+                         fill="none">
+                        <path d="M15 12H12M12 12H9M12 12V9M12 12V15M17 21H7C4.79086 21 3 19.2091 3 17V7C3 4.79086 4.79086 3 7 3H17C19.2091 3 21 4.79086 21 7V17C21 19.2091 19.2091 21 17 21Z" stroke="#008080" stroke-width="1.5" stroke-linecap="round" />
+                    </svg>
+                    <label for="default-radio-2"
+                           class="leading-5 ms-2 text-sm  dark:text-gray-300">
+                        Add new measurements
+                    </label>
                 </div>
 
 
             </div>
-    {% endset %}
 
-    {% set add_measurement %}
-        <div class="grid grid-cols-2 gap-x-4 gap-y-5 py-3 font-roboto">
-            
-            {% for measurement in [1,2,1,1,1,1,1,1,1,1] %}
-            <div class="relative">
-                <input type="number" id="default_outlined" class="font-roboto leading-6 block px-3 pb-2.5 pt-4 w-full text-sm text-sc-gray-dark bg-transparent rounded-md border-1 border-[#888] appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                <label for="default_outlined" class="absolute text-sm text-sc-gray-darker dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 start-1 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Top Length</label>
+            <!-- Warning sign -->
+            <div class="inline-flex items-center space-x-1 justify-center w-full">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="19"
+                     height="18"
+                     viewBox="0 0 19 18"
+                     fill="none">
+                    <path d="M9.5 13.5C9.91421 13.5 10.25 13.1642 10.25 12.75C10.25 12.3358 9.91421 12 9.5 12C9.08579 12 8.75 12.3358 8.75 12.75C8.75 13.1642 9.08579 13.5 9.5 13.5Z" fill="#606060" />
+                    <path d="M9.5 7.5V10.5" stroke="#606060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M3.08608 13.5791L8.15899 3.43318C8.71181 2.32761 10.2895 2.32761 10.8423 3.43318L15.9153 13.5791C16.4139 14.5764 15.6887 15.7499 14.5736 15.7499H4.42772C3.31264 15.7499 2.5874 14.5764 3.08608 13.5791Z" stroke="#606060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span class="text-xs text-sc-gray-dark leading-4 tracking-wider">Select a measurement to continue</span>
             </div>
-            {% endfor %}
-            
-        </div>
-    {% endset %}
+
+            <!--  Button-->
+            <button data-drawer-target="bottom-sheet-select-measurement"
+                    data-drawer-show="bottom-sheet-select-measurement"
+                    data-drawer-placement="bottom"
+                    aria-controls="bottom-sheet-select-measurement"
+                    type="button"
+                    class="text-white  text-sm  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">
+                Add measurement to order
+            </button>
+        {% endset %}
+
+        {% set add_measurement %}
+            <div class="grid grid-cols-2 gap-x-4 gap-y-5 py-3 font-roboto">
+
+                {% for measurement in [1,2,1,1,1,1,1,1,1,1] %}
+                    <div class="relative">
+                        <input type="number"
+                               id="default_outlined"
+                               class="font-roboto leading-6 block px-3 pb-2.5 pt-4 w-full text-sm text-sc-gray-dark bg-transparent rounded-md border-1 border-[#888] appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                               placeholder=" " />
+                        <label for="default_outlined"
+                               class="absolute text-sm text-sc-gray-darker dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 start-1 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
+                            Top Length
+                        </label>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+            <!-- Warning sign -->
+            <div class="inline-flex items-center space-x-1 justify-center w-full">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="19"
+                     height="18"
+                     viewBox="0 0 19 18"
+                     fill="none">
+                    <path d="M9.5 13.5C9.91421 13.5 10.25 13.1642 10.25 12.75C10.25 12.3358 9.91421 12 9.5 12C9.08579 12 8.75 12.3358 8.75 12.75C8.75 13.1642 9.08579 13.5 9.5 13.5Z" fill="#606060" />
+                    <path d="M9.5 7.5V10.5" stroke="#606060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M3.08608 13.5791L8.15899 3.43318C8.71181 2.32761 10.2895 2.32761 10.8423 3.43318L15.9153 13.5791C16.4139 14.5764 15.6887 15.7499 14.5736 15.7499H4.42772C3.31264 15.7499 2.5874 14.5764 3.08608 13.5791Z" stroke="#606060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span class="text-xs text-sc-gray-dark leading-4 tracking-wider">All measurement are in cm</span>
+            </div>
+
+            <!--  Button-->
+            <button data-drawer-target="bottom-sheet-measurement"
+                    data-drawer-show="bottom-sheet-measurement"
+                    data-drawer-placement="bottom"
+                    aria-controls="bottom-sheet-measurement"
+                    type="button"
+                    class="text-white  text-sm  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">
+                Add measurement
+            </button>
+        {% endset %}
 
 
-    {{
-        bottomSheet(title="Select a measurements", 
-                    content=select_measurement,
-                    buttonName="Add Measurement",
-                    warning="Select a measurement to proceed",
-                    sheetName="bottom-sheet-select-measurement")
-    }}
+        {{ bottomSheet(title="Select a measurements",
+                content=select_measurement,
+                sheetName="bottom-sheet-select-measurement") 
+        }}
 
-    {{
-        bottomSheet(title="Measurement", 
-                    content=add_measurement,
-                    buttonName="Add Measurement",
-                    warning="All measurements are in cm",
-                    sheetName="bottom-sheet-measurement")
-    }}
+        {{ bottomSheet(title="Measurement",
+                content=add_measurement,
+                sheetName="bottom-sheet-measurement") 
+        }}
 
 
 
 
-    
-</div>
+
+    </div>
 
 {% endblock %}

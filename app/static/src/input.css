@@ -11,3 +11,10 @@
 .nav-shadow {
     box-shadow: 0px 0px 7.6px 0px rgba(0, 0, 0, 0.10);
 }
+
+::-webkit-file-upload-button {
+    background-color: #E6F2F2!important;
+    color: #006060!important;
+    outline: none;
+}
+

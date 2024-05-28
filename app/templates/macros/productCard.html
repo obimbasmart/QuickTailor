@@ -1,15 +1,15 @@
 {% from 'macros/tailorBadge.html' import tailorBadge   %}
     
 
-{% macro productCard(name, tailor_name, price, rating) %}
+{% macro productCard(name, price, img_url, id) %}
 
 <div
   class="w-full max-w-sm   dark:bg-gray-800 dark:border-gray-700"
 >
-  <a href="/products/1234">
+  <a href="/products/{{id}}">
     <img
       class="block object-center object-cover max-w-full aspect-square rounded-sm"
-      src="{{ url_for('static', filename='/images/product_image_3.png' ) }}"
+      src="{{img_url}}"
       alt=""
     />
   </a>
@@ -18,11 +18,11 @@
       <h5
         class="overflow-hidden whitespace-nowrap text-ellipsis text-sm tablet:text-base leading-7 text- font-roboto font-normal tracking-wide text-gray-900 dark:text-white"
       >
-        White Agbada and dansiki cap is good and Feels nice
+        {{name}}
       </h5>
     </a>
     <div class="flex justify-between items-center">
-      <div class="text-center text-sm leading-7 tablet:text-base font-medium text-gray-900 dark:text-white font-roboto">N10,500</div>
+      <div class="text-center text-sm leading-7 tablet:text-base font-medium text-gray-900 dark:text-white font-roboto">{{ price | currency }}</div>
 
       <div class="flex items-center  justify-center -space-x-1 rtl:space-x-reverse">
         <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">

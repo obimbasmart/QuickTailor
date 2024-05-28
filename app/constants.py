@@ -109,5 +109,19 @@ auth_top = {
         "tailor_verification": ["Verification"]
 
 
-        }
+}
 
+gender = [
+    ('Male', "Male"),
+    ('Female', "Female"),
+    ('Unisex', "Unisex"),
+]
+
+categories = [
+    ("Coperate", "Coperate"),
+    ("Native", "Native"),
+    ("Top", "Top"),
+    ("Casual", "Casual"),
+    ("Shirts", "Shirts"),
+    ("Gown", "Gown"),
+]

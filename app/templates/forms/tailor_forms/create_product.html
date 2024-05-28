@@ -1,0 +1,135 @@
+{% extends 'page_wrapper.html' %}
+
+{% from 'macros/form_error.html' import error %}
+
+{% block page_content %}
+    <div class="text-center space-y-1 mb-5 mt-4">
+
+        <h1 class="font-montserrat text-xl leading-8 font-medium">
+            New Product
+        </h1>
+        <!-- <p class="text-sc-gray-dark font-roboto text-sm leading-6">Sign in to continue</p> -->
+    </div>
+
+
+    <form novalidate action="" method="POST" class="w-full" enctype="multipart/form-data"> 
+        {% set input_styles = "leading-5 font-roboto block p-3  w-full text-sm text-sc-gray-darker bg-transparent rounded-md border-1 border-[#888] appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" %}
+        {% set label_styles = "font-roboto leading-5 absolute text-sm text-sc-gray-darker dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 start-1 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto" %}
+
+        {{ form.hidden_tag() }}
+
+        <div class="grid grid-cols-1 gap-3">
+            {% set ignore_fields = [
+                "MultipleFileField",
+                "CSRFTokenField",
+                "SubmitField",
+                "BooleanField",
+                "MultiRadioField",
+                "MultiCheckboxField"
+            ] %}
+
+            {% for field in form %}
+                {% if field.type not in ignore_fields %}
+                    <p class="relative">
+                        <!--  input -->
+                        {{ field(class=input_styles, placeholder="") }}
+                        <!-- label -->
+                        {{ field.label(class=label_styles) }}
+                        <!-- error message on validate -->
+                        {% for msg in field.errors %}
+                            {{ error(msg) }}
+                        {% endfor %}
+                    </p>
+                {% endif %}
+            {% endfor %}
+
+            <button id="dropdownRadioButton"
+                    data-dropdown-toggle="dropdownDefaultRadio"
+                    class="border-1 border-sc-gray text-sc-gray-darker focus:ring-1 focus:outline-none focus:ring-blue-300 leading-5 rounded-lg text-sm px-3 py-3 text-center inline-flex items-center justify-between dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    type="button">
+                {{ form.gender.label }}
+                <svg class="w-2.5 h-2.5 ms-3"
+                     aria-hidden="true"
+                     xmlns="http://www.w3.org/2000/svg"
+                     fill="none"
+                     viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                </svg>
+            </button>
+
+            <!-- Dropdown gender menu -->
+            <div id="dropdownDefaultRadio"
+                 class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
+                <ul class="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200"
+                    aria-labelledby="dropdownRadioButton">
+
+                    {% for option in form.gender %}
+                        <li class="flex items-center w-full p-2 rounded-lg pl-8 group">
+                            {{ option(class="w-5 h-5 text-pc-teal-normal bg-white border-pc-teal-normal rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600") }}
+                            {{ option.label(class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300") }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+
+            <button id="dropdownRadioButton"
+                    data-dropdown-toggle="dropdownDefaultCheck"
+                    class="text-sc-gray-darker border-1 border-sc-gray focus:ring-1 focus:outline-none focus:ring-blue-300 leading-5 rounded-lg text-sm px-3 py-3 text-center inline-flex items-center justify-between dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    type="button">
+                {{ form.categories.label }}
+                <svg class="w-2.5 h-2.5 ms-3"
+                     aria-hidden="true"
+                     xmlns="http://www.w3.org/2000/svg"
+                     fill="none"
+                     viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                </svg>
+            </button>
+
+            <!-- Dropdown category menu -->
+            <div id="dropdownDefaultCheck"
+                 class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
+                <ul class="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200"
+                    aria-labelledby="dropdownRadioButton">
+                    {% for option in form.categories %}
+                        <li class="flex items-center w-full p-2 rounded-lg pl-8 group">
+                            {{ option(class="w-5 h-5 text-pc-teal-normal bg-white border-pc-teal-normal rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600") }}
+                            {{ option.label(class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300") }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+
+            <p class="">
+                {{ form.images.label(class="font-roboto leading-5 text-sm text-sc-gray-darker") }}
+                {{ form.images(class="block w-full leading-5  text-sm text-sc-gray-darker border border-pc-teal-normal rounded-md cursor-pointer bg-white dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400")}}
+
+
+                <p class="-mt-2 text-xs text-sc-gray dark:text-gray-300"
+                   id="file_input_help">
+                    SVG, PNG, JPG or GIF (MAX 4 files).
+                </p>
+
+
+            </p>
+
+            <button type="button"
+                    class="hidden text-white  text-sm  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">
+                Create customization code
+            </button>
+
+            <p class="inline-flex items-center space-x-2">
+                {{ form.draft(class="w-5 h-5 text-pc-teal-normal bg-white border-pc-teal-normal rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600") }}
+                {{ form.draft.label(class='font-roboto text-sm text-sc-gray-darker') }}
+            </p>
+        </div>
+
+
+
+            {{ form.submit(class="block mt-4 text-white  text-sm  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2") }}
+ 
+    </form>
+
+{% endblock %}
