@@ -4114,11 +4114,10 @@ input:checked + .toggle-bg {
 .\[\&\:nth-last-child\(2\)\]\:border-t-1:nth-last-child(2) {
   border-top-width: 1px;
 }
-<<<<<<< HEAD
 .custom-cancel-button,
 .custom-save-button {
   width: 500px;
-  height: 80px; 
+  height: 50px; 
   padding: 6px 6px 6px 6px;
   border-radius: 6px; 
   opacity: 1; 
@@ -4207,5 +4206,3 @@ input:checked + .toggle-bg {
   border-radius: 4px;
   color: white;
 }
-=======
->>>>>>> a418de72f86c1310d5086d7d107814c37c35fc06
