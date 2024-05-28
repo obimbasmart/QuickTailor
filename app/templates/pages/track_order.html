@@ -119,7 +119,7 @@
                 </div>
                 <form method="POST" action="/submit_review" class="w-full">
                     <textarea class="w-full p-2 border border-gray-300 rounded" placeholder="Write your review here..."></textarea>
-                    <button  class="review_submit" type="submit" class="mt-2 px-4 py-2 bg-blue-500 text-white border-2 rounded">Submit Review</button>
+                    <button  id="review_submit" type="submit" class="mt-2 px-4 py-2 bg-blue-500 text-black border-2 rounded">Submit Review</button>
                 </form>
             </div>
         </footer>
@@ -142,10 +142,12 @@
 
     // JavaScript for star rating functionality
     const stars = document.querySelectorAll('svg');
+    let rating = 0;
     stars.forEach((star, index) => {
         star.addEventListener('click', () => {
+            rating = index + 1;
             stars.forEach((s, i) => {
-                if (i <= index) {
+                if (i < rating) {
                     s.classList.add('text-yellow-500');
                     s.classList.remove('text-gray-400');
                 } else {
@@ -159,11 +161,23 @@
     // JavaScript to toggle the review section visibility
     document.getElementById('closeReview').addEventListener('click', function() {
         var reviewSection = document.getElementById('reviewSection');
-        if (reviewSection.classList.contains('hidden')) {
-            reviewSection.classList.remove('hidden');
-        } else {
-            reviewSection.classList.add('hidden');
+        reviewSection.classList.toggle('hidden');
+    });
+
+    // JavaScript to handle review submission
+    const submitButton = document.getElementById('review_submit');
+    submitButton.addEventListener('click', () => {
+        const reviewText = document.querySelector('textarea').value;
+        if (reviewText.trim() === '') {
+            alert('Please write a review before submitting.');
+            return;
         }
+        
+        // Show alert message
+        alert('Well Done! Your review has been submitted');
+
+        // Optionally, clear the textarea
+        document.querySelector('textarea').value = '';
     });
 </script>
 {% endblock %}
