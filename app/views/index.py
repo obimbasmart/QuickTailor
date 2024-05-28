@@ -7,7 +7,7 @@ Index
 from flask_login import current_user
 from flask import render_template, request, jsonify
 from app.views import app_views
-
+from app.db_access.product import _get_all_products
 
 notification= [
     {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "10, 000"},
@@ -35,7 +35,11 @@ notification= [
 
 @app_views.route("/")
 def home():
-    return render_template('pages/home.html',page='home', current_user=current_user)
+    products = _get_all_products()
+    return render_template('pages/home.html',
+                           page='home',
+                           products=products, 
+                           current_user=current_user)
 
 @app_views.route("/how-it-works")
 def how_it_works():

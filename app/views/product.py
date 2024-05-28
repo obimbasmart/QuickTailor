@@ -5,36 +5,24 @@ Testing cloud storage module
 
 
 from app.views import app_views
-from flask import render_template, request
-from app.constants import USER_SIDEBAR_LINKS
-from app.forms.tailor_forms import CreateProductForm
-from cloud_storage.s3_cloud_storage import S3StorageService
+from flask import render_template, abort
+from app.db_access.product import _get_product, _get_all_products
 
+@app_views.route('/products/<product_id>', methods=["GET"])
+def get_product_by_id(product_id=None):
+    if product_id is None:
+        abort(404)
+    product = _get_product(product_id)
+    return render_template('pages/product.html', product=product, page="products")
+
+   
 
 @app_views.route('/products', methods=["GET", "POST"])
 def get_all_products():
-    return render_template('pages/products.html', page="products")
+    products = _get_all_products()
+    return render_template('pages/products.html',
+                           page="products",
+                           products=products)
 
-@app_views.route('/products/1234', methods=["GET", "POST"])
-def get_product_by_id():
-    return render_template('pages/product.html', page="products")
-
-
-@app_views.route('/products/upload', methods=["GET", "POST"])
-def upload_product():
-    form = CreateProductForm()
-    if request.method == "POST":
-        file = request.files.get('file')
-        storage = S3StorageService('quicktailor-products-bucket')
-        img_key = storage.upload_file(file, '444', '111')
-        img_url = storage.generate_presigned_url('get_object', img_key)
-        return f"<h1>Done. Url is <a href='{img_url}'>imgLink</a></h1>"
-    return render_template('forms/create_product.html', form=form)
-
-@app_views.route("/products/delete")
-def delete_product():
-    storage = S3StorageService('quicktailor-products-bucket')
-    storage.delete_file('tailor-444/product-111/4c5bff6719734acb83c9108cfeb0dac3')
-    return "<h1>Done</h1>"
 
 

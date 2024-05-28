@@ -1,5 +1,5 @@
 from sqlalchemy import  String, Integer, ForeignKey, JSON
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from ..models.base_model import BaseModel
 
 class Product(BaseModel):
@@ -11,3 +11,6 @@ class Product(BaseModel):
     images = mapped_column(JSON, default={})
     estimated_tc: Mapped[int] = mapped_column(Integer, nullable=False)
     material: Mapped[str] = mapped_column(String(128), nullable=True)
+
+    # relationships
+    tailor = relationship("Tailor", back_populates="products")
