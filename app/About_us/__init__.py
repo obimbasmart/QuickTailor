@@ -5,4 +5,4 @@ from flask import Blueprint
 
 page_viewer = Blueprint("page_viewer", __name__)
 
-from . import notification, profile
+from . import notification
