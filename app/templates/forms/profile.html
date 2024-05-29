@@ -1,66 +1,83 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-  <div class="container mx-auto px-4 py-8">
-    <h1 class=" text-center w-120 h-30 text-2xl font-semibold font-montserrat leading-[30px] tracking-[0.1px]">Profile</h1>
-  </div>
-
-    <!-- First Name Input Field -->
-  <div class="relative custom-input-container mb-4">
-    <input type="text" id="floating_outlined" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-    <label for="floating_outlined" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4">First Name</label>
-  </div>
-
-  <!-- Last Name Input Field -->
-  <div class="relative custom-input-container mb-4">
-    <input type="text" id="floating_outlined" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-    <label for="floating_outlined" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4">Last Name</label>
-  </div>
-
-  <!-- Mobile Number Input Field -->
-  <div class="relative custom-input-container mb-4">
-    <input type="number" id="floating_outlined" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-    <label for="floating_outlined" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4">Mobile Number</label>
-  </div>
-
-  <!-- Email Input Field -->
-  <div class="relative custom-input-container mb-4">
-    <input type="email" id="floating_outlined" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-    <label for="floating_outlined" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4">Email</label>
-  </div>
-
-  <!-- Password Input Field -->
-  <div class="relative custom-input-container mb-4">
-    <input type="password" id="floating_outlined" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-    <label for="floating_outlined" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4">Password</label>
-  </div>
-
-  <div class="flex space-x-4">
-  <!-- Cancel Button -->
-  <button class="custom-cancel-button">
-    Cancel
-  </button>
-
-  <!-- Save Button -->
-  <button class="custom-save-button">
-    Save
-  </button>
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-center w-120 h-30 text-2xl font-semibold font-montserrat leading-[30px] tracking-[0.1px]">Profile</h1>
 </div>
 
-  </div>
+<form method="POST" action="{{ url_for('auth_views.profile') }}" id="profile-form">
+    {{ form.hidden_tag() }}
 
+    <!-- First Name Input Field -->
+    <div class="relative custom-input-container mb-4">
+        {{ form.first_name.label(class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4") }}
+        {{ form.first_name(class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer") }}
+    </div>
 
+    {% if phone_number_exists %}
+    <!-- Mobile Number Input Field -->
+    <div class="relative custom-input-container mb-4">
+        {{ form.phone_number.label(class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4") }}
+        {{ form.phone_number(class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer") }}
+    </div>
+    {% endif %}
 
+    <!-- Email Input Field -->
+    <div class="relative custom-input-container mb-4">
+        {{ form.email.label(class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4") }}
+        {{ form.email(class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer") }}
+    </div>
 
+    <!-- Password Change Link -->
+    <div class="relative custom-input-container mb-4">
+        <a href="{{ url_for('auth_views.password_reset') }}" class="text-blue-600 hover:text-blue-800">Change password</a>
+    </div>
 
+    <div class="flex space-x-4">
+        <!-- Cancel Button -->
+        <button type="reset" class="custom-cancel-button">
+            Cancel
+        </button>
 
+        <!-- Save Button -->
+        <button type="submit" class="custom-save-button">
+            Save
+        </button>
+    </div>
+</form>
+ <!-- Handling the Updates on the Profile Page  -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('profile-form');
+        const inputs = form.querySelectorAll('input');
 
+        inputs.forEach(input => {
+            input.addEventListener('change', function() {
+                const data = {
+                    first_name: form.first_name.value,
+                    email: form.email.value
+                };
+                if (form.phone_number) {
+                    data.phone_number = form.phone_number.value;
+                }
 
-
-
-
-
-
-
+                fetch('{{ url_for('auth_views.profile') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ form.csrf_token.current_token }}'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    });
+</script>
 {% endblock %}

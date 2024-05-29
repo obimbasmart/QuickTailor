@@ -7,4 +7,5 @@ tailor_views = Blueprint("tailor_views", __name__)
 
 from . import verification
 from . import index
+from . import CRUD
 

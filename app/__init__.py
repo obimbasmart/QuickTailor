@@ -10,7 +10,13 @@ from flask_login import LoginManager
 from flask_login import current_user
 from app.constants import USER_SIDEBAR_LINKS, ADMIN_SIDEBAR_LINKS
 from flask_wtf.csrf import CSRFProtect
+<<<<<<< HEAD
 from flask_socketio import SocketIO, send
+=======
+from cloud_storage.s3_cloud_storage import S3StorageService
+from babel.numbers import format_currency
+
+>>>>>>> refs/remotes/origin/master
 
 load_dotenv()
 
@@ -31,7 +37,11 @@ def create_app(config=None) -> Flask:
             if current_user.is_tailor:
                 return dict(user_sidebar_links=ADMIN_SIDEBAR_LINKS)
         return dict(user_sidebar_links=USER_SIDEBAR_LINKS)
-
+    
+    @app.template_filter('currency')
+    def currency_filter(value):
+        value = int(float(value))
+        return format_currency(number=value, currency='NGN',  format=u'¤#,##0',  currency_digits=False)
     return app
 
 config = DevConfig
@@ -43,6 +53,7 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login_manager = LoginManager(app)
 login_manager.login_view = 'auth_views.login'
+s3_client = S3StorageService('quicktailor-products-bucket')
 
 from app.models.user import User
 from app.models.tailor import Tailor

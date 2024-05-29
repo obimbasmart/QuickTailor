@@ -4,7 +4,7 @@
 """
 
 from sqlalchemy import String, Boolean, Integer, DateTime
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from ..models.base_model import BaseModel
 from .base_user import BaseUser
 
@@ -28,6 +28,9 @@ class Tailor(BaseUser, BaseModel):
     no_of_completed_jobs: Mapped[int] = mapped_column(Integer, default=0)
     reputation: Mapped[int] = mapped_column(Integer, nullable=True)
     
+    # relationships
+    products = relationship("Product", back_populates="tailor")
+
     # Password reset attributes
     reset_token: Mapped[str] = mapped_column(String(128), nullable=True)
     reset_token_expires: Mapped[DateTime] = mapped_column(DateTime, nullable=True)
