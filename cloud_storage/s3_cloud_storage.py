@@ -47,6 +47,8 @@ class S3StorageService():
                                       ExtraArgs={'ContentType': file.mimetype})
         return key_name
 
+        
+
     def generate_presigned_url(self, action_type: str, key_name: str) -> str:
         """generate aws s3 url for performing actions on an object
 
@@ -84,3 +86,18 @@ class S3StorageService():
             self.delete_file(filename)
             for filename in filenames
         ]
+
+    def upload_profile_photo(self, file: FileStorage, tailor_id: str) -> str:
+        """
+        :param file: file object from flask form
+        :param tailor_id: tailor's id
+        :raises: TypeError - invalid file type
+        :return: img url
+        """
+        if not self.__is_valid_file_extenstion(file.filename):
+            raise TypeError("Invalid file type")
+
+        key_name = f'tailor-{tailor_id}/photo-{str(uuid4().hex)}'
+        self.s3_client.upload_fileobj(file, self.bucket_name, key_name,
+                                      ExtraArgs={'ContentType': file.mimetype})
+        return key_name
