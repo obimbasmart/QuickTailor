@@ -14,4 +14,4 @@ def handle_message(msg):
 
 @app_views.route('/messages', methods=['GET', 'POST'])
 def messages():
-    return render_template('pages/chat.html') 
+    return render_template('pages/chat.html')

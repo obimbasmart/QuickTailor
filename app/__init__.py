@@ -10,7 +10,6 @@ from flask_login import LoginManager
 from flask_login import current_user
 from app.constants import USER_SIDEBAR_LINKS, ADMIN_SIDEBAR_LINKS
 from flask_wtf.csrf import CSRFProtect
-from flask_socketio import SocketIO, send
 from cloud_storage.s3_cloud_storage import S3StorageService
 from babel.numbers import format_currency
 
@@ -123,12 +122,4 @@ def load_user(id: str):
     if user is not None:
         return user
     return db.session.get(Tailor, id)
-
 csrf = CSRFProtect(app) 
-socketio = SocketIO(app)
-
-# Import the SocketIO events
-from app.views import chat
-
-if __name__ == '__main__':
-    socketio.run(app, debug=True)
