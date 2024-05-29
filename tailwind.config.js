@@ -21,7 +21,8 @@ module.exports = {
         "blue-600": "#006060",
         "blue-700": "#006060",
         "sc-gray-darker": "#2D2D2D",
-	"t3": '#333'
+	"t3": '#333',
+	"notif":"var(--Primary-Color-Teal-Light, #E6F2F2)"
       },
 
       fontFamily: {
