@@ -43,3 +43,17 @@ class CreateProductForm(FlaskForm):
 
 class CRSForm(FlaskForm):
     crf_token = HiddenField()
+
+class BrandInformationForm(FlaskForm):
+    brand_name =  StringField('Brand Name')
+    cac_number = StringField('CAC Number (optional)')
+    about = TextAreaField('About', render_kw={"style": "width: 100%; height: 100px; resize: none;"})
+
+    # Bank details
+    bank_name = StringField('Bank Name')
+    account_number = StringField('Account Number',)
+    account_name = StringField('Account Name')
+    photo = FileField('Photo')
+    submit = SubmitField('Save')
+
+    
