@@ -5,37 +5,9 @@
 
 {% block content %}
 
-<style>
-
-#chat-container {
-    background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-}
-
-#messages {
-    border: 1px solid #ccc;
-    padding: 10px;
-    height: 200px;
-    overflow-y: scroll;
-    margin-bottom: 10px;
-}
-
-#message-input {
-    width: calc(100% - 60px);
-    padding: 10px;
-}
-
-#send-button {
-    width: 50px;
-    padding: 10px;
-}
-</style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
 
-<div class"" style="width:90%; margin:auto; margin-top: 70px; background:var(--White, #FFF);">
+<div id="message-Interface"  class"" style="width:90%; margin:auto; margin-top: 70px; background:var(--White, #FFF);">
   
 	{% set reciever %}
 
@@ -47,12 +19,12 @@
 
        {% set image_profile %}
         <div class="">
-		<a href="/products">  <img src="{{ url_for('static', filename='images/product_image_3.png' ) }}" class="h-[40px] rounded-full w-[40px]" alt="...">  </a>
+		<a href="/products">  <img src="{{ url_for('static', filename='images/product_image_3.png' ) }}" class="h-[35px] rounded-full w-[40px]" alt="...">  </a>
 
        </div>
        {% endset %}
 
-       {{ messageTop(reciever, image_profile) }}
+       {{ messageTop(reciever, image_profile, "top") }}
                     
 
       {% set imgs %}
@@ -75,7 +47,7 @@
       {% endset %}
        {% set full_imgs %}
 
-                 <div class= " w-full  mb-1 p-[2px] rounded-[6px]">
+                 <div class= "  mb-1 p-[2px] rounded-[6px]">
                                  <img src="{{ url_for('static', filename='images/product_image_3.png' ) }}" class="h-[255px] w-full" alt="...">
 
 
@@ -84,62 +56,56 @@
 
       {% endset %}
 
-      <div class="flex flex-col mt-8 ml-1 ">
+      <div id="messages"  class="flex flex-col  pt-16  ml-1 ">
 	      
-	      {{ messages('right', "hello the virtes of life if i have the choice of life I should be able to feel everyday wi", "2:00 pm", full_imgs) }}
+	      {{ messages('right', "hello the virtes of life if i have the choice of life I should be able to feel everyday wi", "2:00 pm") }}
 	      {{ messages('left', "hello the virtes of life if i have the choice of life I should be able to feel everyday with pleasure", "2: 00 am", full_imgs) }}
-              {{ messages('right', "hello the virtes of life if i have the choice of life I should be able to feel everyday wi", "3:00 am", imgs) }}
-                 {{ messages('right', "hello the virtes of life if i have the choice of life I should be able to feel everyday wi", "2:00 pm") }}
-              {{ messages('left', "hello the virtes of life if i have the choice of life I should be able to feel everyday wi", "2: 00 am", imgs) }}
-              {{ messages('right', "hello the virtes of life if i have the choice of life I should be able to feel everyday wi", "3:00 am") }}
-
+               {{ messages('left', "hello the virtes of life if i have the choice of life I should be able to feel everyday with pleasure", "2: 00 am")}}
+	        {{ messages('left', "hello the virtes of life if i have the choice of life I should be able to feel everyday with pleasure", "2: 00 am", full_imgs) }}
 
       </div>
-
+      <div class="mt-[200px]">
+      </div>
       {% set  plus %}
 
            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
                  <path d="M1 7.5H7M7 7.5H13M7 7.5V13.5M7 7.5V1.5" stroke="#2D2D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
       {% endset %}
-      
+ 
       {% set input_message %}
-                 <input id="message-input" type="text" placeholder="Type a message..." autocomplete="off" style="border: 1px solid var(--grey-light-active, #D8D8D8); w-[430px]">
+
+          <div >
+		  <input id="message-input" type="text" id="msg" class="rounded-lg placeholder-black   focus:outline-none focus:ring-0 focus:border-[white]  peer w-full" placeholder="Type here...." autocomplete="off">
+         </div>
 
       {% endset %}
-
+     
       {% set send_btn %}
-             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+      <div id="send" class="">   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
                           <path d="M11.5003 12.5H5.41872M5.24634 13.2972L4.24158 16.2986C3.69128 17.9424 3.41613 18.7643 3.61359 19.2704C3.78506 19.71 4.15335 20.0432 4.6078 20.1701C5.13111 20.3161 5.92151 19.9604 7.50231 19.2491L17.6367 14.6886C19.1797 13.9942 19.9512 13.6471 20.1896 13.1648C20.3968 12.7458 20.3968 12.2541 20.1896 11.8351C19.9512 11.3529 19.1797 11.0057 17.6367 10.3114L7.48483 5.74303C5.90879 5.03382 5.12078 4.67921 4.59799 4.82468C4.14397 4.95101 3.77572 5.28336 3.60365 5.72209C3.40551 6.22728 3.67772 7.04741 4.22215 8.68767L5.24829 11.7793C5.34179 12.061 5.38855 12.2019 5.407 12.3459C5.42338 12.4738 5.42321 12.6032 5.40651 12.731C5.38768 12.875 5.34057 13.0157 5.24634 13.2972Z" stroke="#2D2D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
+	  </div>
       {% endset %}
-
-       {{ messageTop(input_message, send_btn, plus) }}
-
-     <div id="chat-container">
-        <div id="messages"></div>
-        <input id="message-input" type="text" placeholder="Type a message..." autocomplete="off">
-        <button id="send-button">Send</button>
-    </div>
+       {{ messageTop(input_message, send_btn,"buttom",  plus) }}
 </div>
 
 
     <script>
-        const socket = io();
+     const socket = io();
 
-        socket.on('message', function(msg){
-            const messages = document.getElementById('messages');
-            const messageElement = document.createElement('div');
-            messageElement.textContent = msg;
-            messages.appendChild(messageElement);
-        });
+    socket.on('message', function(msg){
+        const messagesContainer = document.getElementById('messages');
+        const messageHTML = `{{ messages('left', '${msg}', 'Just now') }}`;
+        messagesContainer.innerHTML += messageHTML;
+    });
 
-        document.getElementById('send-button').onclick = function() {
-            const input = document.getElementById('message-input');
-            const message = input.value;
-            socket.send(message);
-            input.value = '';
-        };
+    document.getElementById('send').onclick = function() {
+        const input = document.getElementById('message-input');
+        const message = input.value;
+        socket.send(message);
+        input.value = '';
+    };
     </script>
 {% endblock %}
 
