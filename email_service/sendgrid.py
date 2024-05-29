@@ -18,12 +18,12 @@ def send_email(subject: str, body: str, recievers: List[str], html_content=None)
         plain_text_content=body,
         html_content=html_content)
     try:
-        sg = SendGridAPIClient("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")
+        sg = SendGridAPIClient(os.getenv("SENDGRID_API_KEY"))
         response = sg.send(message)
         return response.status_code
     except Exception as e:
         print(e)
-        return response.status_code
+        return 500
 
 
 def send_password_reset_email(user):
