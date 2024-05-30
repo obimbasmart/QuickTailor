@@ -13,17 +13,17 @@ The platform allows users to browse through a variety of clothes created by diff
 # Features 
 
 - User-Friendly Interface: Easy-to-use menus and search functionality to help users find products and contact the tailor quickly.
-Responsive Design: Optimized  mostly for mobile devices because the target audience device are mostly mobiles.
+It has a responsive design Optimized  mostly for mobile devices because the target audience device are mostly mobiles users.
 
 - Product Management: Allows for easy addition, deletion, and updating of product listings.
 
-- Customer Support Integration: Built-in chat support to help tailor land jobs and close sales promptly.
+- Customer Support Integration: Built-in chat feature  to help tailor land jobs and close sales promptly.
 
 - Customer Management: Secure customer login and profile management, including order history and saved preferences.
 
-- Order and Payment Processing: Secure  payment gateway supported, ensuring safe and secure transactions.
+- Order and Payment Processing: Secure payment gateway supported, ensuring safe and secure transactions.
 
-- Order Tracking: Real-time updates on order status, from order confirmation to order ready.
+- Order Tracking: Real-time updates on order status, from order confirmation to order completion.
 
 ![Tailors_profile](https://github.com/obimbasmart/QuickTailor/assets/125522368/a550de78-d371-44e1-aed4-82484a8aeb0e)
 
@@ -39,20 +39,19 @@ Responsive Design: Optimized  mostly for mobile devices because the target audie
 
 ##Author's LinkedIn -
 
-Obimba Smart Chukwunenye:  
+Obimba Smart Chukwunenye: https://www.linkedin.com/in/obimba-smart/
+
 Obiamaka Maria Aghadiuno: https://www.linkedin.com/in/obiamaka-aghadiuno?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
 
 Iyanuloluwa Emmanuel Adigun: https://www.linkedin.com/in/adigun-iyanuloluwa-3270421b7?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
 
 # Web Technologies 
-![Webstack](https://github.com/ObiamakaMaria/HEALTHY_PROJECT/assets/125522368/3c59aeb0-26b6-4373-804c-18133a690fd6)
-
-
-
 - Front-end: Front-end was handled using core web technologies like flowbite, HTMX, Alpine Js and  Tailwind CSS to deliver a visually appealing, responsive, and user-friendly interface. 
 
-
 - Back-end: Back-end was handled using the python's Flask framework.For Database SQLIte and SQLAlchemy were used.
+
+![webstack2](https://github.com/ObiamakaMaria/HEALTHY_PROJECT/assets/125522368/691b2e46-43a1-42f3-8c6c-9da5796cb5e1)
+![webstack1](https://github.com/ObiamakaMaria/HEALTHY_PROJECT/assets/125522368/d94809cc-2de3-4512-a0d2-9101ccee95ac)
 
 ## Third-Party Agent:
 Storage: AWS S3
@@ -60,7 +59,7 @@ Payment: Stripe
 
 
 ## Contribution
-We welcome contributions! If you'd like to contribute to the Healthy Website, please follow these guidelines:
+We welcome contributions! If you'd like to contribute to QuickTailor, please follow these guidelines:
 
 - Fork the repository.
 - Create a new branch: git checkout -b feature/your-feature.
