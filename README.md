@@ -25,11 +25,7 @@ It has a responsive design Optimized  mostly for mobile devices because the targ
 
 - Order Tracking: Real-time updates on order status, from order confirmation to order completion.
 
-![Tailors_profile](https://github.com/obimbasmart/QuickTailor/assets/125522368/a550de78-d371-44e1-aed4-82484a8aeb0e)
-
-![payment](https://github.com/obimbasmart/QuickTailor/assets/125522368/7ae8439e-1d75-4a26-990f-4be782c109ab)
-
-![Tailors_profile](https://github.com/obimbasmart/QuickTailor/assets/125522368/3a2f78a3-6483-47a0-85ee-b8c33247d327)
+![Tailors_profile](https://github.com/obimbasmart/QuickTailor/assets/125522368/a550de78-d371-44e1-aed4-82484a8aeb0e) ![payment](https://github.com/obimbasmart/QuickTailor/assets/125522368/7ae8439e-1d75-4a26-990f-4be782c109ab)![Tailors_profile](https://github.com/obimbasmart/QuickTailor/assets/125522368/3a2f78a3-6483-47a0-85ee-b8c33247d327)
 
 
 ## Links:
@@ -50,12 +46,11 @@ Iyanuloluwa Emmanuel Adigun: https://www.linkedin.com/in/adigun-iyanuloluwa-3270
 
 - Back-end: Back-end was handled using the python's Flask framework.For Database SQLIte and SQLAlchemy were used.
 
-![webstack2](https://github.com/ObiamakaMaria/HEALTHY_PROJECT/assets/125522368/691b2e46-43a1-42f3-8c6c-9da5796cb5e1)
-![webstack1](https://github.com/ObiamakaMaria/HEALTHY_PROJECT/assets/125522368/d94809cc-2de3-4512-a0d2-9101ccee95ac)
+![webstack2](https://github.com/ObiamakaMaria/HEALTHY_PROJECT/assets/125522368/691b2e46-43a1-42f3-8c6c-9da5796cb5e1)![webstack1](https://github.com/ObiamakaMaria/HEALTHY_PROJECT/assets/125522368/d94809cc-2de3-4512-a0d2-9101ccee95ac)
 
 ## Third-Party Agent:
-Storage: AWS S3
-Payment: Stripe
+- Storage: AWS S3
+- Payment: Stripe
 
 
 ## Contribution
