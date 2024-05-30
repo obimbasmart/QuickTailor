@@ -1,7 +1,7 @@
 {% from 'macros/tailorBadge.html' import tailorBadge   %}
     
 
-{% macro productCard(name, price, img_url, id) %}
+{% macro productCard(name, price, img_url, id, tailor_name='dummy') %}
 
 <div
   class="w-full max-w-sm   dark:bg-gray-800 dark:border-gray-700"
@@ -41,7 +41,7 @@
 
       <div class="flex items-center justify-between mt-2  w-full">
         <a href="/yomi-casual">
-          {{ tailorBadge() }}
+          {{ tailorBadge(tailor_name) }}
         </a>
       </div>
   </div>

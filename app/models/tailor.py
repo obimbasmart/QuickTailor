@@ -21,13 +21,22 @@ class Tailor(BaseUser, BaseModel):
 
     # tailor attrs
     business_name: Mapped[str] = mapped_column(String(128), nullable=True)
+    cac_number: Mapped[str] = mapped_column(String(128), nullable=True)
+    about: Mapped[str] = mapped_column(String(1024), nullable=True)
     state: Mapped[str] = mapped_column(String(128), nullable=True)
     city: Mapped[str] = mapped_column(String(128), nullable=True)
     street: Mapped[str] = mapped_column(String(128), nullable=True)
     is_available = mapped_column(Boolean, default=True)
     no_of_completed_jobs: Mapped[int] = mapped_column(Integer, default=0)
     reputation: Mapped[int] = mapped_column(Integer, nullable=True)
+
+    photo_url: Mapped[str] = mapped_column(String(2048), nullable=True)
     
+    #bank details
+    bank_name: Mapped[str] = mapped_column(String(128), nullable=True)
+    account_number: Mapped[int] = mapped_column(Integer, nullable=True)
+    account_name: Mapped[str] = mapped_column(String(128), nullable=True)
+
     # relationships
     products = relationship("Product", back_populates="tailor")
 
