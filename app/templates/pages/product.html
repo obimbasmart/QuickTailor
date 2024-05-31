@@ -13,11 +13,11 @@
             <div class="relative aspect-[0.977] overflow-hidden md:h-96">
                 <!-- Item 1 -->
                 {% for img_url in product.img_urls %}
-                <div class="hidden w-full duration-700 ease-in-out]" data-carousel-item>
-                    <img src="{{img_url}}"
-                         class="absolute object-cover bg-center block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                         alt="..." />
-                </div>
+                    <div class="hidden w-full duration-700 ease-in-out]" data-carousel-item>
+                        <img src="{{ img_url }}"
+                             class="absolute object-cover bg-center block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                             alt="..." />
+                    </div>
                 {% endfor %}
             </div>
 
@@ -49,7 +49,8 @@
             <!-- Slider indicators -->
 
 
-            <div x-data="{ imgUrls: {{ product.img_urls }} }" class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+            <div x-data="{ imgUrls: {{ product.img_urls }} }"
+                 class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
                 <button type="button"
                         class="w-2 h-2 rounded-full"
                         aria-current="true"
@@ -79,61 +80,62 @@
                         data-carousel-slide-to="3">
                 </button>
             </div>
-  
-    
-            {% if product.img_urls | length > 1  %}
-                    <button type="button"
-                    class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                    data-carousel-prev>
-                <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-1 group-focus:ring-white/5 dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 6 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 1 1 5l4 4" />
-                    </svg>
-                    <span class="sr-only">Previous</span>
-                </span>
-                    </button>
-                    <button type="button"
-                            class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                            data-carousel-next>
-                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-1 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                            <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
-                                aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 6 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m1 9 4-4-4-4" />
-                            </svg>
-                            <span class="sr-only">Next</span>
-                        </span>
-                    </button>
+
+
+            {% if product.img_urls | length > 1 %}
+                <button type="button"
+                        class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                        data-carousel-prev>
+                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-1 group-focus:ring-white/5 dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+                             aria-hidden="true"
+                             xmlns="http://www.w3.org/2000/svg"
+                             fill="none"
+                             viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 1 1 5l4 4" />
+                        </svg>
+                        <span class="sr-only">Previous</span>
+                    </span>
+                </button>
+                <button type="button"
+                        class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                        data-carousel-next>
+                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-1 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+                             aria-hidden="true"
+                             xmlns="http://www.w3.org/2000/svg"
+                             fill="none"
+                             viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m1 9 4-4-4-4" />
+                        </svg>
+                        <span class="sr-only">Next</span>
+                    </span>
+                </button>
 
             {% endif %}
             <!-- Slider controls -->
-            
+
 
 
         </div>
 
         <!-- Product Information -->
-        <div class="px-4 w-full font-roboto font-normal space-y-8">
+        <div x-data="{ isTailor: {{ 'true' if current_user.is_tailor else 'false' }} }"
+             class="px-4 w-full font-roboto font-normal space-y-8">
             <div role="info" class="flex py-4 flex-col gap-y-3 text-black">
                 <h2 class="text-xl leading-8">
-                   {{product.name}}
+                    {{ product.name }}
                 </h2>
                 <div class="flex justify-between">
                     <h3 class="inline-flex items-center space-x-3 rounded-md px-2 bg-sc-gray-normal">
                         <span class="text-xs leading-5">starts at</span>
                         <p class="leading-9 text-[18px] leading-8">
-                            {{product.price | currency}}
+                            {{ product.price | currency }}
                         </p>
                     </h3>
 
                     <p class="inline-flex items-center space-x-2">
-                        <span class="max-w-20 text-xs text-sc-gray-darker leading-5"> {{product.material}}</span>
+                        <span class="max-w-20 text-xs text-sc-gray-darker leading-5"> {{ product.material }}</span>
                         <span>
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  width="18"
@@ -144,22 +146,22 @@
                             </svg>
                         </span>
                     </p>
-
-
                 </div>
 
                 {% if current_user.is_authenticated %}
-                    <button data-drawer-target="bottom-sheet-select-measurement"
+                    <button disabled
+                            :class="{ 'bg-sc-gray-light': isTailor, 'bg-blue-500': !isTailor }"
+                            data-drawer-target="bottom-sheet-select-measurement"
                             data-drawer-show="bottom-sheet-select-measurement"
                             data-drawer-placement="bottom"
                             aria-controls="bottom-sheet-select-measurement"
                             type="button"
-                            class="text-white  text-sm  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">
+                            class="text-white  text-sm  w-full hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">
                         Order
                     </button>
 
                 {% else %}
-                    <a href="{{ url_for('auth_views.login', next='products/1234') }}"
+                    <a href="{{ url_for('auth_views.login', next='products/{{product.id}}') }}"
                        class="text-white  text-sm  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">Order</a>
                 {% endif %}
                 <div>
@@ -168,17 +170,20 @@
                     </h3>
                     <p class="text-sm leading-6 text-sc-gray-darker">
 
-                            {{product.description}}
+                        {{ product.description }}
                     </p>
                 </div>
             </div>
         </div>
 
-        <!-- Tailor Info -->
-        <div 
-            class="p-4">
-            {{ tailorProductCard(product.tailor) }}
-        </div>
+
+        {% if not current_user.is_tailor %}
+
+            <div class="p-4">
+                {{ tailorProductCard(product.tailor) }}
+            </div>
+            {
+        {% endif %}
 
         <!-- Reviews -->
         <section class="p-4" id="accordion-collapse" data-accordion="collapse">
@@ -193,11 +198,9 @@
                             Reviews
                         </h3>
                         <p class="flex gap-2 text-black leading-5 text-xs">
-                            <span class="bg-[#EFBF13] p-1 rounded-sm text-xs">4.4/5</span>
-                            <span>64 reviews</span>
+                            <span class="bg-[#EFBF13] p-1 rounded-sm text-xs">4.4/5</span> <span>64 reviews</span>
                         </p>
                     </div>
-
                     <svg data-accordion-icon
                          class="w-6 h-6 rotate-180 shrink-0"
                          aria-hidden="true"
@@ -206,16 +209,11 @@
                          viewBox="0 0 10 6">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5 5 1 1 5" />
                     </svg>
-
                 </button>
             </h3>
-
             <div id="accordion-collapse-body-1"
                  class="hidden"
                  aria-labelledby="accordion-collapse-heading-1">
-
-
-
                 <div id="animation-carousel"
                      class="relative w-full"
                      data-carousel="static">
@@ -223,28 +221,23 @@
                     <div class="relative h-[400px] overflow-hidden rounded-lg md:h-96">
                         <!-- Item 1 -->
                         <div class="hidden duration-200 ease-linear" data-carousel-item>
-                            {{ productReview("Givenchy Leo") }}
-                            {{ productReview("Nwachukwu David") }}
+                            {{ productReview("Givenchy Leo") }} {{ productReview("Nwachukwu David") }}
                         </div>
                         <!-- Item 2 -->
                         <div class="hidden duration-200 ease-linear" data-carousel-item>
-                            {{ productReview("Bionic Obimba") }}
-                            {{ productReview("Jegede Lugbe") }}
+                            {{ productReview("Bionic Obimba") }} {{ productReview("Jegede Lugbe") }}
                         </div>
                         <!-- Item 3 -->
                         <div class="hidden duration-200 ease-linear" data-carousel-item="active">
-                            {{ productReview("Nnenna Taoma") }}
-                            {{ productReview("Breadwinner Nkechi") }}
+                            {{ productReview("Nnenna Taoma") }} {{ productReview("Breadwinner Nkechi") }}
                         </div>
                         <!-- Item 4 -->
                         <div class="hidden duration-200 ease-linear" data-carousel-item>
-                            {{ productReview("Givenchy Leo") }}
-                            {{ productReview("Nwachukwu David") }}
+                            {{ productReview("Givenchy Leo") }} {{ productReview("Nwachukwu David") }}
                         </div>
                         <!-- Item 5 -->
                         <div class="hidden duration-200 ease-linear" data-carousel-item>
-                            {{ productReview("Givenchy Leo") }}
-                            {{ productReview("Nwachukwu David") }}
+                            {{ productReview("Givenchy Leo") }} {{ productReview("Nwachukwu David") }}
                         </div>
                     </div>
                     <!-- Slider controls -->
@@ -259,160 +252,155 @@
                                  fill="none">
                                 <path d="M15.4998 19L9.20696 12.7071C8.81643 12.3166 8.81643 11.6834 9.20696 11.2929L15.4998 5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
-                            <span class="sr-only">Previous</span>
-                        </span>
-                    </button>
-                    <button type="button"
-                            class="absolute bottom-0 end-1/4 z-30 flex items-end justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                            data-carousel-next>
-                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-sc-gray-light-active dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                            <span class="sr-only">Previous</span> </span>
+                        </button>
+                        <button type="button"
+                                class="absolute bottom-0 end-1/4 z-30 flex items-end justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                                data-carousel-next>
+                            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-sc-gray-light-active dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     width="24"
+                                     height="24"
+                                     viewBox="0 0 24 24"
+                                     fill="none">
+                                    <path d="M9.5 5L15.7929 11.2929C16.1834 11.6834 16.1834 12.3166 15.7929 12.7071L9.5 19" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <span class="sr-only">Next</span> </span>
+                            </button>
+                        </div>
+            </div>
+        </section>
+        {% if not current_user.is_tailor %}
+            <h3 class="px-4 text-fdt-brown-dark text-xl leading-9 capitalize font-montserrat">
+                Similar Products
+            </h3>
+            <section class=" mx-4 py-4 relative overflow-x-scroll  md:h-96 flex gap-4 py-4">
+                {% for product in product.tailor.products %}
+                    <div class="w-[40%]">
+                        {{ productCard(product.name, product.price, 'akd', product.id) }}
+                    </div>
+                {% endfor %}
+            </section>
+
+        {% endif %}
+                {% set select_measurement %}
+                    <div class="py-3 space-y-5 text-sm text-sc-gray-darker leading-5">
+                        <div class="flex items-center gap-3 font-normal">
+                            <input id="default-radio-1"
+                                   type="radio"
+                                   value=""
+                                   name="default-radio"
+                                   class="w-4 h-4 ml-1 text-blue-600  border-pc-teal-normal border-1 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                            <label for="default-radio-1"
+                                   class="leading-5 ms-2 text-sm dark:text-gray-300">
+                                Use my saved measurements
+                            </label>
+                        </div>
+
+                        <div class="flex items-center gap-2"
+                             data-drawer-target="bottom-sheet-measurement"
+                             data-drawer-show="bottom-sheet-measurement"
+                             data-drawer-placement="bottom"
+                             aria-controls="bottom-sheet-measurement">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  width="24"
                                  height="24"
                                  viewBox="0 0 24 24"
                                  fill="none">
-                                <path d="M9.5 5L15.7929 11.2929C16.1834 11.6834 16.1834 12.3166 15.7929 12.7071L9.5 19" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M15 12H12M12 12H9M12 12V9M12 12V15M17 21H7C4.79086 21 3 19.2091 3 17V7C3 4.79086 4.79086 3 7 3H17C19.2091 3 21 4.79086 21 7V17C21 19.2091 19.2091 21 17 21Z" stroke="#008080" stroke-width="1.5" stroke-linecap="round" />
                             </svg>
-                            <span class="sr-only">Next</span>
-                        </span>
-                    </button>
-                </div>
+                            <label for="default-radio-2"
+                                   class="leading-5 ms-2 text-sm  dark:text-gray-300">
+                                Add new measurements
+                            </label>
+                        </div>
 
 
-            </div>
-
-
-        </section>
-
-        <h3 class="px-4 text-fdt-brown-dark text-xl leading-9 capitalize font-montserrat">
-            Similar Products
-        </h3>
-        <section class=" mx-4 py-4 relative overflow-x-scroll  md:h-96 flex gap-4 py-4">
-            {% for product in product.tailor.products %}
-                <div class="w-[40%]">
-                    {{ productCard(product.name, product.price, 'akd', product.id) }}
-                </div>
-            {% endfor %}
-        </section>
-
-        {% set select_measurement %}
-            <div class="py-3 space-y-5 text-sm text-sc-gray-darker leading-5">
-                <div class="flex items-center gap-3 font-normal">
-                    <input id="default-radio-1"
-                           type="radio"
-                           value=""
-                           name="default-radio"
-                           class="w-4 h-4 ml-1 text-blue-600  border-pc-teal-normal border-1 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                    <label for="default-radio-1"
-                           class="leading-5 ms-2 text-sm dark:text-gray-300">
-                        Use my saved measurements
-                    </label>
-                </div>
-
-                <div class="flex items-center gap-2"
-                     data-drawer-target="bottom-sheet-measurement"
-                     data-drawer-show="bottom-sheet-measurement"
-                     data-drawer-placement="bottom"
-                     aria-controls="bottom-sheet-measurement">
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                         width="24"
-                         height="24"
-                         viewBox="0 0 24 24"
-                         fill="none">
-                        <path d="M15 12H12M12 12H9M12 12V9M12 12V15M17 21H7C4.79086 21 3 19.2091 3 17V7C3 4.79086 4.79086 3 7 3H17C19.2091 3 21 4.79086 21 7V17C21 19.2091 19.2091 21 17 21Z" stroke="#008080" stroke-width="1.5" stroke-linecap="round" />
-                    </svg>
-                    <label for="default-radio-2"
-                           class="leading-5 ms-2 text-sm  dark:text-gray-300">
-                        Add new measurements
-                    </label>
-                </div>
-
-
-            </div>
-
-            <!-- Warning sign -->
-            <div class="inline-flex items-center space-x-1 justify-center w-full">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     width="19"
-                     height="18"
-                     viewBox="0 0 19 18"
-                     fill="none">
-                    <path d="M9.5 13.5C9.91421 13.5 10.25 13.1642 10.25 12.75C10.25 12.3358 9.91421 12 9.5 12C9.08579 12 8.75 12.3358 8.75 12.75C8.75 13.1642 9.08579 13.5 9.5 13.5Z" fill="#606060" />
-                    <path d="M9.5 7.5V10.5" stroke="#606060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M3.08608 13.5791L8.15899 3.43318C8.71181 2.32761 10.2895 2.32761 10.8423 3.43318L15.9153 13.5791C16.4139 14.5764 15.6887 15.7499 14.5736 15.7499H4.42772C3.31264 15.7499 2.5874 14.5764 3.08608 13.5791Z" stroke="#606060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-                <span class="text-xs text-sc-gray-dark leading-4 tracking-wider">Select a measurement to continue</span>
-            </div>
-
-            <!--  Button-->
-            <button data-drawer-target="bottom-sheet-select-measurement"
-                    data-drawer-show="bottom-sheet-select-measurement"
-                    data-drawer-placement="bottom"
-                    aria-controls="bottom-sheet-select-measurement"
-                    type="button"
-                    class="text-white  text-sm  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">
-                Add measurement to order
-            </button>
-        {% endset %}
-
-        {% set add_measurement %}
-            <div class="grid grid-cols-2 gap-x-4 gap-y-5 py-3 font-roboto">
-
-                {% for measurement in [1,2,1,1,1,1,1,1,1,1] %}
-                    <div class="relative">
-                        <input type="number"
-                               id="default_outlined"
-                               class="font-roboto leading-6 block px-3 pb-2.5 pt-4 w-full text-sm text-sc-gray-dark bg-transparent rounded-md border-1 border-[#888] appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                               placeholder=" " />
-                        <label for="default_outlined"
-                               class="absolute text-sm text-sc-gray-darker dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 start-1 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
-                            Top Length
-                        </label>
                     </div>
-                {% endfor %}
+
+                    <!-- Warning sign -->
+                    <div class="inline-flex items-center space-x-1 justify-center w-full">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             width="19"
+                             height="18"
+                             viewBox="0 0 19 18"
+                             fill="none">
+                            <path d="M9.5 13.5C9.91421 13.5 10.25 13.1642 10.25 12.75C10.25 12.3358 9.91421 12 9.5 12C9.08579 12 8.75 12.3358 8.75 12.75C8.75 13.1642 9.08579 13.5 9.5 13.5Z" fill="#606060" />
+                            <path d="M9.5 7.5V10.5" stroke="#606060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M3.08608 13.5791L8.15899 3.43318C8.71181 2.32761 10.2895 2.32761 10.8423 3.43318L15.9153 13.5791C16.4139 14.5764 15.6887 15.7499 14.5736 15.7499H4.42772C3.31264 15.7499 2.5874 14.5764 3.08608 13.5791Z" stroke="#606060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span class="text-xs text-sc-gray-dark leading-4 tracking-wider">Select a measurement to continue</span>
+                    </div>
+
+                    <!--  Button-->
+                    <button data-drawer-target="bottom-sheet-select-measurement"
+                            data-drawer-show="bottom-sheet-select-measurement"
+                            data-drawer-placement="bottom"
+                            aria-controls="bottom-sheet-select-measurement"
+                            type="button"
+                            class="text-white  text-sm  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">
+                        Add measurement to order
+                    </button>
+                {% endset %}
+
+                {% set add_measurement %}
+                    <div class="grid grid-cols-2 gap-x-4 gap-y-5 py-3 font-roboto">
+
+                        {% for measurement in [1,2,1,1,1,1,1,1,1,1] %}
+                            <div class="relative">
+                                <input type="number"
+                                       id="default_outlined"
+                                       class="font-roboto leading-6 block px-3 pb-2.5 pt-4 w-full text-sm text-sc-gray-dark bg-transparent rounded-md border-1 border-[#888] appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                       placeholder=" " />
+                                <label for="default_outlined"
+                                       class="absolute text-sm text-sc-gray-darker dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 start-1 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
+                                    Top Length
+                                </label>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+
+                    <!-- Warning sign -->
+                    <div class="inline-flex items-center space-x-1 justify-center w-full">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             width="19"
+                             height="18"
+                             viewBox="0 0 19 18"
+                             fill="none">
+                            <path d="M9.5 13.5C9.91421 13.5 10.25 13.1642 10.25 12.75C10.25 12.3358 9.91421 12 9.5 12C9.08579 12 8.75 12.3358 8.75 12.75C8.75 13.1642 9.08579 13.5 9.5 13.5Z" fill="#606060" />
+                            <path d="M9.5 7.5V10.5" stroke="#606060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M3.08608 13.5791L8.15899 3.43318C8.71181 2.32761 10.2895 2.32761 10.8423 3.43318L15.9153 13.5791C16.4139 14.5764 15.6887 15.7499 14.5736 15.7499H4.42772C3.31264 15.7499 2.5874 14.5764 3.08608 13.5791Z" stroke="#606060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span class="text-xs text-sc-gray-dark leading-4 tracking-wider">All measurement are in cm</span>
+                    </div>
+
+                    <!--  Button-->
+                    <button data-drawer-target="bottom-sheet-measurement"
+                            data-drawer-show="bottom-sheet-measurement"
+                            data-drawer-placement="bottom"
+                            aria-controls="bottom-sheet-measurement"
+                            type="button"
+                            class="text-white  text-sm  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">
+                        Add measurement
+                    </button>
+                {% endset %}
+
+
+                {{ bottomSheet(title="Select a measurements",
+                                content=select_measurement,
+                                sheetName="bottom-sheet-select-measurement") 
+                }}
+
+                {{ bottomSheet(title="Measurement",
+                                content=add_measurement,
+                                sheetName="bottom-sheet-measurement") 
+                }}
+
+
+
+
 
             </div>
 
-            <!-- Warning sign -->
-            <div class="inline-flex items-center space-x-1 justify-center w-full">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     width="19"
-                     height="18"
-                     viewBox="0 0 19 18"
-                     fill="none">
-                    <path d="M9.5 13.5C9.91421 13.5 10.25 13.1642 10.25 12.75C10.25 12.3358 9.91421 12 9.5 12C9.08579 12 8.75 12.3358 8.75 12.75C8.75 13.1642 9.08579 13.5 9.5 13.5Z" fill="#606060" />
-                    <path d="M9.5 7.5V10.5" stroke="#606060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M3.08608 13.5791L8.15899 3.43318C8.71181 2.32761 10.2895 2.32761 10.8423 3.43318L15.9153 13.5791C16.4139 14.5764 15.6887 15.7499 14.5736 15.7499H4.42772C3.31264 15.7499 2.5874 14.5764 3.08608 13.5791Z" stroke="#606060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-                <span class="text-xs text-sc-gray-dark leading-4 tracking-wider">All measurement are in cm</span>
-            </div>
-
-            <!--  Button-->
-            <button data-drawer-target="bottom-sheet-measurement"
-                    data-drawer-show="bottom-sheet-measurement"
-                    data-drawer-placement="bottom"
-                    aria-controls="bottom-sheet-measurement"
-                    type="button"
-                    class="text-white  text-sm  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">
-                Add measurement
-            </button>
-        {% endset %}
-
-
-        {{ bottomSheet(title="Select a measurements",
-                content=select_measurement,
-                sheetName="bottom-sheet-select-measurement") 
-        }}
-
-        {{ bottomSheet(title="Measurement",
-                content=add_measurement,
-                sheetName="bottom-sheet-measurement") 
-        }}
-
-
-
-
-
-    </div>
-
-{% endblock %}
+        {% endblock %}

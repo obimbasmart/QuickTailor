@@ -97,7 +97,7 @@ class S3StorageService():
         if not self.__is_valid_file_extenstion(file.filename):
             raise TypeError("Invalid file type")
 
-        key_name = f'tailor-{tailor_id}/photo-{str(uuid4().hex)}'
+        key_name = f'tailor-{tailor_id}/photo-0x01'
         self.s3_client.upload_fileobj(file, self.bucket_name, key_name,
                                       ExtraArgs={'ContentType': file.mimetype})
         return key_name

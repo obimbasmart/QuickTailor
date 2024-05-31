@@ -1,14 +1,14 @@
 {% from 'macros/tailorBadge.html' import tailorBadge   %}
     
 
-{% macro productCard(name, price, img_url, id, tailor_name='dummy') %}
+{% macro productCard(name, price, img_url, id, tailor_name, tailor_img_url) %}
 
 <div
-  class="w-full max-w-sm   dark:bg-gray-800 dark:border-gray-700"
+  class="w-full max-w-sm rounded-lg  dark:bg-gray-800 dark:border-gray-700"
 >
   <a href="/products/{{id}}">
     <img
-      class="block object-center object-cover max-w-full aspect-square rounded-sm"
+      class="block object-center rounded-lg object-cover max-w-full aspect-square"
       src="{{img_url}}"
       alt=""
     />
@@ -40,8 +40,8 @@
 
 
       <div class="flex items-center justify-between mt-2  w-full">
-        <a href="/yomi-casual">
-          {{ tailorBadge(tailor_name) }}
+        <a href="/{{tailor_name}}">
+          {{ tailorBadge(tailor_name, tailor_img_url) }}
         </a>
       </div>
   </div>

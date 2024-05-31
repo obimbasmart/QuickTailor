@@ -20,7 +20,7 @@
             src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.10/dist/cdn.min.js"></script>
     <title>Document</title>
   </head>
-  <body>
+  <body x-data="{loading: true, show: false}">
 
     {% include 'partials/sidebar.html' %}
 
@@ -29,14 +29,14 @@
     <!-- fOR flashing notifications -->
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
-        <ul x-data="{ show: true }"
+        <ul
+            x-data="{show: false}"
+            x-init="window.addEventListener('load', () => { show = true; setTimeout(() => show = false, 3000); })"
             x-show="show"
             x-transition
             x-transition.scale.origin.top
-            x-transition:enter.duration.500ms
-            x-transition:leave.duration.400ms
-            x-init="setTimeout(() => show = false, 3000)"
-            class="w-full flex flex-col absolute top-16 justify-center items-center">
+
+          class="w-full flex flex-col absolute top-14 justify-center items-center">
           {% for category, message in messages %}
             {% if category == "error" %}
               {{ toast_danger(message) }}

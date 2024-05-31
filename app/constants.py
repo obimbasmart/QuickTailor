@@ -28,7 +28,7 @@ ADMIN_SIDEBAR_LINKS = [
 
     {"name": "dashboard", "link": "tailor_views.dashboard", "is_protected": 0, "icon_name": "products"},
     {"name": "my products", "link": 'tailor_views.get_all_products', "is_protected": 0, "icon_name": "products"},
-    {"name": "orders", "link": "tailor_views.account", "is_protected": 0, "icon_name": "orders"},
+    {"name": "orders", "link": "tailor_views.orders", "is_protected": 0, "icon_name": "orders"},
     {"name": "notifications", "link": "tailor_views.dashboard", "is_protected": 0, "icon_name": "notifications"},
     {"name": "messages", "link": "tailor_views.get_all_products", "is_protected": 0, "icon_name": "messages"},
     {"name": "account", "link": "tailor_views.account", "is_protected": 0, "icon_name": "account"},
