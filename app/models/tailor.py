@@ -7,6 +7,9 @@ from sqlalchemy import String, Boolean, Integer, DateTime
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from ..models.base_model import BaseModel
 from .base_user import BaseUser
+from app import s3_client
+from functools import lru_cache as memoized
+
 
 class Tailor(BaseUser, BaseModel):
     __tablename__ = 'tailors'
@@ -47,5 +50,13 @@ class Tailor(BaseUser, BaseModel):
     @property
     def is_tailor(self):
         return True
+    
+    @property
+    @memoized(maxsize=1)
+    def photo(self):
+        try:
+            return s3_client.generate_presigned_url('get_object', self.photo_url)
+        except Exception as e:
+            return "https://www.iconshock.com/image/PlasticXP/General/user"
 
 

@@ -4,41 +4,44 @@
 
 {% block page_content %}
 
-    <form novalidate action="" method="post">
+    <form novalidate action="" method="post" enctype="multipart/form-data">
         {% set input_styles = "leading-5 font-roboto block p-3  w-full text-sm text-sc-gray-darker bg-transparent rounded-md border-1 border-[#888] appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" %}
         {% set label_styles = "font-roboto leading-5 absolute text-sm text-sc-gray-darker dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 start-1 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto" %}
 
         {{ form.hidden_tag() }}
 
 
-        <!-- profile picture -->
-        <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 ml-2 sm:col-span-4 md:mr-3">
+        <div x-data="{photoName: null, photoPreview: null}"
+             class="col-span-6 ml-2 sm:col-span-4 md:mr-3">
             <!-- Photo File Input -->
-            <input type="file" name="photo" class="hidden" x-ref="photo" x-on:change="
-                                photoName = $refs.photo.files[0].name;
-                                const reader = new FileReader();
-                                reader.onload = (e) => {
-                                    photoPreview = e.target.result;
-                                };
-                                reader.readAsDataURL($refs.photo.files[0]);
-            ">
-            
+            <input type="file" name="photo"
+                   class="hidden"
+                   x-ref="photo"
+                   x-on:change=" photoName = $refs.photo.files[0].name; const reader = new FileReader(); reader.onload = (e) => { photoPreview = e.target.result; }; reader.readAsDataURL($refs.photo.files[0]); " />
+
             <div class="text-center">
                 <!-- Current Profile Photo -->
                 <div class="mt-2" x-show="! photoPreview">
-                    <img src="https://images.unsplash.com/photo-1531316282956-d38457be0993?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80" class="w-28 h-28 m-auto rounded-full shadow">
+                    <img src="{{current_user.photo}}"
+                         class="w-28 h-28 object-cover object-center m-auto rounded-full shadow" />
                 </div>
                 <!-- New Profile Photo Preview -->
                 <div class="mt-2" x-show="photoPreview" style="display: none;">
-                    <span class="block w-40 h-40 rounded-full m-auto shadow" x-bind:style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'" style="background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url('null');">
+                    <span class="block w-40 h-40 rounded-full m-auto shadow"
+                          x-bind:style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'"
+                          style="background-size: cover;
+                                 background-repeat: no-repeat;
+                                 background-position: center center;
+                                 background-image: url('null')">
                     </span>
                 </div>
-                <button type="button" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-400 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150 mt-2 ml-3" x-on:click.prevent="$refs.photo.click()">
+                <button type="button"
+                        class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-400 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150 mt-2"
+                        x-on:click.prevent="$refs.photo.click()">
                     Select New Photo
                 </button>
             </div>
         </div>
-
 
         <h3 class="my-5 text-base font-normal text-sc-gray-darker leading-6">
             Brand Details
@@ -48,7 +51,7 @@
                 {% if loop.index < 4 and field.type != 'CSRFTokenField' and field.type != 'SubmitField' and field.type != 'BooleanField' %}
                     <p class="relative">
                         <!--  input -->
-                        {{ field(class=input_styles, placeholder="") }}
+                        {{ field(class=input_styles, placeholder="", value=current_user[field.name]) }}
                         <!-- label -->
                         {{ field.label(class=label_styles, for="default_outlined") }}
                         <!-- error message on validate -->

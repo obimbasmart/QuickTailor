@@ -7,7 +7,7 @@ Index
 from flask_login import current_user
 from flask import render_template, request, jsonify
 from app.views import app_views
-from app.db_access.product import _get_all_products
+from app.db_access.product import _get_products
 
 notification= [
     {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "10, 000"},
@@ -35,7 +35,14 @@ notification= [
 
 @app_views.route("/")
 def home():
-    products = _get_all_products()
+    products = _get_products()
+    if not current_user.is_anonymous and current_user.is_tailor:
+        products = _get_products(tailor_id=current_user.id)
+        return render_template('pages/tailor/dashboard.html',
+                           page='dashboard',
+                           products=products, 
+                           current_user=current_user)
+    
     return render_template('pages/home.html',
                            page='home',
                            products=products, 
