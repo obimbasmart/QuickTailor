@@ -5,7 +5,7 @@ from flask import Blueprint
 
 app_views = Blueprint("app_views", __name__)
 
-
+from . import notification
 from . import index
 from . import product
 from . import user

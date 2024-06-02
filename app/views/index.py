@@ -8,28 +8,13 @@ from flask_login import current_user
 from flask import render_template, request, jsonify
 from app.views import app_views
 from app.db_access.product import _get_all_products
-
 notification= [
-    {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "10, 000"},
-      {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "30,000"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "200, 000"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "1, 000, 000"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
-    {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"},
-  {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "2 minutes ago"}
-
+        {"time": "3hr ago", "is_clicked": False, "id": "0","content": "🛍️ Order Confirmation: Your order has been successfully placed!", "icon": "1hr ago", "time_elapsed": "Adegbite concept", "url":"http://localhost:5002/products"},
+        {"time": "3hr ago", "is_clicked": True, "id": "1","content": "📦 Order Status Updates: Your order status has been updated to 'In Progress.", "icon": "2 minutes ago", "time_elapsed": "Wellakt Arieie d","url":"http://localhost:5002/messages"},
+        {"time": "3hr ago","is_clicked": False, "id": "2", "content": "🌟 Review Request: We hope you enjoyed your tailored experience! Share your feedback and help us improve.", "icon": "📥", "time_elapsed": "2 minutes ago", "url":"http://localhost:5002/"},
+        {"time": "3hr ago", "is_clicked": False, "id": "3","content": "💬 Chat Responses: The tailor has replied to your message. Check it out!", "icon":"3 minutes ago", "time_elapsed": "1 day ago", 
+            "url": "http://localhost:5002/product/1234"},
+        {"time": "3hr ago", "is_clicked": False, "id": "4", "content": "🎁 Promotional Offers: New collection alert! Explore our latest designs with exclusive discounts.", "icon": "📥", "time_elapsed": "2 minutes ago", "url":"http://localhost:5002/messages"}
 ]
 
 
@@ -53,19 +38,5 @@ def register():
 @app_views.route('/about')
 def about_us():
     return render_template('pages/about_us.html')
-
-@app_views.route('/get_notifications')
-def get_notifications():
-    page = request.args.get('page', 1, type=int)
-    per_page = 10
-    start = (page - 1) * per_page
-    end = start + per_page
-    paginated_notifications = notification[start:end]
-    return jsonify(paginated_notifications)
-
-@app_views.route('/notification')
-def notificationn():
-    return render_template("pages/notification.html")
-
 
 
