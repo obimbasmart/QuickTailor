@@ -37,7 +37,16 @@ def create_app(config=None) -> Flask:
     @app.template_filter('current_datetime')
     def current_datetime_filter(format='%Y-%m-%d %H:%M:%S'):
         return datetime.now().strftime(format)
+    
+    @app.template_filter('sum_price')
+    def sum_price(product_list: list):
+        return sum([float(prod.price) for prod in product_list])
         
+    @app.template_filter('tolist')
+    def tolist(_list: list):
+        
+        return [li.to_dict() for li in _list]
+    
     @app.template_filter('currency')
     def currency_filter(value):
         value = int(float(value))

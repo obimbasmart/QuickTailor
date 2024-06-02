@@ -5,7 +5,7 @@ Index
 
 
 from flask_login import current_user
-from flask import render_template, request, jsonify
+from flask import render_template, request, jsonify, redirect, url_for
 from app.views import app_views
 from app.db_access.product import _get_products
 
@@ -55,6 +55,8 @@ def how_it_works():
 
 @app_views.route("/register")
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('app_views.home'))
     return render_template('pages/register.html',page='auth_page')
 
 @app_views.route('/about')
