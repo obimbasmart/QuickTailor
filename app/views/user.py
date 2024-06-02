@@ -16,12 +16,3 @@ def tailor_profile(brand_name=None):
     tailor.img_url = s3_client.generate_presigned_url('get_object', tailor.photo_url)
     products = _get_product_with_img_urls(tailor.products, no_images=1)
     return render_template('pages/tailor_profile.html', tailor=tailor, products=products)
-
-
-@app_views.route('/measurement', methods=["GET", "POST"])
-def get_set_measurement():
-    form = MeasurementForm()
-    if form.validate_on_submit():
-        return "Submitted"
-    return render_template('pages/measurements.html',
-                           form=form)

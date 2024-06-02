@@ -22,3 +22,6 @@ class MeasurementForm(FlaskForm):
     stomach = DecimalField("Stomach", places=2)
     chest_burst = DecimalField("Chest/Burst", places=2)
     submit = SubmitField("Save")
+
+class OrderMeasurementForm(MeasurementForm):
+    submit = SubmitField('Add measurement')

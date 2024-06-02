@@ -3,10 +3,8 @@
 {% from 'macros/productCard.html' import productCard %}
 {% from 'macros/productsContainer.html' import productsContainer %}
 {% block page_content %}
-  {% from 'macros/loadingState.html' import loadingState %}
-
-  {% include 'partials/productFilterPanel.html' %}
-
+{% from 'macros/loadingState.html' import loadingState %}
+{% include 'partials/productFilterPanel.html' %}
 
   <header class="border-d space-y-4 flex flex-col">
     <form class="flex items-center max-w-lg mx-auto w-full">

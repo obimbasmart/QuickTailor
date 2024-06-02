@@ -1,393 +1,76 @@
-{% extends 'base.html' %} 
+{% extends 'page_wrapper.html' %}
 
-{% block content %} 
-<style>
- .disable-btn-now {
-   
-    opacity: 0.5;
-
- }
-</style>
- <div class="text-center space-y-1 mb-5 mt-7">
-
-        <h1 class="font-montserrat text-xl leading-8 font-medium pt-4">Cart</h1>
- </div>
-<div class="mx-3">
- <div id="cnt"class=" flex flex-col   gap-[12px] items-start mb-[300px]">
-     <!-- 
-    Use JavaScript to populate the carts here
--->
-
- </div>
- <div  style="color:white;margin-top:200px;">
- _  
- </div>
-<div id="Checkout" class="w-[96%] fixed   bottom-0 ml-1"  style=" width:92%; background:white; ">
-     <div class="flex flex-col p-[12px] justify-center items-center mt-[24px]   gap-[10px] mb-8 self-stretch border-[1px] border-solid border-[var(--grey-light-active, #D8D8D8)] rounded-md "> 
-         <div class="` gap-[5px] w-full">	 
-	     <form novalidate action="" method="post">
-        {% set input_styles = "leading-5 font-roboto block p-3  w-full text-sm text-sc-gray-darker bg-transparent rounded-md border-1 border-[#888] appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" %}
-        {% set label_styles = "font-roboto leading-5 absolute text-sm text-sc-gray-darker dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 start-1 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto" %}
-                  <div class="flex flex-row justify-center items-start gap-[8px] self-stretch ">
-
-                       <div class=" gap-[5px] w-full">   
+{% from 'macros/cartItem.html' import cartItem %}
+{% from 'macros/loadingState.html' import loadingsState %}
 
 
-			  {{form.hidden_tag()}}
-
-                                <p class="relative">
-                                <!--  input -->
-                                {{form.code(class=input_styles, placeholder="") }}
-                                <!-- label -->
-                                {{form.code.label(class=label_styles)}}
-                                <!-- error message on validate -->
-                                {% for msg in form.code.errors %}
-                                        {{ error(msg) }}
-                                {% endfor %}
-                                </p>
-			</div>
-                           {{ form.submit(class="text-white  p-3 text-smm bg-gradient-to-r   w-[45%] from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-md px-5 py-2.5 text-center" ) }}
+{% block page_content %}
+    <div>
+        <ul role="list" class="divide-y-1 divide-gray-200">
+            {% for product in products %}
+                {{ cartItem(product, form) }}
+            {% endfor %}
+        </ul>
 
 
-                </div>
-	     </form>
-	 </div>
-        <div class="flex flex-row justify-between self-stretch items-start">
-                <div class="leading-[21px] font-normal font-roboto tracking-[0.25px] text-[var(--Grey-Darker, #2D2D2D)]  text-[14px]">
-		 No of items
-		</div>
-	         <div id="no" class="leading-[21px] font-normal font-roboto tracking-[0.5px] text-gray-[var(--Grey-Darker, #2D2D2D)]  text-[16px]">
-                    0
-		 </div>
+            {% if products | length > 0 %}
+            <div class="px-4 fixed bottom-0 left-0 z-50 w-full h-auto bg-white dark:bg-gray-700 dark:border-gray-600">
+                <span x-text="len_products"></span>
+                <section class="border border-sc-gray-light-active rounded-lg p-3">
 
-	</div>
-        <div class="flex flex-row justify-between self-stretch items-start">
-                <div class="leading-[21px] font-normal font-roboto tracking-[0.25px] text-[var(--Grey-Darker, #2D2D2D)]  text-[14px]">
-                Sub Total
-		</div>
-               <div id="sub-total" class="leading-[21px] font-normal font-roboto tracking-[0.5px] text-gray-[var(--Grey-Darker, #2D2D2D)]  text-[16px]">
-                ₦ 0
-	       </div>
-
-
-	</div>
-        <div class="flex flex-row justify-between self-stretch items-start">
-
-               <div class="leading-[21px] font-normal font-roboto tracking-[0.25px] text-[var(--Grey-Darker, #2D2D2D)]  text-[14px]">
-               Customization value
-	       </div>
-               <div id ="c-value"class="leading-[21px] font-normal font-roboto tracking-[0.5px] text-gray-[var(--Grey-Darker, #2D2D2D)]  text-[16px]">
-                + ₦ 0
-	       </div>
-
-
-	</div>
-        <div class="flex flex-row justify-between self-stretch items-start mt-1 pt-2 border-t-2 border-solid border-[var(--grey-light-active, #D8D8D8)]">
-               <div class="leading-[21px] font-normal font-roboto tracking-[0.25px] text-[var(--Grey-Darker, #2D2D2D)]  text-[14px]">
-                Total
-	       </div>
-               <div id ="total" class="leading-[21px] font-normal font-roboto tracking-[0.5px] text-gray-[var(--Grey-Darker, #2D2D2D)]  text-[16px]">
-                ₦ 0
-	       </div>
-
-	</div>
-
-
-
-     </div>
-     <div class="w-full">
-	        <button id="checkout-btn"  class="my-5 inline-block  text-white  text-sm  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center">
-		Checkout
-		</button>
-
-     </div>
-
-</div>
-
-</div>
-<div id="delete" class="fixed  flex flex-col p-4 hidden justify-center items-center gap-[12px] w-full mb-1  bottom-0 mt-4" style="z-index:100; border-top-right-radius:24px; border-top-left-radius:24px;   box-shadow: 0px -5px 20px 0px rgba(0, 0, 0, 0.10); background:white;">
-
-	 <div class="flex flex-col justify-between"> 
-               <svg xmlns="http://www.w3.org/2000/svg" width="100" height="4" viewBox="0 0 100 4" fill="none">
-                        <rect width="100" height="4" rx="2" fill="#D8D8D8"/>
-               </svg>
-	 </div>
-
-       <div class="flex flex-row justify-center mt-1 self-stretch mb-2">
-		       <div style="margin:auto; position:relative;"> Remove from cart? </div>
-		       <div class="mr-4" style=" position:absolute; right:0;">   
-			       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M6.75781 17.2426L12.0004 12M12.0004 12L17.243 6.75732M12.0004 12L6.75781 6.75732M12.0004 12L17.243 17.2426" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-		              </svg>
-	               </div>
-       </div>
-
-	<div class="flex flex-col p-[6px] justify-between self-stretch items-start  h-[101px] border-t border-gray-500   mx-[4px]" style="border-top:1px solid #D8D8D8; padding-top:20px;" >
-               <a href="/products">
-                    <div class="flex flex-row gap-[15px]">
-                        <div class="">
-                             <img src="{{ url_for('static', filename='images/product_image_3.png' ) }}" class="h-[90px] rounded-md  w-[90px]" alt="...">
-
+                    <form class="flex items-center max-w-lg mx-auto">
+                        <label for="voice-search"
+                               class=" text-sc-gray text-sm tracking-wide sr-only">
+                            Search
+                        </label>
+                        <div class="relative w-full">
+                            <input type="text"
+                                   id="custom-code"
+                                   class="border border-sc-gray-light-active text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-3 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                   placeholder="Customization code"
+                                   required />
+                         
                         </div>
-                        <div class="flex flex-col justify-between py-0">
-				<p class="leading-[21px] font-normal font-roboto tracking-[0.25px] text-gray-800  text-[14px]"> N {{ data[0].time_elapsed }} </p>
-				<p class="leading-[21px] font-normal font-roboto tracking-[0.4px] text-gray-800  text-[12px]">  N{{ data[0]. time }} </p>
-				<p class="leading-[21px] font-normal font-roboto tracking-[0.5px]  text-[var(--Black, #000)] text-[16px]"> N {{ data[0].time_elapsed }} <p>
-                        </div>
-                    </div>
-               </a>
-             <div class="self-center">
-             </div>
+                        <button type="submit"
+                                class="inline-flex items-center py-2.5 px-3 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Apply
+                        </button>
+                    </form>
 
-         </div>
-
-	 <div class="flex flex-row justify-between w-full gap-4 mt-4  mb-4">
-
-		 <button id="cancel"   class="text-pc-teal-normal   p-3 text-smm bg-gradient-to-r   w-[90%] bg-[var(--Gr-[var(--Grey-Light, #F2F2F2)]  font-medium rounded-md px-5 py-2.5 text-center", style="border:1px solid;">
-			 Cancel
-		 </button>
-                 <button id="remove"  class="text-white  p-3 text-smm bg-gradient-to-r   w-[90%] from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-md px-5 py-2.5 text-center">
-			 Yes, remove
-		 </button>
-
-
-	 </div>
-</div>
-<div id="overlay" class=" fixed w-full hidden h-[100%] top-0 mt-8 bg-[rgba(0, 0, 0, 0.15)] " style= " background:rgba(0, 0, 0, 0.15); height:100%;"></div>
-<div id="processing"  class="flex flex-col hidden justify-center mt-8   px-[16px]  fixed top-0  bottom-0 left-0 right-0  items-center  rounded-md  z-[100] "  style="width:68%; height:165px; gap:14px;  background:var(--White, #FFF); margin:auto;">
-       <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
-                  <path d="M50 25C50 38.8071 38.8071 50 25 50C11.1929 50 0 38.8071 0 25C0 11.1929 11.1929 0 25 0C38.8071 0 50 11.1929 50 25ZM3.415 25C3.415 36.9211 13.0789 46.585 25 46.585C36.9211 46.585 46.585 36.9211 46.585 25C46.585 13.0789 36.9211 3.415 25 3.415C13.0789 3.415 3.415 13.0789 3.415 25Z" fill="#E6F2F2"/>
-                  <path d="M48.2924 25C49.2355 25 50.0061 24.2346 49.9417 23.2937C49.7571 20.5946 49.1352 17.9394 48.097 15.4329C46.8406 12.3998 44.9991 9.6438 42.6777 7.32233C40.3562 5.00087 37.6002 3.15938 34.5671 1.90301C32.0606 0.864791 29.4054 0.24294 26.7063 0.0582928C25.7654 -0.00607093 25 0.764501 25 1.70756C25 2.65062 25.7657 3.4081 26.7058 3.48263C28.9561 3.66102 31.1681 4.19162 33.2602 5.05817C35.879 6.14291 38.2585 7.73284 40.2628 9.73719C42.2672 11.7415 43.8571 14.121 44.9418 16.7398C45.8084 18.8319 46.339 21.0439 46.5174 23.2942C46.5919 24.2343 47.3494 25 48.2924 25Z" fill="#008080"/>
-       </svg>
-       <p class="leading-[24px] font-normal font-roboto tracking-[0.5px] text-[var(--Grey-Darker, #2D2D2D)]  text-[16px]">  Processing your order </p>
-        <p class="leading-[24px] font-normal font-roboto tracking-[0.5px] text-[var(--Grey-Darker, #2D2D2D)]  text-[12px]">  Please wait while we work our magic </p>
-
-</div>
-
-<script>
-
-document.addEventListener('DOMContentLoaded', loading)
-// Asynchronous function to handle cart loading and checkout process
-async function loading() {
-    // Get elements from the DOM
-    const num = document.getElementById("no");
-    const sub = document.getElementById("sub-total");
-    const c_value = document.getElementById("c-value");
-    const total = document.getElementById("total");
-    const checkoutBtn = document.getElementById("checkout-btn");
-    const processing = document.getElementById("processing");
-    const container = document.getElementById('cnt');
-
-    // Function to clear checkout details
-    function clearCheckout() {
-        num.innerText = 0;
-        sub.innerText = 0;
-        c_value.innerText = 0;
-        total.innerText = 0;
-        checkoutBtn.classList.add("disable-btn-now", "hidden");
-    }
-
-    // Function to handle payment transfer
-    function payTransfer() {
-        overlay.classList.remove("hidden");
-        processing.classList.remove("hidden");
-        setTimeout(() => {
-            processing.classList.add("hidden");
-            overlay.classList.add("hidden");
-        }, 3000);
-        window.location.href = "/payment";
-    }
-
-    // Function to fetch CSRF token
-    const getCSRFToken = async () => {
-        const response = await fetch('/get_csrf_token');
-        const data = await response.json();
-        return data.csrf_token;
-    };
-
-    console.log("hi");
-
-    // Fetch CSRF token
-    const csrfToken = await getCSRFToken();
-
-    // Retrieve cart data from local storage
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-    // If cart is empty, display a message and return
-    if (cart.length === 0) {
-        clearCheckout();
-        container.innerHTML = `<h1 class="text-[50px]" style="z-index:100; text-align:center; font-size:35px; margin:auto; margin-top:150px;"><b>Cart is empty</b></h1>`;
-        return;
-    }
-
-    // Send cart data to the server
-    const response = await fetch('/user/cart', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrfToken
-        },
-        body: JSON.stringify({ cart_items: cart })
-    });
-
-    // Parse the server response
-    const data = await response.json();
-
-    // Clear the container
-    container.innerHTML = '';
-
-    // Populate the container with the server response
-    if (data.length > 0) {
-        let i = 0;
-        let sub_total = 0;
-
-        data.forEach(item => {
-            const productHTML = `
-                <div class="flex flex-row p-[6px] justify-between self-stretch items-start h-[101px] mx-[4px]" data-id="${item.id}">
-                   <a href="/products/${item.id}">
-                        <div class="flex flex-row gap-[15px]"> 
-                            <div class="">
-                                <img src="{{ url_for('static', filename='images/product_image_3.png' ) }}" class="h-[90px] rounded-md w-[90px]" alt="...">
-                            </div>
-                            <div class="flex flex-col justify-between py-0">
-                                <p class="leading-[21px] font-normal font-roboto tracking-[0.25px] text-gray-800 text-[14px]"> ${item.name}</p>
-                                <p class="leading-[21px] font-normal font-roboto tracking-[0.4px] text-gray-800 text-[12px]">  ${item.price} </p>
-                                <p class="leading-[21px] font-normal font-roboto tracking-[0.5px] text-[var(--Black, #000)] text-[16px]"> ${item.total_price}</p>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="self-center" onclick="removeProduct(this)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="29" viewBox="0 0 28 29" fill="none">
-                            <path d="M11.666 14.5V20.3333" stroke="#2D2D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M16.334 14.5V20.3333" stroke="#2D2D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M4.66602 8.6665H23.3327" stroke="#2D2D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M7 12.1665V21.4998C7 23.4329 8.56701 24.9998 10.5 24.9998H17.5C19.433 24.9998 21 23.4329 21 21.4998V12.1665" stroke="#2D2D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M10.5 6.33333C10.5 5.04467 11.5447 4 12.8333 4H15.1667C16.4554 4 17.5 5.04467 17.5 6.33333V8.66667H10.5V6.33333Z" stroke="#2D2D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                </div>`;
-            container.innerHTML += productHTML;
-            i++;
-            sub_total += Number(item.price);
-        });
-
-        // Update checkout details
-        num.innerText = i;
-        sub.innerText = '₦' + sub_total;
-        c_value.innerText = "+ " + "₦" + (sub_total - 25000);
-        total.innerText = "₦" + (sub_total + (sub_total - 25000));
-        
-        // Add event listener to checkout button
-        checkoutBtn.addEventListener('click', payTransfer);
-
-    } else {
-        clearCheckout();
-        container.innerHTML = `<h1 class="text-[50px]" style="z-index:100; text-align:center; font-size:35px; margin:auto; margin-top:150px;"><b>Cart is empty</b></h1>`;
-    }
-}
-
-function removeProduct(element) {
-    // Find the parent element that has the data-id attribute
-    const overlay = document.getElementById("overlay");
-    const del = document.getElementById("delete");
-    const cancel = document.getElementById("cancel");
-    const remove = document.getElementById("remove");
-    const num = document.getElementById("no")
-    const sub = document.getElementById("sub-total")
-    const c_value = document.getElementById("c-value")
-    const total = document.getElementById("total")
-    const productElement = element.closest('[data-id]');
-    const productId = productElement.getAttribute('data-id');
-    
-    overlay.classList.remove("hidden");
-    del.classList.remove("hidden")
-    cancel.addEventListener('click', removeCancel);
-    remove.addEventListener('click', removeRemove);
-    function removeCancel() {
-    const overlay = document.getElementById("overlay");
-    const del = document.getElementById("delete");
-    const cancel = document.getElementById("cancel");
-    const remove = document.getElementById("remove");
-
-    
-    overlay.classList.add("hidden");
-    del.classList.add("hidden")
-
-}
-    function removeRemove(Element) {
-    const overlay = document.getElementById("overlay");
-    const del = document.getElementById("delete");
-    const cancel = document.getElementById("cancel");
-    const remove = document.getElementById("remove"); 
-
-   // Remove the item from local storage
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    console.log(cart, productId )
-    cart = cart.filter(item => item !== Number(productId));
-    localStorage.setItem('cart', JSON.stringify(cart));
-    
-    // Remove the product element from the DOM
-    productElement.remove();
-    loading()
-    overlay.classList.add("hidden");
-    del.classList.add("hidden")
-}
-
-}
-
-// Function to remove a product from the cart
-function removeProduct(element) {
-    // Get necessary DOM elements
-    const overlay = document.getElementById("overlay");
-    const del = document.getElementById("delete");
-    const cancel = document.getElementById("cancel");
-    const remove = document.getElementById("remove");
-    const num = document.getElementById("no");
-    const sub = document.getElementById("sub-total");
-    const c_value = document.getElementById("c-value");
-    const total = document.getElementById("total");
-    
-    // Find the parent element that has the data-id attribute
-    const productElement = element.closest('[data-id]');
-    const productId = productElement.getAttribute('data-id');
-    
-    // Function to handle cancellation of product removal
-    function removeCancel() {
-        overlay.classList.add("hidden");
-        del.classList.add("hidden");
-        return;
-    }
-    
-    // Function to handle confirmation of product removal
-    async function removeRemove(Element) {
-        // Remove the item from local storage
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        cart = cart.filter(item => item !== Number(productId));
-        localStorage.setItem('cart', JSON.stringify(cart));
-        
-        // Remove the product element from the DOM
-        productElement.remove();
-        
-        // Update cart details
-        await loading();
-        
-        // Hide overlay and delete confirmation dialog
-        overlay.classList.add("hidden");
-        del.classList.add("hidden");
-	return;
-    }
-
-    // Show overlay and delete confirmation dialog
-    overlay.classList.remove("hidden");
-    del.classList.remove("hidden");
-
-    // Add event listeners for cancellation and confirmation
-    cancel.addEventListener('click', removeCancel);
-    remove.addEventListener('click', removeRemove);
-}
+                    <ul class="space-y-2 mt-2 tracking-wide text-sm font-roboto text-sc-gray-darker">
+                        <li class="flex items-center justify-between">
+                            <span class="text-base font-normal">No. of items</span>
+                            <span> {{products | length }}  </span>
+                        </li>
+                        <li class="flex items-center justify-between">
+                            <span class="text-base font-normal">Sub total</span>
+                            <span class="text-base font-normal tracking-wide"> {{ products | sum_price | currency }} </span>
+                        </li>
+                        <li class="flex items-center justify-between">
+                            <span class="text-base font-normal">Customization value</span>
+                            <span> {{ products.customization_value | sum_price | default(0) }}</span>
+                        </li>
+                    </ul>
+                </section>
 
 
-
-</script>
-
+                <button type="button" @click="console.log(alp_products)"
+                        class="text-white mt-5 bg-pc-teal-normal  text-sm  w-full hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">
+                    Check out
+                </button>
+        </div>
+            {% endif %}
+      
+       
+        <script>
+            function cartData() {
+                return {
+                    items: {{ products }},
+                    get length() {
+                        return this.items.length;
+                    }
+                }
+            }
+        </script>
+    </div>
 {% endblock %}

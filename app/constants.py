@@ -4,7 +4,7 @@ USER_SIDEBAR_LINKS = [
     {"name": "home", "link": "app_views.home", "is_protected": 0, "icon_name": "home"},
     {"name": "products", "link": "app_views.get_all_products", "is_protected": 0, "icon_name": "products"},
     {"name": "orders", "link": "app_views.about_us", "is_protected": 1, "icon_name": "orders"},
-    {"name": "cart", "link": "app_views.about_us", "is_protected": 0, "icon_name": "cart"},
+    {"name": "cart", "link": "app_views.view_cart", "is_protected": 0, "icon_name": "cart"},
     {"name": "saved", "link": "app_views.about_us", "is_protected": 0, "icon_name": "saved"},
     {"name": "about us", "link": "app_views.about_us", "is_protected": 0, "icon_name": "aboutus"},
     {"name": "how it works", "link": "app_views.how_it_works", "is_protected": 0, "icon_name": "howitworks"},
@@ -16,7 +16,7 @@ USER_SIDEBAR_VISITORS = [
 
     {"name": "home", "link": "/", "is_protected": 0, "icon_name": "home"},
     {"name": "products", "link": "/products", "is_protected": 0, "icon_name": "products"},
-    {"name": "cart", "link": "/aboutus", "is_protected": 0, "icon_name": "cart"},
+    {"name": "cart", "link": "/cart", "is_protected": 0, "icon_name": "cart"},
     {"name": "saved", "link": "/aboutus", "is_protected": 0, "icon_name": "saved"},
     {"name": "How it works", "link": "/howitworks", "is_protected": 0, "icon_name": "howitworks"},
     {"name": "about us", "link": "/about", "is_protected": 0, "icon_name": "aboutus"},
@@ -41,6 +41,9 @@ measurement_names = [
     "chest_burst", "stomach", "top_length", "shoulder",
     "sleeve_length", "neck", "muscle", "waist", "laps", "knee",
 ]
+
+
+
 
 
 default_measurement = {
