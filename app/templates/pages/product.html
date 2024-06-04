@@ -6,7 +6,7 @@
 {% from 'macros/productCard.html' import productCard %}
 {% from 'macros/bottomSheet.html' import bottomSheet %}
 {% block content %}
-    <div x-data="{useSavedMeasurement: false, useNewMeasurement: false, top_length: ''}"
+    <div x-data="{addedToCart: false}"
          class="md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
 
         <div id="default-carousel" class="relative w-full" data-carousel="slide">
@@ -178,7 +178,6 @@
 
 
         {% if not current_user.is_tailor %}
-
             <div class="p-4">
                 {{ tailorProductCard(product.tailor) }}
             </div>
@@ -345,7 +344,7 @@
                     {% set input_styles = "font-roboto leading-6 block px-3 pb-2.5 pt-4 w-full text-sm text-sc-gray-dark bg-transparent rounded-md border-1 border-[#888] appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" %}
                     {% set label_styles = "absolute text-sm text-sc-gray-darker dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 start-1 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto" %}
 
-                    {% if current_user.is_authenticated %}
+                    {% if current_user.is_authenticated and not current_user.is_tailor%}
                         <form novalidate
                               method="post"
                               action="{{ product.id }}/cart"
@@ -401,10 +400,41 @@
                                 sheetName="bottom-sheet-measurement") 
                 }}
 
-
-
-
-
             </div>
+            
+
+
+            {% set sheet_content %}
+            <div id="sheet-content" class="space-y-3 py-3">
+              <h4 class="text-center font-roboto text-sm text-sc-gray-darker"
+                  x-text="product_name">
+              </h4>
+      
+      
+                <form action="" class="grid grid-cols-2 gap-3">
+                  {{ form.hidden_tag() }}
+                  <!-- Hidden input field with the product ID -->
+                  <input type="hidden" name="id" :value='product_id' />
+                  <!--  Button-->
+                  <button type="button"
+                          hx-post='/move_to_draft'
+                          hx-include="[name=id]"
+                          hx-trigger="click"
+                          class="text-pc-teal-normal  border-1 border-pc-teal-normal text-sm  w-full bg-white  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">
+                    Move to draft
+                  </button>
+                  <button type="button"
+                          class="text-white  text-sm  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2"
+                          hx-delete='/delete_product'
+                          hx-include="[name=value]"
+                          hx-trigger="click"
+                          hx-target="#sheet-content"
+                          hx-swap="innerHTML">
+                    Yes delete
+                  </button>
+                </form>
+      
+            </div>
+          {% endset %}
 
         {% endblock %}

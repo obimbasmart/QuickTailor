@@ -41,16 +41,21 @@ def create_app(config=None) -> Flask:
     @app.template_filter('sum_price')
     def sum_price(product_list: list):
         return sum([float(prod.price) for prod in product_list])
+
+    @app.template_filter('sum_custom_value')
+    def sum_custom_value(product_list: list):
+        return sum([float(prod.customization_value) for prod in product_list if prod.customization_value])
         
     @app.template_filter('tolist')
     def tolist(_list: list):
-        
         return [li.to_dict() for li in _list]
     
     @app.template_filter('currency')
     def currency_filter(value):
+        if value is None:
+            return 'Nil'
         value = int(float(value))
-        return format_currency(number=value, currency='NGN',  format=u'¤#,##0',  currency_digits=False)
+        return format_currency(number=value, currency='₦',  format=u'¤#,##0',  currency_digits=False)
     return app
 
 config = DevConfig

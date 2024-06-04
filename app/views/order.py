@@ -11,6 +11,22 @@ from app.db_access.product import _get_products
 from app.models.order import Order
 from app.forms.main_forms import OrderMeasurementForm
 from decimal import Decimal
+from app.db_access.product import _get_product_with_img_urls
+from app.models.cart import CartItem
+
+
+@app_views.route("/cart/checkout")
+def checkout():
+    cart_items = CartItem.query.filter_by(user_id=current_user.id).all()
+    for cart_item in cart_items:
+        cart_item.product.customization_value = cart_item.cusomization_value
+    products = [cart_item.product for cart_item in cart_items]
+
+    for product in products:
+        print(product.customization_value)
+    
+    products = _get_product_with_img_urls(products, no_images=1)
+    return render_template('pages/checkout.html', products=products)
 
 
 

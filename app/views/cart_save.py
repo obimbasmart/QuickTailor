@@ -1,5 +1,5 @@
 from app.views import app_views
-from flask import render_template, request, jsonify, abort, redirect, flash
+from flask import render_template, request, jsonify, abort, redirect, flash, url_for
 from flask_wtf.csrf import generate_csrf
 from app.db_access.product import _get_products
 from app.forms.main_forms import OrderMeasurementForm
@@ -9,6 +9,8 @@ from app.models.cart import CartItem
 from app import db
 from app.db_access.product import _get_product_with_img_urls
 from app.forms.tailor_forms import CRSForm
+from app.forms.cart_forms import ApplyCodeForm
+from app.models.tailor import Tailor
 
 
 @app_views.route('/get_csrf_token', methods=['GET'])
@@ -50,12 +52,35 @@ def delete_from_cart(product_id=None):
 
 @app_views.route('/cart')
 def view_cart():
+    form = ApplyCodeForm()
     cart_items = CartItem.query.filter_by(user_id=current_user.id).all()
+    for cart_item in cart_items:
+        cart_item.product.customization_value = cart_item.cusomization_value
     products = [cart_item.product for cart_item in cart_items]
+
+    for product in products:
+        print(product.customization_value)
+    
     products = _get_product_with_img_urls(products, no_images=1)
-    form = CRSForm()
     return render_template('pages/cart.html', products=products, form=form)
 
+@app_views.route('/cart/code', methods=["POST"])
+def apply_code(user_id=None):
+    form = ApplyCodeForm()
+    if form.validate_on_submit():
+        code = form.code.data
+        cart_items = CartItem.query.filter_by(user_id=current_user.id).all()
+
+        for item in cart_items:
+            if item.product.customization_tokens.get('all'):
+                checkout_code = item.product.customization_tokens.get('all')
+                code_details = Tailor.decode_customization_code(checkout_code)
+                print(code_details)
+                if code_details.get('value'):
+                    CartItem.query.filter_by(id=item.id).one_or_404().cusomization_value = code_details.get('value')
+                    # db.session.add(item)
+                    db.session.commit()
+        return redirect(url_for('app_views.view_cart'))
 
 
 # @app_views.route('/cart', methods=["GET", "POST"])

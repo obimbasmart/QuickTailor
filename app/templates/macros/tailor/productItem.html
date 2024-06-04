@@ -37,9 +37,10 @@
               </li>
               <li>
                 {% if product.on_draft %}
-                  <form action="{{ url_for('tailor_views.update_product_visibility') }}" method="post">
+                  <form action="{{ url_for("tailor_views.update_product_visibility") }}"
+                        method="post">
                     {{ form.hidden_tag() }}
-                    <input type="hidden" name="id" value="{{product.id}}" />
+                    <input type="hidden" name="id" value="{{ product.id }}" />
                     <input type="hidden" name="action" value="from_draft" />
                     <button type="submit"
                             class="block px-2 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
@@ -47,28 +48,37 @@
                     </button>
                   </form>
                 {% else %}
-                <form action="{{ url_for('tailor_views.update_product_visibility') }}" method="post">
-                  {{ form.hidden_tag() }}
-                  <input type="hidden" name="id" value="{{product.id}}" />
-                  <input type="hidden" name="action" value="to_draft" />
-                  <button type="submit"
-                          class="block px-2 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                    Mark as inactive
-                  </button>
-                </form>
+                  <form action="{{ url_for("tailor_views.update_product_visibility") }}"
+                        method="post">
+                    {{ form.hidden_tag() }}
+                    <input type="hidden" name="id" value="{{ product.id }}" />
+                    <input type="hidden" name="action" value="to_draft" />
+                    <button type="submit"
+                            class="block px-2 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                      Mark as inactive
+                    </button>
+                  </form>
                 {% endif %}
               </li>
 
               {% if not product.on_draft %}
                 <li>
-                  <a href="#"
-                     class="block px-2 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Customization code</a>
+                  <button data-drawer-target="custom-code"
+                          data-drawer-show="custom-code"
+                          data-drawer-placement="bottom"
+                          aria-controls="custom-code"
+                          type="button"
+                          x-on:click="product_name='{{ product.name }}'; product_id='{{ product.id }}'; price='{{ product.price }}'; console.log(price)"
+                          class="block px-2 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                    Customization code
+                  </button>
                 </li>
               {% endif %}
               <li>
-                <form action="{{ url_for('tailor_views.update_product_visibility') }}" method="post">
+                <form action="{{ url_for("tailor_views.update_product_visibility") }}"
+                      method="post">
                   {{ form.hidden_tag() }}
-                  <input type="hidden" name="id" value="{{product.id}}" />
+                  <input type="hidden" name="id" value="{{ product.id }}" />
                   <input type="hidden" name="action" value="delete" />
                   <button type="submit"
                           class="block px-2 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
@@ -79,7 +89,7 @@
             </ul>
           </div>
 
-     
+
 
         </div>
         <p class="mt-1 text-xs text-sc-gray-dark">
@@ -96,7 +106,7 @@
                   data-modal-toggle="remove-modal"
                   aria-controls="remove-product"
                   type="button"
-                  x-on:click="product_name = '{{ name }}'; product_id = '{{ id }}'"
+                  x-on:click="console.log('okkk'); product_name = '{{ name }}'; product_id = '{{ id }}'"
                   class="font-normal underline text-sc-gray-dark text-xs">
             Remove
           </button>

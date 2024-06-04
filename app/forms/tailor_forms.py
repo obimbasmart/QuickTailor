@@ -56,4 +56,7 @@ class BrandInformationForm(FlaskForm):
     photo = FileField('Photo')
     submit = SubmitField('Save')
 
+# class CustomizationCodeForm(FlaskForm):
+#     code_name = StringFiel
+
     

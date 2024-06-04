@@ -15,3 +15,5 @@ class Product(BaseModel):
 
     # relationships
     tailor = relationship("Tailor", back_populates="products")
+    #codes
+    customization_tokens = mapped_column(JSON, default={})

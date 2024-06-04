@@ -20,6 +20,10 @@ class CustomizationForm(FlaskForm):
     def validate_coce(self,code):
         if code != "QuicTailor":
             raise ValidationError("Invalid code")
+        
+class ApplyCodeForm(FlaskForm):
+    code = StringField(validators=[DataRequired()])
+    apply = SubmitField('Apply')
 
 
 class Checkout(FlaskForm):
