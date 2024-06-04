@@ -1,6 +1,6 @@
 {% extends 'page_wrapper.html' %}
 
-{% from 'macros/cartItem.html' import cartItem %}
+{% from 'macros/checkOutItem.html' import checkOutItem %}
 {% from 'macros/loadingState.html' import loadingsState %}
 
 {% block page_content %}
@@ -41,30 +41,12 @@
     <div>
         <ul role="list" class="divide-y-1 divide-gray-200">
             {% for product in products %}
-                {{ cartItem(product, form) }}
+                {{ checkOutItem(product) }}
             {% endfor %}
         </ul>
         {% if products | length > 0 %}
             <div class="w-full h-auto bg-white dark:bg-gray-700 dark:border-gray-600">
-                <span x-text="len_products"></span>
                 <section class="border border-sc-gray-light-active rounded-lg p-3">
-
-                    <form action="/cart/code"
-                          method="post"
-                          class="flex items-center max-w-lg mx-auto">
-                        {{ form.hidden_tag() }}
-
-                        <div class="relative w-full">
-                            <div class="relative w-full">
-                                {{ form.code(class="border border-sc-gray-light-active text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-3 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
-                                                                placeholder="Customization code") }}
-                            </div>
-
-                        </div>
-
-                        {{ form.apply(class="inline-flex items-center py-2.5 px-3 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800") }}
-                    </form>
-
                     <ul class="space-y-2 mt-2 tracking-wide text-sm font-roboto text-sc-gray-darker">
                         <li class="flex items-center justify-between">
                             <span class="text-base font-normal">No. of items</span>
@@ -76,7 +58,7 @@
                         </li>
                         <li class="flex items-center justify-between">
                             <span class="text-base font-normal">Customization value</span>
-                            <span class="text-base font-normal tracking-wide"> {{ products | sum_custom_value | default(0) | currency }}</span>
+                            <span class="text-center text-base font-normal tracking-wide"> {{ products | sum_custom_value | default(0) | currency }}</span>
                         </li>
                     </ul>
                 </section>
@@ -84,8 +66,8 @@
 
                 <a href="{{ url_for("app_views.checkout") }}">
                     <button type="button"
-                            class="text-white mt-5 bg-pc-teal-normal  text-sm  w-full hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">
-                        Check out
+                            class="tracking-wider text-white mt-5 bg-pc-teal-normal  text-sm  w-full hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">
+                            Pay {{ (products | sum_price - products | sum_custom_value) | currency }}
                     </button>
                 </a>
             </div>

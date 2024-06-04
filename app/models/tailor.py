@@ -9,7 +9,8 @@ from ..models.base_model import BaseModel
 from .base_user import BaseUser
 from app import s3_client
 from functools import lru_cache as memoized
-
+import json
+import base64
 
 class Tailor(BaseUser, BaseModel):
     __tablename__ = 'tailors'
@@ -58,5 +59,18 @@ class Tailor(BaseUser, BaseModel):
             return s3_client.generate_presigned_url('get_object', self.photo_url)
         except Exception as e:
             return "https://www.iconshock.com/image/PlasticXP/General/user"
+        
+    @classmethod
+    def generate_customization_code(cls, product_id: str, value: int):
+        attr = json.dumps({"product_id":  product_id, "value": value})
+        code = base64.b64encode(attr.encode('utf-8')).decode('utf-8')
+        print(code)
+        return code
+
+    @classmethod
+    def decode_customization_code(cls, code: str):
+        decoded_str = base64.b64decode(code).decode('utf-8')
+        code = json.loads(decoded_str)
+        return code
 
 

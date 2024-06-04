@@ -8,6 +8,8 @@ from flask_login import current_user
 from app import db, s3_client
 from app.forms.tailor_forms import CRSForm
 from app.db_access.product import _get_products
+from app.models.tailor import Tailor
+from app.models.user import User
 
 
 @tailor_views.route('/my_products/new', methods=["GET", "POST"])
@@ -67,3 +69,46 @@ def update_product_visibility():
     db.session.commit()
     flash(msg)
     return redirect(url_for('tailor_views.get_all_products'))
+
+@tailor_views.route('/products/generate_custom_code', methods=['POST'])
+@tailor_required
+def generate_custom_code():
+    product_id = request.form.get('product_id')
+    value = request.form.get('value')
+    limit = request.form.get('limit')
+    deal = request.form.get('deal')
+    price = request.form.get('price')
+    email = request.form.get('email')
+
+    if '%' in value and value[-1] == '%':
+        value = float(value[:-1]) / 100 * float(price)
+    elif value !='' and float(value) < float(price):
+        value = float(value)
+    else:
+        return "Invald value!"
+
+    if deal == "discount":
+        value = -value
+
+    product = Product.query.filter_by(id=product_id).one_or_404()
+    user_id = 'all'
+    print(product_id)
+
+    if email.strip() != '':
+        user = User.query.filter_by(email=email).one_or_404()
+        user_id = user.id
+
+
+    code = Tailor.generate_customization_code(product_id, value)
+    tokens = {user_id: code}
+
+
+    if not product.customization_tokens:
+        product.customization_tokens = tokens
+
+    else:
+        product.customization_tokens[user_id] = code
+
+    db.session.add(product)
+    db.session.commit()
+    return f'<input id="npm-install" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{code}" disabled readonly />'
