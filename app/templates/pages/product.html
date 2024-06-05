@@ -272,10 +272,12 @@
                     <h3 class="px-4 text-fdt-brown-dark text-xl leading-9 capitalize font-montserrat">
                         Similar Products
                     </h3>
-                    <section class=" mx-4 py-4 relative overflow-x-scroll  md:h-96 flex gap-4 py-4">
+                    <section class=" mx-4 relative overflow-x-scroll  md:h-96 flex gap-4 py-4">
                         {% for product in product.tailor.products %}
                             <div class="w-[40%]">
-                                {{ productCard(product.name, product.price, product.id) }}
+                                {{ productCard(product.name, product.price,
+                                                product.img, product.id, product.tailor.business_name,
+                                                product.tailor.photo) }}
                             </div>
                         {% endfor %}
                     </section>
@@ -390,10 +392,6 @@
                 {% endset %}
 
 
-                {{ bottomSheet(title="Select a measurements",
-                                content=select_measurement,
-                                sheetName="bottom-sheet-select-measurement") 
-                }}
 
                 {{ bottomSheet(title="Measurement",
                                 content=add_measurement,

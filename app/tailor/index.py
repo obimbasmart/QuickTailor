@@ -10,13 +10,20 @@ from app.auth.decorators import tailor_required
 from app.forms.tailor_forms import BrandInformationForm
 from flask_login import current_user
 from app import db, s3_client
+from app.models.order import Order
 
 
 @tailor_views.route("/dashboard")
 @tailor_required
 def dashboard():
+    products = [product.id for product in current_user.products]
+    orders = Order.query.all()
+    my_orders = [
+        order for order in orders
+        if order.product_id in products
+    ]
     return render_template('pages/tailor/dashboard.html',
-                           page='dashboard', )
+                           page='dashboard', orders=my_orders)
 
 
 @tailor_views.route("/dashboard")

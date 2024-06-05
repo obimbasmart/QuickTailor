@@ -1,6 +1,7 @@
 from sqlalchemy import  String, Integer, ForeignKey, JSON, Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from ..models.base_model import BaseModel
+from app import s3_client
 
 class Product(BaseModel):
     __tablename__ = 'products'
@@ -17,3 +18,7 @@ class Product(BaseModel):
     tailor = relationship("Tailor", back_populates="products")
     #codes
     customization_tokens = mapped_column(JSON, default={})
+
+    @property
+    def img(self):
+        return s3_client.generate_presigned_url('get_object', list(self.images.values())[0])

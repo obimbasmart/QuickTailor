@@ -16,7 +16,6 @@ def get_product_by_id(product_id=None):
     if product_id is None:
         abort(404)
     product = _get_products(id=product_id)
-    # product.tailor.img_url = s3_client.generate_presigned_url('get_object', product.tailor.photo_url)
     form = OrderMeasurementForm()
     return render_template('pages/product.html', form=form, product=product[0], page="products")
 

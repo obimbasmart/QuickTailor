@@ -23,3 +23,7 @@ class Order(BaseModel):
     order_status: Mapped[Enum] = mapped_column(orderStatus, default='PENDING')
     order_progress: Mapped[Enum] = mapped_column(orderProgress, default='AWAITING_COMFIRMATION')
     measurements = mapped_column(JSON, nullable=False)
+
+    # relationship
+    product = relationship('Product', uselist=False)
+    user = relationship('User', uselist=False)
