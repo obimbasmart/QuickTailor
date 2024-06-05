@@ -159,95 +159,28 @@
                     </tr>
                 </thead>
                 <tbody class="text-xs leading-5">
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="row" class="px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
-                            #499012
-                        </th>
+                    {% for order in orders %}
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <th scope="row" class="px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
+                                    <a href="/orders/{{order.id}}" class="block"> #{{order.id[:7]}}</a>
 
-                        <th scope="row" class="px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
-                            <span class="bg-[#6E6E6E1A] text-xs px-2 py-[2px] rounded-md dark:bg-blue-900 dark:text-blue-300">Pending</span>
-                        </th>
+                                </th>
+    
+                                <th scope="row" class="px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
+                                    <a href="/orders/{{order.id}}">
+                                        <span class="capitalize bg-[#6E6E6E1A] text-xs px-2 py-[2px] rounded-md dark:bg-blue-900 dark:text-blue-300"> {{order.order_status | lower }}</span>
 
-                        <th scope="row" class="text-right px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
-                            lucia_gill@yahoo.com
-                        </th>
-                      
-                    </tr>
-
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="row" class="px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
-                            #499012
-                        </th>
-
-                        <th scope="row" class="px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
-                            <span class="bg-[#138F271A] text-[#138F27] px-2 py-[2px] rounded-md dark:bg-blue-900 dark:text-blue-300">Completed</span>
-                        </th>
-
-                        <th scope="row" class="text-right px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
-                            lucia_gill@yahoo.com
-                        </th>
-                      
-                    </tr>
-
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="row" class="px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
-                            #499012
-                        </th>
-
-                        <th scope="row" class="px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
-                            <span class="bg-[#6E6E6E1A] text-xs px-2 py-[2px] rounded-md dark:bg-blue-900 dark:text-blue-300">Pending</span>
-                        </th>
-
-                        <th scope="row" class="text-right px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
-                            lucia_gill@yahoo.com
-                        </th>
-                      
-                    </tr>
-
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="row" class="px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
-                            #499012
-                        </th>
-
-                        <th scope="row" class="px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
-                            <span class="bg-[#6E6E6E1A] text-xs px-2 py-[2px] rounded-md dark:bg-blue-900 dark:text-blue-300">Pending</span>
-                        </th>
-
-                        <th scope="row" class="text-right px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
-                            lucia_gill@yahoo.com
-                        </th>
-                      
-                    </tr>
-
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="row" class="px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
-                            #499012
-                        </th>
-
-                        <th scope="row" class="px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
-                            <span class="bg-[#6E6E6E1A] text-xs px-2 py-[2px] rounded-md dark:bg-blue-900 dark:text-blue-300">Pending</span>
-                        </th>
-
-                        <th scope="row" class="text-right px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
-                            lucia_gill@yahoo.com
-                        </th>
-                      
-                    </tr>
-
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="row" class="px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
-                            #499012
-                        </th>
-
-                        <th scope="row" class="px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
-                            <span class="bg-[#E288351A] text-[#E28835] text-xs px-2 py-[2px] rounded-md dark:bg-blue-900 dark:text-blue-300">In progress</span>
-                        </th>
-
-                        <th scope="row" class="text-right px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
-                            lucia_gill@yahoo.com
-                        </th>
-                      
-                    </tr>
+                                    </a>
+                                </th>
+    
+                                <th scope="row" class="text-right px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
+                                    <a href="/orders/{{order.id}}">
+                                        {{order.user.email}}
+                                    </a>
+                                </th>
+                            
+                            </tr>
+                    {% endfor %}
                
                 </tbody>
             </table>

@@ -13,6 +13,7 @@ from flask_wtf.csrf import CSRFProtect
 from cloud_storage.s3_cloud_storage import S3StorageService
 from babel.numbers import format_currency
 from datetime import datetime
+import timeago
 
 load_dotenv()
 
@@ -38,6 +39,24 @@ def create_app(config=None) -> Flask:
     def current_datetime_filter(format='%Y-%m-%d %H:%M:%S'):
         return datetime.now().strftime(format)
     
+
+    @app.template_filter('to_datetime')
+    def format_datetime(value):
+        # Parse the input datetime string
+        dt = datetime.strptime(str(value), '%Y-%m-%d %H:%M:%S.%f')
+        
+        # Get the day of the month and determine the correct suffix
+        day = dt.day
+        if 11 <= day <= 13:
+            suffix = 'th'
+        else:
+            suffix = {1: 'st', 2: 'nd', 3: 'rd'}.get(day % 10, 'th')
+        
+        # Format the datetime to the desired output
+        formatted_date = dt.strftime(f'%b, {day}{suffix} %Y')
+        return formatted_date
+    
+
     @app.template_filter('sum_price')
     def sum_price(product_list: list):
         return sum([float(prod.price) for prod in product_list])
@@ -49,6 +68,11 @@ def create_app(config=None) -> Flask:
     @app.template_filter('tolist')
     def tolist(_list: list):
         return [li.to_dict() for li in _list]
+    
+    @app.template_filter('timeago')
+    def _timeago(date):
+        now = datetime.utcnow()
+        return timeago.format(date, now)
     
     @app.template_filter('currency')
     def currency_filter(value):

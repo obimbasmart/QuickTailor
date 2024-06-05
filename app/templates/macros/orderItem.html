@@ -1,0 +1,54 @@
+{% from 'macros/tailorBadge.html' import tailorBadge %}
+{% macro orderItem(order) %}
+    <a href="/orders/{{order.id}}" class="block">
+        <li class="border border-sc-gray-light-active p-2 rounded-md sm:py-4 font-roboto">
+
+            <p class="mb-2 text-xs font-roboto text-sc-gray-darker tracking-wide">
+                #Order
+                {{
+                    order.id[:7]
+                }}
+            </p>
+
+
+            <div class="flex items-center">
+                <div class="flex-shrink-0">
+                    <img class="w-16 h-16 rounded-md"
+                         src="{{order.product.img}}"
+                         alt="Product Image" />
+                </div>
+    
+                <div class="flex flex-col gap-3 ms-3">
+                    <p class="text-sm  text-black truncate dark:text-white">
+                        {{order.product.name}}
+                    </p>
+                    <p class="leading-6 text-base font-normal truncate dark:text-gray-400">
+                        {{order.product.price | currency }}
+                    </p>
+                </div>
+            </div>
+    
+           <dl>
+               <dd class="flex items-center my-2 ">
+                   <div class="w-full bg-[#DEDEDE] rounded-md h-[3px] dark:bg-gray-700 me-2">
+                       <div class="bg-[#E28835]  h-[3px] rounded-md dark:bg-blue-500" style="width: 45%"></div>
+                   </div>
+               </dd>
+           </dl>
+    
+           <div class="flex justify-between items-center">
+            <div class="mt-1 ">
+                {{ tailorBadge(order.product.tailor.business_name, order.product.tailor.photo) }}
+            </div>
+    
+            <div>
+                <span class="!capitalize bg-[#E288351A] max-w-20 text-[#E28835] text-xs px-4 py-1 rounded-md dark:bg-blue-900 dark:text-blue-300">{{order.order_status | lower }}</span>
+            </div>
+           </div>
+        </li>
+
+        <div class="flex justify-end mt-3">
+                <p class="text-xs font-roboto text-sc-gray-darker">{{order.created_at | timeago }}</p>
+        </div>
+    </a>
+{% endmacro %}

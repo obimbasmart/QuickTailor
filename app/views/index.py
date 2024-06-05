@@ -8,6 +8,8 @@ from flask_login import current_user
 from flask import render_template, request, jsonify, redirect, url_for
 from app.views import app_views
 from app.db_access.product import _get_products
+from app.models.order import Order
+
 
 notification= [
     {"time": "3hr ago", "content": "The virtues of life if I have the choice of life", "icon": "📥", "time_elapsed": "10, 000"},
@@ -37,12 +39,16 @@ notification= [
 def home():
     products = _get_products()
     if not current_user.is_anonymous and current_user.is_tailor:
-        products = _get_products(tailor_id=current_user.id)
+        products = [product.id for product in current_user.products]
+        orders = Order.query.all()
+        my_orders = [
+            order for order in orders
+            if order.product_id in products
+        ]
         return render_template('pages/tailor/dashboard.html',
-                           page='dashboard',
-                           products=products, 
-                           current_user=current_user)
-    
+                           page='dashboard', orders = my_orders)
+
+
     return render_template('pages/home.html',
                            page='home',
                            products=products, 

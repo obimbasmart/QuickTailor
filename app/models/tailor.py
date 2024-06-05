@@ -58,7 +58,7 @@ class Tailor(BaseUser, BaseModel):
         try:
             return s3_client.generate_presigned_url('get_object', self.photo_url)
         except Exception as e:
-            return "https://www.iconshock.com/image/PlasticXP/General/user"
+            return "/static/images/default_profile.png"
         
     @classmethod
     def generate_customization_code(cls, product_id: str, value: int):

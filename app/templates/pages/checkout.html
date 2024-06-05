@@ -64,7 +64,7 @@
                 </section>
 
 
-                <a href="{{ url_for("app_views.checkout") }}">
+                <a href="{{ url_for('app_views.order' ) }}">
                     <button type="button"
                             class="tracking-wider text-white mt-5 bg-pc-teal-normal  text-sm  w-full hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">
                             Pay {{ (products | sum_price - products | sum_custom_value) | currency }}

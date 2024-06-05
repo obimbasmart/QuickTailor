@@ -1,0 +1,25 @@
+{% extends 'page_wrapper.html' %}
+
+{% block page_content %}
+<div class="flex flex-col gap-y-6 h-screen items-center justify-center text-center">
+    <p><svg xmlns="http://www.w3.org/2000/svg" width="132" height="132" viewBox="0 0 132 132" fill="none">
+        <path opacity="0.5" d="M132 66C132 102.45 102.45 132 66 132C29.5492 132 0 102.45 0 66C0 29.5492 29.5492 0 66 0C102.45 0 132 29.5492 132 66Z" fill="#03CB2F" fill-opacity="0.15"/>
+        <path d="M92.6011 46.0001C94.5343 47.9332 94.5343 51.0674 92.6011 53.0003L59.6011 86.0003C57.668 87.9334 54.5343 87.9334 52.601 86.0003L39.401 72.8003C37.4679 70.8671 37.4679 67.7334 39.401 65.8003C41.3341 63.8672 44.4683 63.8672 46.4013 65.8003L56.1012 75.4997L70.8508 60.75L85.6012 46.0001C87.5343 44.067 90.668 44.067 92.6011 46.0001Z" fill="#03CB2F"/>
+      </svg>
+    </p>
+
+    <div class="space-y-2">
+        <h3 class="font-montserrat text-xl font-medium ">
+            Thank you for your Order
+        </h3>
+        <p class="font-roboto text-sc-gray-darker text-sm">
+            Your order has been sent!
+        </p>
+    </div>
+
+    <a href="{{ url_for("app_views.get_all_products") }}"
+       class="text-pc-teal-normal tracking-wide leading-5 border-1 border-pc-teal-normal font-roboto text-sm  w-full hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">Continue Shopping</a>
+
+
+</div>
+{% endblock %}
