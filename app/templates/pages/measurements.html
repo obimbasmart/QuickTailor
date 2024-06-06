@@ -7,7 +7,7 @@
     {% set label_styles = "absolute text-sm text-sc-gray-darker dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 start-1 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto" %}
 
     <h1 class="text-xl mb-10 font-montserrat leading-8 text-center">Measurements</h1>
-    <form action="post" class="w-full flex flex-col gap-10 items-center">
+    <form novalidate method="post" action="" class="w-full flex flex-col gap-10 items-center">
 
         {{form.hidden_tag()}}
     
@@ -17,7 +17,7 @@
                 <p class="relative">
                     <!-- input -->
                     {{field(class=input_styles, placeholder="",
-                            type="number", id="default_outlined")}}
+                            type="number",value=current_user.measurements[field.name])}}
                     <!-- label  -->
                     {{field.label(class=label_styles, for="default_outlined")}}
                    
@@ -37,7 +37,7 @@
                 <span class="text-xs text-sc-gray-dark leading-4 tracking-wider">All measurements are in cm</span>
             </div>
 
-                    {{form.submit(type='button', class="inline-block  text-white  text-sm  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center")}}
+                    {{form.submit(class="inline-block  text-white  text-sm  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center")}}
         </div>        
 
     </form>

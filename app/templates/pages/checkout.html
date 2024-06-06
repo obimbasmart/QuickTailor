@@ -1,0 +1,76 @@
+{% extends 'page_wrapper.html' %}
+
+{% from 'macros/checkOutItem.html' import checkOutItem %}
+{% from 'macros/loadingState.html' import loadingsState %}
+
+{% block page_content %}
+
+    {% if products | length == 0 %}
+        <div class="flex flex-col gap-y-6 h-screen items-center justify-center text-center">
+            <p>
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="150"
+                     height="150"
+                     viewBox="0 0 150 150"
+                     fill="none">
+                    <path d="M12.5 18.75L14.1557 19.3019C22.4059 22.052 26.5311 23.427 28.8905 26.7006C31.25 29.9742 31.25 34.3224 31.25 43.019V59.375C31.25 77.0525 31.25 85.8912 36.7417 91.3831C42.2335 96.875 51.0723 96.875 68.75 96.875H118.75" stroke="#B0D8D8" stroke-width="5" stroke-linecap="round" />
+                    <path d="M46.875 112.5C52.0527 112.5 56.25 116.697 56.25 121.875C56.25 127.053 52.0527 131.25 46.875 131.25C41.6973 131.25 37.5 127.053 37.5 121.875C37.5 116.697 41.6973 112.5 46.875 112.5Z" stroke="#B0D8D8" stroke-width="5" />
+                    <path d="M103.125 112.5C108.303 112.5 112.5 116.697 112.5 121.875C112.5 127.053 108.303 131.25 103.125 131.25C97.9475 131.25 93.75 127.053 93.75 121.875C93.75 116.697 97.9475 112.5 103.125 112.5Z" stroke="#B0D8D8" stroke-width="5" />
+                    <path d="M31.25 37.5H102.815C115.659 37.5 122.08 37.5 124.859 41.7141C127.638 45.9283 125.108 51.8309 120.049 63.6362L117.37 69.8862C115.008 75.3975 113.827 78.1531 111.479 79.7019C109.131 81.25 106.132 81.25 100.136 81.25H31.25" stroke="#B0D8D8" stroke-width="5" />
+                    <path d="M88 55C89.6569 55 91 53.6569 91 52C91 50.3431 89.6569 49 88 49C86.3431 49 85 50.3431 85 52C85 53.6569 86.3431 55 88 55Z" fill="#B0D8D8" />
+                    <path d="M63.5 55C65.433 55 67 53.6569 67 52C67 50.3431 65.433 49 63.5 49C61.567 49 60 50.3431 60 52C60 53.6569 61.567 55 63.5 55Z" fill="#B0D8D8" />
+                    <path d="M75.5953 62C73 62.0005 70.4425 62.6407 68.1359 63.8674C65.8293 65.0941 63.8405 66.8716 62.3352 69.0518C62.057 69.4551 61.9454 69.9558 62.0252 70.4438C62.1049 70.9319 62.3693 71.3673 62.7604 71.6543C63.1514 71.9412 63.6369 72.0563 64.1102 71.9741C64.5834 71.8918 65.0056 71.6191 65.2839 71.2159C66.4406 69.5404 67.9646 68.1704 69.732 67.2174C71.4993 66.2644 73.4599 65.7554 75.4541 65.7317C77.4483 65.7081 79.4197 66.1705 81.2078 67.0814C82.9959 67.9923 84.5501 69.3258 85.7438 70.9733C86.0316 71.3692 86.4602 71.6309 86.9352 71.7008C87.4101 71.7708 87.8926 71.6433 88.2764 71.3465C88.6602 71.0496 88.914 70.6076 88.9818 70.1178C89.0497 69.628 88.9261 69.1305 88.6382 68.7347C87.1217 66.6435 85.1532 64.9458 82.889 63.7767C80.6248 62.6076 78.1274 61.9993 75.5953 62Z" fill="#B0D8D8" />
+                </svg>
+            </p>
+
+            <div class="space-y-2">
+                <h3 class="font-montserrat text-xl font-medium ">
+                    Your cart is empty
+                </h3>
+                <p class="font-roboto text-sc-gray-darker text-sm">
+                    Looks like you have not made your choice yet..
+                </p>
+            </div>
+
+            <a href="{{ url_for("app_views.get_all_products") }}"
+               class="text-pc-teal-normal tracking-wide leading-5 border-1 border-pc-teal-normal font-roboto text-sm  w-full hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">Continue Shopping</a>
+
+
+        </div>
+    {% endif %}
+    <div>
+        <ul role="list" class="divide-y-1 divide-gray-200">
+            {% for product in products %}
+                {{ checkOutItem(product) }}
+            {% endfor %}
+        </ul>
+        {% if products | length > 0 %}
+            <div class="w-full h-auto bg-white dark:bg-gray-700 dark:border-gray-600">
+                <section class="border border-sc-gray-light-active rounded-lg p-3">
+                    <ul class="space-y-2 mt-2 tracking-wide text-sm font-roboto text-sc-gray-darker">
+                        <li class="flex items-center justify-between">
+                            <span class="text-base font-normal">No. of items</span>
+                            <span> {{ products | length }}  </span>
+                        </li>
+                        <li class="flex items-center justify-between">
+                            <span class="text-base font-normal">Sub total</span>
+                            <span class="text-base font-normal tracking-wide"> {{ products | sum_price | currency }} </span>
+                        </li>
+                        <li class="flex items-center justify-between">
+                            <span class="text-base font-normal">Customization value</span>
+                            <span class="text-center text-base font-normal tracking-wide"> {{ products | sum_custom_value | default(0) | currency }}</span>
+                        </li>
+                    </ul>
+                </section>
+
+
+                <a href="{{ url_for('app_views.order' ) }}">
+                    <button type="button"
+                            class="tracking-wider text-white mt-5 bg-pc-teal-normal  text-sm  w-full hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">
+                            Pay {{ (products | sum_price - products | sum_custom_value) | currency }}
+                    </button>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -16,7 +16,7 @@ from app.constants import (USER_SIDEBAR_LINKS)
 @auth_views.route("/register/<user_type>", methods=["GET", "POST"])
 def register(user_type=None):
     if current_user.is_authenticated:
-        return redirect(request.referrer)
+        return redirect(url_for('app_views.home'))
 
     if user_type is None:
         return render_template('pages/register.html')

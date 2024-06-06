@@ -1,0 +1,51 @@
+{% macro checkOutItem(product) %}
+    {% from 'macros/tailorBadge.html' import tailorBadge %}
+
+    <li id="product-{{ product.id }}"  class="flex flex-col p-2 gap-y-2">
+        {{ tailorBadge(product.tailor.business_name, product.tailor.photo) 
+        }}
+        <div class="flex items-center font-roboto">
+            <div class="h-[60px] w-[60px] flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                <img src="{{ product.img_urls[0] }}"
+                     alt=""
+                     class="h-full w-full object-cover object-center" />
+            </div>
+
+            <div class="ml-4 flex flex-1 flex-col gap-y-2">
+                <div class="flex justify-between items-center text-base font-medium text-gray-900">
+                    <h3 class="text-base tracking-wide font-normal text-sc-gray-darker leading-6">
+                        <a href="#"> {{ product.name }} </a>
+                    </h3>
+
+
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <p class="mt-1 font-roboto text-sm text-sc-gray-dark">
+                        Price
+                    </p>
+
+
+                    <p class="text-sc-gray-dark text-sm font-roboto text-sm tracking-wide">
+                        {{ product.price | currency }}
+                    </p>
+
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <p class="mt-1 font-roboto text-sm text-sc-gray-dark">
+                        Customization value
+                    </p>
+
+
+                    <p class="text-sc-gray-dark text-sm font-roboto text-sm tracking-wide">
+                        {{ product.customization_value | currency | default(0)}}
+                    </p>
+
+                </div>
+
+
+            </div>
+        </div>
+    </li>
+{% endmacro %}

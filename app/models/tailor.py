@@ -7,6 +7,10 @@ from sqlalchemy import String, Boolean, Integer, DateTime
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from ..models.base_model import BaseModel
 from .base_user import BaseUser
+from app import s3_client
+from functools import lru_cache as memoized
+import json
+import base64
 
 class Tailor(BaseUser, BaseModel):
     __tablename__ = 'tailors'
@@ -21,13 +25,22 @@ class Tailor(BaseUser, BaseModel):
 
     # tailor attrs
     business_name: Mapped[str] = mapped_column(String(128), nullable=True)
+    cac_number: Mapped[str] = mapped_column(String(128), nullable=True)
+    about: Mapped[str] = mapped_column(String(1024), nullable=True)
     state: Mapped[str] = mapped_column(String(128), nullable=True)
     city: Mapped[str] = mapped_column(String(128), nullable=True)
     street: Mapped[str] = mapped_column(String(128), nullable=True)
     is_available = mapped_column(Boolean, default=True)
     no_of_completed_jobs: Mapped[int] = mapped_column(Integer, default=0)
     reputation: Mapped[int] = mapped_column(Integer, nullable=True)
+
+    photo_url: Mapped[str] = mapped_column(String(2048), nullable=True)
     
+    #bank details
+    bank_name: Mapped[str] = mapped_column(String(128), nullable=True)
+    account_number: Mapped[int] = mapped_column(Integer, nullable=True)
+    account_name: Mapped[str] = mapped_column(String(128), nullable=True)
+
     # relationships
     products = relationship("Product", back_populates="tailor")
 
@@ -38,5 +51,26 @@ class Tailor(BaseUser, BaseModel):
     @property
     def is_tailor(self):
         return True
+    
+    @property
+    @memoized(maxsize=1)
+    def photo(self):
+        try:
+            return s3_client.generate_presigned_url('get_object', self.photo_url)
+        except Exception as e:
+            return "/static/images/default_profile.png"
+        
+    @classmethod
+    def generate_customization_code(cls, product_id: str, value: int):
+        attr = json.dumps({"product_id":  product_id, "value": value})
+        code = base64.b64encode(attr.encode('utf-8')).decode('utf-8')
+        print(code)
+        return code
+
+    @classmethod
+    def decode_customization_code(cls, code: str):
+        decoded_str = base64.b64decode(code).decode('utf-8')
+        code = json.loads(decoded_str)
+        return code
 
 

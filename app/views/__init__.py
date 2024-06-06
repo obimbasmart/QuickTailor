@@ -11,3 +11,5 @@ from . import product
 from . import user
 from . import cart_save
 from . import payment
+from . import measurement
+from . import order

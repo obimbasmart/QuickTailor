@@ -10,7 +10,7 @@ from app import db
 from app import app
 from itsdangerous import URLSafeTimedSerializer
 
-serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'])
+serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'] or 'xyz')
 
 
 class BaseUser(UserMixin):

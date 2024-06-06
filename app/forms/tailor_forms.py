@@ -38,8 +38,25 @@ class CreateProductForm(FlaskForm):
     gender = MultiRadioField("Select Gender", choices=gender)
     images = MultipleFileField("Upload product images",
                                validators=[FileRequired()])
-    draft = BooleanField('Move to draft')
+    draft = BooleanField('Move to draft', default=False)
     submit = SubmitField('Save and Upload')
 
 class CRSForm(FlaskForm):
     crf_token = HiddenField()
+
+class BrandInformationForm(FlaskForm):
+    business_name =  StringField('Brand Name')
+    cac_number = StringField('CAC Number (optional)')
+    about = TextAreaField('About', render_kw={"style": "width: 100%; height: 200px; resize: none;"})
+
+    # Bank details
+    bank_name = StringField('Bank Name')
+    account_number = StringField('Account Number',)
+    account_name = StringField('Account Name')
+    photo = FileField('Photo')
+    submit = SubmitField('Save')
+
+# class CustomizationCodeForm(FlaskForm):
+#     code_name = StringFiel
+
+    

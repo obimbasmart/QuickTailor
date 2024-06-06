@@ -1,0 +1,19 @@
+{% extends 'page_wrapper.html' %}
+
+{% from 'macros/loadingState.html' import loadingState   %}
+{% from 'macros/orderItem.html' import orderItem   %}
+{% block page_content %}
+    
+    {{loadingState()}}
+
+    <div class="flow-root">
+        <ul role="list" class="space-y-4 dark:divide-gray-700">
+
+                {% for order in orders %}
+                    {{orderItem(order)}}
+                {% endfor %}
+        </ul>
+   </div>
+</div>
+
+{% endblock %}

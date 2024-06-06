@@ -1,34 +1,112 @@
-{% macro productItem(id, name, price, material, img_url) %}
+{% macro productItem(product, form) %}
   <li class="font-roboto flex py-4">
     <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-      <img src="{{ img_url }}"
+      <img src="{{ product.img_urls[0] }}"
            alt=""
            class="h-full w-full object-cover object-center" />
     </div>
 
     <div class="ml-4 flex flex-1 flex-col">
       <div>
-        <div class="flex justify-between text-base font-medium text-gray-900">
+        <div class="flex justify-between items-center text-base font-medium text-gray-900">
           <h3 class="text-sm text-sc-gray-darker leading-6">
-            <a href="#"> {{ name }} </a>
+            <a href="#"> {{ product.name }} </a>
           </h3>
+
+          <!-- drop down menu -->
+          <button id="dropdownMenuIconButton"
+                  data-dropdown-toggle="dropdownDots-{{ product.name }}"
+                  data-dropdown-placement="bottom-start"
+                  class="inline-flex self-center items-center  text-sm font-medium text-center text-gray-900 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-600"
+                  type="button">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="18"
+                 height="18"
+                 viewBox="0 0 18 18"
+                 fill="none">
+              <path d="M6.834 15.757V15.2789C6.84455 15.2402 6.86213 15.205 6.86916 15.1664C7.02385 14.1609 7.86056 13.3664 8.84141 13.2996C9.93828 13.2222 10.8664 13.848 11.1687 14.8675C11.2074 15.0011 11.2355 15.1417 11.2707 15.2789V15.757C11.2602 15.7886 11.2426 15.8167 11.2391 15.8519C11.0879 16.78 10.4199 17.4867 9.50586 17.687C9.43555 17.7011 9.36523 17.7222 9.29492 17.7398H8.8168C8.78516 17.7292 8.75352 17.7117 8.72187 17.7081C7.80781 17.5605 7.11174 16.9101 6.90078 16.0066C6.87969 15.9187 6.8551 15.8378 6.834 15.757ZM11.2707 2.24295L11.2707 2.72111C11.2602 2.75978 11.2426 2.79494 11.2391 2.83361C11.0809 3.84611 10.2406 4.63713 9.24922 4.70041C8.15586 4.77072 7.23125 4.13791 6.93242 3.11486C6.89375 2.98477 6.86562 2.85119 6.83398 2.72109V2.24297C6.84453 2.21133 6.86211 2.1832 6.86914 2.15156C7.03789 1.2375 7.56875 0.639844 8.45469 0.355078C8.5707 0.316406 8.69375 0.295313 8.81328 0.263672H9.29141C9.32305 0.274219 9.35469 0.291797 9.38633 0.295313C10.3039 0.446484 10.9965 1.09336 11.2074 1.99688C11.2285 2.08125 11.2496 2.16211 11.2707 2.24295ZM11.2707 8.76094V9.23906C11.2602 9.27774 11.2426 9.31289 11.2355 9.35156C11.0773 10.3605 10.2055 11.1727 9.22109 11.2148C8.11367 11.2641 7.175 10.5961 6.91133 9.56602C6.8832 9.45703 6.85859 9.34805 6.83398 9.23906V8.76094C6.84453 8.72227 6.86211 8.68711 6.86914 8.64844C7.02383 7.63945 7.89922 6.82733 8.88359 6.78164C9.99101 6.72891 10.9297 7.40039 11.1934 8.43047C11.2215 8.54297 11.2461 8.65195 11.2707 8.76094Z" fill="#2D2D2D" />
+            </svg>
+          </button>
+          <div id="dropdownDots-{{ product.name }}"
+               class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 dark:divide-gray-600">
+            <ul class="p-2 space-y-1 font-normal text-xs tracking-wide text-sc-gray-dark font-roboto dark:text-gray-200"
+                aria-labelledby="dropdownMenuIconButton">
+              <li>
+                <a href="/products/{{ product.id }}"
+                   class="block px-2 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">View Product</a>
+              </li>
+              <li>
+                {% if product.on_draft %}
+                  <form action="{{ url_for("tailor_views.update_product_visibility") }}"
+                        method="post">
+                    {{ form.hidden_tag() }}
+                    <input type="hidden" name="id" value="{{ product.id }}" />
+                    <input type="hidden" name="action" value="from_draft" />
+                    <button type="submit"
+                            class="block px-2 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                      Mark as active
+                    </button>
+                  </form>
+                {% else %}
+                  <form action="{{ url_for("tailor_views.update_product_visibility") }}"
+                        method="post">
+                    {{ form.hidden_tag() }}
+                    <input type="hidden" name="id" value="{{ product.id }}" />
+                    <input type="hidden" name="action" value="to_draft" />
+                    <button type="submit"
+                            class="block px-2 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                      Mark as inactive
+                    </button>
+                  </form>
+                {% endif %}
+              </li>
+
+              {% if not product.on_draft %}
+                <li>
+                  <button data-drawer-target="custom-code"
+                          data-drawer-show="custom-code"
+                          data-drawer-placement="bottom"
+                          aria-controls="custom-code"
+                          type="button"
+                          x-on:click="product_name='{{ product.name }}'; product_id='{{ product.id }}'; price='{{ product.price }}'; console.log(price)"
+                          class="block px-2 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                    Customization code
+                  </button>
+                </li>
+              {% endif %}
+              <li>
+                <form action="{{ url_for("tailor_views.update_product_visibility") }}"
+                      method="post">
+                  {{ form.hidden_tag() }}
+                  <input type="hidden" name="id" value="{{ product.id }}" />
+                  <input type="hidden" name="action" value="delete" />
+                  <button type="submit"
+                          class="block px-2 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                    Delete
+                  </button>
+                </form>
+              </li>
+            </ul>
+          </div>
+
+
+
         </div>
         <p class="mt-1 text-xs text-sc-gray-dark">
-          {{ material }}
+          {{ product.material }}
         </p>
       </div>
       <div class="flex flex-1 items-end justify-between text-sm">
         <p class="text-black text-base font-normal leading-6 tracking-wide">
-          {{ price | currency }}
+          {{ product.price | currency }}
         </p>
 
         <div class="flex">
-          <button data-drawer-target="remove-product"
-                  data-drawer-show="remove-product"
-                  data-drawer-placement="bottom"
+          <button data-modal-target="remove-modal"
+                  data-modal-toggle="remove-modal"
                   aria-controls="remove-product"
                   type="button"
-                  x-on:click="product_name = '{{name}}'; product_id = '{{id}}'"
+                  x-on:click="console.log('okkk'); product_name = '{{ name }}'; product_id = '{{ id }}'"
                   class="font-normal underline text-sc-gray-dark text-xs">
             Remove
           </button>
