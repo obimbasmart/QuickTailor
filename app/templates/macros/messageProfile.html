@@ -2,7 +2,7 @@
 
 {% macro top_style( position) %}
     {% if position == 'top' %}
-         class="flex w-full bg-[white]  my-[45px] pt-4 px-4 flex-row  justify-between " 
+         class="flex w-full bg-[white]  my-[45px] pt-4 px-4 pb-[15px] flex-row  justify-between " 
         style=" position:fixed; top:0; right:0; left:0; z-index:100;"
     {% else  %}
         class="flex w-full bg-white pt-4 pb-[45px] px-8  flex-row justify-between " 
@@ -15,11 +15,9 @@
 <div  {{ top_style(position) }}>
 {% if left %}
     <div class="self-center" style="flex: 1;">
-   
-	    {{ left }}
     </div>
 {% else %}
-     <div class="self-center" style="flex: 1;">
+     <div class="self-center" id="redirectDiv"  style="flex: 1;">
          <svg xmlns="http://www.w3.org/2000/svg" width="34" height="35" viewBox="0 0 34 35" fill="none">
                 <path d="M24.0846 17.4997H9.91797M9.91797 17.4997L15.5846 23.1663M9.91797 17.4997L15.5846 11.833" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
          </svg>
@@ -33,7 +31,15 @@
    </div>
 
 </div>
+ <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const redirectDiv = document.getElementById('redirectDiv');
 
+            redirectDiv.onclick = function() {
+                window.history.back();
+            };
+        });
+    </script>
 {% endmacro %}
 
 
@@ -64,18 +70,20 @@
 
 {% macro set_style( position) %}
     {% if position == 'right' %}
-        style="background-color: var(--Primary-Color-Teal-Dark, #006060); color: var(--White, #FFF);   border-radius: 8px 8px 0 8px;"
-	class = " flex flex-col p-[8px] w-[80%] leading-[21px] font-normal font-roboto tracking-[0.25px] text-gray-800  text-[14px]"
+        style="background-color: var(--Primary-Color-Teal-Dark, #006060); color: var(--White, #FFF); min-width:55px; max-width:80%; border-radius: 8px 8px 0 8px;"
+	class = " flex flex-col p-[10px]  leading-[21px] font-normal font-roboto tracking-[0.25px] text-gray-800  text-[14px]"
 	
     {% else  %}
-        style="background-color: var(--Primary-Color-Teal-Light, #E6F2F2); color: var(--Grey-Darker, #2D2D2D);   border-radius: 8px 8px 8px 0;"
-	 class = " flex flex-col p-[8px] w-[80%] leading-[21px] font-normal font-roboto tracking-[0.25px] text-gray-800 order-1  text-[14px]"
+        style="background-color: var(--Primary-Color-Teal-Light, #E6F2F2); color: var(--Grey-Darker, #2D2D2D); min-width:55px; max-width: 80%;  border-radius: 8px 8px 8px 0;"
+	 class = " flex flex-col p-[10px] leading-[21px] font-normal font-roboto tracking-[0.25px] text-gray-800 order-1  text-[14px]"
     {% endif %}
 {% endmacro %}
 
 {% macro set_main_style( position) %}
     {% if position == 'right' %}
-        class ="self-end flex flex-row  mb-[24px] w-[85%] "
+        class = "self-end flex flex-row justify-end  mb-[24px] w-[85%] "
+	style=""
+
 
     {% else  %}
          class = "self-start flex flex-row  mb-[24px] w-[85%] "
@@ -84,10 +92,10 @@
 
 {% macro set_time_style( position) %}
     {% if position == 'right' %}
-        class ="self-end leading-[21px] w-[20%] font-normal font-roboto tracking-[0.25px] text-gray-800   text-[10px] "
+        class ="self-end leading-[21px] font-normal font-roboto tracking-[0.25px] text-gray-800 mr-2  text-[10px] "
 
     {% else  %}
-         class = "self-end leading-[21px] w-[20%] font-normal font-roboto tracking-[0.25px] text-gray-800  ml-2  text-[10px] order-2 "
+         class = "self-end leading-[21px]  font-normal font-roboto tracking-[0.25px] text-gray-800  ml-2  text-[10px] order-2 "
     {% endif %}
 {% endmacro %}
 

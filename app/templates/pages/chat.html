@@ -10,10 +10,10 @@
 <div id="message-Interface"  class"" style="width:90%; margin:auto; margin-top: 70px; background:var(--White, #FFF);">
   
 	{% set reciever %}
-
+           {% set default_name="Alemaghens" %}
 	 <div class="">
-		 <p class="leading-[21px] font-normal font-roboto tracking-[1.5px] text-gray-800  text-[10px]" style="color: var(--Grey-Dark, #606060);"> Consultation with </p>
-		 <p class="leading-[21px] font-normal font-roboto tracking-[0.25px] text-gray-800  text-[14px]" style="color: var(--Grey-Darker, #2D2D2D);"> ChicChisel Creations </p>
+		 <p class="leading-[21px] font-normal font-roboto tracking-[1.5px] text-gray-800  text-[10px]" style="color: var(--Grey-Dark, #606060);"> {{ other_user.first_name }} </p>
+		 <p class="leading-[21px] font-normal font-roboto tracking-[0.25px] text-gray-800  text-[14px]" style="color: var(--Grey-Darker, #2D2D2D);"> {{ other_user.last_name }} </p>
         </div>
        {% endset %}
 
@@ -45,6 +45,7 @@
 
 
       {% endset %}
+
        {% set full_imgs %}
 
                  <div class= "  mb-1 p-[2px] rounded-[6px]">
@@ -57,12 +58,36 @@
       {% endset %}
 
       <div id="messages"  class="flex flex-col  pt-16  ml-1 ">
-	      
-	      {{ messages('right', "hello the virtes of life if i have the choice of life I should be able to feel everyday wi", "2:00 pm") }}
-	      {{ messages('left', "hello the virtes of life if i have the choice of life I should be able to feel everyday with pleasure", "2: 00 am", imgs) }}
-	       {{ messages('right', "hello the virtes of life if i have the choice of life I should be able to feel everyday with pleasure", "2: 00 am", imgs) }}
-               {{ messages('left', "hello the virtes of life if i have the choice of life I should be able to feel everyday with pleasure", "2: 00 am")}}
-	        {{ messages('left', "hello the virtes of life if i have the choice of life I should be able to feel everyday with pleasure", "2: 00 am", full_imgs) }}
+	    {% if product %}
+	       {{ messages('left', "hello the virtes of life if i have the choice of life I should be able to feel everyday with pleasure", "2: 00 am", imgs) }}
+
+	     {% else %}
+	      {% for message in msg %}
+	      {% if  current_user.is_tailor %}
+                  {% if message.sender_tailor_id %}
+		  {{ messages('right', message.message, message.created_at, ) }}
+                 
+		 {% else %}
+		       {{ messages('left', message.message, message.created_at) }}  
+		 {% endif %}
+         
+              {% else %}
+	         {% if message.sender_user_id %}
+		 {{ messages('right', message.message, message.created_at) }}
+                 
+                 {% else %}
+                       {{ messages('left', message.message, message.created_at) }} 
+                 {% endif %}
+
+                  
+	      {% endif %}
+                     
+
+
+
+	      {% endfor %}
+           {% endif %}
+
 
       </div>
       <div class="mt-[200px]">
@@ -93,20 +118,74 @@
 
 
     <script>
-     const socket = io();
+function getCurrentTime24() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            return `${hours}:${minutes}`;
+        }
 
-    socket.on('message', function(msg){
+	    // Establish a connection to the server using Socket.IO
+const socket = io.connect();
+
+// Event listener for successful connection
+socket.on('connect', () => {
+    console.log('Connected to the server');
+});
+
+// Event listener for disconnection
+socket.on('disconnect', () => {
+    console.log('Disconnected from the server');
+});
+
+// Event listener for receiving a message from the server
+socket.on('recieve_message', (data) => {
+    console.log("Message received event fired");
+    // Select the messages container in the DOM
+    const messagesContainer = document.getElementById('messages');
+
+    // Create the HTML for the received message
+    const messageHTML = `{{ messages('left', '${data.message}', '${getCurrentTime24()}') }}`;
+
+    // Append the new message to the messages container
+    messagesContainer.innerHTML += messageHTML;
+});
+
+
+
+// Event listener for error handling
+socket.on('error', (data) => {
+    alert(data.error);
+});
+
+// Function to handle sending a message when the send button is clicked
+document.getElementById('send').onclick = function() {
+    console.log("Send button clicked event fired");
+
+    // Get the value from the message input field
+    const messageInput = document.getElementById('message-input');
+    const messageText = messageInput.value;
+
+    // Check if the message text is empty
+    if (!messageText) {
+        alert('Message and image cannot both be empty');
+    } else {
+        // Emit the message to the server using Socket.IO
+        socket.emit('send_message', {
+            reciever_id: `{{ other_user.id }}`,  // Replace with actual receiver ID from your template
+            message: messageText
+        });
+
+        // Append the sent message to the messages container
         const messagesContainer = document.getElementById('messages');
-        const messageHTML = `{{ messages('left', '${msg}', 'Just now') }}`;
+        const messageHTML = `{{ messages('right', '${messageText}', '${getCurrentTime24()}') }}`;
         messagesContainer.innerHTML += messageHTML;
-    });
 
-    document.getElementById('send').onclick = function() {
-        const input = document.getElementById('message-input');
-        const message = input.value;
-        socket.send(message);
-        input.value = '';
-    };
+        // Clear the message input field
+        messageInput.value = '';
+    }
+};
+
     </script>
 {% endblock %}
 
