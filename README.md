@@ -53,7 +53,7 @@ Iyanuloluwa Emmanuel Adigun: https://www.linkedin.com/in/adigun-iyanuloluwa-3270
 
 ## Third-Party Agent:
 - Storage: AWS S3
-- Payment: Stripe
+- Payment: Paypal
 
 
 
