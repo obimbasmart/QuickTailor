@@ -12,7 +12,7 @@ from app import app
 
 def send_email(subject: str, body: str, recievers: List[str], html_content=None) -> int:
     message = Mail(
-        from_email="emmapromisesmartnbc@gmail.com",
+        from_email=os.getenv('MAIL_DEFAULT_SENDER'),
         to_emails=recievers,
         subject=subject,
         plain_text_content=body,
