@@ -12,25 +12,19 @@ The platform allows users to browse through a variety of clothes created by diff
 
 # Features 
 
-- User-Friendly Interface: Easy-to-use menus and search functionality to help users find products and contact the tailor quickly.
-It has a responsive design Optimized  mostly for mobile devices because the target audience device are mostly mobiles users.
+- Chat Feature: Built-in chat feature to help tailors land jobs and close sales promptly.
 
-- Product Management: Allows for easy addition, deletion, and updating of product listings.
+- Payment Feature: Secure payment gateway supported, ensuring safe and secure transactions.
 
-- Customer Support Integration: Built-in chat feature  to help tailor land jobs and close sales promptly.
+- Order Tracking & Notification: Real-time updates on order status,  from order confirmation to order completion.
 
-- Customer Management: Secure customer login and profile management, including order history and saved preferences.
+- Email Notification: Order Tracking: Real-time updates on order status, from order confirmation to order completion.
 
-- Order and Payment Processing: Secure payment gateway supported, ensuring safe and secure transactions.
+- 
+![U5](https://github.com/obimbasmart/QuickTailor/assets/125522368/e61d99f5-21af-4744-983d-210f8d10d1eb)
+![payment](https://github.com/obimbasmart/QuickTailor/assets/125522368/7ae8439e-1d75-4a26-990f-4be782c109ab)
 
-- Order Tracking: Real-time updates on order status, from order confirmation to order completion.
-
-![Tailors_profile](https://github.com/obimbasmart/QuickTailor/assets/125522368/a550de78-d371-44e1-aed4-82484a8aeb0e) ![payment](https://github.com/obimbasmart/QuickTailor/assets/125522368/7ae8439e-1d75-4a26-990f-4be782c109ab)![Tailors_profile](https://github.com/obimbasmart/QuickTailor/assets/125522368/3a2f78a3-6483-47a0-85ee-b8c33247d327)
-
-
-## Links:
-
-## Deployed Site : Visit http://in your web browser to explore the QuickTailor
+## Deployed Site : Visit http://quicktailor.shop in your web browser to explore the QuickTailor
 
 
 ##Author's LinkedIn -
