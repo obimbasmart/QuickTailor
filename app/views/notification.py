@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-
-import os
 from flask import render_template, redirect, request, jsonify
 from flask_login import current_user, login_required
 from app.views import app_views
@@ -12,26 +9,25 @@ from app import db
 def user_notication(id_notify=None):
 
     if id_notify is None:
-        return render_template('pages/notification.html')
+        return render_template('pages/notification.html', current_user = current_user.to_dict())
     else:
 
         # Find the notification by ID
         notification = Notification.query.get(id_notify)
-        print("leeke see", notification)
         if notification:
         # Update the is_click status
             notification.is_clicked = True
             db.session.commit()
-            print(notification.is_clicked)
-            print("hello")
             return redirect(notification.url)
         else:
         # Handle the case where the notification is not found
-            return "Notification not found", 404
-
+            return render_template('pages/notification.html', current_user = current_user.to_dict())
 @app_views.route('/notifications')
 @login_required
 def notication():
+        a = current_user.notification
+        for e in a :
+            print(e.to_dict())
         return render_template('pages/notification.html')
 
 @app_views.route('/get_notifications')

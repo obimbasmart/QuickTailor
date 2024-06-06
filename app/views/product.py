@@ -20,7 +20,7 @@ def get_product_by_id(product_id=None):
 @app_views.route('/products', methods=["GET", "POST"])
 def get_all_products():
     products = _get_all_products()
-    print(products)
+
     return render_template('pages/products.html',
                            page="products",
                            products=products)
