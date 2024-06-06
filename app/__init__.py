@@ -5,6 +5,7 @@ from app.config import DevConfig, Config, ProdConfig
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from os import getenv
+from dotenv import load_dotenv
 from flask_login import LoginManager
 from flask_login import current_user
 from app.constants import USER_SIDEBAR_LINKS, ADMIN_SIDEBAR_LINKS
@@ -13,11 +14,8 @@ from cloud_storage.s3_cloud_storage import S3StorageService
 from babel.numbers import format_currency
 from datetime import datetime
 import timeago
-import os
-from dotenv import load_dotenv
 
-basedir = os.path.abspath(os.path.dirname(__file__))
-load_dotenv(os.path.join(basedir, '.env'))
+load_dotenv()
 
 def create_app(config=None) -> Flask:
     """create a flask app"""
