@@ -13,7 +13,11 @@ from cloud_storage.s3_cloud_storage import S3StorageService
 from babel.numbers import format_currency
 from datetime import datetime
 import timeago
+import os
+from dotenv import load_dotenv
 
+basedir = os.path.abspath(os.path.dirname(__file__))
+load_dotenv(os.path.join(basedir, '.env'))
 
 def create_app(config=None) -> Flask:
     """create a flask app"""
