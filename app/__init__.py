@@ -5,7 +5,6 @@ from app.config import DevConfig, Config, ProdConfig
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from os import getenv
-from dotenv import load_dotenv
 from flask_login import LoginManager
 from flask_login import current_user
 from app.constants import USER_SIDEBAR_LINKS, ADMIN_SIDEBAR_LINKS
@@ -15,7 +14,6 @@ from babel.numbers import format_currency
 from datetime import datetime
 import timeago
 
-load_dotenv()
 
 def create_app(config=None) -> Flask:
     """create a flask app"""
