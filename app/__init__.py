@@ -83,7 +83,8 @@ def create_app(config=None) -> Flask:
     return app
 
 config = DevConfig
-if getenv("APP_ENV") == "production":
+print(getenv('MYSQL_USER'))
+if getenv("APP_ENV") == 'prod':
     config = ProdConfig
 
 app = create_app(config)
@@ -92,6 +93,8 @@ migrate = Migrate(app, db)
 login_manager = LoginManager(app)
 login_manager.login_view = 'auth_views.login'
 s3_client = S3StorageService('quicktailor-products-bucket')
+csrf = CSRFProtect(app) 
+
 
 from app.models.user import User
 from app.models.tailor import Tailor
@@ -102,4 +105,3 @@ def load_user(id: str):
     if user is not None:
         return user
     return db.session.get(Tailor, id)
-csrf = CSRFProtect(app) 
