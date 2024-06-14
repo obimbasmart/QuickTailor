@@ -10,6 +10,7 @@ def test_home_page(client):
     response = client.get('/')
     assert response.status_code == 200
     assert b"Discover" in response.data
+    assert b"Login" in response.data
 
 
 def test_about_page(client):
