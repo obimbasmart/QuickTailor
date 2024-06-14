@@ -32,7 +32,7 @@ jobs:
       
       - name: Setup Database
         run: |
-          service mysql start
+          sudo service mysql start
           cat setup_DB | sudo mysql
 
       - name: Run test
