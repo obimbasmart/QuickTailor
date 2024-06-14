@@ -33,7 +33,7 @@ jobs:
       - name: Setup Database
         run: |
           sudo service mysql start
-          sudo mysql < setup_CI_DB
+          sudo mysql --host=127.0.0.1 --user=root --password=root < setup_CI_DB.sql
 
       - name: Run test
         run: python3 -m pytest
