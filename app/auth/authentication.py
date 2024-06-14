@@ -31,7 +31,6 @@ def register(user_type=None):
 
     form = RegistrationForm()
     if form.validate_on_submit():
-        print(form.email.data, form.password.data, form.first_name.data, form.phone_number.data)
         if user_type == "user":
             new_user = User(first_name=form.first_name.data,
                             last_name="good name",
