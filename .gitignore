@@ -11,7 +11,7 @@ venv/
 .vscode
 sidebar.old.html
 sidebar_1.html
-# *.env
-# .env
-# **/.env
+*.env
+.env
+**/.env
 sendgrid.env
