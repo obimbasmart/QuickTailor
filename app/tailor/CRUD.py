@@ -5,7 +5,8 @@ from app.auth.decorators import tailor_required
 from app.forms.tailor_forms import CreateProductForm
 from app.models.product import Product
 from flask_login import current_user
-from app import db, s3_client
+from app.models import db
+from app import s3_client
 from app.forms.tailor_forms import CRSForm
 from app.db_access.product import _get_products
 from app.models.tailor import Tailor
@@ -70,6 +71,7 @@ def update_product_visibility():
     flash(msg)
     return redirect(url_for('tailor_views.get_all_products'))
 
+
 @tailor_views.route('/products/generate_custom_code', methods=['POST'])
 @tailor_required
 def generate_custom_code():
@@ -82,7 +84,7 @@ def generate_custom_code():
 
     if '%' in value and value[-1] == '%':
         value = float(value[:-1]) / 100 * float(price)
-    elif value !='' and float(value) < float(price):
+    elif value != '' and float(value) < float(price):
         value = float(value)
     else:
         return "Invald value!"
@@ -98,10 +100,8 @@ def generate_custom_code():
         user = User.query.filter_by(email=email).one_or_404()
         user_id = user.id
 
-
     code = Tailor.generate_customization_code(product_id, value)
     tokens = {user_id: code}
-
 
     if not product.customization_tokens:
         product.customization_tokens = tokens

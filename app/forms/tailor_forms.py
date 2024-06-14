@@ -51,7 +51,7 @@ class BrandInformationForm(FlaskForm):
 
     # Bank details
     bank_name = StringField('Bank Name')
-    account_number = StringField('Account Number',)
+    account_number = IntegerField('Account Number', default=0)
     account_name = StringField('Account Name')
     photo = FileField('Photo')
     submit = SubmitField('Save')

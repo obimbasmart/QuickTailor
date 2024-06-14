@@ -3,10 +3,10 @@
 """ Password reset routes """
 from app.auth import auth_views
 from app.forms.reset_forms import ResetForm,  ResetPasswordForm
-from app.models.user  import User
+from app.models.user import User
 from app.models.tailor import Tailor
 from flask import (render_template, flash,  redirect, url_for)
-from app import db
+from app.models import db
 from flask_login import current_user
 from app.models.base_user import BaseUser
 from email_service.sendgrid import send_password_reset_email
@@ -29,19 +29,20 @@ def password_reset():
     return render_template('forms/password_reset.html',
                            form=form, page='auth_page')
 
+
 @auth_views.route("/set_new_password/<token>", methods=["GET", "POST"])
 def set_new_password(token):
     """ Route for setting new password after submitting email
     """
     if current_user.is_authenticated:
         return redirect(url_for('app_views.home'))
-    
+
     user = BaseUser.verify_reset_password_token(token)
-    
+
     if user is None or user.reset_token != token:
-       flash("The reset link is invalid or has expired.")
-       return redirect(url_for('auth_views.password_reset'), page='auth_page')
-    
+        flash("The reset link is invalid or has expired.")
+        return redirect(url_for('auth_views.password_reset'), page='auth_page')
+
     form = ResetPasswordForm()
     if form.validate_on_submit():
         user.set_password(form.password.data)
@@ -52,5 +53,3 @@ def set_new_password(token):
 
     return render_template('forms/reset_password_page.html',
                            form=form, page='auth_page')
-
-

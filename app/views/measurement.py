@@ -7,7 +7,7 @@ from flask_login import current_user, login_required
 from flask import render_template, flash, redirect, url_for
 from app.views import app_views
 from app.forms.main_forms import MeasurementForm
-from app import db
+from app.models import db
 from decimal import Decimal
 
 
