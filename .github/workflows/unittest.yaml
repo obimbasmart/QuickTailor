@@ -36,8 +36,6 @@ jobs:
           sudo mysql --host=127.0.0.1 --user=root --password=root < setup_CI_DB
 
       - name: Run test
-        env:
-          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
-        run: python3 -m pytest
+        run: pytest -k 'not email'
 
 
