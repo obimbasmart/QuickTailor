@@ -36,6 +36,8 @@ jobs:
           sudo mysql --host=127.0.0.1 --user=root --password=root < setup_CI_DB
 
       - name: Set environment variables
+        with:
+          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
         env:
           SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
 
