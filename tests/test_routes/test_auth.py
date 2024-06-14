@@ -4,7 +4,7 @@
 
 from app.models.user import User
 
-def test_register_user(client, new_user, _db):
+def test_register_user(client, new_user: User, _db):
     """
         @when: /register/user is requested (POST)
         @then: test that response is valid
@@ -33,7 +33,7 @@ def test_register_user(client, new_user, _db):
     assert user.is_tailor == False
     assert b'Login' in res.data
 
-def test_login(new_user, client, _db):
+def test_login(new_user: User, client, _db):
     response = client.post('/login', data={
         'email': new_user.email,
         'password': new_user.password
