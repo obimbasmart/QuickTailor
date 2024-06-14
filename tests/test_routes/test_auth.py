@@ -33,7 +33,7 @@ def test_register_user(client, new_user: User, _db):
     assert user.is_tailor == False
     assert b'Login' in res.data
 
-def test_login(new_user: User, client, _db):
+def test_login_success(new_user: User, client, _db):
     response = client.post('/login', data={
         'email': new_user.email,
         'password': new_user.password
@@ -43,6 +43,17 @@ def test_login(new_user: User, client, _db):
 
     with client.session_transaction() as session:
         assert '_user_id' in session
+
+        
+def test_login_failure(new_user: User, client, _db):
+    response = client.post('/login', data={
+        'email': 'd',
+        'password': 'a'
+    })
+
+    assert response.status_code == 302
+    with client.session_transaction() as session:
+        assert '_user_id' not in session
 
 def test_logout(client):
     res = client.post('/logout', follow_redirects=True)

@@ -14,7 +14,7 @@ load_dotenv()
 
 @pytest.fixture(scope='module')
 def new_user():
-    user = User(email='olegbyonic@gmail.com', phone_no='08130119931',
+    user = User(email='obimbasmartchukwunenye@gmail.com', phone_no='08130119931',
                 first_name='oleg', last_name='byonic', password='1234')
     return user
 
