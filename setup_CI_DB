@@ -1,0 +1,12 @@
+-- prepares a MySQL server for quicktailor
+
+CREATE DATABASE IF NOT EXISTS quicktailor_dev_db;
+CREATE DATABASE IF NOT EXISTS quicktailor_test_db;
+CREATE DATABASE IF NOT EXISTS quicktailor_prod_db;
+DROP USER IF EXISTS 'quicktailor_dev'@'127.0.0.1';
+CREATE USER IF NOT EXISTS 'quicktailor_dev'@'127.0.0.1' IDENTIFIED BY 'quicktailor_dev_pwd';
+GRANT ALL PRIVILEGES ON `quicktailor_dev_db`.* TO 'quicktailor_dev'@'127.0.0.1';
+GRANT ALL PRIVILEGES ON `quicktailor_prod_db`.* TO 'quicktailor_dev'@'127.0.0.1';
+GRANT ALL PRIVILEGES ON `quicktailor_test_db`.* TO 'quicktailor_dev'@'127.0.0.1';
+GRANT SELECT ON `performance_schema`.* TO 'quicktailor_dev'@'127.0.0.1';
+FLUSH PRIVILEGES;
