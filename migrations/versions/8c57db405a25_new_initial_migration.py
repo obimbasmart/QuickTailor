@@ -1,8 +1,8 @@
 """new: initial migration
 
-Revision ID: aadced788e2b
+Revision ID: 8c57db405a25
 Revises: 
-Create Date: 2024-06-12 07:35:37.247444
+Create Date: 2024-06-12 08:51:43.402699
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'aadced788e2b'
+revision = '8c57db405a25'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,7 +22,7 @@ def upgrade():
     sa.Column('first_name', sa.String(length=128), nullable=False),
     sa.Column('last_name', sa.String(length=128), nullable=False),
     sa.Column('email', sa.String(length=128), nullable=False),
-    sa.Column('password_hash', sa.String(length=128), nullable=False),
+    sa.Column('password_hash', sa.TEXT(), nullable=False),
     sa.Column('phone_no', sa.String(length=128), nullable=False),
     sa.Column('business_name', sa.String(length=128), nullable=True),
     sa.Column('cac_number', sa.String(length=128), nullable=True),
@@ -48,7 +48,7 @@ def upgrade():
     sa.Column('first_name', sa.String(length=128), nullable=False),
     sa.Column('last_name', sa.String(length=128), nullable=False),
     sa.Column('email', sa.String(length=128), nullable=False),
-    sa.Column('password_hash', sa.String(length=128), nullable=False),
+    sa.Column('password_hash', sa.TEXT(), nullable=False),
     sa.Column('phone_no', sa.String(length=128), nullable=False),
     sa.Column('measurements', sa.JSON(), nullable=True),
     sa.Column('reset_token', sa.String(length=128), nullable=True),

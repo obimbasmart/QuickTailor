@@ -8,7 +8,7 @@ from app.tailor import tailor_views
 from app.auth.decorators import tailor_required
 from app.forms.tailor_forms import BrandInformationForm
 from flask_login import current_user
-from app import db, s3_client
+# from app.models import db, s3_client
 from datetime import datetime
 
 # @tailor_views.route("/orders")

@@ -3,11 +3,11 @@
 """Tailor Model
 """
 
-from sqlalchemy import String, Boolean, Integer, DateTime
+from sqlalchemy import String, Boolean, Integer, DateTime, TEXT
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from ..models.base_model import BaseModel
 from .base_user import BaseUser
-from app import s3_client
+from app.models.product import Product
 from functools import lru_cache as memoized
 import json
 import base64
@@ -19,7 +19,7 @@ class Tailor(BaseUser, BaseModel):
     first_name: Mapped[str] = mapped_column(String(128), nullable=False)
     last_name: Mapped[str] = mapped_column(String(128), nullable=False)
     email: Mapped[str] = mapped_column(String(128), nullable=False)
-    password_hash: Mapped[str] = mapped_column(String(128), nullable=False)
+    password_hash: Mapped[str] = mapped_column(TEXT(), nullable=False)
     phone_no: Mapped[str] = mapped_column(String
                                           (128), nullable=False)
 
@@ -42,7 +42,7 @@ class Tailor(BaseUser, BaseModel):
     account_name: Mapped[str] = mapped_column(String(128), nullable=True)
 
     # relationships
-    products = relationship("Product", back_populates="tailor")
+    products = relationship(Product, back_populates="tailor")
 
     # Password reset attributes
     reset_token: Mapped[str] = mapped_column(String(128), nullable=True)
@@ -55,6 +55,7 @@ class Tailor(BaseUser, BaseModel):
     @property
     @memoized(maxsize=1)
     def photo(self):
+        from app import s3_client
         try:
             return s3_client.generate_presigned_url('get_object', self.photo_url)
         except Exception as e:

@@ -7,8 +7,9 @@ from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column
 import uuid
 from datetime import datetime, timezone
-from app import db
+from flask_sqlalchemy import SQLAlchemy
 
+from app.models import db
 
 class BaseModel(db.Model):
     __abstract__ = True

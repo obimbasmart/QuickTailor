@@ -1,6 +1,6 @@
 '''App forms'''
 
-from app import db
+from app.models import db
 from flask_wtf import FlaskForm
 from wtforms import (
     FileField,
@@ -10,12 +10,11 @@ from wtforms import (
     DecimalField,
     BooleanField
 )
-from wtforms.validators import (DataRequired, 
+from wtforms.validators import (DataRequired,
                                 Email, EqualTo,
                                 ValidationError)
 from ..models.user import User
 from ..models.tailor import Tailor
-
 
 
 class ResetForm(FlaskForm):
@@ -25,9 +24,10 @@ class ResetForm(FlaskForm):
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).one_or_none()
         tailor = Tailor.query.filter_by(email=email.data).one_or_none()
-        if  user is None and  tailor is None:
+        if user is None and tailor is None:
             raise ValidationError("Email not registered")
-        
+
+
 class ResetPasswordForm(FlaskForm):
     password = PasswordField('New Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password', validators=[

@@ -7,7 +7,6 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from typing import List
 from flask import render_template
-from app import app
 
 
 def send_email(subject: str, body: str, recievers: List[str], html_content=None) -> int:

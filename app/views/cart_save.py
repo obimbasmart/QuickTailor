@@ -6,7 +6,7 @@ from app.forms.main_forms import OrderMeasurementForm
 from decimal import Decimal
 from flask_login import current_user
 from app.models.cart import CartItem
-from app import db
+from app.models import db
 from app.db_access.product import _get_product_with_img_urls
 from app.forms.tailor_forms import CRSForm
 from app.forms.cart_forms import ApplyCodeForm
@@ -42,13 +42,16 @@ def cart(product_id=None):
         return redirect(request.referrer)
     return render_template('pages/cart.html')
 
+
 @app_views.route('/products/<product_id>/cart', methods=["DELETE"])
 def delete_from_cart(product_id=None):
-        print("OKddd")
-        cart_item = CartItem.query.filter_by(product_id=product_id, user_id=current_user.id).first()
-        db.session.delete(cart_item)
-        db.session.commit()
-        return ""
+    print("OKddd")
+    cart_item = CartItem.query.filter_by(
+        product_id=product_id, user_id=current_user.id).first()
+    db.session.delete(cart_item)
+    db.session.commit()
+    return ""
+
 
 @app_views.route('/cart')
 def view_cart():
@@ -60,9 +63,10 @@ def view_cart():
 
     for product in products:
         print(product.customization_value)
-    
+
     products = _get_product_with_img_urls(products, no_images=1)
     return render_template('pages/cart.html', products=products, form=form)
+
 
 @app_views.route('/cart/code', methods=["POST"])
 def apply_code(user_id=None):
@@ -77,7 +81,8 @@ def apply_code(user_id=None):
                 code_details = Tailor.decode_customization_code(checkout_code)
                 print(code_details)
                 if code_details.get('value'):
-                    CartItem.query.filter_by(id=item.id).one_or_404().cusomization_value = code_details.get('value')
+                    CartItem.query.filter_by(id=item.id).one_or_404(
+                    ).cusomization_value = code_details.get('value')
                     # db.session.add(item)
                     db.session.commit()
         return redirect(url_for('app_views.view_cart'))
@@ -138,7 +143,7 @@ def apply_code(user_id=None):
 #                 for item in _data:
 #                     if item['id'] == cart_item_id:
 #                         response_data.append(item)
-#                         break  
+#                         break
 #             return jsonify(response_data), 200
 #         return jsonify([]), 400
 #     form =  CustomizationForm()
@@ -148,6 +153,3 @@ def apply_code(user_id=None):
 # def save():
 #     form =  CustomizationForm()
 #     return render_template('pages/save.html', data=notification, form=form)
-
-
-
