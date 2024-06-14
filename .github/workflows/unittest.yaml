@@ -33,7 +33,7 @@ jobs:
       - name: Setup Database
         run: |
           sudo service mysql start
-          cat setup_CI_DB | sudo mysql
+          sudo mysql < setup_CI_DB
 
       - name: Run test
         run: python3 -m pytest
