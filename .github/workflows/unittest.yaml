@@ -28,6 +28,9 @@ jobs:
         run: | 
           sudo apt install libmysqlclient-dev 
           python -m  pip install -r requirements.txt
+      
+      - name: Setup Database
+        run: cat setup_DB | sudo mysql
 
       - name: Run test
         run: python3 -m pytest
