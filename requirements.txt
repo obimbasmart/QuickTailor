@@ -1,5 +1,4 @@
 alembic==1.13.1
-awscli==1.32.104
 Babel==2.15.0
 bidict==0.23.1
 blinker==1.8.2
