@@ -13,7 +13,7 @@ class Cache:
     def __init__(self) -> None:
         """init redis cache"""
 
-        self._redis = redis.Redis()
+        self._redis = redis.Redis(host='127.0.0.1', port=6379)
         self._redis.flushdb()
 
     def store(self, key: str, data: Union[str, bytes, int, float], expires: int = 3600) -> str:
