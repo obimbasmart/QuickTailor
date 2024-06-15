@@ -11,15 +11,16 @@ from flask_login import LoginManager
 from flask_login import current_user
 from app.constants import USER_SIDEBAR_LINKS, ADMIN_SIDEBAR_LINKS
 from flask_wtf.csrf import CSRFProtect
-from cloud_storage.s3_cloud_storage import S3StorageService
+from app.cloud_storage.s3_cloud_storage import S3StorageService
+from app.cache import Cache
 
 load_dotenv()
 
 migrate = Migrate()
 login_manager = LoginManager()
 csrf = CSRFProtect()
-s3_client = S3StorageService('quicktailor-products-bucket')
-
+redis_cache = Cache()
+s3_client = S3StorageService('quicktailor-products-bucket', cache=redis_cache)
 
 def create_app(config=DevelopmentConfig) -> Flask:
     """create a flask app"""
@@ -43,6 +44,7 @@ def create_app(config=DevelopmentConfig) -> Flask:
         register_filters(app)
 
         app.config['db'] = db
+
 
     @app.context_processor
     def inject_sidebar_links():

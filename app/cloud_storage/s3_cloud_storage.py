@@ -16,7 +16,7 @@ class S3StorageService():
     __allowed_file_types = ['png', 'jpeg', 'pdf', 'svg', 'jpg']
     __presigned_url_exp_time = 3600
 
-    def __init__(self, bucket_name: str) -> None:
+    def __init__(self, bucket_name: str, cache=None) -> None:
         self.bucket_name = bucket_name
         self.s3_client = boto3.client(
             's3',
@@ -24,6 +24,8 @@ class S3StorageService():
             aws_secret_access_key=getenv('AWS_SECRET_ACCESS_KEY'),
             region_name='eu-north-1'
         )
+
+        self.cache = cache
 
     def __is_valid_file_extenstion(self, filename):
         file_ext = filename.split('.')[-1]
@@ -56,11 +58,17 @@ class S3StorageService():
         :param key_name: object key
         :return: presigned url
         """
+
+        data = self.cache.get(key_name, self.cache.get_str)
+        if data:
+            return data
+        
         img_url = self.s3_client.generate_presigned_url(
             action_type,
             Params={'Bucket': self.bucket_name, 'Key': key_name},
             ExpiresIn=S3StorageService.__presigned_url_exp_time
         )
+        self.cache.store(key_name, img_url, self.__presigned_url_exp_time)
         return img_url
     
     def generate_presigned_urls(self, action_type: str, key_names: List[str]) -> List[str]:
