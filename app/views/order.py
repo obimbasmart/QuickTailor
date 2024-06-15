@@ -12,6 +12,8 @@ from app.db_access.product import _get_product_with_img_urls
 from app.models.cart import CartItem
 from app.models import db
 from app.forms.main_forms import OrderMeasurementForm
+from flask import current_app
+import os
 
 
 @app_views.route('/orders/<order_id>')

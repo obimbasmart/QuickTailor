@@ -1,0 +1,19 @@
+Dear {{user.first_name}},
+
+We are excited to inform you that your order #{{order.id}} has been successfully completed!
+
+Our tailor has finished working on your order, and it has passed our quality checks. The next step is for you to arrange the pickup of your order.
+
+Please follow up with the tailor directly through the in-app chat to schedule a convenient time for pickup. If you have any special requests or need further assistance, feel free to discuss it with the tailor in the chat.
+
+Here’s a quick summary of your order details:
+- **Order Number**: {{order.id[:7]}}
+- **Order Details**: {{order.product.name}}
+
+You can access the in-app chat by logging into your account on our website or mobile app. Our tailor is looking forward to assisting you with the pickup process.
+
+Thank you for choosing us for your tailoring needs. We hope you are satisfied with our service and look forward to serving you again in the future.
+
+Best regards,
+
+@QuickTailor Team
