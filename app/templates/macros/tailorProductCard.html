@@ -1,5 +1,5 @@
 {% macro tailorProductCard(tailor) %}
-<div class="p-3  w-full flex flex-col gap-y-3 rounded-lg bg-gradient-to-tr from-teal-100 to-white">
+<div class="p-3  w-full flex flex-col gap-y-3 rounded-lg card-shadow">
     <div role="heading" class="w-full flex items-center justify-between">
        <div class="relative min-w-16 min-h-16 max-w-16 max-h-16 me-2">
            <img class="block bg-center object-cover min-w-16 min-h-16 max-w-16 max-h-16 rounded-full" src="{{tailor.photo}}" alt="">
@@ -34,7 +34,7 @@
                </div>
            </div>
        </div>
-       <a href="/{{tailor.business_name}}"> <button type="button" class="text-pc-teal-normal px-6 py-2.5 bg-sc-gray-light-active hover:bg-pc-teal-light leading-6  focus:outline-none focus:ring-1 focus:ring-gray-300 font-medium rounded-lg text-sm px  dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Enquire</button></a>
+       <a href="/{{tailor.business_name}}"> <button type="button" class="text-pc-teal-normal px-6 py-2.5 bg-sc-gray-normal hover:bg-pc-teal-light leading-6  focus:outline-none focus:ring-1 focus:ring-gray-300 font-medium rounded-lg text-sm px  dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Enquire</button></a>
     </div>
 
 

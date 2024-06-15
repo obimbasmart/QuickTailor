@@ -76,6 +76,7 @@ def register_filters(app):
     app.jinja_env.filters['sum_price'] = filters.sum_price
     app.jinja_env.filters['sum_custom_value'] = filters.sum_custom_value
     app.jinja_env.filters['to_datetime'] = filters.format_datetime
+    app.jinja_env.filters['completion_date'] = filters.completion_date
 
 
 def register_blueprints(app):

@@ -32,3 +32,17 @@ def send_password_reset_email(user):
         recievers=[user.email],
         body=render_template('emails/reset_password.txt',
                                            user=user, token=token))
+
+def send_order_comfirmation_email(user, order=None):
+    return send_email(
+        subject='[QuickTailor]  Your Order Has Been Received and Confirmed',
+        recievers=[user.email],
+        body=render_template('emails/order_comfirmation.txt', user=user, order=order)
+    )
+
+def send_order_completion_email(user, order=None):
+    return send_email(
+        subject=f'[QuickTailor] Your Order #{order.id[:7]} is Complete!',
+        recievers=[user.email],
+        body=render_template('emails/order_completion.txt', user=user, order=order)
+    )

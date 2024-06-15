@@ -156,8 +156,20 @@
                             <th scope="row"
                                 class="px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
                                 <a href="/orders/{{ order.id }}">
-                                    <span class="capitalize bg-[#6E6E6E1A] text-xs px-2 py-[2px] rounded-md dark:bg-blue-900 dark:text-blue-300"> {{ order.order_status | lower }}</span>
+                                    {% if order.stages[0]['status'] == 'completed' and order.stages[4]['status'] == 'pending' %}
+                    {% set color = '#E28835' %}
+                    {% set bgcolor = '#E2883510' %}
+                {% elif order.stages[4]['status'] == 'completed' %}
+                    {% set color = '#138F27' %}
+                    {% set bgcolor = '#138F2710' %}
+                {% else %}
+                    {% set color = '#6E6E6E' %}
+                    {% set bgcolor = '#6E6E6E10' %}
+                {% endif %}
 
+                <span style="background-color: {{ bgcolor }}; color: {{color}};"
+                    class="ms-2 !capitalize tracking-wider bg-[#6E6E6E]/10 max-w-20 text-[#6E6E6E] text-xs px-4 py-1 rounded-md dark:bg-blue-900 dark:text-blue-300">{{order.status
+                    | lower }}</span>
                                 </a>
                             </th>
 

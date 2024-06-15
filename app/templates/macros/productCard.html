@@ -4,25 +4,25 @@
 {% macro productCard(name, price, img_url, id, tailor_name, tailor_img_url) %}
 
 <div
-  class="w-full max-w-sm rounded-lg  dark:bg-gray-800 dark:border-gray-700"
+  class="p-1 w-full max-w-sm rounded-lg  dark:bg-gray-800 dark:border-gray-700 card-shadow"
 >
   <a href="/products/{{id}}">
     <img
-      class="block object-center rounded-lg object-cover max-w-full aspect-square"
+      class="block object-center rounded-xl object-cover max-w-full aspect-square"
       src="{{img_url}}"
       alt=""
     />
   </a>
-  <div class="px-2">
+  <div class="px-1">
     <a href="#">
       <h5
-        class="overflow-hidden whitespace-nowrap text-ellipsis text-sm tablet:text-base leading-7 text- font-roboto font-normal tracking-wide text-gray-900 dark:text-white"
+        class="truncate text-base tablet:text-base leading-7 font-roboto font-normal tracking-wider text-sc-gray-darker dark:text-white"
       >
         {{name}}
       </h5>
     </a>
-    <div class="flex justify-between items-center">
-      <div class="text-center text-sm leading-7 tablet:text-base font-medium text-gray-900 dark:text-white font-roboto">{{ price | currency }}</div>
+    <div class="mt-1 flex justify-between items-center">
+      <div class="text-center text-base font-medium leading-7 tablet:text-base text-black tracking-wider dark:text-white font-roboto">{{ price | currency }}</div>
 
       <div class="flex items-center  justify-center -space-x-1 rtl:space-x-reverse">
         <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
@@ -36,7 +36,7 @@
       </div>
     </div>
     
-    <hr class="h-[0.5px] my-0 bg-gray-200 border-0 dark:bg-gray-700">
+    <hr class="h-[0.5px] my-1 bg-gray-200 border-0 dark:bg-gray-700">
 
 
       <div class="flex items-center justify-between mt-2  w-full">

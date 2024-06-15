@@ -1,0 +1,19 @@
+Dear {{user.first_name}},
+
+We are delighted to inform you that we have received and confirmed your order #{{order.id[:7]}}. Our tailor has reviewed the details and has started working on it.
+
+We understand how important this order is to you, and we want to assure you that we will keep you updated at every stage of the process. Here’s what you can expect:
+
+1. **Material Sourcing**: We will source the best materials for your order.
+2. **Sewing**: Our skilled tailor will begin the sewing process.
+3. **Ironing and Finishing**: Your order will be carefully ironed and finished to perfection.
+4. **Quality Check**: A thorough quality check will be conducted to ensure everything meets our high standards.
+5. **Pickup and Delivery**: Once completed, your order will be dispatched and you'll receive a notification along with tracking details.
+
+You can track the progress of your order at any time by logging into your account on our website. If you have any questions or need further assistance, please do not hesitate to contact our customer support team.
+
+Thank you for choosing us for your tailoring needs. We look forward to delivering a product that meets your expectations.
+
+Best regards,
+
+@QuickTailor Team

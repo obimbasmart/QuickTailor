@@ -1,0 +1,33 @@
+
+
+{% macro modal(modalHeader, modalName, modalContent) %}
+  
+  <!-- Main modal -->
+  <div id="{{modalName}}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+      <div class="relative p-4 w-full max-w-2xl max-h-full">
+          <!-- Modal content -->
+          <div class="font-roboto text-base font-normal relative bg-white rounded-lg shadow dark:bg-gray-700">
+              <!-- Modal header -->
+              <div class="relative flex justify-between items-center p-4 md:p-5 rounded-t">
+                  <h3 class="w-full text-center text-base font-roboto  font-normal text-gray-900 dark:text-white">
+                      {{modalHeader}}
+                  </h3>
+                  <button type="button" class="right-1 absolute text-gray-400 bg-transparent hover:bg-gray-200 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="{{modalName}}">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="none">
+                        <path d="M6.75781 17.2426L12.0004 12M12.0004 12L17.243 6.75732M12.0004 12L6.75781 6.75732M12.0004 12L17.243 17.2426" stroke="#2D2D2D" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                      <span class="sr-only">Close modal</span>
+                  </button>
+              </div>
+              <!-- Modal body -->
+
+              {{
+                    modalContent
+              }}
+             
+             
+          </div>
+      </div>
+  </div>
+  
+{% endmacro %}
