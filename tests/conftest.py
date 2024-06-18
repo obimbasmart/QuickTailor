@@ -9,6 +9,7 @@ import pytest
 from app.models.user import User
 from app.config import TestingConfig
 from dotenv import load_dotenv
+from app import login_manager
 
 load_dotenv()
 
@@ -31,6 +32,7 @@ def app():
         db.drop_all()
         # if str(db.engine.url) == TestingConfig.SQLALCHEMY_DATABASE_URI:
         #     db.drop_all()
+
 
 @pytest.fixture()
 def client(app):

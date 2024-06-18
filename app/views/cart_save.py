@@ -56,6 +56,9 @@ def delete_from_cart(product_id=None):
 @app_views.route('/cart')
 def view_cart():
     form = ApplyCodeForm()
+    if current_user.is_anonymous:
+        return redirect(url_for('auth_views.login'))
+    
     cart_items = CartItem.query.filter_by(user_id=current_user.id).all()
     for cart_item in cart_items:
         cart_item.product.customization_value = cart_item.cusomization_value

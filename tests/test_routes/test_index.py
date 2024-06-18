@@ -35,3 +35,9 @@ def test_hiw_page(client):
     response = client.get('/how-it-works')
     assert response.status_code == 200
     assert b"Enjoy" in response.data
+
+
+def test_cart_page_logged_out(client):
+    """test that /cart redirects to /login for logged out user"""
+    response = client.get('/cart')
+    assert response.status_code == 302
