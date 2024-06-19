@@ -79,6 +79,11 @@ def register_filters(app):
     app.jinja_env.filters['sum_custom_value'] = filters.sum_custom_value
     app.jinja_env.filters['to_datetime'] = filters.format_datetime
     app.jinja_env.filters['completion_date'] = filters.completion_date
+    app.jinja_env.filters['is_date_more_than_days_ago'] = filters.is_date_more_than_days_ago
+    app.jinja_env.filters['to_date_dmy'] = filters.to_date_dmy
+    app.jinja_env.filters['time_now'] = filters.time_now
+    app.jinja_env.filters['today_date'] = filters.today_date
+
 
 
 def register_blueprints(app):
