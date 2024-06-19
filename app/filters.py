@@ -50,8 +50,8 @@ def _timeago(date):
 
 def completion_date(order):
     date = order.created_at \
-           + timedelta(days=order.product.estimated_tc)
-    
+        + timedelta(days=order.product.estimated_tc)
+
     return format_datetime(date)
 
 
@@ -60,3 +60,25 @@ def currency_filter(value):
         return 'Nil'
     value = int(float(value))
     return format_currency(number=value, currency='₦',  format=u'¤#,##0',  currency_digits=False)
+
+
+def to_date_dmy(value):
+    if isinstance(value, datetime):
+        return value.strftime("%d/%m/%Y")
+    return value
+
+
+def is_date_more_than_days_ago(value, days):
+    if isinstance(value, datetime):
+        return value < (datetime.now() - timedelta(days=days))
+    return False
+
+
+def today_date(val):
+    date = datetime.now()
+    formatted_date = date.strftime("%A, %dth %B %Y")
+    return formatted_date
+
+def time_now(val):
+    now = datetime.now()
+    return now.strftime("%I:%M%p").lower()

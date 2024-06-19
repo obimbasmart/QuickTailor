@@ -49,10 +49,10 @@
     <div class="font-roboto flex items-center justify-between border-b border-sc-gray-light-active">
         <div class="space-y-1">
             <p class="text-base text-sc-gray-dark">
-                Thursday, 16th November 2024
+                {{'' | today_date}}
             </p>
             <p class="font-montserrat text-xl font-medium text-sc-gray-darker">
-                09:32am
+                {{ '' | time_now }}
             </p>
         </div>
 
@@ -80,7 +80,7 @@
 
         <div class="dark:text-white">
             <div class="text-base text-black">
-                Josiah Nwachukwu
+                {{current_user.first_name}}
             </div>
             <div class="text-xs text-sc-gray-dark dark:text-gray-400">
                 Welcome back

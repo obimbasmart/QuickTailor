@@ -39,6 +39,9 @@ def create_product():
 @tailor_required
 def get_all_products():
     products = _get_products(tailor_id=current_user.id, no_images=1)
+    products = Product.query.filter_by(tailor_id=current_user.id) \
+        .order_by(Product.created_at.desc()).all()
+    
     form = CRSForm()
     return render_template('pages/tailor/products.html',
                            page='my products', products=products, form=form)

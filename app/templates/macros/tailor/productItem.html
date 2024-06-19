@@ -107,8 +107,12 @@
                   aria-controls="remove-product"
                   type="button"
                   x-on:click="console.log('okkk'); product_name = '{{ name }}'; product_id = '{{ id }}'"
-                  class="font-normal underline text-sc-gray-dark text-xs">
-            Remove
+                  class="font-normal text-sc-gray-dark text-xs">
+                  {% if product.created_at | is_date_more_than_days_ago(1) %}
+                    {{product.created_at | to_date_dmy}}
+                  {% else %}
+                    {{product.created_at | timeago }}
+                  {% endif %}
           </button>
         </div>
       </div>
