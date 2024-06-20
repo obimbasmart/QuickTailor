@@ -27,7 +27,7 @@
     <figcaption class="flex items-center justify-between mt-6 space-x-3 rtl:space-x-reverse">
         <div class="inline-flex space-x-2 tracking-wide">
             <span class="inline-flex items-center justify-center bg-pc-teal-light text-center p-2 w-6 h-6 rounded-full"> {{review.order.user.first_name[0]}} </span>
-            <cite class="leading-6 pe-3 font-normal text-base text-sc-gray-darker dark:text-white"> {{ review.order.user.first_name}} </cite>
+            <span class="leading-6 pe-3 font-normal text-base text-sc-gray-darker dark:text-white"> {{ review.order.user.first_name}} </span>
         </div>
         <p class="ps-3 text-sm text-gray-500 dark:text-gray-400"> {{review.created_at | timeago }} </p>
     </figcaption>

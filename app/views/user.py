@@ -13,6 +13,10 @@ def tailor_profile(brand_name=None):
         return redirect(url_for('app_views.home'))
 
     tailor = Tailor.query.filter_by(business_name=brand_name).one_or_404()
-    tailor.img_url = s3_client.generate_presigned_url('get_object', tailor.photo_url)
     products = _get_product_with_img_urls(tailor.products, no_images=1)
-    return render_template('pages/tailor_profile.html', tailor=tailor, products=products)
+    reviews = [
+        review for product in tailor.products
+        for review in product.reviews
+    ]
+    return render_template('pages/tailor_profile.html', reviews=reviews,
+                           products=products, tailor=tailor)
