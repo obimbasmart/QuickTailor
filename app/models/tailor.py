@@ -8,7 +8,8 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from ..models.base_model import BaseModel
 from .base_user import BaseUser
 from app.models.product import Product
-from functools import lru_cache as memoized
+from app.models.order import Order
+from app.models.review import Review
 import json
 import base64
 
@@ -53,7 +54,19 @@ class Tailor(BaseUser, BaseModel):
         return True
     
     @property
-    @memoized(maxsize=1)
+    def reviews(self):
+        return [
+            review for review in Review.query.all()
+            if review.product.tailor_id == self.id
+        ]
+    
+    @property
+    def n_completed_orders(self):
+        completed_orders = Order.query.filter_by(status="COMPLETED").all()
+        return len([order for order in completed_orders if order.product.tailor_id == self.id])
+
+
+    @property
     def photo(self):
         from app import s3_client
         try:
