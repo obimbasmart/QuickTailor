@@ -87,7 +87,7 @@ def average_reviews(reviews):
 
     if len(reviews) == 0:
         return  0
-    return sum([
+    return round(sum([
         review.rating
         for review in reviews
-    ]) / len(reviews)
+    ]) / len(reviews), 2)

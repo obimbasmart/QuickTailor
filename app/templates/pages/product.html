@@ -222,7 +222,7 @@
                     <!-- Carousel wrapper -->
                     <div class="relative min-h-[260px] overflow-hidden rounded-lg md:h-96">
                         {% for review in product.reviews %}
-                            <div class="hidden duration-200 ease-linear" data-carousel-item>
+                            <div class="duration-200 ease-linear" data-carousel-item>
                                 {{ productReview(review) }}
                             </div>
                         
@@ -262,7 +262,7 @@
 
                             
                 </div>
-                    </div>
+                </div>
             {% endif %}
         </section>
                 {% if not current_user.is_tailor %}

@@ -29,8 +29,8 @@
                    <svg class="w-4 h-4 text-yellow-300 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
                    </svg>
-                   <p class="ms-2 text-sm leading-4 dark:text-white">4.95</p>
-                   <a href="#" class="text-sm   dark:text-white">(50)</a>
+                   <p class="ms-2 text-sm leading-4 dark:text-white"> {{ tailor.reviews | average_reviews }} </p>
+                   <a href="#" class="text-sm   dark:text-white">({{tailor.reviews | length }})</a>
                </div>
            </div>
        </div>
@@ -55,7 +55,7 @@
                 <path d="M6.75 5.25H3.75C2.92157 5.25 2.25 5.92157 2.25 6.75V13.5C2.25 14.3284 2.92157 15 3.75 15H14.25C15.0784 15 15.75 14.3284 15.75 13.5V6.75C15.75 5.92157 15.0784 5.25 14.25 5.25H11.25M6.75 5.25V3.75C6.75 2.92157 7.42157 2.25 8.25 2.25H9.75C10.5784 2.25 11.25 2.92157 11.25 3.75V5.25M6.75 5.25H11.25" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
            </span>
-           <p class="text-sc-gray-darker text-xs leading-5">50 completed jobs</p>
+           <p class="text-sc-gray-darker text-xs leading-5">{{tailor.n_completed_orders}} completed jobs</p>
        </div>
 
        <dl>

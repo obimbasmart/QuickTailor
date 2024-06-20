@@ -6,7 +6,7 @@
 {% from 'macros/loadingState.html' import loadingState  %}
 
 {% block page_content %}
-    {{tailorProfileCard(tailor)}}
+    {{tailorProfileCard(tailor, reviews)}}
 
     {{ loadingState()}}
     <section class="mt-4">
