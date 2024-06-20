@@ -30,14 +30,9 @@
             </div>
             <div class="hidden py-4 rounded-lg  dark:bg-gray-800" id="styled-dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
             
-                    {% for review in [1,1,1,1,1,1,1,1] %}
-                            {{productReview("Oleg Bionic")}}
-                            {{productReview("Tura")}}
-                            {{productReview("Taoma")}}
-                            {{productReview("Egwinn")}}
-                            {{productReview("Igwe")}}
-                            {{productReview("Oleg Bionic")}}
-                            {{productReview("Oleg Bionic")}}
+                    {% for review in reviews %}
+                            {{productReview(review)}}
+                            
                     {% endfor %}
             </div>
         </div>
