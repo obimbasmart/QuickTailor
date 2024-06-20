@@ -1719,10 +1719,6 @@ input:checked + .toggle-bg {
   height: 3px;
 }
 
-.h-\[400px\] {
-  height: 400px;
-}
-
 .h-\[40px\] {
   height: 40px;
 }
@@ -1788,12 +1784,24 @@ input:checked + .toggle-bg {
   min-height: 4rem;
 }
 
+.min-h-\[250px\] {
+  min-height: 250px;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
 
+.min-h-\[260px\] {
+  min-height: 260px;
+}
+
 .w-1\/2 {
   width: 50%;
+}
+
+.w-10 {
+  width: 2.5rem;
 }
 
 .w-11 {
@@ -2344,6 +2352,12 @@ input:checked + .toggle-bg {
   --tw-space-x-reverse: 0;
   margin-right: calc(-0.25rem * var(--tw-space-x-reverse));
   margin-left: calc(-0.25rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-0 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0px * var(--tw-space-x-reverse));
+  margin-left: calc(0px * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-x-1 > :not([hidden]) ~ :not([hidden]) {
@@ -2955,8 +2969,20 @@ input:checked + .toggle-bg {
   fill: #006060;
 }
 
+.fill-current {
+  fill: currentColor;
+}
+
 .fill-pc-teal-normal {
   fill: #008080;
+}
+
+.fill-\[\#FACA15\] {
+  fill: #FACA15;
+}
+
+.fill-\[\#cb3ade\] {
+  fill: #cb3ade;
 }
 
 .stroke-pc-teal-normal {
@@ -3190,6 +3216,10 @@ input:checked + .toggle-bg {
 
 .pt-5 {
   padding-top: 1.25rem;
+}
+
+.pt-1 {
+  padding-top: 0.25rem;
 }
 
 .text-left {
@@ -3428,6 +3458,11 @@ input:checked + .toggle-bg {
   color: rgb(226 8 8 / var(--tw-text-opacity));
 }
 
+.text-\[\#EFBF13\] {
+  --tw-text-opacity: 1;
+  color: rgb(239 191 19 / var(--tw-text-opacity));
+}
+
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
@@ -3541,6 +3576,44 @@ input:checked + .toggle-bg {
 .text-yellow-500 {
   --tw-text-opacity: 1;
   color: rgb(194 120 3 / var(--tw-text-opacity));
+}
+
+.text-green-300 {
+  --tw-text-opacity: 1;
+  color: rgb(132 225 188 / var(--tw-text-opacity));
+}
+
+.text-\[\] {
+  color: ;
+}
+
+.text-\[white\] {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-\[\#FACA15\] {
+  --tw-text-opacity: 1;
+  color: rgb(250 202 21 / var(--tw-text-opacity));
+}
+
+.text-\[\#\] {
+  color: #;
+}
+
+.text-\[\#df15fa\] {
+  --tw-text-opacity: 1;
+  color: rgb(223 21 250 / var(--tw-text-opacity));
+}
+
+.text-\[\#cb3ade\] {
+  --tw-text-opacity: 1;
+  color: rgb(203 58 222 / var(--tw-text-opacity));
+}
+
+.text-sc-gray-light {
+  --tw-text-opacity: 1;
+  color: rgb(242 242 242 / var(--tw-text-opacity));
 }
 
 .underline {

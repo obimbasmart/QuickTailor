@@ -82,3 +82,12 @@ def today_date(val):
 def time_now(val):
     now = datetime.now()
     return now.strftime("%I:%M%p").lower()
+
+def average_reviews(reviews):
+
+    if len(reviews) == 0:
+        return  0
+    return sum([
+        review.rating
+        for review in reviews
+    ]) / len(reviews)

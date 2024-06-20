@@ -602,9 +602,12 @@ loadingState()
       <div
         class="mt-0 fixed bottom-0 p-4 flex items-center justify-between rev-shadow w-full rounded-t-md max-h-16 bg-white  dark:bg-gray-700 dark:border-gray-600">
         <p class="font-montserrat ">Leave a review</p>
-        <button
-          class="text-white font-roboto tracking-widest text-sm  bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal   focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-6 py-2.5 text-center">Submit
-          review</button>
+
+        <button data-drawer-target="leave-review" data-drawer-show="leave-review"
+          data-drawer-placement="bottom" aria-controls="leave a review" type="button"
+          class="text-white font-roboto tracking-widest text-sm  bg-pc-teal-normal   focus:outline-none  dark:focus:ring-teal-800 font-medium rounded-lg px-6 py-2.5 text-center">Submit review
+        </button>
+ 
       </div>
     {% endif %}
 
@@ -682,6 +685,88 @@ loadingState()
   {{ bottomSheet(title="Measurement",
   content=view_measurement,
   sheetName="bottom-sheet-measurement")
+  }}
+
+
+  {% set submit_review %}
+    <div class="flex w-full justify-center items-center">
+
+
+        <form x-data="
+          {
+            rating: 0,
+            hoverRating: 0,
+            ratings: [{'amount': 1, 'label':'Terrible'}, {'amount': 2, 'label':'Bad'}, {'amount': 3, 'label':'Okay'}, {'amount': 4, 'label':'Good'}, {'amount': 5, 'label':'Great'}],
+            rate(amount) {
+              if (this.rating == amount) {
+                this.rating = 0;
+              }
+              else this.rating = amount;
+            },
+            currentLabel() {
+              let r = this.rating;
+              if (this.hoverRating != this.rating) r = this.hoverRating;
+              let i = this.ratings.findIndex(e => e.amount == r);
+              if (i >=0) {return this.ratings[i].label;} else {return ''};     
+            },
+            currentRating() {
+              let r = this.rating;
+              if (this.hoverRating != this.rating) r = this.hoverRating;
+              let i = this.ratings.findIndex(e => e.amount == r);
+              if (i >=0) {return this.ratings[i].amount;} else {return ''};     
+            },
+            
+            _review: ''
+          }
+          " class="flex flex-col items-center justify-center space-y-3 rounded w-full mx-auto" id="review-modal">
+
+          {{ form.hidden_tag() }}
+
+          <div class="px-2 rounded-md font-roboto text-sm tracking-wide py-1 bg-pc-teal-light mt-4">
+            <template x-if="rating || hoverRating">
+              <p x-text="currentLabel()"></p>
+            </template>
+            <template x-if="!rating && !hoverRating">
+              <p>Rating</p>
+            </template>
+          </div>
+
+
+          <div class="flex space-x-0">
+          <template x-for="(star, index) in ratings" :key="index">
+            <span @click="rate(star.amount)" @mouseover="hoverRating = star.amount" @mouseleave="hoverRating = rating"
+              aria-hidden="true"
+              :title="star.label"
+              class="rounded-sm text-gray-400 fill-current focus:outline-none focus:shadow-outline p-1 w-12 m-0 cursor-pointer"
+              :class="{'text-gray-600': hoverRating >= star.amount, 'text-[#EFBF13]': rating >= star.amount && hoverRating >= star.amount}">
+              <svg class="w-10 transition duration-150" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            </button>
+        
+          </template>
+          </div>
+
+
+        <label for="message" class="font-roboto  block mb-2 text-sm  text-black dark:text-white">Your message</label>
+        <input type="hidden" name="rating" :value="currentRating()">
+        <textarea id="message" x-model="_review" name="review" :value="_review" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
+
+        <button
+          hx-post="/order/{{order.id}}/review"
+          hx-target="#review-modal"
+          hx-swap="outerHTML"
+        class="text-white font-roboto tracking-widest text-sm  bg-pc-teal-normal   focus:outline-none w-full  dark:focus:ring-teal-800 font-medium rounded-lg px-6 py-2.5 text-center">Submit review
+      </button>
+        </form>
+    </div>
+  {% endset %}
+      
+ <div>
+  <!-- review bottom sheet -->
+  {{ bottomSheet(title="Review Your tailor and garment",
+      content=submit_review,
+      sheetName="leave-review")
   }}
 
   {{ modal(modalHeader="Confirm progress Update", modalName='update-order', modalContent=update_comfirmation) }}

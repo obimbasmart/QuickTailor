@@ -5,9 +5,12 @@
 from flask_wtf import FlaskForm
 from wtforms import (
     SubmitField,
-    DecimalField
+    DecimalField,
+    IntegerField,
+    StringField
 )
 
+from wtforms.validators import DataRequired
 
 
 class MeasurementForm(FlaskForm):
@@ -25,3 +28,8 @@ class MeasurementForm(FlaskForm):
 
 class OrderMeasurementForm(MeasurementForm):
     submit = SubmitField('Add measurement')
+
+class ReviewForm(FlaskForm):
+    rating = IntegerField("Rating", validators=[DataRequired()])
+    review = StringField("Review", validators=[DataRequired()])
+    
