@@ -83,6 +83,8 @@ def register_filters(app):
     app.jinja_env.filters['to_date_dmy'] = filters.to_date_dmy
     app.jinja_env.filters['time_now'] = filters.time_now
     app.jinja_env.filters['today_date'] = filters.today_date
+    app.jinja_env.filters['average_reviews'] = filters.average_reviews
+
 
 
 
