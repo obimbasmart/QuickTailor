@@ -1,0 +1,17 @@
+{% from 'macros/tailorCard.html' import tailorCard   %}
+
+{% macro groupedTailors(title, tailors) %}
+  <section class="py-4">
+    
+    <h3 class="text-sc-gray-dark text-center text-xl leading-9 capitalize font-montserrat">
+      {{title}}
+  </h3>
+    <section class="p-4 flex overflow-scroll gap-4">
+        {% for tailor in tailors %}
+            {{tailorCard(tailor)}}
+            {{tailorCard(tailor)}}
+            {{tailorCard(tailor)}}
+        {% endfor %}
+    </section>
+  </section>
+{% endmacro %}

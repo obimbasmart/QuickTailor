@@ -1,0 +1,20 @@
+{% macro promotion(title, desc) %}
+    <div class="rounded-xl card-shadow text-white aspect-[2]  bg-center bg-cover flex items-center justify-center  bg-no-repeat bg-[url('/static/images/kids3.jpeg')] bg-blend-multiply  duration-700 ease-in-out w-full"
+         data-carousel-item>
+        <div class="rounded-xl bg-gradient-to-r from-black/35 h-full w-full flex justify-center items-center">
+            <div class="mx-16 flex flex-col gap-6 max-w-96 ">
+                <h1 class="font-montserrat text-xl font-medium">
+                    {{title}}
+                </h1>
+                <p class="font-roboto text-sc-gray-light text-xs font-normal tracking-widest">
+                   {{desc}}
+                </p>
+
+                <button class="text-white w-fit font-roboto  tracking-widest text-xs border border-white focus:outline-none dark:focus:ring-teal-800 font-medium rounded-lg px-6 py-2.5 text-center">
+                    View collections
+                </button>
+            </div>
+        </div>
+    </div>
+
+{% endmacro %}

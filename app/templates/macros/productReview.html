@@ -1,22 +1,24 @@
-{% from 'macros/ratingsComponent.html' import ratingsComponent   %}
+{% from 'macros/ratingsComponent.html' import ratingsComponent %}
 
 
 {% macro productReview(review) %}
-    
-<figure class="max-w-screen-md py-1 space-y-2.5 border-b border-b-[#DEDEDE]">
-    {{ratingsComponent(review)}}
-    <blockquote>
-        <p class="text-sm leading-6 text-sc-gray-darker dark:text-white">
-            {{ review.review}}
-        </p>
-    </blockquote>
-    <figcaption class="flex items-center justify-between mt-6 space-x-3 rtl:space-x-reverse">
-        <div class="inline-flex space-x-2 tracking-wide">
-            <span class="inline-flex items-center justify-center bg-pc-teal-light text-center p-2 w-6 h-6 rounded-full"> {{review.order.user.first_name[0]}} </span>
-            <span class="leading-6 pe-3 font-normal text-base text-sc-gray-darker dark:text-white"> {{ review.order.user.first_name}} </span>
-        </div>
-        <p class="ps-3 text-sm text-gray-500 dark:text-gray-400"> {{review.created_at | timeago }} </p>
-    </figcaption>
-</figure>
+
+    <figure class="max-w-screen-md py-1 space-y-2.5 border-b border-b-[#DEDEDE]">
+        {{ ratingsComponent(review) }}
+        <blockquote>
+            <p class="text-sm leading-6 text-sc-gray-darker dark:text-white">
+                {{ review.review }}
+            </p>
+        </blockquote>
+        <figcaption class="flex items-center justify-between mt-6 space-x-3 rtl:space-x-reverse">
+            <div class="inline-flex space-x-2 tracking-wide">
+                <span class="inline-flex items-center justify-center bg-pc-teal-light text-center p-2 w-6 h-6 rounded-full"> {{ review.order.user.first_name[0] }} </span>
+                <span class="leading-6 pe-3 font-normal text-base text-sc-gray-darker dark:text-white"> {{ review.order.user.first_name }} </span>
+            </div>
+            <p class="ps-3 text-sm text-gray-500 dark:text-gray-400">
+                {{ review.created_at | timeago }}
+            </p>
+        </figcaption>
+    </figure>
 
 {% endmacro %}

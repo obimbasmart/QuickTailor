@@ -9,6 +9,7 @@ from flask import render_template, request, jsonify, redirect, url_for
 from app.views import app_views
 from app.db_access.product import _get_products
 from app.models.order import Order
+from app.models.tailor import Tailor
 
 
 notification= [
@@ -49,9 +50,12 @@ def home():
                            page='dashboard', orders = my_orders)
 
 
+    # get popular tailors
+    tailors = Tailor.query.all()
     return render_template('pages/home.html',
                            page='home',
                            products=products, 
+                           tailors=tailors,
                            current_user=current_user)
 
 @app_views.route("/how-it-works")

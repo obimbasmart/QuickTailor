@@ -1,27 +1,53 @@
-{% macro tailorCard(name, link, img_name) %}
-        <a href="" class="py-4 max-w-[180px] min-w-[180px] rounded-md gap-2 flex flex-col items-center justify-center border-1 border-sc-gray-light-active">
-           
-            <div class="flex justify-center w-16 h-16 items-center rounded-md">
-                <img src="{{ url_for('static', filename='/images/tailor.jpeg' ) }}" alt=""
-                class="object-cover bg-no-repeat rounded-full w-full h-full">
-            </div>
-    
-            <div class="flex justify-center items-center gap-1">
-                <span class="leading-6 font-roboto text-base"> {{name}}    
-                </span>
-               <span>
-                <svg 
-                class="block"
-                width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <rect width="24" height="24" fill="url(#pattern0_6138_2139)"/>
-                    <defs>
-                    <pattern id="pattern0_6138_2139" patternContentUnits="objectBoundingBox" width="1" height="1">
-                    <use xlink:href="#image0_6138_2139" transform="scale(0.01)"/>
-                    </pattern>
-                    <image id="image0_6138_2139" width="100" height="100" xlink:href="data:image/png;base64,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"/>
-                    </defs>
+{% macro tailorCard(tailor) %}
+    <div role="heading"
+         class="min-w-[230px] aspect-[2.32] flex gap-2 card-shadow items-center p-3">
+        <div class="relative w-[69px] max-w-[69px] me-1">
+            <img class="bg-center object-cover w-18 max-w-18 aspect-square rounded-full"
+                 src="{{ tailor.photo }}"
+                 alt="" />
+            <span class="-bottom-1 left-9 absolute  w-3 h-3 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+        </div>
+
+        <div class="flex text-base leading-6 mr-0">
+            <div class="flex flex-col gap-2">
+                <div class="inline-flex w-full items-center space-x-1">
+                    <p class="text-sm leading-6">
+                        {{ tailor.business_name }}
+                    </p>
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             width="19"
+                             height="19"
+                             viewBox="0 0 19 19"
+                             fill="none">
+                            <g clip-path="url(#clip0_6779_20919)">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.45204 1.7691L12.3876 0.5L13.9971 3.23997L17.119 3.93767L16.811 7.09964L18.9256 9.49923L16.8187 11.8773L17.119 15.0623L14.0156 15.7477L12.3876 18.5L9.4736 17.2294L6.53803 18.5L4.92855 15.76L1.80662 15.0623L2.11466 11.8988L0 9.49923L2.10696 7.1212L1.80662 3.93767L4.91007 3.25229L6.53803 0.5L9.45204 1.7691Z" fill="#10A64A" />
+                            <path d="M5.8397 10.5111C4.90482 9.50537 6.34026 8.00678 7.37987 8.95553C7.74643 9.28975 8.27933 9.77798 8.64898 10.1091L11.4983 6.6083C12.4902 5.58255 14.0565 7.08884 13.077 8.12075L9.49761 12.3901C9.30184 12.5969 9.0334 12.7195 8.74892 12.7322C8.46445 12.7448 8.18619 12.6465 7.97284 12.4579C7.36601 11.8803 6.47579 11.0502 5.8397 10.5111Z" fill="white" />
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_6779_20919">
+                            <rect width="18.9256" height="18" fill="white" transform="translate(0 0.5)" />
+                            </clipPath>
+                            </defs>
+                        </svg>
+                    </span>
+                </div>
+
+                <p class="font-roboto text-xs text-sc-gray-dark tracking-wide"> {{ tailor.products | length  }} products</p>
+
+                <div class="flex w-full">
+                    <svg class="inline-flex w-4 h-4 text-yellow-300 me-1"
+                         aria-hidden="true"
+                         xmlns="http://www.w3.org/2000/svg"
+                         fill="currentColor"
+                         viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
                     </svg>
-               </span>
+                    <span class="text-xs leading-4 dark:text-white">
+                        {{ tailor.reviews | average_reviews }}
+                    </span>
+                </div>
             </div>
-        </a>
+        </div>
+    </div>
 {% endmacro %}
