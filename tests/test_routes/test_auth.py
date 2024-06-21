@@ -58,7 +58,7 @@ def test_login_failure(new_user: User, client, _db):
 def test_logout(client):
     res = client.post('/logout', follow_redirects=True)
     assert res.status_code == 200
-    assert b"Discover" in res.data
+    assert b"Availability" in res.data
 
     with client.session_transaction() as session:
         assert '_user_id' not in session

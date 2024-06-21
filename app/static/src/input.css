@@ -20,6 +20,10 @@
     box-shadow: 0px -4px 7.6px 0px rgba(0, 0, 0, 0.10);
 }
 
+.hero-gradient {
+    background-color: linear-gradient(270deg, rgba(0, 0, 0, 0.00) 30.06%, #000 100%)!important
+}
+
 ::-webkit-file-upload-button {
     background-color: #E6F2F2!important;
     color: #006060!important;

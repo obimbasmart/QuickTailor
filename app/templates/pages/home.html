@@ -4,29 +4,31 @@
 {% from 'macros/categories.html' import categories   %}
 {% from 'macros/promotionCard.html' import promotionCard   %}
 {% from 'macros/tailorCard.html' import tailorCard   %}
-{% from 'macros/tailors.html' import tailors   %}
+{% from 'macros/groupedTailors.html' import groupedTailors  %}
+{% from 'macros/featuredProducts.html' import featuredProducts   %}
+{% from 'macros/promotion.html' import promotion   %}
 
 {% block content %} 
     {% include 'partials/hero.html' %} 
 
     {% include 'partials/features.html' %}
 
+
+        <section class="px-4">
+               {{ featuredProducts("Explore featured Products",
+                        "Elevate Your Wardrobe with Our Featured Selections", products[:4])}}
+        </section>
+
+        
         <section class="p-4">
-            {{ productsContainer("Trendin this week", products) }}
+                    {{promotion("Delightful Kids' Styles",
+                    "Explore custom outfits for children, tailored to fit perfectly and keep them looking adorable.")}}
         </section>
 
      
-        {{ categories("Explore Male Categories", products)}}
-  
-            <section class="p-4">
-            {{ productsContainer("", products) }}
+        
 
-        </section>
-
-        {{ categories("Explore Female Categories", [1,2,3,4])}}
-
-
-        {{tailors("Popular tailors", products)}}
+        {{groupedTailors("Popular tailors", tailors)}}
 
         {% include 'partials/howItWorks.html'   %}
 

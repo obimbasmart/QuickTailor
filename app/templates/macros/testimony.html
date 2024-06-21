@@ -1,29 +1,22 @@
 {% macro testimony(name, state, firstLetter, review) %}
-    <article class="bg-sc-gray-normal my-2 p-4 duration-700 ease-in-out flex flex-col justify-between min-w-[270px] w-4/5 aspect-[0.99] rounded-md">
+    <article class="card-shadow bg-sc-gray-normal my-2 p-4 duration-700 ease-in-out flex flex-col justify-between min-w-[270px] w-4/5 aspect-[0.99] rounded-md">
         <header class="flex justify-between items-center">
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 width="40"
-                 height="34"
-                 viewBox="0 0 40 34"
-                 fill="none">
-                <path d="M40 0.5V6.44313C36.7347 6.96445 34.449 8.05924 33.1429 9.72749C31.8367 11.3957 31.1837 14.3673 31.1837 18.6422H39.5102V33.5H23.5102V20.9882C23.5102 14.5237 24.7619 9.51896 27.2653 5.97393C29.7687 2.32464 34.0136 0.5 40 0.5ZM16.4898 0.5V6.44313C13.2245 6.96445 10.9388 8.05924 9.63265 9.72749C8.32653 11.3957 7.67347 14.3673 7.67347 18.6422H16V33.5H0V20.9882C0 14.5237 1.2517 9.51896 3.7551 5.97393C6.2585 2.32464 10.5034 0.5 16.4898 0.5Z" fill="#939393" />
-            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="33" viewBox="0 0 40 33" fill="none">
+                <path d="M40 0V5.94313C36.7347 6.46445 34.449 7.55924 33.1429 9.22749C31.8367 10.8957 31.1837 13.8673 31.1837 18.1422H39.5102V33H23.5102V20.4882C23.5102 14.0237 24.7619 9.01896 27.2653 5.47393C29.7687 1.82464 34.0136 0 40 0ZM16.4898 0V5.94313C13.2245 6.46445 10.9388 7.55924 9.63265 9.22749C8.32653 10.8957 7.67347 13.8673 7.67347 18.1422H16V33H0V20.4882C0 14.0237 1.2517 9.01896 3.7551 5.47393C6.2585 1.82464 10.5034 0 16.4898 0Z" fill="#B0D8D8"/>
+              </svg>
 
             <div class="flex items-center gap-4 font-Roboto font-medium">
-                <p class="uppercase relative font-medium  bg-sc-gray-light-active text-black text-base rounded-full w-8 h-8 grid place-content-center">
-                    {{firstLetter}}
-                </p>
-                <p class="text-fdt-grey-darker">
+                <p class="text-pc-teal-normal tracking-wider">
                     {{name}}
                 </p>
             </div>
         </header>
 
-        <p class="text-sm font-montserrat leading-6 text-fdt-grey-darker py-8">
+        <p class="text-sm tracking-wider font-roboto leading-6 text-sc-gray-dark py-8">
             {{review}}
         </p>
 
-        <p class="text-sm text-fdt-grey-dark">
+        <p class="text-sm text-pc-teal-normal tracking-wide">
             {{state}}
         </p>
     </article>

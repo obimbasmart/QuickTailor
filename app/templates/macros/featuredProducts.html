@@ -1,0 +1,21 @@
+{% from 'macros/productCard.html' import productCard %}
+
+{% macro featuredProducts(title, subtitle, products) %}
+    <section class="w-full">
+        <h3 class="px-4 text-base tracking-wide text-pc-teal-normal text-center font-normal  capitalize font-montserrat">
+            {{title}}
+        </h3>
+
+        <p class="text-center text-xs leading-6 text-sc-gray-dark tracking-wider">Elevate Your Wardrobe with Our Featured Selections</p>
+
+        
+        <div class="grid grid-cols-2 md:grid-cols-5 md:grid-rows-4 gap-x-3 gap-y-5 mt-4">
+            {% for product in products %} 
+                {{ productCard(product.name, product.price,
+                                product.img, product.id,
+                                product.tailor.business_name,
+                                product.tailor.photo) }} 
+            {% endfor %}
+          </div>
+    </section>
+{% endmacro %}
