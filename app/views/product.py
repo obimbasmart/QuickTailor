@@ -18,7 +18,6 @@ def get_product_by_id(product_id=None):
 
     product = _get_products(id=product_id)
     form = OrderMeasurementForm()
-    print(product[0].reviews)
     return render_template('pages/product.html', form=form, product=product[0], page="products")
 
    
