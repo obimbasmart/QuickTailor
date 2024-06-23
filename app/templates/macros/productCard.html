@@ -2,7 +2,14 @@
 
 {% macro productCard(product, form, current_user=None) %}
 
-  <div x-data='manager({{ product.to_json | safe }}, likedBefore={{ "true" if product.id in current_user.saved_items else "false"}})'
+  <!-- need this due to Db migration -->
+  {% if current_user.saved_items is None %}
+      saved_items = []
+  {% else %}
+      saved_items = current_user.saved_items
+  {% endif %}
+
+  <div x-data='manager({{ product.to_json | safe }}, likedBefore={{ "true" if product.id in saved_items else "false"}})'
        class="relative p-1 w-full max-w-sm rounded-md  dark:bg-gray-800 dark:border-gray-700 card-shadow">
     <a href="/products/{{ product.id }}">
       <img class="block object-center rounded-md object-cover max-w-full aspect-square"
