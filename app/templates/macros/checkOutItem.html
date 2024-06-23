@@ -1,7 +1,7 @@
 {% macro checkOutItem(product) %}
     {% from 'macros/tailorBadge.html' import tailorBadge %}
 
-    <li id="product-{{ product.id }}"  class="flex flex-col p-2 gap-y-2">
+    <li id="product-{{ product.id }}"  class="card-shadow rounded-md flex flex-col p-2 gap-y-2">
         {{ tailorBadge(product.tailor.business_name, product.tailor.photo) 
         }}
         <div class="flex items-center font-roboto">
@@ -11,7 +11,7 @@
                      class="h-full w-full object-cover object-center" />
             </div>
 
-            <div class="ml-4 flex flex-1 flex-col gap-y-2">
+            <div class="ml-4 flex flex-1 flex-col gap-y-1.5">
                 <div class="flex justify-between items-center text-base font-medium text-gray-900">
                     <h3 class="text-base tracking-wide font-normal text-sc-gray-darker leading-6">
                         <a href="#"> {{ product.name }} </a>
@@ -21,24 +21,24 @@
                 </div>
 
                 <div class="flex items-center justify-between">
-                    <p class="mt-1 font-roboto text-sm text-sc-gray-dark">
+                    <p class="mt-1 font-roboto tracking-wider text-xs text-sc-gray-dark">
                         Price
                     </p>
 
 
-                    <p class="text-sc-gray-dark text-sm font-dosis text-sm tracking-wide">
+                    <p class="text-sc-gray-dark text-sm font-dosis tracking-wider font-semibold">
                         {{ product.price | currency }}
                     </p>
 
                 </div>
 
                 <div class="flex items-center justify-between">
-                    <p class="mt-1 font-roboto text-sm text-sc-gray-dark">
+                    <p class="mt-1 font-roboto tracking-wider text-xs text-sc-gray-dark">
                         Customization value
                     </p>
 
 
-                    <p class="text-sc-gray-dark text-sm font-roboto text-sm tracking-wide">
+                    <p class="text-sc-gray-dark font-semibold font-dosis text-sm tracking-wider">
                         {{ product.customization_value | currency | default(0)}}
                     </p>
 

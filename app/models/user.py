@@ -9,6 +9,7 @@ from ..models.base_model import BaseModel
 from sqlalchemy import JSON, String, DateTime, TEXT
 from sqlalchemy.orm import mapped_column
 from app.constants import default_measurement
+from sqlalchemy_json import NestedMutableJson
 
 class User(BaseModel, BaseUser):
     __tablename__ = 'users'
@@ -24,3 +25,6 @@ class User(BaseModel, BaseUser):
     # Password reset attributes
     reset_token: Mapped[str] = mapped_column(String(128), nullable=True)
     reset_token_expires: Mapped[DateTime] = mapped_column(DateTime, nullable=True)
+
+    saved_items = mapped_column(NestedMutableJson, default=[])
+

@@ -35,30 +35,29 @@
             <a href="{{ url_for("app_views.get_all_products") }}"
                class="text-pc-teal-normal tracking-wide leading-5 border-1 border-pc-teal-normal font-roboto text-sm  w-full hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">Continue Shopping</a>
 
-
         </div>
     {% endif %}
     <div>
-        <ul role="list" class="divide-y-1 divide-gray-200">
+        <ul role="list" class="grid grid-cols-1 gap-y-2">
             {% for product in products %}
                 {{ checkOutItem(product) }}
             {% endfor %}
         </ul>
         {% if products | length > 0 %}
-            <div class="w-full h-auto bg-white dark:bg-gray-700 dark:border-gray-600">
+            <div class="mt-6 w-full h-auto bg-white dark:bg-gray-700 dark:border-gray-600">
                 <section class="border border-sc-gray-light-active rounded-lg p-3">
                     <ul class="space-y-2 mt-2 tracking-wide text-sm font-roboto text-sc-gray-darker">
                         <li class="flex items-center justify-between">
-                            <span class="text-base font-normal">No. of items</span>
-                            <span> {{ products | length }}  </span>
+                            <span class="font-normal text-sm tracking-wider">No. of items</span>
+                            <span class="font-dosis tracking-wider font-semibold"> {{ products | length }}  </span>
                         </li>
                         <li class="flex items-center justify-between">
-                            <span class="text-base font-normal">Sub total</span>
-                            <span class="text-base font-dosis font-normal tracking-wide"> {{ products | sum_price | currency }} </span>
+                            <span class="text-sm tracking-wider font-roboto font-normal">Sub total</span>
+                            <span class="text-base font-dosis font-semibold tracking-wider"> {{ products | sum_price | currency }} </span>
                         </li>
                         <li class="flex items-center justify-between">
-                            <span class="text-base font-normal">Customization value</span>
-                            <span class="text-center font-dosis text-base font-normal tracking-wide"> {{ products | sum_custom_value | default(0) | currency }}</span>
+                            <span class="text-sm tracking-wider">Customization value</span>
+                            <span class="text-base font-dosis font-semibold  tracking-wider"> {{ products | sum_custom_value | default(0) | currency }}</span>
                         </li>
                     </ul>
                 </section>
@@ -66,7 +65,7 @@
 
                 <a href="{{ url_for('app_views.order' ) }}">
                     <button type="button"
-                            class="tracking-wider font-dosis text-white mt-5 bg-pc-teal-normal  text-sm  w-full hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">
+                            class="font-semibold font-dosis text-white mt-5 bg-pc-teal-normal  text-sm  w-full hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 tracking-wider rounded-lg px-5 py-2.5 text-center me-2 mb-2">
                             Pay {{ (products | sum_price - products | sum_custom_value) | currency }}
                     </button>
                 </a>

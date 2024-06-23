@@ -1,18 +1,11 @@
-{% from 'macros/productsContainer.html' import productsContainer   %}
+{% from 'macros/productsContainer.html' import productsContainer %}
 
-{% extends 'base.html' %} 
+{% extends 'page_wrapper.html' %}
 
-{% block content %}
-<div class="w-[90%] m-[auto] mb-8">
- <div class="text-center space-y-1 mb-8 mt-7">
+{% block page_content %}
 
-        <h1 class="font-montserrat text-xl leading-8 font-medium pt-4">Saved</h1>
- </div>
+    {{ productsContainer("", products, form=crsf, current_user=current_user) 
+    }}
 
-{{
-  productsContainer("", [1,2,3,4,5,6])
-}}
-
-</div>
 
 {% endblock %}
