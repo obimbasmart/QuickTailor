@@ -97,7 +97,6 @@ def generate_custom_code():
 
     product = Product.query.filter_by(id=product_id).one_or_404()
     user_id = 'all'
-    print(product_id)
 
     if email.strip() != '':
         user = User.query.filter_by(email=email).one_or_404()

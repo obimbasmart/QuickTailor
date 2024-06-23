@@ -25,7 +25,6 @@ def cart(product_id=None):
     if form.validate_on_submit():
         measurements = {}
         for field_name, field in form.data.items():
-            print(field_name, field)
             if isinstance(field, Decimal):
                 measurements[field_name] = float(field)
             current_user.measurements = measurements
@@ -45,7 +44,6 @@ def cart(product_id=None):
 
 @app_views.route('/products/<product_id>/cart', methods=["DELETE"])
 def delete_from_cart(product_id=None):
-    print("OKddd")
     cart_item = CartItem.query.filter_by(
         product_id=product_id, user_id=current_user.id).first()
     db.session.delete(cart_item)
@@ -82,7 +80,6 @@ def apply_code(user_id=None):
             if item.product.customization_tokens.get('all'):
                 checkout_code = item.product.customization_tokens.get('all')
                 code_details = Tailor.decode_customization_code(checkout_code)
-                print(code_details)
                 if code_details.get('value'):
                     CartItem.query.filter_by(id=item.id).one_or_404(
                     ).cusomization_value = code_details.get('value')

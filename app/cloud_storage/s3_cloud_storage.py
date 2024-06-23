@@ -29,7 +29,6 @@ class S3StorageService():
 
     def __is_valid_file_extenstion(self, filename):
         file_ext = filename.split('.')[-1]
-        print(file_ext)
         return file_ext in S3StorageService.__allowed_file_types
 
     def upload_file(self, file: FileStorage, tailor_id: str,

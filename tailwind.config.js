@@ -31,7 +31,8 @@ module.exports = {
         "roboto": ["Roboto", "serif"],
         "montserrat": ["Montserrat", "sans-serif"],
         "montserrat-alternates": ["Montserrat Alternates", "sans-serif"],
-        "trajanpro": [ 'Trajan Pro', "sans-serif"]
+        "dosis": ["Dosis", "sans-serif"]
+
       },
       lineHeight: {
         '7': '21px',

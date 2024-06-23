@@ -22,6 +22,7 @@ csrf = CSRFProtect()
 redis_cache = Cache()
 s3_client = S3StorageService('quicktailor-products-bucket', cache=redis_cache)
 
+
 def create_app(config=DevelopmentConfig) -> Flask:
     """create a flask app"""
     app = Flask(__name__)
@@ -44,7 +45,6 @@ def create_app(config=DevelopmentConfig) -> Flask:
         register_filters(app)
 
         app.config['db'] = db
-
 
     @app.context_processor
     def inject_sidebar_links():
@@ -84,8 +84,6 @@ def register_filters(app):
     app.jinja_env.filters['time_now'] = filters.time_now
     app.jinja_env.filters['today_date'] = filters.today_date
     app.jinja_env.filters['average_reviews'] = filters.average_reviews
-
-
 
 
 def register_blueprints(app):

@@ -78,7 +78,6 @@ class Tailor(BaseUser, BaseModel):
     def generate_customization_code(cls, product_id: str, value: int):
         attr = json.dumps({"product_id":  product_id, "value": value})
         code = base64.b64encode(attr.encode('utf-8')).decode('utf-8')
-        print(code)
         return code
 
     @classmethod

@@ -21,7 +21,6 @@ def send_email(subject: str, body: str, recievers: List[str], html_content=None)
         response = sg.send(message)
         return response.status_code
     except Exception as e:
-        print(e)
         return 500
 
 

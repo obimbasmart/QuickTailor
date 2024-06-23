@@ -8,10 +8,7 @@
         
         <div class="grid grid-cols-2 md:grid-cols-5 md:grid-rows-4 gap-x-3 gap-y-5 mt-4">
             {% for product in products %} 
-                {{ productCard(product.name, product.price,
-                                product.img, product.id,
-                                product.tailor.business_name,
-                                product.tailor.photo) }} 
+                {{ productCard(product) }} 
             {% endfor %}
           </div>
     </section>
