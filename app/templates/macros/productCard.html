@@ -11,7 +11,7 @@
            alt="" />
     </a>
     <div class="p-1">
-      <a href="/products/{{ id }}">
+      <a href="/products/{{ product.id }}">
         <h5 class="truncate text-sm tablet:text-base leading-8 font-roboto font-normal tracking-wider text-sc-gray-darker dark:text-white">
           {{ product.name }}
         </h5>
@@ -40,7 +40,7 @@
 
 
       <div class="flex items-center justify-between mt-2  w-full">
-        <a href="/{{ tailor_name }}">
+        <a href="/{{ product.tailor.business_name }}">
           {{ tailorBadge(product.tailor.business_name, product.tailor.photo) }}
         </a>
       </div>
