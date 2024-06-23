@@ -9,7 +9,7 @@ USER_SIDEBAR_LINKS = [
         "is_protected": 1, "icon_name": "orders"},
     {"name": "cart", "link": "app_views.view_cart",
         "is_protected": 0, "icon_name": "cart"},
-    {"name": "saved", "link": "app_views.about_us",
+    {"name": "saved", "link": "app_views.saved",
         "is_protected": 0, "icon_name": "saved"},
     {"name": "about us", "link": "app_views.about_us",
         "is_protected": 0, "icon_name": "aboutus"},

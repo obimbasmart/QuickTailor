@@ -11,6 +11,7 @@ from app.db_access.product import _get_product_with_img_urls
 from app.forms.tailor_forms import CRSForm
 from app.forms.cart_forms import ApplyCodeForm
 from app.models.tailor import Tailor
+from app.models.product import Product
 
 
 @app_views.route('/get_csrf_token', methods=['GET'])
@@ -56,7 +57,7 @@ def view_cart():
     form = ApplyCodeForm()
     if current_user.is_anonymous:
         return redirect(url_for('auth_views.login'))
-    
+
     cart_items = CartItem.query.filter_by(user_id=current_user.id).all()
     for cart_item in cart_items:
         cart_item.product.customization_value = cart_item.cusomization_value
@@ -88,68 +89,33 @@ def apply_code(user_id=None):
         return redirect(url_for('app_views.view_cart'))
 
 
-# @app_views.route('/cart', methods=["GET", "POST"])
-# def cart():
+@app_views.route('/me/saved', methods=["GET", "POST"])
+def saved():
+    if current_user.is_anonymous:
+        products = []
+    else:
+        products = db.session.query(Product).filter(
+            Product.id.in_(current_user.saved_items)).all()
+    return render_template('pages/save.html', products=products)
 
-#     if request.method == "POST":
-#         data = request.json
-#         cart_items = data.get('cart_items')
-#         if cart_items:
-#         # Process the cart items and generate the response
-#             _data = [{
-#                 "image_url": url_for('static', filename='images/product_image_3.png'),
-#                 "name": "Agbada Buba",
-#                 "price": 10500,
-#                 "total_price": 10500,
-#                 "customization_value": 105000,
-#                 "id": 1234
-#                  },
-#                  {
-#                 "image_url": url_for('static', filename='images/product_image_3.png'),
-#                 "name": "Agbada Lace",
-#                 "price": 50500,
-#                 "total_price": 10500,
-#                 "id": 1234,
-#                 "customization_value": 105000
-#                  },
-#                  {
-#                 "image_url": url_for('static', filename='images/product_image_3.png'),
-#                 "name": "Agbada Ankara",
-#                 "price": 10500,
-#                 "total_price": 10500,
-#                 "id": 1234,
-#                 "customization_value": 105000
-#                  },
-#                  {
-#                 "image_url": url_for('static', filename='images/product_image_3.png'),
-#                 "name": "Agbada Ankara",
-#                 "price": 20500,
-#                 "total_price": 100500,
-#                 "id": 1234,
-#                 "customization_value": 10000
-#                  },
-#                  {
-#                 "image_url": url_for('static', filename='images/product_image_3.png'),
-#                 "name": "Agbada Ankara",
-#                 "price": 50000,
-#                 "total_price": 140500,
-#                 "id": 1234,
-#                 "customization_value": 15000
-#                  }
 
-# ]
-#             response_data = []
-#             for cart_item_id in cart_items:
-#                 for item in _data:
-#                     if item['id'] == cart_item_id:
-#                         response_data.append(item)
-#                         break
-#             return jsonify(response_data), 200
-#         return jsonify([]), 400
-#     form =  CustomizationForm()
-#     return render_template('pages/cart.html', data=notification, form=form)
+@app_views.route('/product/<product_id>/save', methods=["POST"])
+def save_item(product_id=None):
 
-# @app_views.route('/user/save', methods=["GET", "POST"])
-# def save():
-#     form =  CustomizationForm()
-#     return render_template('pages/save.html', data=notification, form=form)
+    if current_user.is_anonymous:
+        return 'Not signed In'  # localStorage will do the work
+
+    product = Product.query.filter_by(id=product_id).one_or_404()
+    saved_items = current_user.saved_items
+    print(current_user.saved_items)
+    if saved_items:
+        if not product_id in saved_items:
+            current_user.saved_items.append(product_id)
+        else:
+            current_user.saved_items.remove(product_id)
+    else:
+        current_user.saved_items = [product_id]
+
+    print(current_user.saved_items)
+    db.session.commit()
+    return "Success"

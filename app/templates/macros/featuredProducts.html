@@ -1,6 +1,6 @@
 {% from 'macros/productCard.html' import productCard %}
 
-{% macro featuredProducts(title, subtitle, products) %}
+{% macro featuredProducts(title, subtitle, products, form, current_user=None) %}
     <section class="w-full">
         <h3 class="px-4 text-base tracking-wide text-pc-teal-normal text-center font-normal  capitalize font-montserrat">
             {{title}}
@@ -11,7 +11,7 @@
         
         <div class="grid grid-cols-2 md:grid-cols-5 md:grid-rows-4 gap-x-3 gap-y-5 mt-4">
             {% for product in products %} 
-                {{ productCard(product) }} 
+                {{ productCard(product, form, current_user) }} 
             {% endfor %}
           </div>
     </section>

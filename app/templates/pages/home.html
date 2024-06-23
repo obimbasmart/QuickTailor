@@ -7,6 +7,7 @@
 {% from 'macros/groupedTailors.html' import groupedTailors  %}
 {% from 'macros/featuredProducts.html' import featuredProducts   %}
 {% from 'macros/promotion.html' import promotion   %}
+{% from 'macros/testimonials.html' import testimonials   %}
 
 {% block content %} 
     {% include 'partials/hero.html' %} 
@@ -16,7 +17,7 @@
 
         <section class="px-4">
                {{ featuredProducts("Explore featured Products",
-                        "Elevate Your Wardrobe with Our Featured Selections", products[:4])}}
+                        "Elevate Your Wardrobe with Our Featured Selections", products[:4], crsf, current_user=current_user)}}
         </section>
 
         
@@ -32,7 +33,7 @@
 
         {% include 'partials/howItWorks.html'   %}
 
-        {% include 'partials/testimonials.html'   %}
+        {{testimonials(reviews)}}
 
         {% include 'partials/footer.html'   %}
 {% endblock %}

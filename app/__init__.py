@@ -2,7 +2,7 @@
 
 from app.models.tailor import Tailor
 from app.models.user import User
-from flask import Flask, jsonify, make_response
+from flask import Flask, jsonify, make_response, request
 from app.config import DevelopmentConfig, ProductionConfig
 from flask_migrate import Migrate
 from os import environ
@@ -13,6 +13,7 @@ from app.constants import USER_SIDEBAR_LINKS, ADMIN_SIDEBAR_LINKS
 from flask_wtf.csrf import CSRFProtect
 from app.cloud_storage.s3_cloud_storage import S3StorageService
 from app.cache import Cache
+from app.forms.tailor_forms import CRSForm
 
 load_dotenv()
 
@@ -51,7 +52,7 @@ def create_app(config=DevelopmentConfig) -> Flask:
         if not current_user.is_anonymous and current_user.is_tailor:
             if current_user.is_tailor:
                 return dict(user_sidebar_links=ADMIN_SIDEBAR_LINKS)
-        return dict(user_sidebar_links=USER_SIDEBAR_LINKS)
+        return dict(user_sidebar_links=USER_SIDEBAR_LINKS, crsf=CRSForm())
 
     @app.errorhandler(404)
     def resource_not_found(self):

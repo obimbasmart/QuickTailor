@@ -1,14 +1,14 @@
 {% from 'macros/productCard.html' import productCard %}
 
-{% macro productsContainer(title, products) %}
+{% macro productsContainer(title, products, form, current_user=None) %}
     <section class="w-full">
-        <h3 class="px-4 text-base font-normal tracking-wide capitalize font-roboto">
+        <h3 class="text-base font-normal tracking-wide capitalize font-roboto">
             {{title}}
         </h3>
         
         <div class="grid grid-cols-2 md:grid-cols-5 md:grid-rows-4 gap-x-3 gap-y-5 mt-4">
             {% for product in products %} 
-                {{ productCard(product) }} 
+                {{ productCard(product, form=form, current_user=current_user) }} 
             {% endfor %}
           </div>
     </section>

@@ -267,7 +267,7 @@
                 {% if not current_user.is_tailor %}
                     
                     <div class="px-4 pb-4 ">
-                        {{ productsContainer("Related products", product.tailor.products)}}
+                        {{ productsContainer("Related products", product.tailor.products, form=crsf)}}
                     </div>
 
                 {% endif %}
