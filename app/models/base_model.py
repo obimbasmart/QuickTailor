@@ -7,7 +7,6 @@ from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column
 import uuid
 from datetime import datetime, timezone
-from flask_sqlalchemy import SQLAlchemy
 
 from app.models import db
 
@@ -20,14 +19,13 @@ class BaseModel(db.Model):
                                                  onupdate=lambda: datetime.now(timezone.utc))
 
     def __init__(self, *args, **kwargs):
-        """Initialization of the base model"""
-
         if kwargs:
             for key, value in kwargs.items():
                 setattr(self, key, value)
     
         self.id = str(uuid.uuid4())
         self.created_at = datetime.utcnow()
+        
 
     def __str__(self):
         """String representation of the BaseModel class"""

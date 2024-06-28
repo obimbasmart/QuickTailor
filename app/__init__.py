@@ -2,7 +2,7 @@
 
 from app.models.tailor import Tailor
 from app.models.user import User
-from flask import Flask, jsonify, make_response, request
+from flask import Flask, jsonify, make_response
 from app.config import DevelopmentConfig, ProductionConfig
 from flask_migrate import Migrate
 from os import environ

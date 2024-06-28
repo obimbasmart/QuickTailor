@@ -8,6 +8,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'tailor-img': "url('/static/images/tailor_room_1.jpg')",
+        'tailor-img-2': "url('/static/images/tailor_room.jpeg')",
+        'kids-img': "url('/static/images/kids3.jpeg')",
+      },
+
       colors: {
         "pc-teal-normal": "#008080",
         "pc-teal-light": "#E6F2F2",
@@ -22,8 +28,8 @@ module.exports = {
         "blue-700": "#006060",
         "blue-300": "#006060",
         "sc-gray-darker": "#2D2D2D",
-	"t3": '#333',
-	"notif":"var(--Primary-Color-Teal-Light, #E6F2F2)"
+        "t3": '#333',
+        "notif": "var(--Primary-Color-Teal-Light, #E6F2F2)"
       },
 
       fontFamily: {
@@ -44,7 +50,7 @@ module.exports = {
         'tablet': '412',
         // => @media (min-width: 580px) { ... }
 
-      }  
+      }
 
     },
   },
