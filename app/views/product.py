@@ -8,7 +8,6 @@ from app.views import app_views
 from flask import render_template, abort, redirect, url_for
 from flask_login import current_user
 from ..db_access.product import _get_products
-from app import s3_client
 from app.forms.main_forms import OrderMeasurementForm
 
 @app_views.route('/products/<product_id>', methods=["GET"])
