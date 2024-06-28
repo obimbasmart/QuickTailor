@@ -6,7 +6,9 @@
            <img class="bg-center object-cover w-18 max-w-18 aspect-square rounded-full"
                 src="{{ tailor.photo }}"
                 alt="" />
-           <span class="-top-1 left-12  absolute  w-4 h-4 bg-[#48E000] border-2 border-white dark:border-gray-800 rounded-full"></span>
+           <span 
+                x-bind:class="{'bg-[#E0A100]': {{'false' if tailor.is_available else 'true' }} }" 
+                class="-top-1 left-12  absolute  w-4 h-4 bg-[#48E000] border-2 border-white dark:border-gray-800 rounded-full"></span>
        </div>
 
        <div class="flex text-base leading-6 mr-0">
