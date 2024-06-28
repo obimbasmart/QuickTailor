@@ -151,15 +151,29 @@
                 </div>
 
                 {% if current_user.is_authenticated %}
-                    <button :class="{ 'bg-sc-gray-light': isTailor, 'bg-blue-500': !isTailor }"
+                    <button :class="{ 'bg-sc-gray-light': isTailor, 'bg-blue-500': !isTailor, 'bg-pc-teal-normal/50' : {{'false' if product.tailor.is_available else 'true'}} }"
+                            x-bind:disabled="{{ 'false' if product.tailor.is_available else 'true' }}"
                             data-drawer-target="bottom-sheet-measurement"
                             data-drawer-show="bottom-sheet-measurement"
                             data-drawer-placement="bottom"
                             aria-controls="add-measurement"
                             type="button"
-                            class="text-white  text-sm  w-full hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">
+                            class="text-white mb-0 text-sm  w-full hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">
                         Order
                     </button>
+
+                    {% if not product.tailor.is_available %}
+                    <p class="text-[10px] leading-4 -mt-1 tracking-wider inline-flex w-full justify-center items-center text-sc-gray-dark">
+                        <svg class="text-sc-gray-dark me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M8.00008 13.7599C11.2696 13.7599 13.9201 11.1094 13.9201 7.83992C13.9201 4.5704 11.2696 1.91992 8.00008 1.91992C4.73055 1.91992 2.08008 4.5704 2.08008 7.83992C2.08008 11.1094 4.73055 13.7599 8.00008 13.7599Z" stroke="#606060" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M7.97519 5.27797L7.97534 5.27808C7.98602 5.28567 7.99844 5.29035 8.01143 5.29171C8.03278 5.29056 8.05308 5.28176 8.06855 5.2668L8.41619 5.62617M7.97519 5.27797L7.9665 5.16154C7.97729 5.15111 7.99083 5.14415 8.00543 5.14143L8.00545 5.14142C8.02014 5.13869 8.03533 5.14035 8.049 5.14614L8.04903 5.14615C8.06274 5.15196 8.07443 5.16167 8.08265 5.17408L8.08279 5.17429C8.08998 5.18512 8.09425 5.19766 8.09519 5.21068C8.09333 5.23201 8.08385 5.25199 8.06845 5.2669L8.41619 5.62617M7.97519 5.27797C7.9632 5.26945 7.95389 5.25752 7.94851 5.24354L7.94841 5.2433M7.97519 5.27797L7.94841 5.2433M8.41619 5.62617C8.52761 5.51833 8.592 5.37086 8.59539 5.21582L8.00012 5.7918C8.1552 5.79352 8.3047 5.73402 8.41619 5.62617ZM7.94841 5.2433C7.94308 5.22946 7.94194 5.21438 7.94513 5.1999L7.94519 5.19964M7.94841 5.2433L7.94519 5.19964M7.94519 5.19964C7.94837 5.18522 7.95573 5.17197 7.96649 5.16156L7.94519 5.19964ZM7.99354 10.5792L7.99379 10.5793M7.99354 10.5792L7.9932 10.5796L7.99354 10.5792ZM7.99354 10.5792L7.99379 10.5793M7.99379 10.5793L7.99379 10.5793M7.99379 10.5793L7.99379 10.5793M7.99375 7.12305L7.99384 7.12309L7.99375 7.12305ZM7.99375 7.12305L7.99356 7.12298L7.99375 7.12305ZM7.99379 10.5793L7.82233 10.9929L7.99379 10.5793Z" stroke="#606060"/>
+                          </svg>
+                          
+                          <span class="font-roboto">
+                            This tailor is offline and is currently not accepting orders!
+                          </span>
+                    </p>
+                    {% endif %}
 
                 {% else %}
                     <a href="{{ url_for('auth_views.login', next='products/{{product.id }}') }}"

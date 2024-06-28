@@ -1132,6 +1132,10 @@ input:checked + .toggle-bg {
   inset-inline-start: -0.75rem;
 }
 
+.-top-1 {
+  top: -0.25rem;
+}
+
 .bottom-0 {
   bottom: 0px;
 }
@@ -1180,12 +1184,12 @@ input:checked + .toggle-bg {
   left: 2.75rem;
 }
 
-.left-2\/4 {
-  left: 50%;
+.left-12 {
+  left: 3rem;
 }
 
-.left-9 {
-  left: 2.25rem;
+.left-2\/4 {
+  left: 50%;
 }
 
 .right-0 {
@@ -1284,11 +1288,6 @@ input:checked + .toggle-bg {
   margin: auto;
 }
 
-.mx-10 {
-  margin-left: 2.5rem;
-  margin-right: 2.5rem;
-}
-
 .mx-16 {
   margin-left: 4rem;
   margin-right: 4rem;
@@ -1317,6 +1316,11 @@ input:checked + .toggle-bg {
 .mx-6 {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
+}
+
+.mx-8 {
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 .mx-\[4px\] {
@@ -1373,12 +1377,20 @@ input:checked + .toggle-bg {
   margin-inline-start: -0.25rem;
 }
 
+.-mt-1 {
+  margin-top: -0.25rem;
+}
+
 .-mt-2 {
   margin-top: -0.5rem;
 }
 
 .-mt-\[2px\] {
   margin-top: -2px;
+}
+
+.mb-0 {
+  margin-bottom: 0px;
 }
 
 .mb-1 {
@@ -1729,6 +1741,10 @@ input:checked + .toggle-bg {
   height: 101px;
 }
 
+.h-\[18px\] {
+  height: 18px;
+}
+
 .h-\[1px\] {
   height: 1px;
 }
@@ -1916,6 +1932,10 @@ input:checked + .toggle-bg {
 
 .w-\[112px\] {
   width: 112px;
+}
+
+.w-\[18px\] {
+  width: 18px;
 }
 
 .w-\[20\%\] {
@@ -2799,6 +2819,11 @@ input:checked + .toggle-bg {
   background-color: rgb(222 222 222 / var(--tw-bg-opacity));
 }
 
+.bg-\[\#E0A100\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(224 161 0 / var(--tw-bg-opacity));
+}
+
 .bg-\[\#E28835\] {
   --tw-bg-opacity: 1;
   background-color: rgb(226 136 53 / var(--tw-bg-opacity));
@@ -2821,6 +2846,10 @@ input:checked + .toggle-bg {
 
 .bg-black\/30 {
   background-color: rgb(0 0 0 / 0.3);
+}
+
+.bg-black\/35 {
+  background-color: rgb(0 0 0 / 0.35);
 }
 
 .bg-black\/40 {
@@ -2871,11 +2900,6 @@ input:checked + .toggle-bg {
   background-color: rgb(17 24 39 / 0.5);
 }
 
-.bg-green-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(49 196 141 / var(--tw-bg-opacity));
-}
-
 .bg-green-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(14 159 110 / var(--tw-bg-opacity));
@@ -2902,6 +2926,10 @@ input:checked + .toggle-bg {
 .bg-pc-teal-normal {
   --tw-bg-opacity: 1;
   background-color: rgb(0 128 128 / var(--tw-bg-opacity));
+}
+
+.bg-pc-teal-normal\/50 {
+  background-color: rgb(0 128 128 / 0.5);
 }
 
 .bg-sc-gray {
@@ -2944,14 +2972,6 @@ input:checked + .toggle-bg {
 
 .bg-white\/50 {
   background-color: rgb(255 255 255 / 0.5);
-}
-
-.bg-black\/35 {
-  background-color: rgb(0 0 0 / 0.35);
-}
-
-.bg-black\/20 {
-  background-color: rgb(0 0 0 / 0.2);
 }
 
 .bg-opacity-80 {
@@ -2998,8 +3018,8 @@ input:checked + .toggle-bg {
   background-image: url('/static/images/kids3.jpeg');
 }
 
-.bg-tailor-img {
-  background-image: url('/static/images/tailor_room_1.jpg');
+.bg-tailor-img-3 {
+  background-image: url('/static/images/hero_img_1.png');
 }
 
 .bg-tailor-img-2 {
@@ -3014,6 +3034,12 @@ input:checked + .toggle-bg {
 
 .from-black\/35 {
   --tw-gradient-from: rgb(0 0 0 / 0.35) var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(0 0 0 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.from-black\/50 {
+  --tw-gradient-from: rgb(0 0 0 / 0.5) var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(0 0 0 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
@@ -3039,12 +3065,6 @@ input:checked + .toggle-bg {
 .from-pc-teal-normal {
   --tw-gradient-from: #008080 var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(0 128 128 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
-.from-black\/50 {
-  --tw-gradient-from: rgb(0 0 0 / 0.5) var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(0 0 0 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 

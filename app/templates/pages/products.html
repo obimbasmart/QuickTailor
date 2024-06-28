@@ -2,7 +2,7 @@
 
 {% from 'macros/productCard.html' import productCard %}
 {% from 'macros/productsContainer.html' import productsContainer %}
-{% from 'macros/promotion.html' import promotion   %}
+{% from 'macros/promotion.html' import promotion %}
 
 {% block page_content %}
   {% from 'macros/loadingState.html' import loadingState %}
@@ -49,18 +49,24 @@
     </button>
   </header>
 
-  
+
   {{ loadingState() }}
 
   {{
     promotion("Create Your Perfect Outfit!",
-    "Connect with top tailors for custom designs. Choose your fabric, add your measurements, and track your order—all in one place",
-    bg_img="bg-tailor-img-2", with_button=False)
+    "Connect with top tailors for custom designs",
+    bg_img="bg-tailor-img-3", button_name="Discover more", opacity=40, with_button=False)
   }}
 
   {{ productsContainer("", products, form=crsf, current_user=current_user) 
   }}
 
+
+  <section class="mt-4">
+    {{ promotion("Delightful Kids' Styles",
+    "Explore custom outfits for children, tailored to fit perfectly and keep them looking adorable.",
+    'bg-kids-img') }}
+  </section>
 
 {% endblock %}
 

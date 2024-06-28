@@ -5,42 +5,43 @@
 
 {% block content %}
     <section class="bg-black/40 flex flex-col items-center justify-center w-full h-[20vh] bg-cover bg-center bg-no-repeat bg-[url('/static/images/hero_img_1.png')]  bg-blend-multiply">
-            <div class="text-center gap-y-1 flex flex-col items-center justify-center">
-                <h1 class="font-montserrat text-white text-xl font-medium">
-                    Our process
-              </h1>
-              <p class="font-roboto text-sc-gray-light text-xs font-normal tracking-widest">
+        <div class="text-center gap-y-1 flex flex-col items-center justify-center">
+            <h1 class="font-montserrat text-white text-xl font-medium">
+                Our process
+            </h1>
+            <p class="font-roboto text-sc-gray-light text-xs font-normal tracking-widest">
                 Achieve Your Perfect Fit in 6 Simple Steps
-              </p>
-        
-            </div>
+            </p>
+
+        </div>
     </section>
 
     <section class="p-4 grid grid-cols-2 md:grid-cols-2 gap-2">
         {{ feature('Style Selection', 'style_selection', 'Choose your perfect design from our collection.') }}
 
-        {{ feature('Personalize', 'customization', 
-        'Customize details like fabrics, colors, and fit to match your style.') }}
+        {{ feature('Personalize', 'customization',
+                'Customize details like fabrics, colors, and fit to match your style.') }}
 
-        {{ feature("Add Measurement", "provide_measurement", 
-        "Provide your measurements using our intiutive measurement guild") }}
+        {{ feature("Add Measurement", "provide_measurement",
+                "Provide your measurements using our intiutive measurement guild") }}
 
         {{ feature("Place Your Order", "order_placement",
-            "Place your order with confidence and submit your design.") }}
-
-        
-
-        {{ feature("Progress Tracking", "tracking",  "Follow your order’s journey from tailoring to delivery.") }}
+                "Place your order with confidence and submit your design.") }}
 
 
-        {{ feature("Enjoy Your Style", "enjoy", "Receive your custom outfit and showcase your unique look.") }}
+
+        {{ feature('Progress Tracking', 'tracking', 'Follow your order’s journey from tailoring to delivery.') }}
+
+        {{ feature('Enjoy Your Style', 'enjoy', 'Receive your custom outfit and showcase your unique look.') }}
     </section>
 
     <div class="p-4 text-center">
-        <button type="button"
-                class="font-roboto leading-5 py-2.5 px-6 text-sm font-medium text-pc-teal-normal focus:outline-none bg-sc-gray-light rounded-lg tracking-wider hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-            Get Started
-        </button>
+        <a href="{{ url_for('app_views.get_all_products') }}">
+            <button type="button"
+                    class="font-roboto leading-5 py-2.5 px-6 text-sm font-medium text-pc-teal-normal focus:outline-none bg-sc-gray-light rounded-lg tracking-wider hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                Get Started
+            </button>
+        </a>
     </div>
 
     <section class="p-4">
@@ -51,7 +52,7 @@
         <div class="bg-pc-teal-normal rounded-md pb-4">
             <div>
                 <img class="rounded-t-md object-cover object-center"
-                     src="{{ url_for('static', filename='/images/forTailors.png') }}"
+                     src="{{ url_for('static', filename='/images/tailor_room_1.jpg') }}"
                      alt="" />
             </div>
 
@@ -72,7 +73,7 @@
                 </p>
             </div>
 
-            <a href="#"
+            <a href="{{ url_for("app_views.register") }}"
                class="font-roboto mx-4 space-x-2.5 inline-flex justify-start items-start py-2.5 px-6 text-sm font-medium text-center text-pc-teal-normal rounded-md bg-white focus:ring-4 focus:ring-pc-teal-normal dark:focus:ring-blue-900">
                 <span class="tracking-wide font-roboto">Join</span>
                 <svg xmlns="http://www.w3.org/2000/svg"

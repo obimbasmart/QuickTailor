@@ -1,10 +1,12 @@
-{% macro tailorBadge(tailor_name, tailor_img_url) %}
+{% macro tailorBadge(name, photo, is_available) %}
    <span class="flex gap-1 items-center relative">
     <div class="relative h-fit">
-        <img class="w-5 h-5 rounded-full object-cover" src="{{tailor_img_url}}" alt="Tailor profile image">
-        <span class="absolute top-0 left-0 transform -translate-y-1/2 w-2 h-2 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+        <img class="w-5 h-5 rounded-full object-cover" src="{{photo}}" alt="Tailor profile image">
+        <span 
+            x-bind:class="{'bg-[#E0A100]': {{'false' if is_available else 'true' }} }" 
+            class="absolute top-0 bg-[#48E000] right-0 transform -translate-y-1/2 w-2 h-2  border-1 border-white dark:border-gray-800 rounded-full"></span>
     </div>
 
-    <p class="font-roboto text-sc-gray-darker leading-5 tracking-wider text-xs">{{tailor_name}}</p>
+    <p class="font-roboto text-sc-gray-darker leading-5 tracking-wider text-xs">{{name}}</p>
    </span>
 {% endmacro %}

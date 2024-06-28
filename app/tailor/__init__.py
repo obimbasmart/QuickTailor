@@ -9,3 +9,4 @@ from . import verification
 from . import index
 from . import CRUD
 from . import orders
+from . import profile

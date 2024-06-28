@@ -39,7 +39,8 @@
 
       <div class="flex items-center justify-between mt-2  w-full">
         <a href="/{{ product.tailor.business_name }}">
-          {{ tailorBadge(product.tailor.business_name, product.tailor.photo) }}
+          {{ tailorBadge(product.tailor.business_name,
+            product.tailor.photo, product.tailor.is_available) }}
         </a>
       </div>
     </div>

@@ -3,7 +3,9 @@
     <div role="heading" class="w-full flex items-center justify-between">
        <div class="relative min-w-16 min-h-16 max-w-16 max-h-16 me-2">
            <img class="block bg-center object-cover min-w-16 min-h-16 max-w-16 max-h-16 rounded-full" src="{{tailor.photo}}" alt="">
-           <span class="-bottom-1 left-9 absolute  w-4 h-4 bg-[#48E000] border-2 border-white dark:border-gray-800 rounded-full"></span>
+           <span
+                x-bind:class="{'bg-[#E0A100]': {{'false' if tailor.is_available else 'true' }} }" 
+                class="-top-1 left-12 absolute  w-[18px] h-[18px] bg-[#48E000] border-2 border-white dark:border-gray-800 rounded-full"></span>
        </div>
 
        <div class="text-base leading-6 mr-5">

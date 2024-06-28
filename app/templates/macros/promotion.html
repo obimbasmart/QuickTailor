@@ -1,18 +1,23 @@
-{% macro promotion(title, desc, bg_img, with_button=True) %}
-    <div class="bg-gradient-to-r from-black/50 rounded-xl bg-black/20 card-shadow text-white {{bg_img}} bg-center bg-cover flex items-center justify-center  bg-no-repeat  bg-blend-multiply  duration-700 ease-in-out w-full"
+{% macro promotion(title, desc, bg_img, button_name=None, with_button=True, opacity=35) %}
+    <div class="bg-gradient-to-r from-black/50 rounded-xl bg-black/35 card-shadow text-white {{bg_img}} bg-center bg-cover flex items-center justify-center  bg-no-repeat  bg-blend-multiply  duration-700 ease-in-out w-full"
          >
-        <div class="rounded-xl bg-gradient-to-r from-black/35 h-full w-full flex justify-center items-center">
-            <div class="mx-10 my-5 flex flex-col gap-6 max-w-96 ">
+        <div class="rounded-xl bg-gradient-to-r from-black/{{opacity}} h-full w-full flex justify-center items-center">
+            <div class="mx-8 my-5 flex flex-col gap-6 max-w-96 ">
                 <h1 class="font-montserrat text-xl font-medium">
                     {{title}}
                 </h1>
-                <p class="font-roboto text-sc-gray-light text-xs font-normal tracking-widest">
+                <p class="font-roboto leading-7 text-sc-gray-light text-xs font-normal tracking-widest">
                    {{desc}}
                 </p>
 
                 {% if with_button %}
                     <button class="text-white w-fit font-roboto  tracking-widest text-xs border border-white focus:outline-none dark:focus:ring-teal-800 font-medium rounded-lg px-6 py-2.5 text-center">
-                        View collections
+                        {% if button_name %}
+                            {{button_name}}
+                        {% else %}
+                            View collections
+                        {% endif %}
+
                     </button>
                 {% endif %}
             </div>
