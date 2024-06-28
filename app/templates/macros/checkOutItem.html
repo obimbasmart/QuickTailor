@@ -2,7 +2,7 @@
     {% from 'macros/tailorBadge.html' import tailorBadge %}
 
     <li id="product-{{ product.id }}"  class="card-shadow rounded-md flex flex-col p-2 gap-y-2">
-        {{ tailorBadge(product.tailor.business_name, product.tailor.photo) 
+        {{ tailorBadge(product.tailor.business_name, product.tailor.photo, tailor.is_available) 
         }}
         <div class="flex items-center font-roboto">
             <div class="h-[60px] w-[60px] flex-shrink-0 overflow-hidden rounded-md border border-gray-200">

@@ -36,7 +36,8 @@
 
         <div class="flex justify-between items-center">
             <div class="mt-1 ">
-                {{ tailorBadge(order.product.tailor.business_name, order.product.tailor.photo) }}
+                {{ tailorBadge(order.product.tailor.business_name,
+                    order.product.tailor.photo, order.product.tailor.is_available) }}
             </div>
 
             <div>

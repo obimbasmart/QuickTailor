@@ -2,7 +2,7 @@
 
 import os
 from flask import render_template
-from app.About_us import page_viewer
+from app.notification import page_viewer
 
 
 @page_viewer.route('/notifications')
