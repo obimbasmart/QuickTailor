@@ -2,12 +2,14 @@
 
 {% from 'macros/productCard.html' import productCard %}
 {% from 'macros/productsContainer.html' import productsContainer %}
+{% from 'macros/promotion.html' import promotion   %}
+
 {% block page_content %}
   {% from 'macros/loadingState.html' import loadingState %}
 
   {% include 'partials/productFilterPanel.html' %}
 
-  <header class="border-d space-y-4 flex flex-col">
+  <header class="border-d space-y-4 flex flex-col mb-4">
     <form class="flex items-center max-w-lg mx-auto w-full">
       <label for="voice-search" class="sr-only">
         Search
@@ -47,7 +49,14 @@
     </button>
   </header>
 
+  
   {{ loadingState() }}
+
+  {{
+    promotion("Create Your Perfect Outfit!",
+    "Connect with top tailors for custom designs. Choose your fabric, add your measurements, and track your order—all in one place",
+    bg_img="bg-tailor-img-2", with_button=False)
+  }}
 
   {{ productsContainer("", products, form=crsf, current_user=current_user) 
   }}

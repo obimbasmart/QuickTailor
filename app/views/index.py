@@ -52,7 +52,7 @@ def home():
 
 
     # get popular tailors
-    tailors = Tailor.query.all()
+    tailors = Tailor.query.filter(Tailor.business_name != None).all()
     reviews = Review.query.filter(Review.rating >= 4).all()
     return render_template('pages/home.html',
                            page='home',
