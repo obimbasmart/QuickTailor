@@ -7,7 +7,7 @@ from ..models.base_user import BaseUser
 from sqlalchemy.orm import Mapped, mapped_column
 from ..models.base_model import BaseModel
 from sqlalchemy import JSON, String, DateTime, TEXT
-from sqlalchemy.orm import mapped_column
+from sqlalchemy.orm import mapped_column, relationship
 from app.constants import default_measurement
 from sqlalchemy_json import NestedMutableJson
 
@@ -27,4 +27,13 @@ class User(BaseModel, BaseUser):
     reset_token_expires: Mapped[DateTime] = mapped_column(DateTime, nullable=True)
 
     saved_items = mapped_column(NestedMutableJson, default=[])
+
+  # Relationship with Message & MessageList
+    message_sent = relationship('Message',foreign_keys= "Message.sender_user_id", back_populates='sender_user')
+    message_recieved = relationship('Message', foreign_keys= "Message.reciever_user_id",  back_populates='reciever_user')
+    message_list = relationship('MessageList',   back_populates='user')
+
+    # Relationship with Notification
+    notification = relationship('Notification',foreign_keys="Notification.user_id",  back_populates='user_notification')
+    notification_sent = relationship('Notification',foreign_keys= "Notification.sender_user_id", back_populates='sender_user')
 

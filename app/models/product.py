@@ -19,7 +19,10 @@ class Product(BaseModel):
     # relationships
     tailor = relationship("Tailor", back_populates="products")
     reviews = relationship('Review', back_populates='product', lazy='joined')
-    
+    product_msg = relationship('Message',  back_populates="product")
+    notification= relationship("Notification", back_populates="product_notification")
+
+
     # codes
     customization_tokens = mapped_column(JSON, default={})
 
