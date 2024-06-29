@@ -17,7 +17,7 @@ from ..models.user import User
 from ..models.tailor import Tailor
 
 
-class ResetForm(FlaskForm):
+class ResetEmailForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     submit = SubmitField('Reset Password')
 

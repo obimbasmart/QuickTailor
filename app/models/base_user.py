@@ -7,8 +7,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timedelta
 from itsdangerous import URLSafeTimedSerializer
 from app.models import db
+import random
 
-# serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'] or 'xyz')
 serializer = URLSafeTimedSerializer('xyz')
 
 
@@ -27,6 +27,13 @@ class BaseUser(UserMixin):
         ) + timedelta(hours=1)  # Token valid for 1 hour
         db.session.commit()
         return token
+    
+    def generate_otp(self):
+        otp = random.randint(100000,999999)
+        self.otp = otp
+        self.reset_token_expires = datetime.utcnow(
+        ) + timedelta(hours=1)  # Token valid for 1 hour
+        return otp
 
     def clear_reset_token(self):
         self.reset_token = None
@@ -47,6 +54,18 @@ class BaseUser(UserMixin):
         tailor = db.session.get(Tailor, id)
 
         return normal_user or tailor
+    
+    @staticmethod
+    def verify_otp(user_id: str, otp: int):
+        from app.models.tailor import Tailor
+        from app.models.user import User
+
+        normal_user = db.session.get(User, user_id)
+        tailor = db.session.get(Tailor, user_id)
+
+        user = normal_user or tailor
+        
+        return user.otp == otp
     
     @property
     def is_tailor(self):

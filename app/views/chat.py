@@ -9,7 +9,6 @@ from app import socketio
 
 @socketio.on('message')
 def handle_message(msg):
-    print('Message: ' + msg)
     send(msg, broadcast=True)
 
 @app_views.route('/messages', methods=['GET', 'POST'])

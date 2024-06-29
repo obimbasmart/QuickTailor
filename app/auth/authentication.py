@@ -5,8 +5,6 @@
 """ register route """
 
 
-
-
 from app.auth import auth_views
 from app.forms.auth_forms import RegistrationForm, LoginForm
 from app.models.user import User
@@ -31,9 +29,17 @@ def register(user_type=None):
 
     form = RegistrationForm()
     if form.validate_on_submit():
+
+        full_name = form.full_name.data.split()
+        first_name = full_name[0]
+        try:
+            last_name = full_name[1]
+        except IndexError:
+            last_name = None
+
         if user_type == "user":
-            new_user = User(first_name=form.first_name.data,
-                            last_name="good name",
+            new_user = User(first_name=first_name,
+                            last_name=last_name,
                             email=form.email.data,
                             phone_no=form.phone_number.data)
         else:
