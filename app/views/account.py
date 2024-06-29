@@ -4,7 +4,7 @@ from flask_login import current_user
 from app.forms.account import ResetEmailForm, ResetPasswordForm, UpdateAccountForm
 from flask_login import login_required
 from app.models.user import User
-from email_service.sendgrid import send_password_reset_email
+from email_service.sendgrid import send_otp
 from app.models import db
 
 
@@ -51,9 +51,9 @@ def email():
     return redirect(url_for('app_views.account'))
 
 @app_views.route('/account/user/code', methods=['POST'])
-def send_otp():
+def _send_otp():
     otp = current_user.generate_otp()
-    status_code = send_password_reset_email(current_user)
+    status_code = send_otp(current_user, otp)
     if status_code == 202:
         return """
                 <div class='inline-flex gap-1 items-center justify-center'>

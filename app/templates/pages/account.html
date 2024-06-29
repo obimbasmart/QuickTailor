@@ -127,7 +127,7 @@
                             {% if  field.name != 'otp' and field.type != 'CSRFTokenField' and field.type != 'SubmitField' and field.type != 'BooleanField' %}
                             <p class="relative">
                                     <!--  input -->
-                                    {{ field(class=input_styles) }}
+                                    {{ field(class=input_styles, value=current_user.email) }}
                                     <!-- label -->
                                     {{ field.label(class=label_styles, for="default_outlined") }}
                                     <!-- error message on validate -->

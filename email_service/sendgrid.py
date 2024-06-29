@@ -45,3 +45,10 @@ def send_order_completion_email(user, order=None):
         recievers=[user.email],
         body=render_template('emails/order_completion.txt', user=user, order=order)
     )
+
+def send_otp(user, otp):
+    return send_email(
+        subject=f'[QuickTailor] Your One-Time Password (OTP) for Secure Account Reset',
+        recievers=[user.email],
+        body=render_template('emails/otp.txt', user=user, otp=otp)
+    )
