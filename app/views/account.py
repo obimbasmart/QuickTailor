@@ -54,7 +54,7 @@ def email():
 def send_otp():
     otp = current_user.generate_otp()
     status_code = send_password_reset_email(current_user)
-    if status_code == 200:
+    if status_code == 202:
         return """
                 <div class='inline-flex gap-1 items-center justify-center'>
                             <span>Sent</span>   
