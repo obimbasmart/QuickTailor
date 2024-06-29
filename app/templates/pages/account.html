@@ -79,7 +79,7 @@
              id="profile"
              role="tabpanel"
              aria-labelledby="profile-tab">
-            <form novalidate action=""  method="post">
+            <form novalidate action="" method="post">
                 {{ form.hidden_tag() }}
 
                 <div class="grid grid-cols-1 gap-3">
@@ -265,8 +265,8 @@
                 </p>
 
 
-                <form class="w-full text-center  max-w-sm mx-auto" action="">
-                    {{form.hidden_tag()}}
+                <form class="w-full text-center  max-w-sm mx-auto" action="/account/password" method="post" x-data="initForm()">
+                    {{password_reset_form.hidden_tag()}}
                     <div class="grid grid-cols-1 gap-y-2">
                         {% for field in password_reset_form %}
                             {% if field.name != 'otp' and field.type != 'CSRFTokenField' and field.type != 'SubmitField' and field.type != 'BooleanField' %}
@@ -282,6 +282,11 @@
                                 </p>
                             {% endif %}
                         {% endfor %}
+
+                        <p class="relative">
+                            <input type="hidden" name="otp"  class="{{input_styles}}" :value="code_21 + code_22 + code_23 + code_24 + code_25 + code_26">
+                    </p>
+
                     </div>
 
 
@@ -302,79 +307,85 @@
 
                     <div class="grid grid-cols-6 gap-1 mb-2">
                         <div class="ml-1">
-                            <label for="code-1" class="sr-only">
+                            <label for="code-21" class="sr-only">
                                 First code
                             </label>
                             <input type="number"
                                    maxlength="1"
                                    data-focus-input-init
-                                   data-focus-input-next="code-2"
-                                   id="code-1"
+                                   data-focus-input-next="code-22"
+                                   x-model="code_21"
+                                   id="code-21"
                                    class="block w-12 h-10 py-3 text-sm font-extrabold text-center text-sc-gray-dark bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                    required />
                         </div>
                         <div>
-                            <label for="code-2" class="sr-only">
+                            <label for="code-22" class="sr-only">
                                 Second code
                             </label>
                             <input type="number"
                                    maxlength="1"
                                    data-focus-input-init
-                                   data-focus-input-prev="code-1"
-                                   data-focus-input-next="code-3"
-                                   id="code-2"
+                                   data-focus-input-prev="code-21"
+                                   data-focus-input-next="code-23"
+                                   x-model="code_22"
+                                   id="code-22"
                                    class="block w-12 h-10 py-3 text-sm font-extrabold text-center text-sc-gray-dark bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                    required />
                         </div>
                         <div>
-                            <label for="code-3" class="sr-only">
+                            <label for="code-23" class="sr-only">
                                 Third code
                             </label>
                             <input type="number"
                                    maxlength="1"
                                    data-focus-input-init
-                                   data-focus-input-prev="code-2"
-                                   data-focus-input-next="code-4"
-                                   id="code-3"
+                                   data-focus-input-prev="code-22"
+                                   data-focus-input-next="code-24"
+                                   x-model="code_23"
+                                   id="code-23"
                                    class="block w-12 h-10 py-3 text-sm font-extrabold text-center text-sc-gray-dark bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                    required />
                         </div>
                         <div>
-                            <label for="code-4" class="sr-only">
+                            <label for="code-24" class="sr-only">
                                 Fourth code
                             </label>
                             <input type="number"
                                    maxlength="1"
                                    data-focus-input-init
-                                   data-focus-input-prev="code-3"
-                                   data-focus-input-next="code-5"
-                                   id="code-4"
+                                   data-focus-input-prev="code-23"
+                                   data-focus-input-next="code-25"
+                                   id="code-24"
+                                   x-model="code_24"
                                    maxlength="1"
                                    class="block w-12 h-10 py-3 text-sm font-extrabold text-center text-sc-gray-dark bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                    required />
                         </div>
                         <div>
-                            <label for="code-5" class="sr-only">
+                            <label for="code-25" class="sr-only">
                                 Fifth code
                             </label>
                             <input type="number"
                                    maxlength="1"
                                    data-focus-input-init
-                                   data-focus-input-prev="code-4"
-                                   data-focus-input-next="code-6"
-                                   id="code-5"
+                                   data-focus-input-prev="code-24"
+                                   data-focus-input-next="code-26"
+                                   id="code-25"
+                                   x-model="code_25"
                                    class="block w-12 h-10 py-3 text-sm font-extrabold text-center text-sc-gray-dark bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                    required />
                         </div>
                         <div>
-                            <label for="code-6" class="sr-only">
+                            <label for="code-26" class="sr-only">
                                 Sixth code
                             </label>
                             <input type="number"
                                    maxlength="1"
                                    data-focus-input-init
-                                   data-focus-input-prev="code-5"
-                                   id="code-6"
+                                   data-focus-input-prev="code-25"
+                                   x-model="code_26"
+                                   id="code-26"
                                    class="block w-12 h-10 py-3 text-sm font-extrabold text-center text-sc-gray-dark bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                    required />
                         </div>
@@ -402,6 +413,12 @@
                     code_4: '',
                     code_5: '',
                     code_6: '',
+                    code_21: '',
+                    code_22: '',
+                    code_23: '',
+                    code_24: '',
+                    code_25: '',
+                    code_26: '',
 
                     getCode() {
                         return code_1 + code_2 + code_3 + code_4 + code_5 + code_6

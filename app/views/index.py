@@ -83,8 +83,8 @@ def get_notifications():
     paginated_notifications = notification[start:end]
     return jsonify(paginated_notifications)
 
-@app_views.route('/notification')
-def notificationn():
+@app_views.route('/notifications')
+def notifications():
     return render_template("pages/notification.html")
 
 

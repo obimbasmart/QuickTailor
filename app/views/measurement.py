@@ -13,7 +13,7 @@ from decimal import Decimal
 
 @app_views.route('/measurement', methods=["GET", "POST"])
 @login_required
-def get_set_measurement():
+def measurement():
     form = MeasurementForm()
     if form.validate_on_submit():
         new_measurements = {}

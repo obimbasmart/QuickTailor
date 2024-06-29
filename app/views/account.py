@@ -45,8 +45,24 @@ def email():
     if User.verify_otp(current_user.id, form.otp.data):
         if form.email.data != current_user.email:
             setattr(current_user, 'email', form.email.data)
+            current_user.clear_reset_token()
             db.session.commit()
             flash("Update successfull")
+
+    return redirect(url_for('app_views.account'))
+
+@app_views.route('/account/password', methods=["POST"])
+def password():
+    form = ResetPasswordForm()
+    if form.password.data != form.confirm_password.data:
+        flash("Password does not match")
+
+    elif User.verify_otp(current_user.id, form.otp.data):
+        current_user.set_password(form.password.data)
+        current_user.clear_reset_token()
+        db.session.commit()
+        flash("Update successfull")
+        return redirect(url_for('auth_views.logout'))
 
     return redirect(url_for('app_views.account'))
 

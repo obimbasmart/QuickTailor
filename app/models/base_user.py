@@ -32,11 +32,13 @@ class BaseUser(UserMixin):
         otp = random.randint(100000,999999)
         self.otp = otp
         self.reset_token_expires = datetime.utcnow(
-        ) + timedelta(hours=1)  # Token valid for 1 hour
+        ) + timedelta(hours=1)
+        db.session.commit()
         return otp
 
     def clear_reset_token(self):
         self.reset_token = None
+        self.otp = None
         self.reset_token_expires = None
         db.session.commit()
 
@@ -64,7 +66,8 @@ class BaseUser(UserMixin):
         tailor = db.session.get(Tailor, user_id)
 
         user = normal_user or tailor
-        
+        print(user.otp)
+        print(user.otp == otp)
         return user.otp == otp
     
     @property
