@@ -11,61 +11,92 @@
     </div>
 
   <script>
-    
-function customTimeFormat(datetimeString, timezoneOffset = 0) {
+    function customTimeFormat(datetimeString, timezoneOffset = 1) {
     // If the input is 'N/A', return 'N/A'
     if (datetimeString === 'N/A') {
         return 'N/A';
     }
-
+    
     // Create a new Date object from the datetime string
     const date = new Date(datetimeString);
-
+   
     // Adjust for the specified timezone offset (in hours)
     const localDate = new Date(date.getTime() + timezoneOffset * 3600000);
     const now = new Date();
     const diff = now - localDate;
-
+    console.log("Difference: ", diff)
+    console.log(now);
+    console.log(date);
+    console.log(localDate);
     // Calculate the difference in various units
     const seconds = Math.floor(diff / 1000);
     const minutes = Math.floor(diff / 60000);
-    const hours = Math.floor(diff / 3600000);
-
+    const hours = Math.floor(diff / 3600000) ;
+    const days = Math.floor(diff / 86400000);
+    console.log("seconds: ", seconds, "ninuttees:", minutes, "hours: ", hours, "days: ", days);
     // If the datetime is under 30 seconds
     if (seconds < 30) {
-        console.log('hiiiii ereare ');
         return 'just now';
-
     }
+
     // If the datetime is under 60 seconds
-    else if (seconds < 60) {
+    if (seconds < 60) {
         return `${seconds} seconds ago`;
     }
+
     // If the datetime is under 60 minutes
-    else if (minutes < 60) {
-        return `${minutes} minutes ago`;
+    if (minutes < 60) {
+        return `${minutes} ${minutes === 1 ? 'miute': 'minutes'} ago`;
     }
+
+   
+    // If the datetime is exactly one day old
+    if (days === 1) {
+        const localHours = localDate.getUTCHours().toString().padStart(2, '0');
+        const localMinutes = localDate.getUTCMinutes().toString().padStart(2, '0');
+        return `Yesterday at ${localHours}:${localMinutes}`;
+    }
+
     // For dates older than 24 hours
-    else {
-        // Get hours and minutes
-        let localHours = localDate.getUTCHours();
-        let localMinutes = localDate.getUTCMinutes();
+    if (days > 1) {
+        // Get the day of the month and determine the correct suffix
+        const day = localDate.getUTCDate();
+        let suffix = 'th';
+        if (day % 10 === 1 && day !== 11) {
+            suffix = 'st';
+        } else if (day % 10 === 2 && day !== 12) {
+            suffix = 'nd';
+        } else if (day % 10 === 3 && day !== 13) {
+            suffix = 'rd';
+        }
 
-        // Format hours and minutes to ensure they are two digits
-        localHours = localHours < 10 ? '0' + localHours : localHours;
-        localMinutes = localMinutes < 10 ? '0' + localMinutes : localMinutes;
+        // Get month, day, and year
+        const month = localDate.toLocaleString('default', { month: 'short' });
+        const year = localDate.getUTCFullYear();
 
-        // Return the formatted time
-        return `${localHours}:${localMinutes}`;
+        // Format the datetime to the desired output
+        return `${month}, ${day}${suffix} ${year}`;
     }
+
+    // For times older than 24 hours but within the same day (unlikely, but for completeness)
+    // Get hours and minutes
+    let localHours = localDate.getUTCHours();
+    let localMinutes = localDate.getUTCMinutes();
+
+    // Format hours and minutes to ensure they are two digits
+    localHours = localHours < 10 ? '0' + localHours : localHours;
+    localMinutes = localMinutes < 10 ? '0' + localMinutes : localMinutes;
+
+    // Return the formatted time
+    return `${localHours}:${localMinutes}`;
 }
+
 
 
 	function getCurrentTime24() {
             const now = new Date();
-            const hours = now.getHours().toString().padStart(2, '0');
-            const minutes = now.getMinutes().toString().padStart(2, '0');
-            return `${hours}:${minutes}`;
+           
+            return now;
         }
 
     const socket = io.connect();
@@ -84,7 +115,7 @@ function customTimeFormat(datetimeString, timezoneOffset = 0) {
             div.className = 'notification';
             div.setAttribute('data-id', notification.id);
             div.setAttribute('data-url', notification.url);
-            div.innerHTML = `{{ notify('0', '${notification.content}', '${getCurrentTime24()}', tailorBadge()) }}`;
+            div.innerHTML = `{{ notify('0', '${notification.content}', '${customTimeFormat(getCurrentTime24())}', tailorBadge()) }}`;
             div.addEventListener('click', () => {
                                 fetch(`/notifications/${notification.id}`)
                                     .then(response => {
@@ -128,10 +159,10 @@ function customTimeFormat(datetimeString, timezoneOffset = 0) {
                             // Render the notification using the Jinja2 macro
 					  if (notification.is_clicked)
 				          {
-					          div.innerHTML = `{{ notify('1', '${notification.content}', '${notification.created_at}', tailorBadge()) }}`;
+					          div.innerHTML = `{{ notify('1', '${notification.content}', '${customTimeFormat(notification.created_at)}', tailorBadge()) }}`;
 					  }
 					  else 
-					  div.innerHTML = `{{ notify('0', '${notification.content}', '${notification.created_at}', tailorBadge()) }}`;
+					  div.innerHTML = `{{ notify('0', '${notification.content}', '${customTimeFormat(notification.created_at)}', tailorBadge()) }}`;
 
 
                             // Add the click event listener to the notification
