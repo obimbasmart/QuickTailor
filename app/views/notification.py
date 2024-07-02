@@ -26,8 +26,11 @@ def user_notication(id_notify=None):
 @login_required
 def notication():
         a = current_user.notification
+        
         for e in a :
             print(e.to_dict())
+            #db.session.delete(e)
+        #db.session.commit()
         return render_template('pages/notification.html')
 
 @app_views.route('/get_notifications')
