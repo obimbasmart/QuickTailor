@@ -5,54 +5,29 @@
 
 {% block content %}
 
-<style>
-
-#chat-container {
-    background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-}
-
-#messages {
-    border: 1px solid #ccc;
-    padding: 10px;
-    height: 200px;
-    overflow-y: scroll;
-    margin-bottom: 10px;
-}
-
-#message-input {
-    width: calc(100% - 60px);
-    padding: 10px;
-}
-
-#send-button {
-    width: 50px;
-    padding: 10px;
-}
-</style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
 
-<div class"" style="width:90%; margin:auto; margin-top: 70px; background:var(--White, #FFF);">
+<div id="message-Interface"  class"" style="width:90%; margin:auto; margin-top: 70px; background:var(--White, #FFF);">
   
 	{% set reciever %}
-
+           {% set default_name="Alemaghens" %}
 	 <div class="">
-		 <p class="leading-[21px] font-normal font-roboto tracking-[1.5px] text-gray-800  text-[10px]" style="color: var(--Grey-Dark, #606060);"> Consultation with </p>
-		 <p class="leading-[21px] font-normal font-roboto tracking-[0.25px] text-gray-800  text-[14px]" style="color: var(--Grey-Darker, #2D2D2D);"> ChicChisel Creations </p>
+		 <p class="leading-[21px] font-normal font-roboto tracking-[1.5px] text-gray-800  text-[10px]" style="color: var(--Grey-Dark, #606060);"> {{ other_user.first_name }} </p>
+		 <p class="leading-[21px] font-normal font-roboto tracking-[0.25px] text-gray-800  text-[14px]" style="color: var(--Grey-Darker, #2D2D2D);"> {{ other_user.last_name }} </p>
         </div>
        {% endset %}
 
        {% set image_profile %}
         <div class="">
-		<a href="/products">  <img src="{{ url_for('static', filename='images/product_image_3.png' ) }}" class="h-[40px] rounded-full w-[40px]" alt="...">  </a>
-
+		{% if other_user.is_tailor %}
+		<a href= {{ '/' ~ other_user.business_name }}>  <img src="{{ other_user.img_url }}" class="w-8 h-8 rounded-full" alt="...">  </a>
+               {% else %}
+	                 <img src="{{ url_for('static', filename='images/product_image_3.png')  }}" class="w-8 h-8 rounded-full" alt="...">  
+               {% endif %}
        </div>
        {% endset %}
 
-       {{ messageTop(reciever, image_profile) }}
+       {{ messageTop(reciever, image_profile, "top") }}
                     
 
       {% set imgs %}
@@ -73,9 +48,10 @@
 
 
       {% endset %}
+
        {% set full_imgs %}
 
-                 <div class= " w-full  mb-1 p-[2px] rounded-[6px]">
+                 <div class= "  mb-1 p-[2px] rounded-[6px]">
                                  <img src="{{ url_for('static', filename='images/product_image_3.png' ) }}" class="h-[255px] w-full" alt="...">
 
 
@@ -84,62 +60,151 @@
 
       {% endset %}
 
-      <div class="flex flex-col mt-8 ml-1 ">
-	      
-	      {{ messages('right', "hello the virtes of life if i have the choice of life I should be able to feel everyday wi", "2:00 pm", full_imgs) }}
-	      {{ messages('left', "hello the virtes of life if i have the choice of life I should be able to feel everyday with pleasure", "2: 00 am", full_imgs) }}
-              {{ messages('right', "hello the virtes of life if i have the choice of life I should be able to feel everyday wi", "3:00 am", imgs) }}
-                 {{ messages('right', "hello the virtes of life if i have the choice of life I should be able to feel everyday wi", "2:00 pm") }}
-              {{ messages('left', "hello the virtes of life if i have the choice of life I should be able to feel everyday wi", "2: 00 am", imgs) }}
-              {{ messages('right', "hello the virtes of life if i have the choice of life I should be able to feel everyday wi", "3:00 am") }}
+      <div id="messages"  class="flex flex-col  pt-16  ml-1 ">
+	    {% if product %}
+	       {{ messages('left', "hello the virtes of life if i have the choice of life I should be able to feel everyday with pleasure", "2: 00 am", imgs) }}
+
+	     {% else %}
+	      {% for message in msg %}
+	      {% if  current_user.is_tailor %}
+                  {% if message.sender_tailor_id %}
+		  {{ messages('right', message.message, message.created_at | custom_time ) }}
+                 
+		 {% else %}
+		       {{ messages('left', message.message, message.created_at | custom_time) }}  
+		 {% endif %}
+         
+              {% else %}
+	         {% if message.sender_user_id %}
+		 {{ messages('right', message.message, message.created_at | custom_time) }}
+                 
+                 {% else %}
+                       {{ messages('left', message.message, message.created_at | custom_time) }} 
+                 {% endif %}
+
+                  
+	      {% endif %}
+                     
+
+
+
+	      {% endfor %}
+           {% endif %}
 
 
       </div>
-
+      <div class="mt-[100px]">
+      </div>
       {% set  plus %}
 
            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
                  <path d="M1 7.5H7M7 7.5H13M7 7.5V13.5M7 7.5V1.5" stroke="#2D2D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
       {% endset %}
-      
+ 
       {% set input_message %}
-                 <input id="message-input" type="text" placeholder="Type a message..." autocomplete="off" style="border: 1px solid var(--grey-light-active, #D8D8D8); w-[430px]">
+
+          <div >
+		  <input id="message-input" type="text" id="msg" class="rounded-lg placeholder-black   focus:outline-none focus:ring-0 focus:border-[white]  peer w-full" placeholder="Type here...." autocomplete="off">
+         </div>
 
       {% endset %}
-
+     
       {% set send_btn %}
-             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+      <div id="send" class="">   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
                           <path d="M11.5003 12.5H5.41872M5.24634 13.2972L4.24158 16.2986C3.69128 17.9424 3.41613 18.7643 3.61359 19.2704C3.78506 19.71 4.15335 20.0432 4.6078 20.1701C5.13111 20.3161 5.92151 19.9604 7.50231 19.2491L17.6367 14.6886C19.1797 13.9942 19.9512 13.6471 20.1896 13.1648C20.3968 12.7458 20.3968 12.2541 20.1896 11.8351C19.9512 11.3529 19.1797 11.0057 17.6367 10.3114L7.48483 5.74303C5.90879 5.03382 5.12078 4.67921 4.59799 4.82468C4.14397 4.95101 3.77572 5.28336 3.60365 5.72209C3.40551 6.22728 3.67772 7.04741 4.22215 8.68767L5.24829 11.7793C5.34179 12.061 5.38855 12.2019 5.407 12.3459C5.42338 12.4738 5.42321 12.6032 5.40651 12.731C5.38768 12.875 5.34057 13.0157 5.24634 13.2972Z" stroke="#2D2D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
+	  </div>
       {% endset %}
-
-       {{ messageTop(input_message, send_btn, plus) }}
-
-     <div id="chat-container">
-        <div id="messages"></div>
-        <input id="message-input" type="text" placeholder="Type a message..." autocomplete="off">
-        <button id="send-button">Send</button>
-    </div>
+       {{ messageTop(input_message, send_btn,"buttom",  plus) }}
 </div>
 
 
     <script>
-        const socket = io();
+function getCurrentTime24() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            return `${hours}:${minutes}`;
 
-        socket.on('message', function(msg){
-            const messages = document.getElementById('messages');
-            const messageElement = document.createElement('div');
-            messageElement.textContent = msg;
-            messages.appendChild(messageElement);
+	    }
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function demo() {
+  await sleep(0);
+   window.scrollBy(0, document.body.offsetHeight)
+		    // Sleep for 2000 milliseconds (2 seconds)
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+demo();
+
+	    });
+	    // Establish a connection to the server using Socket.IO
+const socket = io.connect();
+
+// Event listener for successful connection
+socket.on('connect', () => {
+    console.log('Connected to the server');
+});
+
+// Event listener for disconnection
+socket.on('disconnect', () => {
+    console.log('Disconnected from the server');
+});
+
+// Event listener for receiving a message from the server
+socket.on('recieve_message', (data) => {
+    console.log("Message received event fired");
+    // Select the messages container in the DOM
+    const messagesContainer = document.getElementById('messages');
+
+    // Create the HTML for the received message
+    const messageHTML = `{{ messages('left', '${data.message}', '${getCurrentTime24()}') }}`;
+    messagesContainer.scrollBottom = messagesContainer.scrollHeight;
+    // Append the new message to the messages container
+    messagesContainer.innerHTML += messageHTML;
+});
+
+
+
+// Event listener for error handling
+socket.on('error', (data) => {
+    alert(data.error);
+});
+
+// Function to handle sending a message when the send button is clicked
+document.getElementById('send').onclick = function() {
+    console.log("Send button clicked event fired");
+
+    // Get the value from the message input field
+    const messageInput = document.getElementById('message-input');
+    const messageText = messageInput.value;
+
+    // Check if the message text is empty
+    if (!messageText) {
+        alert('Message and image cannot both be empty');
+    } else {
+        // Emit the message to the server using Socket.IO
+        socket.emit('send_message', {
+            reciever_id: `{{ other_user.id }}`,  // Replace with actual receiver ID from your template
+            message: messageText
         });
 
-        document.getElementById('send-button').onclick = function() {
-            const input = document.getElementById('message-input');
-            const message = input.value;
-            socket.send(message);
-            input.value = '';
-        };
+        // Append the sent message to the messages container
+        const messagesContainer = document.getElementById('messages');
+        const messageHTML = `{{ messages('right', '${messageText}', '${getCurrentTime24()}') }}`;
+        messagesContainer.innerHTML += messageHTML;
+        demo();
+
+
+        // Clear the message input field
+        messageInput.value = '';
+    }
+};
+
     </script>
 {% endblock %}
 

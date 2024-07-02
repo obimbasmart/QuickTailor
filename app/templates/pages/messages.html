@@ -1,0 +1,197 @@
+{% from 'macros/notification.html' import messageList %}
+
+{% extends 'base.html' %} 
+
+
+{% block content %}
+<div id="main-div" class="flex flex-col-reverse gap-[7px] py-4  mx-4 mb-8">
+ {% if message_list %}
+
+   {% for msg_list in message_list %}
+
+    {% set image_profile %}
+    {% if not current_user.is_tailor %}
+        <img src={{ msg_list.tailor.img_url }} class="rounded-full" style="width: 40px; height: 40px;">
+    {% else %}
+    <div  class="w-12 h-12 flex items-center  p-2 justify-center  text-sm bg-pc-teal-light rounded-full   dark:focus:ring-gray-600">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                       width="40"
+                       height="40"
+                       viewBox="0 0 18 18"
+                       fill="none">
+                    <path d="M9.15037 9C11.2214 9 12.9004 7.32106 12.9004 5.25C12.9004 3.17893 11.2214 1.5 9.15037 1.5C7.07932 1.5 5.40039 3.17893 5.40039 5.25C5.40039 7.32106 7.07932 9 9.15037 9Z" stroke="#006060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M2.25 16.5C2.67778 15.0249 3.56097 13.7228 4.7733 12.7799C5.98562 11.837 7.46501 11.3015 9 11.25C12.09 11.25 14.7225 13.4325 15.75 16.5" stroke="#006060" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+   </div>
+
+    {% endif %}
+    {% endset %}
+
+    {% set message_and_name %}
+    <div class="flex flex-col gap-1 justify-between ml-2">
+        <div class="leading-[21px] font-normal font-roboto tracking-[0.5px] text-gray-800 text-[16px]" style="color: (--Grey-Darker, #2D2D2D);">
+            {% if current_user.is_tailor %}
+                {{ msg_list.user.first_name ~ ' ' ~ msg_list.user.lastname  }}
+            {% else %}
+                {{ msg_list.tailor.first_name ~ ' ' ~ msg_list.tailor.lastname  }}
+            {% endif %}
+        </div>
+        <div class="leading-[21px] font-normal font-roboto tracking-[0.4px] text-gray-800 text-[12px] overflow-hidden" style="height:40px; {% if not msg_list.is_viewed and msg_list.last_sender != current_user.id %} font-weight:bold;  font-size: 14px; {% else %} color:var(--Grey-Dark, #606060); {% endif %}">
+		{% if msg_list.last_sender == current_user.id %}
+
+		    {{'You:  ' ~ msg_list.message }}
+		{% else  %}
+		     {{ msg_list.message }}
+                {% endif %}
+        </div>
+    </div>
+    {% endset %}
+
+    <div class="pb-[5px] mt-1" data-msg-id="{{ msg_list.id }}" onclick="handleDivClick(this)" style="{% if loop.first %} border:none; {% else %} border-bottom:1px solid #D8D8D8; {% endif %}">
+        {{ messageList(image_profile, message_and_name, msg_list.updated_at|timeago) }}
+    </div>
+
+    {% endfor %}
+ {% else %}
+   <div  id="empty" class="text-center"> Your chat history is empty
+   </div>
+{% endif %}
+</div>
+
+<script>
+
+ const socket = io.connect();
+
+    // Event listener for successful connection
+    socket.on('connect', () => {
+    console.log('Connected to the server');
+    });
+
+
+
+    socket.on('new_msg_list', (new_msg_list) => {
+
+	const container = document.getElementById('main-div');
+        const existingDiv= document.querySelector(`[data-msg-id= '${new_msg_list.id}']`)
+        const currentUserId = '{{ current_user.id  }}';
+        if (existingDiv) {
+            // Update the message content and time
+            existingDiv.style.borderBottom = '1px solid #D8D8D8';
+      
+
+            const messageContent = existingDiv.querySelector('.overflow-hidden');
+            messageContent.innerText = new_msg_list.last_sender === currentUserId ? `You: ${new_msg_list.message}` : new_msg_list.message;
+
+            // Bold the message if needed
+            if (new_msg_list.last_sender !== currentUserId) {
+                messageContent.style.fontWeight = 'bold';
+                messageContent.style.fontSize = '14px';
+                messageContent.style.color = 'var(--Grey-Dark, #606060)';
+
+            } else {
+                messageContent.style.color = 'var(--Grey-Dark, #606060)';
+            }
+
+            // Update the timestamp (assuming the time is in "2:00am" format, this should be dynamically set)
+            const timestampDiv = existingDiv.children[0].children[2]; // Access the third child of the first child
+			timestampDiv.innerText = `${new_msg_list.updated_at}`; // Replace with actual timestamp if available
+	    // remove border from the new last element
+
+            // Move the div to the top
+            // Move the div to the top
+            container.appendChild(existingDiv);
+        } else {
+
+	   
+            // Create a new div if it doesn't exist (for new messages)
+            const isTailor = {{ current_user.is_tailor | tojson }};
+            const imageProfile = `<img src="{{ url_for('static', filename='images/product_image_3.png') }}" class="rounded-full" style="width: 60px; height: 60px;">`;
+
+            const name = isTailor ? `${new_msg_list.user_name}`  : `${new_msg_list.tailor_name}`;
+            const message = new_msg_list.last_sender === currentUserId ? `You: ${new_msg_list.message}` : new_msg_list.message;
+
+            const messageAndName = `
+                <div class="flex flex-col gap-2 justify-between ml-2">
+                    <div class="leading-[21px] font-normal font-roboto tracking-[0.5px] text-gray-800 text-[16px]" style="color: (--Grey-Darker, #2D2D2D);">
+                        ${name}
+                    </div>
+                    <div class="leading-[21px] font-normal font-roboto tracking-[0.4px] text-gray-800 text-[12px] overflow-hidden" style="height:40px;">
+                        ${message}
+                    </div>
+                </div>
+            `;
+
+            const newDiv = document.createElement('div');
+            newDiv.className = 'pb-[10px]';
+            newDiv.setAttribute('data-msg-id', new_msg_list.id);
+            newDiv.setAttribute('id', `msg-${new_msg_list.id}`);
+            newDiv.setAttribute('onclick', 'handleDivClick(this)');
+            newDiv.style.borderBottom = container.children.length > 0 ? '1px solid #D8D8D8' : 'none';
+            newDiv.innerHTML = ` {{ messageList('${imageProfile}','${ messageAndName}', '${new_msg_list.updated_at}') }}`;
+
+            // Bold the message if needed
+            const messageContentNew = newDiv.querySelector('.overflow-hidden');
+            if (!new_msg_list.is_viewed && new_msg_list.last_sender !== currentUserId) {
+                messageContentNew.style.fontWeight = 'bold';
+                messageContentNew.style.fontSize = '14px';
+                messageContentNew.style.color = 'var(--Grey-Dark, #606060)';
+
+            } else {
+                messageContentNew.style.color = 'var(--Grey-Dark, #606060)';
+            }
+            if (container.querySelector('#empty') !== null){
+		container.querySelector('#empty').remove();
+		container.append(newDiv);
+            }
+	   else{
+            container.append(newDiv);
+	    }
+	    container.scrollTop = container.scrollHeight;
+        }
+       
+    });
+
+    
+    function handleDivClick(element) {
+        const msgId = element.getAttribute('data-msg-id');
+        const existingDiv= document.querySelector(`[data-msg-id= '${msgId}']`)
+        const messageContent = existingDiv.querySelector('.overflow-hidden');
+        messageContent.style.fontWeight = 'normal';
+        messageContent.style.fontSize = '12px';
+
+        fetch(`/get_message?id=${msgId}`, { method: 'GET' })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log(`Message ${msgId} marked as viewed.`);
+                    window.location.href = data.redirect_url;
+                } else {
+                    console.error(`Failed to mark message ${msgId} as viewed.`);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+/*    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/get_messages')
+            .then(response => response.json())
+            .then(data => {
+                const mainDiv = document.getElementById('main-div');
+                const container = document.createElement('div');
+                 data.forEach(item => {
+                    const image_html = `<img src="{{ url_for('static', filename='images/product_image_3.png' ) }}" class="rounded-full" style="width: 50px; height: 50px;">`;
+                    const time = "2:30";
+
+                    const middleDiv = document.createElement('div');
+		    middleDiv.classList.add('flex', 'flex-row')
+				middleDiv.innerHTML = `<div class="flex flex-col gap-1 justify-between ml-2">  <div class="leading-[21px] font-normal font-roboto tracking-[0.5px] text-gray-800  text-[16px]" style="  color: (--Grey-Darker, #2D2D2D);">Morgan Coulture</div> 
+                                                       <div class="class="leading-[21px] font-normal font-roboto tracking-[0.4px] text-gray-800  text-[10px]" style="  color:var(--Grey-Dark, #606060);">Ohh!! That was faster than expected.</div>
+                                                       </div>`
+				container.innerHTML = `{{ messageList('${image_html}', '${middleDiv.innerHTML}', '${time}') }}`;
+                    mainDiv.appendChild(container);
+                });
+            })
+            .catch(error => console.error('Error fetching messages:', error));
+    });  */
+</script>
+{% endblock %}
