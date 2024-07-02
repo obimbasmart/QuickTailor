@@ -3,7 +3,7 @@
 from app.models.tailor import Tailor
 from app.models.user import User
 from flask import Flask, jsonify, make_response
-from app.config import DevelopmentConfig, ProductionConfig
+from app.config import DevelopmentConfig, ProductionConfig, TestingConfig
 from flask_migrate import Migrate
 from os import environ
 from dotenv import load_dotenv
@@ -14,6 +14,8 @@ from flask_wtf.csrf import CSRFProtect
 from app.cloud_storage.s3_cloud_storage import S3StorageService
 from app.cache import Cache
 from app.forms.tailor_forms import CRSForm
+from flask_socketio import SocketIO
+
 
 load_dotenv()
 
@@ -22,6 +24,9 @@ login_manager = LoginManager()
 csrf = CSRFProtect()
 redis_cache = Cache()
 s3_client = S3StorageService('quicktailor-products-bucket', cache=redis_cache)
+socketio = SocketIO()
+if __name__ == '__main__':
+        socketio.run(app, debug=True)
 
 
 def create_app(config=DevelopmentConfig) -> Flask:
@@ -42,11 +47,12 @@ def create_app(config=DevelopmentConfig) -> Flask:
         login_manager.login_view = 'auth_views.login'
 
         csrf.init_app(app)
+        socketio.init_app(app)
         register_blueprints(app)
         register_filters(app)
-
         app.config['db'] = db
 
+                                          
     @app.context_processor
     def inject_sidebar_links():
         if not current_user.is_anonymous and current_user.is_tailor:
@@ -75,6 +81,8 @@ def register_filters(app):
     import app.filters as filters
     app.jinja_env.filters['currency'] = filters.currency_filter
     app.jinja_env.filters['timeago'] = filters._timeago
+    app.jinja_env.filters['custom_timeago'] = filters.custom_timeago
+    app.jinja_env.filters['custom_time'] = filters.custom_time_format
     app.jinja_env.filters['tolist'] = filters.tolist
     app.jinja_env.filters['sum_price'] = filters.sum_price
     app.jinja_env.filters['sum_custom_value'] = filters.sum_custom_value
@@ -101,3 +109,4 @@ def register_blueprints(app):
     app.register_blueprint(page_viewer)
     app.register_blueprint(order_views)
     app.register_blueprint(tailor_views)
+    

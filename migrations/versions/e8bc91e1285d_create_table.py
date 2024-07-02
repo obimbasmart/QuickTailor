@@ -1,8 +1,8 @@
-"""new: initial migration
+"""create table
 
-Revision ID: 8c57db405a25
+Revision ID: e8bc91e1285d
 Revises: 
-Create Date: 2024-06-12 08:51:43.402699
+Create Date: 2024-06-29 11:50:39.344981
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '8c57db405a25'
+revision = 'e8bc91e1285d'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -53,15 +53,33 @@ def upgrade():
     sa.Column('measurements', sa.JSON(), nullable=True),
     sa.Column('reset_token', sa.String(length=128), nullable=True),
     sa.Column('reset_token_expires', sa.DateTime(), nullable=True),
+    sa.Column('saved_items', sa.JSON(), nullable=True),
     sa.Column('id', sa.String(length=60), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_table('messages_list',
+    sa.Column('user_id', sa.String(length=128), nullable=False),
+    sa.Column('tailor_id', sa.String(length=128), nullable=False),
+    sa.Column('message', sa.String(length=255), nullable=False),
+    sa.Column('user_url', sa.String(length=255), nullable=False),
+    sa.Column('tailor_url', sa.String(length=255), nullable=False),
+    sa.Column('is_viewed', sa.Boolean(), nullable=True),
+    sa.Column('tailor_img_url', sa.String(length=255), nullable=True),
+    sa.Column('user_img_url', sa.String(length=255), nullable=True),
+    sa.Column('last_sender', sa.String(length=128), nullable=True),
+    sa.Column('id', sa.String(length=60), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['tailor_id'], ['tailors.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
     op.create_table('products',
     sa.Column('tailor_id', sa.String(length=128), nullable=False),
     sa.Column('name', sa.String(length=128), nullable=True),
-    sa.Column('description', sa.String(length=128), nullable=True),
+    sa.Column('description', sa.String(length=350), nullable=True),
     sa.Column('price', sa.String(length=128), nullable=False),
     sa.Column('images', sa.JSON(), nullable=True),
     sa.Column('estimated_tc', sa.Integer(), nullable=False),
@@ -86,11 +104,32 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_table('messages',
+    sa.Column('sender_user_id', sa.String(length=128), nullable=True),
+    sa.Column('reciever_user_id', sa.String(length=128), nullable=True),
+    sa.Column('sender_tailor_id', sa.String(length=128), nullable=True),
+    sa.Column('reciever_tailor_id', sa.String(length=128), nullable=True),
+    sa.Column('product_id', sa.String(length=128), nullable=True),
+    sa.Column('thread_msg_id', sa.String(length=128), nullable=True),
+    sa.Column('message', sa.Text(), nullable=False),
+    sa.Column('media_url', sa.String(length=255), nullable=True),
+    sa.Column('media_type', sa.String(length=50), nullable=True),
+    sa.Column('is_viewed', sa.Boolean(), nullable=True),
+    sa.Column('id', sa.String(length=60), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
+    sa.ForeignKeyConstraint(['reciever_tailor_id'], ['tailors.id'], ),
+    sa.ForeignKeyConstraint(['reciever_user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['sender_tailor_id'], ['tailors.id'], ),
+    sa.ForeignKeyConstraint(['sender_user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
     op.create_table('orders',
     sa.Column('product_id', sa.String(length=128), nullable=False),
     sa.Column('user_id', sa.String(length=128), nullable=False),
-    sa.Column('order_status', sa.Enum('PENDING', 'COMFIRMED', 'COMPLETED', 'IN_PRGRESS', 'DELIVERED', name='orderStatus'), nullable=False),
-    sa.Column('order_progress', sa.Enum('AWAITING_COMFIRMATION', 'MATERIAL_SOURCING', 'CUTTING', 'SEWING', 'IRONING', 'PACKAGING', name='orderProgress'), nullable=False),
+    sa.Column('status', sa.Enum('PENDING', 'COMFIRMED', 'COMPLETED', 'IN PROGRESS', 'DELIVERED', name='orderStatus'), nullable=False),
+    sa.Column('stages', sa.JSON(), nullable=False),
     sa.Column('measurements', sa.JSON(), nullable=False),
     sa.Column('id', sa.String(length=60), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
@@ -99,14 +138,52 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_table('notifications',
+    sa.Column('user_id', sa.String(length=128), nullable=True),
+    sa.Column('tailor_id', sa.String(length=128), nullable=True),
+    sa.Column('sender_user_id', sa.String(length=128), nullable=True),
+    sa.Column('sender_tailor_id', sa.String(length=128), nullable=True),
+    sa.Column('product_id', sa.String(length=128), nullable=True),
+    sa.Column('content', sa.String(length=128), nullable=False),
+    sa.Column('message_id', sa.String(length=128), nullable=True),
+    sa.Column('is_clicked', sa.Boolean(), nullable=True),
+    sa.Column('is_user', sa.Boolean(), nullable=True),
+    sa.Column('url', sa.String(length=128), nullable=False),
+    sa.Column('id', sa.String(length=60), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['message_id'], ['messages.id'], ),
+    sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
+    sa.ForeignKeyConstraint(['sender_tailor_id'], ['tailors.id'], ),
+    sa.ForeignKeyConstraint(['sender_user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['tailor_id'], ['tailors.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('reviews',
+    sa.Column('order_id', sa.String(length=128), nullable=False),
+    sa.Column('product_id', sa.String(length=128), nullable=False),
+    sa.Column('review', sa.String(length=1028), nullable=False),
+    sa.Column('rating', sa.Integer(), nullable=False),
+    sa.Column('id', sa.String(length=60), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['order_id'], ['orders.id'], ),
+    sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
     # ### end Alembic commands ###
 
 
 def downgrade():
     # ### commands auto generated by Alembic - please adjust! ###
+    op.drop_table('reviews')
+    op.drop_table('notifications')
     op.drop_table('orders')
+    op.drop_table('messages')
     op.drop_table('carts')
     op.drop_table('products')
+    op.drop_table('messages_list')
     op.drop_table('users')
     op.drop_table('tailors')
     # ### end Alembic commands ###

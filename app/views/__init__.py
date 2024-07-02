@@ -14,3 +14,5 @@ from . import payment
 from . import measurement
 from . import order
 from . import review
+from . import chat
+from . import notification

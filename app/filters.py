@@ -2,13 +2,56 @@
 """
 
 from datetime import datetime, timedelta
-import timeago
+import timeago, pytz
 from babel.numbers import format_currency
 
 
 def current_datetime_filter(format='%Y-%m-%d %H:%M:%S'):
     return datetime.now().strftime(format)
 
+def custom_timeago(date):
+    if date == 'N/A':
+        return 'N/A'
+    if isinstance(date, str):
+        date = datetime.strptime(date, '%Y-%m-%d %H:%M:%S.%f')
+
+    now = datetime.utcnow()
+    diff = now - date
+    if diff < timedelta(hours=24):
+        return date.strftime('%H:%M')
+    elif diff < timedelta(hours=48):
+        return f'Yesterday at {date.strftime("%H:%M")}'
+    else:
+        return format_datetime(date)
+
+
+def custom_time_format(date, timezone='UTC'):
+    if date == 'N/A':
+        return 'N/A'
+    if isinstance(date, str):
+        date = datetime.strptime(date, '%Y-%m-%d %H:%M:%S.%f')
+
+    # Convert date to the specified timezone
+    
+    local_tz = pytz.timezone(timezone)
+    date = date.replace(tzinfo=pytz.utc).astimezone(local_tz)
+    
+    now = datetime.now(local_tz)
+    diff = now - date
+
+    # If the datetime is under 30 seconds
+    if diff < timedelta(seconds=30):
+        return 'just now'
+    # If the datetime is under 60 seconds
+    elif diff < timedelta(minutes=1):
+        return f'{int(diff.total_seconds())} seconds ago'
+    # If the datetime is under 60 minutes
+    elif diff < timedelta(hours=1):
+        minutes = int(diff.total_seconds() // 60)
+        return f'{minutes} minutes ago'
+    # For dates older than 24 hours
+    else:
+        return date.strftime('%H:%M')
 
 def format_datetime(value):
     # Parse the input datetime string
