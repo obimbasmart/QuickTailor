@@ -80,6 +80,7 @@ def load_user(id: str):
 def register_filters(app):
     import app.filters as filters
     app.jinja_env.filters['currency'] = filters.currency_filter
+    app.jinja_env.filters['now'] = filters.now_utc
     app.jinja_env.filters['timeago'] = filters._timeago
     app.jinja_env.filters['custom_timeago'] = filters.custom_timeago
     app.jinja_env.filters['custom_time'] = filters.custom_time_format

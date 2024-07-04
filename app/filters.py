@@ -1,13 +1,17 @@
 """app, jinja filters
 """
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import timeago, pytz
 from babel.numbers import format_currency
 
 
 def current_datetime_filter(format='%Y-%m-%d %H:%M:%S'):
     return datetime.now().strftime(format)
+
+def now_utc(date):
+    return datetime.now(timezone.utc)
+
 
 def custom_timeago(date):
     if date == 'N/A':
@@ -22,7 +26,9 @@ def custom_timeago(date):
     elif diff < timedelta(hours=48):
         return f'Yesterday at {date.strftime("%H:%M")}'
     else:
-        return format_datetime(date)
+        return f'{format_datetime(date)} at {date.strftime("%H:%M")}'
+
+
 
 
 def custom_time_format(date, timezone='UTC'):

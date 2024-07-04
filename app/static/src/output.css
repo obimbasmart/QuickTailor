@@ -1980,6 +1980,10 @@ input:checked + .toggle-bg {
   width: 78px;
 }
 
+.w-\[80\%\] {
+  width: 80%;
+}
+
 .w-\[85\%\] {
   width: 85%;
 }
@@ -2007,6 +2011,14 @@ input:checked + .toggle-bg {
 
 .w-full {
   width: 100%;
+}
+
+.w-\[30\%\] {
+  width: 30%;
+}
+
+.w-\[35\%\] {
+  width: 35%;
 }
 
 .min-w-16 {

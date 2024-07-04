@@ -68,18 +68,18 @@
 	      {% for message in msg %}
 	      {% if  current_user.is_tailor %}
                   {% if message.sender_tailor_id %}
-		  {{ messages('right', message.message, message.created_at | custom_time ) }}
+		  {{ messages('right', message.message, message.created_at | custom_timeago ) }}
                  
 		 {% else %}
-		       {{ messages('left', message.message, message.created_at | custom_time) }}  
+		       {{ messages('left', message.message, message.created_at | custom_timeago) }}  
 		 {% endif %}
          
               {% else %}
 	         {% if message.sender_user_id %}
-		 {{ messages('right', message.message, message.created_at | custom_time) }}
+		 {{ messages('right', message.message, message.created_at | custom_timeago) }}
                  
                  {% else %}
-                       {{ messages('left', message.message, message.created_at | custom_time) }} 
+                       {{ messages('left', message.message, message.created_at | custom_timeago) }} 
                  {% endif %}
 
                   
