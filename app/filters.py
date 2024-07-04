@@ -37,7 +37,7 @@ def custom_time_format(date, timezone='UTC'):
     if isinstance(date, str):
         date = datetime.strptime(date, '%Y-%m-%d %H:%M:%S.%f')
 
-    # Convert date to the specified timezone
+    # Convert date to the specified timezone from parameters
     
     local_tz = pytz.timezone(timezone)
     date = date.replace(tzinfo=pytz.utc).astimezone(local_tz)
