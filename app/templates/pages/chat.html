@@ -68,18 +68,32 @@
 	      {% for message in msg %}
 	      {% if  current_user.is_tailor %}
                   {% if message.sender_tailor_id %}
+<<<<<<< HEAD
 		  {{ messages('right', message.message, message.created_at | custom_timeago ) }}
                  
 		 {% else %}
 		       {{ messages('left', message.message, message.created_at | custom_timeago) }}  
+=======
+		  {{ messages('right', message.message, message.created_at | custom_time ) }}
+                 
+		 {% else %}
+		       {{ messages('left', message.message, message.created_at | custom_time) }}  
+>>>>>>> a03186c2a9fa59fe5729ea032872dd4f8985783d
 		 {% endif %}
          
               {% else %}
 	         {% if message.sender_user_id %}
+<<<<<<< HEAD
 		 {{ messages('right', message.message, message.created_at | custom_timeago) }}
                  
                  {% else %}
                        {{ messages('left', message.message, message.created_at | custom_timeago) }} 
+=======
+		 {{ messages('right', message.message, message.created_at | custom_time) }}
+                 
+                 {% else %}
+                       {{ messages('left', message.message, message.created_at | custom_time) }} 
+>>>>>>> a03186c2a9fa59fe5729ea032872dd4f8985783d
                  {% endif %}
 
                   

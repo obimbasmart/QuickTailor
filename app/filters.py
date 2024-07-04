@@ -1,7 +1,11 @@
 """app, jinja filters
 """
 
+<<<<<<< HEAD
 from datetime import datetime, timedelta, timezone
+=======
+from datetime import datetime, timedelta
+>>>>>>> a03186c2a9fa59fe5729ea032872dd4f8985783d
 import timeago, pytz
 from babel.numbers import format_currency
 
@@ -9,10 +13,13 @@ from babel.numbers import format_currency
 def current_datetime_filter(format='%Y-%m-%d %H:%M:%S'):
     return datetime.now().strftime(format)
 
+<<<<<<< HEAD
 def now_utc(date):
     return datetime.now(timezone.utc)
 
 
+=======
+>>>>>>> a03186c2a9fa59fe5729ea032872dd4f8985783d
 def custom_timeago(date):
     if date == 'N/A':
         return 'N/A'
@@ -26,9 +33,13 @@ def custom_timeago(date):
     elif diff < timedelta(hours=48):
         return f'Yesterday at {date.strftime("%H:%M")}'
     else:
+<<<<<<< HEAD
         return f'{format_datetime(date)} at {date.strftime("%H:%M")}'
 
 
+=======
+        return format_datetime(date)
+>>>>>>> a03186c2a9fa59fe5729ea032872dd4f8985783d
 
 
 def custom_time_format(date, timezone='UTC'):
@@ -37,7 +48,11 @@ def custom_time_format(date, timezone='UTC'):
     if isinstance(date, str):
         date = datetime.strptime(date, '%Y-%m-%d %H:%M:%S.%f')
 
+<<<<<<< HEAD
     # Convert date to the specified timezone from parameters
+=======
+    # Convert date to the specified timezone
+>>>>>>> a03186c2a9fa59fe5729ea032872dd4f8985783d
     
     local_tz = pytz.timezone(timezone)
     date = date.replace(tzinfo=pytz.utc).astimezone(local_tz)
