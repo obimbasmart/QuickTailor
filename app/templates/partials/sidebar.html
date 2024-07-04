@@ -30,7 +30,7 @@
       </a>
 
       {% if current_user.is_tailor %}
-        <a href="{{ url_for("tailor_views.account") }}">
+        <a href="{{ url_for('tailor_views.account') }}">
           <button type="button"
                   class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                   aria-expanded="false"
@@ -45,8 +45,7 @@
         <div class="flex items-center">
           {% if current_user.is_authenticated %}
             <div class="flex items-center ms-3">
-
-              <a href="{{ url_for("app_views.account") }}">
+              <a href="{{ url_for('app_views.account') }}">
                 <div>
                   <button type="button"
                           class="w-8 h-8 flex items-center  p-2 justify-center  text-sm bg-pc-teal-light rounded-full   dark:focus:ring-gray-600"
@@ -66,15 +65,13 @@
             </div>
 
           {% else %}
-            <a href="{{ url_for("auth_views.login") }}">
+            <a href="{{ url_for('auth_views.login') }}">
               <span class="text-pc-teal-normal font-medium text-sm font-roboto leading-6">Login</span>
             </a>
           {% endif %}
 
         </div>
-
       {% endif %}
-
 
     </div>
   </div>

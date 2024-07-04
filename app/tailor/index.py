@@ -35,7 +35,7 @@ def profile():
                            page='dashboard')
 
 
-@tailor_views.route("/account")
+@tailor_views.route("/me/account")
 @tailor_required
 def account():
     return render_template('pages/tailor/account.html',

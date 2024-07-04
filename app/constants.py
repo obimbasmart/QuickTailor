@@ -54,8 +54,8 @@ ADMIN_SIDEBAR_LINKS = [
         "is_protected": 0, "icon_name": "messages"},
     {"name": "account", "link": "tailor_views.account",
         "is_protected": 0, "icon_name": "account"},
-    {"name": "logout", "link": "auth_views.logout",
-        "is_protected": 0, "icon_name": "logout"}
+    # {"name": "logout", "link": "auth_views.logout",
+    #     "is_protected": 0, "icon_name": "logout"}
     # Add more "link"s as needed
 ]
 
