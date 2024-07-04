@@ -70,6 +70,7 @@ def password():
 def _send_otp():
     otp = current_user.generate_otp()
     status_code = send_otp(current_user, otp)
+    print(status_code)
     if status_code == 202:
         return """
                 <div class='inline-flex gap-1 items-center justify-center'>

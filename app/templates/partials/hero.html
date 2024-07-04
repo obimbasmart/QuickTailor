@@ -1,98 +1,135 @@
-
-
 <section id="controls-carousel" class="relative w-full" data-carousel="slide">
   <!-- Carousel wrapper -->
   <div class="relative w-full aspect-[1.17] overflow-hidden md:h-96">
-       <!-- Item 1 -->
-      <div class="text-white bg-center bg-cover flex items-center justify-center bg-cover bg-center bg-no-repeat bg-[url('/static/images/hero_1.jpeg')]   bg-blend-multiply hidden duration-700 ease-in-out w-full" data-carousel-item>
-        <div class="bg-gradient-to-r from-black/35 h-full w-full flex justify-center items-center">
-          <div class="mx-16 flex flex-col gap-6 max-w-96 ">
-                <h1 class="font-montserrat text-xl font-medium">
-                      Perfect Wedding Attire
-                </h1>
-                <p class="font-roboto text-sc-gray-light text-xs font-normal tracking-widest">
-                  Design your dream wedding outfit, tailored to perfection for your special day.
-                </p>
+    <!-- Item 1 -->
+    <div class="text-white bg-center bg-black/30 bg-cover flex bg-tailor-img-2 items-center justify-center bg-cover bg-center bg-no-repeat bg-blend-multiply hidden duration-700 ease-in-out w-full"
+         data-carousel-item>
+      <div class="bg-gradient-to-r from-black/45 h-full w-full flex justify-center items-center">
+        <div class="mx-16 flex flex-col gap-6 max-w-96 ">
+          <h1 class="font-montserrat text-xl font-medium">
+            Connect with verfied tailors!
+          </h1>
+          <p class="font-roboto text-sc-gray-light text-xs font-normal tracking-widest">
+            Disover expert, verified tailors for custom designs. Choose your fabric, add your measurements, and track your order—all in one place
+          </p>
 
-                <button
-              class="text-white max-w-36 font-roboto  tracking-widest text-xs border border-white focus:outline-none dark:focus:ring-teal-800 font-medium rounded-lg px-6 py-2.5 text-center">Shop Now
+          <a href="{{ url_for('app_views.get_all_products' ) }}">
+            <button class="text-white max-w-36 font-roboto  tracking-widest text-xs border border-white focus:outline-none dark:focus:ring-teal-800 font-medium rounded-lg px-6 py-2.5 text-center">
+              Discover More
             </button>
-          </div>
+          </a>
+        </div>
 
+      </div>
+    </div>
+
+    <!-- Item 1 -->
+    <div class="text-white bg-center bg-cover flex items-center justify-center bg-cover bg-center bg-no-repeat bg-[url('/static/images/hero_1.jpeg')]   bg-blend-multiply hidden duration-700 ease-in-out w-full"
+         data-carousel-item>
+      <div class="bg-gradient-to-r from-black/35 h-full w-full flex justify-center items-center">
+        <div class="mx-16 flex flex-col gap-6 max-w-96 ">
+          <h1 class="font-montserrat text-xl font-medium">
+            Perfect Wedding Attire
+          </h1>
+          <p class="font-roboto text-sc-gray-light text-xs font-normal tracking-widest">
+            Design your dream wedding outfit, tailored to perfection for your special day.
+          </p>
+
+          <a href="{{ url_for('app_views.get_all_products' ) }}"></a>
+              <button class="text-white max-w-36 font-roboto  tracking-widest text-xs border border-white focus:outline-none dark:focus:ring-teal-800 font-medium rounded-lg px-6 py-2.5 text-center">
+                Shop Now
+              </button>
+            </div>
+          </a>
+
+      </div>
+    </div>
+
+    <div class="text-white bg-center bg-cover flex items-center justify-center bg-cover bg-center bg-no-repeat bg-[url('/static/images/african.jpg')]   bg-blend-multiply hidden duration-700 ease-in-out w-full"
+         data-carousel-item>
+      <div class="bg-gradient-to-r from-black/35 h-full w-full flex justify-center items-center">
+        <div class="mx-16 flex flex-col gap-6 max-w-96 ">
+          <h1 class="font-montserrat text-xl font-medium">
+            Traditional African Designs
+          </h1>
+          <p class="font-roboto text-sc-gray-light text-xs font-normal tracking-widest">
+            Embrace your roots with authentic, handcrafted Nigerian attire made just for you
+          </p>
+
+          <a href="{{ url_for('app_views.get_all_products' ) }}">
+            <button class="text-white w-fit font-roboto  tracking-widest text-xs border border-white focus:outline-none dark:focus:ring-teal-800 font-medium rounded-lg px-6 py-2.5 text-center">
+              View collections
+            </button>
+          </a>
+          
         </div>
       </div>
+    </div>
 
-      <div class="text-white bg-center bg-cover flex items-center justify-center bg-cover bg-center bg-no-repeat bg-[url('/static/images/african.jpg')]   bg-blend-multiply hidden duration-700 ease-in-out w-full" data-carousel-item>
-        <div class="bg-gradient-to-r from-black/35 h-full w-full flex justify-center items-center">
-          <div class="mx-16 flex flex-col gap-6 max-w-96 ">
-                <h1 class="font-montserrat text-xl font-medium">
-                  Traditional African Designs
-                </h1>
-                <p class="font-roboto text-sc-gray-light text-xs font-normal tracking-widest">
-                  Embrace your roots with authentic, handcrafted Nigerian attire made just for you
-                </p>
+    <div class="text-white bg-center bg-cover flex items-center justify-center bg-cover bg-center bg-no-repeat bg-[url('/static/images/bridal.jpg')]   bg-blend-multiply hidden duration-700 ease-in-out w-full"
+         data-carousel-item>
+      <div class="bg-gradient-to-r from-black/70 h-full w-full flex justify-center items-center">
+        <div class="mx-16 flex flex-col gap-6 max-w-96 ">
+          <h1 class="font-montserrat text-xl font-medium">
+            Exclusive Bridal Collection
+          </h1>
+          <p class="font-roboto text-sc-gray-light text-xs font-normal tracking-widest">
+            Make your wedding day unforgettable with a custom-made bridal outfit
+          </p>
 
-                <button
-              class="text-white w-fit font-roboto  tracking-widest text-xs border border-white focus:outline-none dark:focus:ring-teal-800 font-medium rounded-lg px-6 py-2.5 text-center">View collections
-            </button>
-          </div>
+          <button class="text-white w-fit font-roboto  tracking-widest text-xs border border-white focus:outline-none dark:focus:ring-teal-800 font-medium rounded-lg px-6 py-2.5 text-center">
+            View collections
+          </button>
         </div>
       </div>
+    </div>
 
-      <div class="text-white bg-center bg-cover flex items-center justify-center bg-cover bg-center bg-no-repeat bg-[url('/static/images/bridal.jpg')]   bg-blend-multiply hidden duration-700 ease-in-out w-full" data-carousel-item>
-        <div class="bg-gradient-to-r from-black/70 h-full w-full flex justify-center items-center">
-          <div class="mx-16 flex flex-col gap-6 max-w-96 ">
-                <h1 class="font-montserrat text-xl font-medium">
-                  Exclusive Bridal Collection
-                </h1>
-                <p class="font-roboto text-sc-gray-light text-xs font-normal tracking-widest">
-                  Make your wedding day unforgettable with a custom-made bridal outfit
-                </p>
+    <div class="text-white bg-center bg-cover flex items-center justify-center bg-cover bg-center bg-no-repeat bg-[url('/static/images/kids.jpg')]   bg-blend-multiply hidden duration-700 ease-in-out w-full"
+         data-carousel-item>
+      <div class="bg-gradient-to-r from-black/80 h-full w-full flex justify-center items-center">
+        <div class="mx-16 flex flex-col gap-6 max-w-96 ">
+          <h1 class="font-montserrat text-xl font-medium">
+            Custom Children's Wear
+          </h1>
+          <p class="font-roboto text-sc-gray-light text-xs font-normal tracking-widest">
+            Dress your little ones in bespoke outfits that are as unique as they are
+          </p>
 
-                <button
-              class="text-white w-fit font-roboto  tracking-widest text-xs border border-white focus:outline-none dark:focus:ring-teal-800 font-medium rounded-lg px-6 py-2.5 text-center">View collections
-            </button>
-          </div>
+          <button class="text-white w-fit font-roboto  tracking-widest text-xs border border-white focus:outline-none dark:focus:ring-teal-800 font-medium rounded-lg px-6 py-2.5 text-center">
+            Browse kid's collections
+          </button>
         </div>
       </div>
+    </div>
 
-      <div class="text-white bg-center bg-cover flex items-center justify-center bg-cover bg-center bg-no-repeat bg-[url('/static/images/kids.jpg')]   bg-blend-multiply hidden duration-700 ease-in-out w-full" data-carousel-item>
-        <div class="bg-gradient-to-r from-black/80 h-full w-full flex justify-center items-center">
-          <div class="mx-16 flex flex-col gap-6 max-w-96 ">
-                <h1 class="font-montserrat text-xl font-medium">
-                  Custom Children's Wear
-                </h1>
-                <p class="font-roboto text-sc-gray-light text-xs font-normal tracking-widest">
-                  Dress your little ones in bespoke outfits that are as unique as they are
-                </p>
-
-                <button
-              class="text-white w-fit font-roboto  tracking-widest text-xs border border-white focus:outline-none dark:focus:ring-teal-800 font-medium rounded-lg px-6 py-2.5 text-center">Browse kid's collections
-            </button>
-          </div>
-        </div>
-      </div>
-   
   </div>
   <!-- Slider controls -->
-  <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-      <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-2 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-          <path d="M15.4998 19.7046L9.20696 13.4117C8.81643 13.0212 8.81643 12.388 9.20696 11.9975L15.4998 5.70459" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-          <span class="sr-only">Previous</span>
-      </span>
+  <button type="button"
+          class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+          data-carousel-prev>
+    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-2 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg"
+           width="24"
+           height="25"
+           viewBox="0 0 24 25"
+           fill="none">
+        <path d="M15.4998 19.7046L9.20696 13.4117C8.81643 13.0212 8.81643 12.388 9.20696 11.9975L15.4998 5.70459" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <span class="sr-only">Previous</span>
+    </span>
   </button>
-  <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-      <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-2 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-          <path d="M9.5 5.70459L15.7929 11.9975C16.1834 12.388 16.1834 13.0212 15.7929 13.4117L9.5 19.7046" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-          <span class="sr-only">Next</span>
-      </span>
+  <button type="button"
+          class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+          data-carousel-next>
+    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-2 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg"
+           width="24"
+           height="25"
+           viewBox="0 0 24 25"
+           fill="none">
+        <path d="M9.5 5.70459L15.7929 11.9975C16.1834 12.388 16.1834 13.0212 15.7929 13.4117L9.5 19.7046" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <span class="sr-only">Next</span>
+    </span>
   </button>
 </section>
-
-
-
-

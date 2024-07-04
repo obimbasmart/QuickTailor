@@ -52,3 +52,10 @@ def send_otp(user, otp):
         recievers=[user.email],
         body=render_template('emails/otp.txt', user=user, otp=otp)
     )
+
+def send_email_verification(name, email, token: str):
+    return send_email(
+        subject="Verify Your Email for QuickTailor",
+        recievers=[email],
+        body=render_template('emails/email_verification.txt', name=name, token=token)
+    )
