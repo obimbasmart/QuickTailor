@@ -147,6 +147,9 @@ def handle_send_message(data):
 @app_views.route('/messages', methods=['GET'])
 @login_required
 def messages():
+    product = Product.query.all()
+    for p in product:
+        print("is a a  apr", p.id)
     print(current_user.id)
     msg_list = current_user.message_list
     for m in msg_list:
@@ -157,6 +160,7 @@ def messages():
         msg_list.tailor.img_url = s3_client.generate_presigned_url('get_object', msg_list.tailor.photo_url)
 
     return render_template('pages/messages.html', user=current_user.to_dict(), message_list=formatted_msg_list)
+
 @app_views.route('/get_message', methods=['GET'])
 @login_required
 def get_message():
@@ -188,13 +192,16 @@ def get_messages():
 @app_views.route('/messages/<msg_id>', methods=['GET', 'POST'])
 @login_required
 def messages_per_user(msg_id):
-
+    product = Product.query.filter_by(id=msg_id).one_or_none()
+    if product:
+        return product.id
     msg_list = current_user.message_list
     for m in msg_list:
         if m.last_sender == msg_id:
             m.is_viewed = True
             db.session.commit()
-    if current_user.is_tailor:
+    
+    if current_user.is_tailor and not product:
         # get all messges related to the sender_tailor and reciever_user for display
         msg1 = Message.query.filter_by(reciever_user_id=msg_id).filter_by(sender_tailor_id=current_user.id).all()
         msg2 = Message.query.filter_by(sender_user_id = msg_id).filter_by(reciever_tailor_id=current_user.id).all()

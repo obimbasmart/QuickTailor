@@ -11,11 +11,7 @@
 
     {% set image_profile %}
     {% if not current_user.is_tailor %}
-<<<<<<< HEAD
         <img src={{ msg_list.tailor.img_url }}' class="rounded-full" style="width: 40px; height: 40px;">
-=======
-        <img src={{ msg_list.tailor.img_url }} class="rounded-full" style="width: 40px; height: 40px;">
->>>>>>> a03186c2a9fa59fe5729ea032872dd4f8985783d
     {% else %}
     <div  class="w-12 h-12 flex items-center  p-2 justify-center  text-sm bg-pc-teal-light rounded-full   dark:focus:ring-gray-600">
                   <svg xmlns="http://www.w3.org/2000/svg"
@@ -99,14 +95,8 @@
             // Update the timestamp (assuming the time is in "2:00am" format, this should be dynamically set)
             const timestampDiv = existingDiv.children[0].children[2]; // Access the third child of the first child
 			timestampDiv.innerText = `${new_msg_list.updated_at}`; // Replace with actual timestamp if available
-<<<<<<< HEAD
 	    
             
-=======
-	    // remove border from the new last element
-
-            // Move the div to the top
->>>>>>> a03186c2a9fa59fe5729ea032872dd4f8985783d
             // Move the div to the top
             container.appendChild(existingDiv);
         } else {
