@@ -21,6 +21,7 @@ from app.models.base_user import BaseUser
 @auth_views.route('/verify_email/<token>', methods=["GET"])
 def activate_account(token=None):
     not_registered_user = AnonymousUserRecord.query.filter_by(id=token).one_or_none()
+    msg = "The link is expired or invalid"
 
     if not_registered_user:
         if not_registered_user.data['user_type'] == "user":
@@ -33,12 +34,15 @@ def activate_account(token=None):
                                 last_name=not_registered_user.data['last_name'],
                                 email=not_registered_user.data['email'],
                                 phone_no=not_registered_user.data['phone_no'])
+            
+        msg = "Email verification successfull!"
 
-    new_user.set_password(not_registered_user.data['password'])
-    db.session.add(new_user)
-    db.session.delete(not_registered_user)
-    db.session.commit()
-    flash("Email verification successfull")
+        new_user.set_password(not_registered_user.data['password'])
+        db.session.add(new_user)
+        db.session.delete(not_registered_user)
+        db.session.commit()
+        
+    flash(msg)
     return redirect(url_for('auth_views.login'))
 
 
