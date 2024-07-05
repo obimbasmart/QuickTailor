@@ -1956,6 +1956,10 @@ input:checked + .toggle-bg {
   width: 203px;
 }
 
+.w-\[30\%\] {
+  width: 30%;
+}
+
 .w-\[45\%\] {
   width: 45%;
 }
@@ -2011,14 +2015,6 @@ input:checked + .toggle-bg {
 
 .w-full {
   width: 100%;
-}
-
-.w-\[30\%\] {
-  width: 30%;
-}
-
-.w-\[35\%\] {
-  width: 35%;
 }
 
 .min-w-16 {

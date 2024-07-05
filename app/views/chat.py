@@ -1,5 +1,5 @@
 from app.views import app_views
-from flask import render_template, request, jsonify
+from flask import render_template, request, jsonify, url_for, redirect
 from app.cloud_storage.s3_cloud_storage import S3StorageService
 from app.models.user import User
 from app.models.tailor import Tailor
@@ -12,19 +12,6 @@ from flask_login import current_user, login_required
 from app.models.notification import Notification
 from datetime import datetime
 from app import s3_client
-
-
-def format_time(time_obj):
-    # Format the time in 12-hour format with AM/PM
-    formatted_time_12 = time_obj.strftime('%I:%M %p').lstrip('0')
-
-    # Format the time in 24-hour format with AM/PM
-    hour = time_obj.strftime('%H')
-    minute = time_obj.strftime('%M')
-    period = 'PM' if int(hour) >= 12 else 'AM'
-    formatted_time_24 = f"{hour}:{minute}"
-
-    return  formatted_time_24
 
 
 
@@ -192,16 +179,46 @@ def get_messages():
 @app_views.route('/messages/<msg_id>', methods=['GET', 'POST'])
 @login_required
 def messages_per_user(msg_id):
-    product = Product.query.filter_by(id=msg_id).one_or_none()
-    if product:
-        return product.id
+   
+    # once this page is visited this particular chat with this id is viewed automatically or manually
     msg_list = current_user.message_list
-    for m in msg_list:
-        if m.last_sender == msg_id:
-            m.is_viewed = True
+    if msg_list:
+        for m in msg_list:
+            if m.last_sender == msg_id:
+                m.is_viewed = True
+                db.session.commit()
+    #m handling of Message sent from product page
+    product = Product.query.filter_by(id=msg_id).one_or_none()
+    test_string = "We the virtuesof life if i have "
+    if product and not current_user.is_tailor:
+        msg1 = Message.query.filter_by(reciever_tailor_id=product.tailor_id).filter_by(sender_user_id=current_user.id).all()
+        msg2 = Message.query.filter_by(sender_tailor_id = product.tailor.id).filter_by(reciever_user_id=current_user.id).all()
+        new_message = Message(
+            sender_user_id=current_user.id,
+            reciever_tailor_id=product.tailor_id,
+            message=test_string,
+            product_id=msg_id
+            )
+        db.session.add(new_message)
+        if not msg1 and not msg2:
+            msg_list = MessageList(tailor_id=product.tailor_id, user_id=current_user.id, user_url = f"/messages/{product.tailor.id}", 
+                     tailor_url= f"/messages/{current_user.id}", message=test_string, last_sender=current_user.id)
+            db.session.add(msg_list)
             db.session.commit()
-    
-    if current_user.is_tailor and not product:
+
+        else:
+            msg_list = MessageList.query.filter_by(user_id = current_user.id, tailor_id = product.tailor_id).one_or_none()
+            msg_list.message= test_string
+            msg_list.last_sender = current_user.id
+            msg_list.is_viewed = False
+            db.session.commit()
+        
+        print(new_message.product.img)
+        return new_message.product_id
+
+    if product and current_user.is_tailor:
+        return redirect(url_for('app_views.messages'))
+    if current_user.is_tailor:
         # get all messges related to the sender_tailor and reciever_user for display
         msg1 = Message.query.filter_by(reciever_user_id=msg_id).filter_by(sender_tailor_id=current_user.id).all()
         msg2 = Message.query.filter_by(sender_user_id = msg_id).filter_by(reciever_tailor_id=current_user.id).all()
@@ -244,8 +261,8 @@ def messages_per_user(msg_id):
        # display the previous conversations with the tailor
            message = sorted(msg1 + msg2, key=lambda msg: msg.created_at)
            for m in message:
-               print("this is updated", m.updated_at, "this is created", m.created_at)
+               print("this is tailor.img,", m.product)
            formatted_messages = [msg for msg in message]
-           tailor.img_url = s3_client.generate_presigned_url('get_object', tailor.photo_url)
+           
 
            return render_template("pages/chat.html", user=current_user.to_dict(), msg=formatted_messages, other_user=tailor )

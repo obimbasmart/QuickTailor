@@ -11,7 +11,7 @@
 
     {% set image_profile %}
     {% if not current_user.is_tailor %}
-        <img src={{ msg_list.tailor.img_url }}' class="rounded-full" style="width: 40px; height: 40px;">
+        <img src="{{ msg_list.tailor.photo }}" class="rounded-full" style="width: 40px; height: 40px;">
     {% else %}
     <div  class="w-12 h-12 flex items-center  p-2 justify-center  text-sm bg-pc-teal-light rounded-full   dark:focus:ring-gray-600">
                   <svg xmlns="http://www.w3.org/2000/svg"

@@ -20,9 +20,19 @@
        {% set image_profile %}
         <div class="">
 		{% if other_user.is_tailor %}
-		<a href= {{ '/' ~ other_user.business_name }}>  <img src="{{ other_user.img_url }}" class="w-8 h-8 rounded-full" alt="...">  </a>
+		<a href= "{{ '/' ~ other_user.business_name }}">  <img src="{{ other_user.photo }}" class="w-8 h-8 rounded-full" alt="...">  </a>
                {% else %}
-	                 <img src="{{ url_for('static', filename='images/product_image_3.png')  }}" class="w-8 h-8 rounded-full" alt="...">  
+                   <div  class="w-12 h-12 flex items-center  p-2 justify-center  text-sm bg-pc-teal-light rounded-full   dark:focus:ring-gray-600">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            width="40"
+                            height="40"
+                            viewBox="0 0 18 18"
+                            fill="none">
+                           <path d="M9.15037 9C11.2214 9 12.9004 7.32106 12.9004 5.25C12.9004 3.17893 11.2214 1.5 9.15037 1.5C7.07932 1.5 5.40039 3.17893 5.40039 5.25C5.40039 7.32106 7.07932 9 9.15037 9Z" stroke="#006060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M2.25 16.5C2.67778 15.0249 3.56097 13.7228 4.7733 12.7799C5.98562 11.837 7.46501 11.3015 9 11.25C12.09 11.25 14.7225 13.4325 15.75 16.5" stroke="#006060" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                   </div>
+
                {% endif %}
        </div>
        {% endset %}
@@ -30,24 +40,7 @@
        {{ messageTop(reciever, image_profile, "top") }}
                     
 
-      {% set imgs %}
-
-                 <div class= "flex flex-row gap-2  w-full  mb-2 p-[5px] rounded-[6px]" style="background-color:var(--White, #FFF);">
-			 <div class="">
-				 <img src="{{ url_for('static', filename='images/product_image_3.png' ) }}" class="h-[63px] rounded-md w-[63px]" alt="...">
-			</div>
-			 <div class=" flex flex-col justify-between">
-                             <p class="leading-[21px] font-normal font-roboto tracking-[0.4px] text-gray-800  text-[12px]" style="color: var(--Grey-Dark, #606060);" >Product name</p>
-                            <p class="leading-[21px] font-normal font-roboto tracking-[0.4px] text-gray-800  text-[12px]" style="color:var(--Grey-Dark, #606060);" >₦10,500</p>
-                            <p class="leading-[21px] font-normal font-roboto tracking-[0.25px] text-gray-800  text-[14px]" style="color:var(--Grey-Darker, #2D2D2D);" >Order ID: #232102</p>
-
-                        </div>
-
-
-		 </div>
-
-
-      {% endset %}
+      
 
        {% set full_imgs %}
 
@@ -61,35 +54,75 @@
       {% endset %}
 
       <div id="messages"  class="flex flex-col  pt-16  ml-1 ">
-	    {% if product %}
-	       {{ messages('left', "hello the virtes of life if i have the choice of life I should be able to feel everyday with pleasure", "2: 00 am", imgs) }}
+	    
+	     
+	    {% for message in msg %}
+            {% if message.product %}
+               {% set imgs %}
 
-	     {% else %}
-	      {% for message in msg %}
-	      {% if  current_user.is_tailor %}
+                 <a href="">     <div class= "flex flex-row gap-2  w-full  mb-2 p-[5px] rounded-[6px]" style="background-color:var(--White, #FFF);">
+                         <div class="">
+                                <img src="{{ message.product.img }}" class="h-[63px] rounded-md w-[63px]" alt="...">
+                         </div>
+                         <div class=" flex flex-col justify-between">
+                             <p class="leading-[21px] font-normal font-roboto tracking-[0.4px] text-gray-800  text-[12px]" style="color: var(--Grey-Dark, #606060);" >{{message.product.name}}</p>
+                            <p class="leading-[21px] font-normal font-roboto tracking-[0.4px] text-gray-800  text-[12px]" style="color:var(--Grey-Dark, #606060);" >{{message.product.price |currency }}</p>
+                            <p class="leading-[21px] font-normal font-roboto tracking-[0.25px] text-gray-800  text-[14px]" style="color:var(--Grey-Darker, #2D2D2D);" >Order ID: #232102</p>
+
+                         </div> 
+
+
+                     </div>
+                </a>
+
+               {% endset %}
+                {% if  current_user.is_tailor %}
                   {% if message.sender_tailor_id %}
-		  {{ messages('right', message.message, message.created_at | custom_timeago ) }}
+		             {{ messages('right', message.message, message.created_at | custom_timeago, imgs) }}
                  
-		 {% else %}
-		       {{ messages('left', message.message, message.created_at | custom_timeago) }}  
-		 {% endif %}
+		          {% else %}
+		             {{ messages('left', message.message, message.created_at | custom_timeago, imgs) }}  
+		          {% endif %}
          
-              {% else %}
-	         {% if message.sender_user_id %}
-		 {{ messages('right', message.message, message.created_at | custom_timeago) }}
+               {% else %}
+	              {% if message.sender_user_id %}
+		              {{ messages('right', message.message, message.created_at | custom_timeago, imgs) }}
                  
-                 {% else %}
-                       {{ messages('left', message.message, message.created_at | custom_timeago) }} 
-                 {% endif %}
+                  {% else %}
+                       {{ messages('left', message.message, message.created_at | custom_timeago, imgs) }} 
+                  {% endif %}
 
                   
-	      {% endif %}
+	           {% endif %}
                      
 
 
+               
+            {% else %}
+	           {% if  current_user.is_tailor %}
+                  {% if message.sender_tailor_id %}
+		             {{ messages('right', message.message, message.created_at | custom_timeago) }}
+                 
+		          {% else %}
+		             {{ messages('left', message.message, message.created_at | custom_timeago) }}  
+		          {% endif %}
+         
+               {% else %}
+	              {% if message.sender_user_id %}
+		              {{ messages('right', message.message, message.created_at | custom_timeago) }}
+                 
+                  {% else %}
+                       {{ messages('left', message.message, message.created_at | custom_timeago) }} 
+                  {% endif %}
 
-	      {% endfor %}
-           {% endif %}
+                  
+	           {% endif %}
+                     
+
+
+            {% endif %}
+	    {% endfor %}
+          
 
 
       </div>
