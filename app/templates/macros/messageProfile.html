@@ -12,9 +12,10 @@
 
 
 {% macro messageTop(middle, right, position, left) %}
-<div  {{ top_style(position) }}>
+<div id="top-msg" {{ top_style(position) }}>
 {% if left %}
     <div class="self-center" style="flex: 1;">
+        {{left}}
     </div>
 {% else %}
      <div class="self-center" id="redirectDiv"  style="flex: 1;">
@@ -41,7 +42,37 @@
         });
     </script>
 {% endmacro %}
+{% macro messageBottom(middle, right, position, left) %}
+<div id="btm-msg" {{ top_style(position) }}>
+{% if left %}
+    <div class="self-center" style="flex: 1;">
+        {{left}}
+    </div>
+{% else %}
+     <div class="self-center" id="redirectDiv"  style="flex: 1;">
+         <svg xmlns="http://www.w3.org/2000/svg" width="34" height="35" viewBox="0 0 34 35" fill="none">
+                <path d="M24.0846 17.4997H9.91797M9.91797 17.4997L15.5846 23.1663M9.91797 17.4997L15.5846 11.833" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+         </svg>
+    </div>
+{% endif %}
+   <div class="self-center text-center mr-4" style="flex: 8; ">      
+            {{ middle }}
+   </div>
+   <div class=" self-center" style="flex: 1;">      
+            {{ right }}
+   </div>
 
+</div>
+ <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const redirectDiv = document.getElementById('redirectDiv');
+
+            redirectDiv.onclick = function() {
+                window.history.back();
+            };
+        });
+    </script>
+{% endmacro %}
 
 {% macro messages(side, msg, time, img) %}
 

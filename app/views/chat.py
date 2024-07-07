@@ -175,94 +175,106 @@ def get_messages():
     message = sorted(msg_list, key=lambda msg: msg.created_at)
     formatted_messages = [msg.to_dict() for msg in message]
     return jsonify(formatted_messages)
+ 
 
-@app_views.route('/messages/<msg_id>', methods=['GET', 'POST'])
+@app_views.route('/message/<product_id>', methods=['POST'])
+def handle_post(product_id):
+    #handling of message sent from product page
+    # Check if the request method is POST
+    if request.method == 'POST':
+        # Handling Message sent from product page
+        product = Product.query.filter_by(id=product_id).one_or_none()
+        
+        
+        # Ensure product exists and the current user is not a tailor
+        if product and not current_user.is_tailor:
+            if request.is_json:
+                data = request.get_json()
+                value = data.get('text', '')
+                               
+                msg1 = Message.query.filter_by(reciever_tailor_id=product.tailor_id, sender_user_id=current_user.id).all()
+                msg2 = Message.query.filter_by(sender_tailor_id=product.tailor_id, reciever_user_id=current_user.id).all()
+                
+                new_message = Message(
+                    sender_user_id=current_user.id,
+                    reciever_tailor_id=product.tailor_id,
+                    message=value,
+                    product_id=product_id  # Use product_id here
+                )
+                db.session.add(new_message)
+                
+                if not msg1 and not msg2:
+                    msg_list = MessageList(
+                        tailor_id=product.tailor_id,
+                        user_id=current_user.id,
+                        user_url=f"/messages/{product.tailor_id}",
+                        tailor_url=f"/messages/{current_user.id}",
+                        message=value,
+                        last_sender=current_user.id
+                    )
+                    db.session.add(msg_list)
+                    db.session.commit()
+                else:
+                    msg_list = MessageList.query.filter_by(user_id=current_user.id, tailor_id=product.tailor_id).one_or_none()
+                    if msg_list:
+                        msg_list.message = value
+                        msg_list.last_sender = current_user.id
+                        msg_list.is_viewed = False
+                        db.session.commit()
+                
+                return jsonify("Message sent to the Tailor, you can view the message in your inbox page")
+            else:
+                return jsonify("Invalid content type, expected JSON"), 400
+
+        elif product and current_user.is_tailor:
+            return jsonify('Tailor cannot send messages from product page'), 403
+
+    return jsonify("Invalid request method"), 405
+
+
+@app_views.route('/messages/<msg_id>', methods=['GET'])
 @login_required
 def messages_per_user(msg_id):
-   
-    # once this page is visited this particular chat with this id is viewed automatically or manually
+    # Once this page is visited this particular chat with this id is viewed automatically or manually
     msg_list = current_user.message_list
     if msg_list:
         for m in msg_list:
             if m.last_sender == msg_id:
                 m.is_viewed = True
                 db.session.commit()
-    #m handling of Message sent from product page
-    product = Product.query.filter_by(id=msg_id).one_or_none()
-    test_string = "We the virtuesof life if i have "
-    if product and not current_user.is_tailor:
-        msg1 = Message.query.filter_by(reciever_tailor_id=product.tailor_id).filter_by(sender_user_id=current_user.id).all()
-        msg2 = Message.query.filter_by(sender_tailor_id = product.tailor.id).filter_by(reciever_user_id=current_user.id).all()
-        new_message = Message(
-            sender_user_id=current_user.id,
-            reciever_tailor_id=product.tailor_id,
-            message=test_string,
-            product_id=msg_id
-            )
-        db.session.add(new_message)
-        if not msg1 and not msg2:
-            msg_list = MessageList(tailor_id=product.tailor_id, user_id=current_user.id, user_url = f"/messages/{product.tailor.id}", 
-                     tailor_url= f"/messages/{current_user.id}", message=test_string, last_sender=current_user.id)
-            db.session.add(msg_list)
-            db.session.commit()
 
-        else:
-            msg_list = MessageList.query.filter_by(user_id = current_user.id, tailor_id = product.tailor_id).one_or_none()
-            msg_list.message= test_string
-            msg_list.last_sender = current_user.id
-            msg_list.is_viewed = False
-            db.session.commit()
-        
-        print(new_message.product.img)
-        return new_message.product_id
-
-    if product and current_user.is_tailor:
-        return redirect(url_for('app_views.messages'))
+  
     if current_user.is_tailor:
-        # get all messges related to the sender_tailor and reciever_user for display
-        msg1 = Message.query.filter_by(reciever_user_id=msg_id).filter_by(sender_tailor_id=current_user.id).all()
-        msg2 = Message.query.filter_by(sender_user_id = msg_id).filter_by(reciever_tailor_id=current_user.id).all()
-
-        #prevent a tailor from starting a conversation with a customer, customer should initiate a chat with vendors
-        # if there is no message history between the tailor and customer, the tailor cannot start conversation
+        # Get all messages related to the sender_tailor and receiver_user for display
+        msg1 = Message.query.filter_by(reciever_user_id=msg_id, sender_tailor_id=current_user.id).all()
+        msg2 = Message.query.filter_by(sender_user_id=msg_id, reciever_tailor_id=current_user.id).all()
+        
+        # Prevent a tailor from starting a conversation with a customer, customer should initiate a chat with vendors
+        # If there is no message history between the tailor and customer, the tailor cannot start conversation
         if not msg1 and not msg2:
-        # tailor cannot start new conversation with new customer || user query wrong id manually
-            return render_template("pages/messages.html", user=current_user.to_dict(), msg=[], other_user=[] )
-         
+            return redirect(url_for('app_views.messages'))
         else:
-        # display the conversation history between the tailor and the cutomer
+            # Display the conversation history between the tailor and the customer
             user = User.query.filter_by(id=msg_id).one_or_none()
             message = sorted(msg1 + msg2, key=lambda msg: msg.created_at)
             formatted_messages = [msg for msg in message]
             return render_template("pages/chat.html", user=current_user.to_dict(), msg=formatted_messages, other_user=user.to_dict())
-    # this is for purpose of users who wants to go beyond the provided interface, if not this is not necessary
-    elif not current_user.is_tailor:
-       # get all the message relatd to the sender_user and reciever_tailor for display
-       msg1 = Message.query.filter_by(reciever_tailor_id=msg_id).filter_by(sender_user_id=current_user.id).all()
-       msg2 = Message.query.filter_by(sender_tailor_id = msg_id).filter_by(reciever_user_id=current_user.id).all()
-       #check if tailor  exist
-       tailor = Tailor.query.filter_by(id=msg_id).one_or_none()
-
-       if not msg1 and not msg2:
-       # start a new conversation with the tailor check if user
-           if not tailor:
-                # if a customer message through a posted product
-               product= Product.query.filter_by(id=msg_id).one_or_none()
-               if product:
-
-                   return render_template('pages/chat.html', user=current_user.to_dict(), msg=[], other_user=product.tailor.to_dict(), product=product.to_dict())
-               return render_template("pages/messages.html")
-
-
-           return (render_template("/pages/chat.html", user=current_user.to_dict(), msg=[], other_user=tailor.to_dict())
-                   if tailor else render_template("pages/messages.html"))
-            
-       else:
-       # display the previous conversations with the tailor
-           message = sorted(msg1 + msg2, key=lambda msg: msg.created_at)
-           for m in message:
-               print("this is tailor.img,", m.product)
-           formatted_messages = [msg for msg in message]
-           
-
-           return render_template("pages/chat.html", user=current_user.to_dict(), msg=formatted_messages, other_user=tailor )
+    
+    else:
+        # Get all the messages related to the sender_user and receiver_tailor for display
+        msg1 = Message.query.filter_by(reciever_tailor_id=msg_id, sender_user_id=current_user.id).all()
+        msg2 = Message.query.filter_by(sender_tailor_id=msg_id, reciever_user_id=current_user.id).all()
+        
+        # Check if tailor exists
+        tailor = Tailor.query.filter_by(id=msg_id).one_or_none()
+        
+        if not msg1 and not msg2:
+            if not tailor:
+                return redirect(url_for('app_views.messages'))
+            return render_template("/pages/chat.html", user=current_user.to_dict(), msg=[], other_user=tailor.to_dict())
+        
+        else:
+            # Display the previous conversations with the tailor
+            message = sorted(msg1 + msg2, key=lambda msg: msg.created_at)
+            formatted_messages = [msg for msg in message]
+            return render_template("pages/chat.html", user=current_user.to_dict(), msg=formatted_messages, other_user=tailor.to_dict())
