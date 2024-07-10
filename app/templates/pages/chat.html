@@ -43,7 +43,7 @@
 
       
 
-       {% set full_imgs %}
+       <!-- {% set full_imgs %}
 
                  <div class= "  mb-1 p-[2px] rounded-[6px]">
                                  <img src="{{ url_for('static', filename='images/product_image_3.png' ) }}" class="h-[255px] w-full" alt="...">
@@ -52,13 +52,64 @@
                  </div>
 
 
-      {% endset %}
+      {% endset %} -->
 
       <div id="messages"  class="flex flex-col  pt-16  ml-1 ">
 	    
 	     
 	    {% for message in msg %}
-            {% if message.product %}
+            {% if message.media_url %}
+                    {% set full_imgs %}
+                    <a href="{{ message.image}}">     
+                         <div class= "  mb-1 p-[2px] rounded-[6px]">
+                                 <img src="{{ message.image }}" class="h-[255px] w-full" alt="...">
+
+
+                         </div>
+                    </a>
+
+
+                    {% endset %}
+
+                    {% if  current_user.is_tailor %}
+                         {% if message.sender_tailor_id %}
+                              {%if message.message %}
+                                    {{ messages('right', message.message, message.created_at | custom_timeago, full_imgs) }}
+                              {% else %}
+                                    {{ messages('right', None, message.created_at | custom_timeago, full_imgs) }}
+                              {% endif %}
+                   
+                         {% else %}
+                              {%if message.message %}
+                                   {{ messages('left', message.message, message.created_at | custom_timeago, full_imgs) }}
+                              {% else %}
+                                   {{ messages('left', None, message.created_at | custom_timeago, full_imgs) }}
+                              {% endif %}
+          
+                         {% endif %}
+           
+                   {% else %}
+                         {% if message.sender_user_id %}
+                              {%if message.message %}
+                                   {{ messages('right', message.message, message.created_at | custom_timeago, full_imgs) }}
+                              {% else %}
+                                   {{ messages('right', None, message.created_at | custom_timeago, full_imgs) }}
+                              {% endif %}
+        
+                   
+                        {% else %}
+                              {%if message.message %}
+                                   {{ messages('left', message.message, message.created_at | custom_timeago, full_imgs) }}
+                              {% else %}
+                                   {{ messages('left', None, message.created_at | custom_timeago, full_imgs) }}
+                              {% endif %}
+       
+                       {% endif %}
+  
+                    
+                    {% endif %}
+                       
+            {% elif message.product %}
                {% set imgs %}
 
                  <a href="{{ '/products/' ~ message.product.id}}">     
@@ -156,7 +207,7 @@
        {{ messageBottom(input_message, send_btn,"buttom",  plus) }}
        <div  id="preview" style="position: fixed; bottom: 50px; right: 0px; left: 0px; z-index: 199; margin-bottom: 20px;">
 
-        <img style=" display: none;" src="" class="h-[180px] rounded-md w-[100px]" alt="Image preview">
+        <img style=" display: none;" src="" class="h-[300px] rounded-md w-[180%]" alt="Image preview">
        </div>
      
 </div>
@@ -248,34 +299,122 @@ document.getElementById('file-input').addEventListener('change', function(event)
 });
 
 // Function to handle sending a message when the send button is clicked
-document.getElementById('send').onclick = function() {
+document.getElementById('send').onclick = async function() {
     console.log("Send button clicked event fired");
 
-    // Get the value from the message input field
     const messageInput = document.getElementById('message-input');
-    const messageText = messageInput.value;
+    const fileInput = document.getElementById('file-input');
+    const previewImg = document.querySelector('#preview img');
+    let tmpImg;
 
-    // Check if the message text is empty
-    if (!messageText) {
+    const messageText = messageInput.value;
+    const fileImg = fileInput.files[0];
+
+    console.log(fileInput.value, "value here");
+
+    if (!messageText && !fileImg) {
         alert('Message and image cannot both be empty');
     } else {
-        // Emit the message to the server using Socket.IO
-        socket.emit('send_message', {
-            reciever_id: `{{ other_user.id }}`,  // Replace with actual receiver ID from your template
-            message: messageText
-        });
+        try {
+            const csrfToken = await getCSRFToken();
 
-        // Append the sent message to the messages container
+            if (fileImg) {
+                const formData = new FormData();
+                formData.append('file', fileImg);
+
+                const response = await fetch('/upload_file', {
+                  method: 'POST',
+                  headers: {
+                'X-CSRFToken': csrfToken
+                  
+                    },
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // After successful file upload, emit the message with the file URL
+                    tmpImg = 
+                    socket.emit('send_message', {
+                        reciever_id: '{{ other_user.id }}',
+                        message: messageText ? messageText : null,
+                        image_url: data.file_url
+                    });
+
+                    appendMessageToContainer(messageText, data.file_url);
+                } else {
+                    console.error('File upload failed:', data.error);
+                }
+            } else {
+                // Emit the message without file
+                socket.emit('send_message', {
+                    reciever_id: '{{ other_user.id }}',
+                    message: messageText ? messageText : null,
+                    image_url: null
+                });
+
+                appendMessageToContainer(messageText, null);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+    function appendMessageToContainer(message, imageUrl) {
+   
+   
+   
+    // const reader = new FileReader();
+    // reader.onload = function(e) {
+    // msg_img = `<a href="${e.target.result}">     
+    //                      <div class= "  mb-1 p-[2px] rounded-[6px]">
+    //                              <img src="${e.target.result}" class="h-[255px] w-full" alt="...">
+
+
+    //                      </div>
+    //                 </a>`;
+     
+    // };
+    // reader.readAsDataURL(fileImg);
+  
+    const msg_img = `<a href="">     
+                    <div class= "  mb-1 p-[2px] rounded-[6px]">
+                        <img src="{{ url_for('static', filename='images/product_image_3.png' ) }}" class="h-[255px] w-full" alt="...">
+
+                  </div>
+                   </a>`;
+     
+        
         const messagesContainer = document.getElementById('messages');
-        const messageHTML = `{{ messages('right', '${messageText}', '${getCurrentTime24()}') }}`;
+        const messageHTML = `{{ messages('right', '${message}', '${getCurrentTime24()}', '${msg_img}') }}`;
         messagesContainer.innerHTML += messageHTML;
         demo();
 
-
         // Clear the message input field
         messageInput.value = '';
+        fileInput.value = '';
+        previewImg.src = '';
+        document.querySelector('#preview img').style.display = 'none';
+        
     }
 };
+
+async function getCSRFToken() {
+    const response = await fetch('/get_csrf_token', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+    return data.csrf_token;
+}
 
     </script>
 {% endblock %}

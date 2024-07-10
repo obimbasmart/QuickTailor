@@ -24,7 +24,7 @@ def create_product():
             material=form.material.data, tailor_id=current_user.id,
             categories=form.categories.data + form.gender.data, on_draft=form.draft.data
         )
-
+        print("a new product in town", form.images.data)
         img_urls = s3_client.upload_files(
             form.images.data, new_product.tailor_id, new_product.id)
         new_product.images = img_urls

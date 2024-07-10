@@ -11,7 +11,7 @@ class Message(BaseModel):
     reciever_tailor_id:  Mapped[str] = mapped_column(String(128), ForeignKey('tailors.id'), nullable=True)
     product_id: Mapped[str] = mapped_column(String(128), ForeignKey('products.id'), nullable=True)
     thread_msg_id: Mapped[str] = mapped_column(String(128),  nullable=True)
-    message: Mapped[str] = mapped_column(Text, nullable=False)
+    message: Mapped[str] = mapped_column(Text, nullable=True)
     media_url: Mapped[str]= mapped_column(String(255), nullable=True)
     media_type: Mapped[str]  = mapped_column(String(50), nullable=True)  # 'image' or 'video'
     is_viewed =  mapped_column(Boolean, default=False)
@@ -23,6 +23,14 @@ class Message(BaseModel):
     reciever_user = relationship('User',  foreign_keys=[reciever_user_id], back_populates='message_recieved')
     sender_tailor = relationship('Tailor', foreign_keys=[sender_tailor_id], back_populates='message_sent')
     reciever_tailor = relationship('Tailor',foreign_keys=[reciever_tailor_id], back_populates='message_recieved')
+
+    @property
+    def image(self):
+        from app import s3_client
+        try:
+            return s3_client.generate_presigned_url('get_object', self.media_url)
+        except Exception as e:
+            return "/static/images/default_profile.png"
 
 class MessageList(BaseModel):
     __tablename__ = 'messages_list'

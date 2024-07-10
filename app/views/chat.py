@@ -1,4 +1,5 @@
 from app.views import app_views
+import uuid
 from flask import render_template, request, jsonify, url_for, redirect
 from app.cloud_storage.s3_cloud_storage import S3StorageService
 from app.models.user import User
@@ -15,21 +16,49 @@ from app import s3_client
 
 
 
+def format_time(time_obj):
+    # Format the time in 12-hour format with AM/PM
+    formatted_time_12 = time_obj.strftime('%I:%M %p').lstrip('0')
 
-@app_views.route('/upload', methods=['POST'])
+    # Format the time in 24-hour format with AM/PM
+    hour = time_obj.strftime('%H')
+    minute = time_obj.strftime('%M')
+    period = 'PM' if int(hour) >= 12 else 'AM'
+    formatted_time_24 = f"{hour}:{minute}"
+
+    return  formatted_time_24
+
+
+
+
+# def upload_file():
+#     if 'image_file' not in request.files:
+#         return jsonify({'error': 'No file part'}), 400
+#     file = request.files['image_file']  # Get the file
+#     if file.filename == '':
+#         return jsonify({'error': 'No selected file'}), 400
+#     try:
+#         file_url = s3_service.upload_image(file, current_user.id)  # Upload file to S3
+#         return jsonify({'image_url': file_url}), 200
+#     except Exception as e:
+#         return jsonify({'error': str(e)}), 500
+@app_views.route('/upload_file', methods=['POST'])
 @login_required
 def upload_file():
-    if 'image_file' not in request.files:
-        return jsonify({'error': 'No file part'}), 400
-    file = request.files['image_file']  # Get the file
+    if 'file' not in request.files:
+        return jsonify({'success': False, 'error': 'No file part'})
+    
+    file = request.files['file']
+    print("this is file", file)
     if file.filename == '':
-        return jsonify({'error': 'No selected file'}), 400
-    try:
-        file_url = s3_service.upload_image(file, current_user.id)  # Upload file to S3
-        return jsonify({'image_url': file_url}), 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
+        return jsonify({'success': False, 'error': 'No selected file'})
+    
+    if file:
+        unique_id = str(uuid.uuid4())
+        file_url = s3_client.upload_single_photo(file, unique_id)  # Upload file to S3
+        return jsonify({'success': True, 'file_url': file_url})
+    else:
+        return jsonify({'success': False, 'error': 'File upload failed'})
 @socketio.on('connect')
 @login_required
 def handle_connect():
@@ -49,24 +78,32 @@ def handle_send_message(data):
     reciever_id = data['reciever_id']
     message_text = data['message']
     image_url = data.get('image_url')
+    print(data, "it is data")
+   
     if not message_text and not image_url:
-        emit('error', {'error': 'Message and image cannot both be empty'}, room=current_user.id)
+        emit('error', {'error': 'Message and image cannot  bee empty'}, room=current_user.id)
+        print(image_url)
         return
+    print(data, "it is fdgsdgfdg arererwdata")
+   
+            
     
     # Save message to the database
     if current_user.is_tailor:
         #check if reciever has  had conversation with the tailor and prevent tailor to tailor conversation
         check_msg = Message.query.filter_by(sender_user_id = reciever_id, reciever_tailor_id = current_user.id).all()
         if check_msg:
+            
             new_message = Message(
             sender_tailor_id=current_user.id,
             reciever_user_id=reciever_id,
-            message=message_text)
+            media_url = image_url if image_url else None,
+            message=message_text if message_text else None)
             notification = Notification(url=f"/messages/{current_user.id}",
                 content = "💬 New Chat: The user  has replied to your message. Check it out!",
                 user_id= reciever_id, sender_tailor_id= current_user.id, is_user=True)
             msg_list = MessageList.query.filter_by(user_id = reciever_id, tailor_id = current_user.id).one_or_none()
-            msg_list.message= message_text
+            msg_list.message= "Attachment" if not message_text else message_text
             msg_list.is_viewed = False
             msg_list.last_sender = current_user.id
             db.session.commit()
@@ -82,12 +119,12 @@ def handle_send_message(data):
         msg2 = Message.query.filter_by(sender_user_id =current_user.id).filter_by(reciever_tailor_id=reciever_id).all()
         if  not msg1 and not msg2:
             msg_list = MessageList(tailor_id=reciever_id, user_id=current_user.id, user_url = f"/messages/{reciever_id}", 
-                     tailor_url= f"/messages/{current_user.id}", message=message_text, last_sender=current_user.id)
+                     tailor_url= f"/messages/{current_user.id}", message="Attachment" if not message_text else message_text, last_sender=current_user.id)
             db.session.add(msg_list)
 
         else:
             msg_list = MessageList.query.filter_by(user_id = current_user.id, tailor_id = reciever_id).one_or_none()
-            msg_list.message= message_text
+            msg_list.message= message_text if message_text else "Attachment"
             msg_list.last_sender = current_user.id
             msg_list.is_viewed = False
             db.session.commit()
@@ -95,8 +132,8 @@ def handle_send_message(data):
         new_message = Message(
             sender_user_id=current_user.id,
             reciever_tailor_id=reciever_id,
-            message=message_text
-            )
+            media_url = image_url if image_url else None,
+            message=message_text if message_text else None)
         notification = Notification(url=f"/messages/{current_user.id}", 
                 content = "💬 New Chat: The user  has replied to your message. Check it out!",
                 tailor_id= reciever_id, sender_user_id= current_user.id)
@@ -129,7 +166,7 @@ def handle_send_message(data):
         'id': msg_list.id
     }, room=reciever_id)
 
-    print('Message: ',  data)
+   # print('Message: ',  data)
 
 @app_views.route('/messages', methods=['GET'])
 @login_required
@@ -258,7 +295,7 @@ def messages_per_user(msg_id):
             user = User.query.filter_by(id=msg_id).one_or_none()
             message = sorted(msg1 + msg2, key=lambda msg: msg.created_at)
             formatted_messages = [msg for msg in message]
-            return render_template("pages/chat.html", user=current_user.to_dict(), msg=formatted_messages, other_user=user.to_dict())
+            return render_template("pages/chat.html", user=current_user.to_dict(), msg=formatted_messages, other_user=user)
     
     else:
         # Get all the messages related to the sender_user and receiver_tailor for display
@@ -271,10 +308,11 @@ def messages_per_user(msg_id):
         if not msg1 and not msg2:
             if not tailor:
                 return redirect(url_for('app_views.messages'))
-            return render_template("/pages/chat.html", user=current_user.to_dict(), msg=[], other_user=tailor.to_dict())
+            return render_template("/pages/chat.html", user=current_user.to_dict(), msg=[], other_user=tailor)
         
         else:
             # Display the previous conversations with the tailor
             message = sorted(msg1 + msg2, key=lambda msg: msg.created_at)
             formatted_messages = [msg for msg in message]
-            return render_template("pages/chat.html", user=current_user.to_dict(), msg=formatted_messages, other_user=tailor.to_dict())
+            print(tailor.photo)
+            return render_template("pages/chat.html", user=current_user.to_dict(), msg=formatted_messages, other_user=tailor)
