@@ -48,12 +48,6 @@
     <div class="self-center" style="flex: 1;">
         {{left}}
     </div>
-{% else %}
-     <div class="self-center" id="redirectDiv"  style="flex: 1;">
-         <svg xmlns="http://www.w3.org/2000/svg" width="34" height="35" viewBox="0 0 34 35" fill="none">
-                <path d="M24.0846 17.4997H9.91797M9.91797 17.4997L15.5846 23.1663M9.91797 17.4997L15.5846 11.833" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-         </svg>
-    </div>
 {% endif %}
    <div class="self-center text-center mr-4" style="flex: 8; ">      
             {{ middle }}
@@ -63,15 +57,7 @@
    </div>
 
 </div>
- <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const redirectDiv = document.getElementById('redirectDiv');
-
-            redirectDiv.onclick = function() {
-                window.history.back();
-            };
-        });
-    </script>
+ 
 {% endmacro %}
 
 {% macro messages(side, msg, time, img) %}
@@ -80,7 +66,7 @@
 	<div {{ set_time_style(side) }}>
 	       {{ time }}
        </div>
-       {% if img  and msg %}
+       {% if img  and (msg != ' ' and msg != None)  %}
          <div {{ set_style_img(side) }}>
               <div class="">
 		      {{ img }}
@@ -89,7 +75,7 @@
 	      {{ msg }}
 	      </div>
          </div>
-       {% elif img and not msg %}
+       {% elif img and  (msg ==' ' or msg ==None) %}
           <div {{ set_style_img(side) }}>
               <div class="">
                 {{ img }}
@@ -144,4 +130,28 @@
     {% else  %}
          class = "self-end leading-[21px]  font-normal font-roboto tracking-[0.25px] text-gray-800  ml-2  text-[10px] order-2 "
     {% endif %}
+{% endmacro %}
+
+
+{% macro modalMessageTop(heading, messages, send) %}
+<div id="overlay" style="background: rgba(0, 0, 0, 0.15); width: 100%; height: 932px; position:fixed; z-index: 201; top:0; bottom:0;"></div>
+<div id="overlay-for-modal" 
+     style="outline: none; overflow-y: auto; overflow-x: hidden; height: 750px; background: var(--White, #FFF); position: fixed; z-index: 202; left: 0; right: 0; box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.20); width: 100%; bottom: 0; border-radius: 24px 24px 0px 0px;">
+    <div id="top-msg" class="flex w-full   ml-[20px] pt-[16px] px-4 pb-[15px] flex-row justify-between" style="position: sticky; top: 0; background: var(--White, #FFF); z-index: 203;">
+        <div class="self-center text-center" style="flex: 8;">      
+            {{ heading }}
+        </div>
+        <div class="self-center" style="flex: 1;">      
+            <svg id="cancel-modal" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M6.75781 17.2426L12.0004 12M12.0004 12L17.243 6.75732M12.0004 12L6.75781 6.75732M12.0004 12L17.243 17.2426" stroke="#2D2D2D" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+    </div>
+    {% if messages %}
+    <div class="px-8">{{ messages }}</div>
+    {% endif %}
+    {% if send %}
+    <div> {{send }}</div>
+    {% endif %}
+</div>
 {% endmacro %}

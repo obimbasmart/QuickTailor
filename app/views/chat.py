@@ -29,19 +29,6 @@ def format_time(time_obj):
     return  formatted_time_24
 
 
-
-
-# def upload_file():
-#     if 'image_file' not in request.files:
-#         return jsonify({'error': 'No file part'}), 400
-#     file = request.files['image_file']  # Get the file
-#     if file.filename == '':
-#         return jsonify({'error': 'No selected file'}), 400
-#     try:
-#         file_url = s3_service.upload_image(file, current_user.id)  # Upload file to S3
-#         return jsonify({'image_url': file_url}), 200
-#     except Exception as e:
-#         return jsonify({'error': str(e)}), 500
 @app_views.route('/upload_file', methods=['POST'])
 @login_required
 def upload_file():
@@ -56,7 +43,8 @@ def upload_file():
     if file:
         unique_id = str(uuid.uuid4())
         file_url = s3_client.upload_single_photo(file, unique_id)  # Upload file to S3
-        return jsonify({'success': True, 'file_url': file_url})
+        img = s3_client.generate_presigned_url('get_object', file_url)
+        return jsonify({'success': True, 'file_url': file_url, 'the_image': img})
     else:
         return jsonify({'success': False, 'error': 'File upload failed'})
 @socketio.on('connect')
@@ -78,13 +66,24 @@ def handle_send_message(data):
     reciever_id = data['reciever_id']
     message_text = data['message']
     image_url = data.get('image_url')
-    print(data, "it is data")
+    image_generated = data.get('the_image')
+    product = data.get('product')
+    print(reciever_id, "it is data")
+    
+    
    
     if not message_text and not image_url:
-        emit('error', {'error': 'Message and image cannot  bee empty'}, room=current_user.id)
+        emit('error', {'error': 'Message and image cannot  be empty'}, room=current_user.id)
         print(image_url)
         return
-    print(data, "it is fdgsdgfdg arererwdata")
+     # Check if the message contains only space characters
+    if message_text and message_text.strip() == "":
+        if image_url:
+            message_text = None
+        else:
+            emit('error', {'error': 'Message cannot contain only spaces'}, room=current_user.id)
+            return
+    
    
             
     
@@ -118,16 +117,18 @@ def handle_send_message(data):
         msg1 = Message.query.filter_by(reciever_user_id=current_user.id).filter_by(sender_tailor_id=reciever_id).all()
         msg2 = Message.query.filter_by(sender_user_id =current_user.id).filter_by(reciever_tailor_id=reciever_id).all()
         if  not msg1 and not msg2:
-            msg_list = MessageList(tailor_id=reciever_id, user_id=current_user.id, user_url = f"/messages/{reciever_id}", 
-                     tailor_url= f"/messages/{current_user.id}", message="Attachment" if not message_text else message_text, last_sender=current_user.id)
-            db.session.add(msg_list)
+            if not product:
+                msg_list = MessageList(tailor_id=reciever_id, user_id=current_user.id, user_url = f"/messages/{reciever_id}", 
+                        tailor_url= f"/messages/{current_user.id}", message="Attachment" if not message_text else message_text, last_sender=current_user.id)
+                db.session.add(msg_list)
 
         else:
-            msg_list = MessageList.query.filter_by(user_id = current_user.id, tailor_id = reciever_id).one_or_none()
-            msg_list.message= message_text if message_text else "Attachment"
-            msg_list.last_sender = current_user.id
-            msg_list.is_viewed = False
-            db.session.commit()
+       
+                msg_list = MessageList.query.filter_by(user_id = current_user.id, tailor_id = reciever_id).one_or_none()
+                msg_list.message= message_text if message_text else "Attachment"
+                msg_list.last_sender = current_user.id
+                msg_list.is_viewed = False
+                db.session.commit()
 
         new_message = Message(
             sender_user_id=current_user.id,
@@ -138,17 +139,20 @@ def handle_send_message(data):
                 content = "💬 New Chat: The user  has replied to your message. Check it out!",
                 tailor_id= reciever_id, sender_user_id= current_user.id)
 
-
-    db.session.add(new_message)
+    if not product:
+        db.session.add(new_message)
     db.session.add(notification)
     db.session.commit()
 
 
-    # Emit the message to the receiver's room
+    # Emit the message to the receiver's room     
+    
     emit('recieve_message', {
         'sender_id': current_user.id,
         'message': message_text,
-        'image_url': image_url
+        'image_url': image_generated,
+        'product': product
+      
     }, room=reciever_id)
     emit('new_notification', {
         'url': notification.url,
@@ -218,16 +222,29 @@ def get_messages():
 def handle_post(product_id):
     #handling of message sent from product page
     # Check if the request method is POST
+
+        # Logging for debugging
+    # no = Notification.query.all()
+    # for m in no:
+    #     db.session.delete(m)
+    #     db.session.commit()
+    # print(no)
     if request.method == 'POST':
+        print(f"Handling POST request for product_id: {product_id}")
+        print(f"Request method: {request.method}")
+
         # Handling Message sent from product page
         product = Product.query.filter_by(id=product_id).one_or_none()
         
         
         # Ensure product exists and the current user is not a tailor
         if product and not current_user.is_tailor:
+            dat  = {"id": product.id, "image":product.img, "price":product.price, "name": product.name}
             if request.is_json:
                 data = request.get_json()
                 value = data.get('text', '')
+                if not value or  (value and value.strip() == ""):
+                    return jsonify("empty message cannot be sent"), 405
                                
                 msg1 = Message.query.filter_by(reciever_tailor_id=product.tailor_id, sender_user_id=current_user.id).all()
                 msg2 = Message.query.filter_by(sender_tailor_id=product.tailor_id, reciever_user_id=current_user.id).all()
@@ -239,27 +256,10 @@ def handle_post(product_id):
                     product_id=product_id  # Use product_id here
                 )
                 db.session.add(new_message)
-                
-                if not msg1 and not msg2:
-                    msg_list = MessageList(
-                        tailor_id=product.tailor_id,
-                        user_id=current_user.id,
-                        user_url=f"/messages/{product.tailor_id}",
-                        tailor_url=f"/messages/{current_user.id}",
-                        message=value,
-                        last_sender=current_user.id
-                    )
-                    db.session.add(msg_list)
-                    db.session.commit()
-                else:
-                    msg_list = MessageList.query.filter_by(user_id=current_user.id, tailor_id=product.tailor_id).one_or_none()
-                    if msg_list:
-                        msg_list.message = value
-                        msg_list.last_sender = current_user.id
-                        msg_list.is_viewed = False
-                        db.session.commit()
-                
-                return jsonify("Message sent to the Tailor, you can view the message in your inbox page")
+                db.session.commit()
+               
+                print(dat, "dlkajfsdlfkj dslkfjsdlk ldskfjsdlkfjsld ")
+                return jsonify({"data": dat, "success":True})
             else:
                 return jsonify("Invalid content type, expected JSON"), 400
 
@@ -269,10 +269,12 @@ def handle_post(product_id):
     return jsonify("Invalid request method"), 405
 
 
-@app_views.route('/messages/<msg_id>', methods=['GET'])
+@app_views.route('/messages/<msg_id>', defaults={'modal': None}, methods=['GET'])
+@app_views.route('/messages/<msg_id>/<modal>', methods=['GET'])
 @login_required
-def messages_per_user(msg_id):
+def messages_per_user(msg_id, modal):
     # Once this page is visited this particular chat with this id is viewed automatically or manually
+    print(modal, "modal here here")
     msg_list = current_user.message_list
     if msg_list:
         for m in msg_list:
@@ -281,7 +283,7 @@ def messages_per_user(msg_id):
                 db.session.commit()
 
   
-    if current_user.is_tailor:
+    if current_user.is_tailor and not modal:
         # Get all messages related to the sender_tailor and receiver_user for display
         msg1 = Message.query.filter_by(reciever_user_id=msg_id, sender_tailor_id=current_user.id).all()
         msg2 = Message.query.filter_by(sender_user_id=msg_id, reciever_tailor_id=current_user.id).all()
@@ -295,24 +297,69 @@ def messages_per_user(msg_id):
             user = User.query.filter_by(id=msg_id).one_or_none()
             message = sorted(msg1 + msg2, key=lambda msg: msg.created_at)
             formatted_messages = [msg for msg in message]
+            json_message = [msg.to_dict() for msg in message]
+            if modal:
+                return redirect(url_for('app_views.messages'))
             return render_template("pages/chat.html", user=current_user.to_dict(), msg=formatted_messages, other_user=user)
     
-    else:
+    elif not current_user.is_tailor:
         # Get all the messages related to the sender_user and receiver_tailor for display
-        msg1 = Message.query.filter_by(reciever_tailor_id=msg_id, sender_user_id=current_user.id).all()
-        msg2 = Message.query.filter_by(sender_tailor_id=msg_id, reciever_user_id=current_user.id).all()
+        if not modal:
+            msg1 = Message.query.filter_by(reciever_tailor_id=msg_id, sender_user_id=current_user.id).all()
+            msg2 = Message.query.filter_by(sender_tailor_id=msg_id, reciever_user_id=current_user.id).all()
+            tailor = Tailor.query.filter_by(id=msg_id).one_or_none() 
+        else:
+            product = Product.query.filter_by(id=msg_id).one_or_none()
+            if product:
+                msg1 = Message.query.filter_by(reciever_tailor_id=product.tailor_id, sender_user_id=current_user.id).all()
+                msg2 = Message.query.filter_by(sender_tailor_id=product.tailor_id, reciever_user_id=current_user.id).all()
+                tailor = Tailor.query.filter_by(id=product.tailor_id).one_or_none() 
+            else:
+                return jsonify("invalid link")
         
         # Check if tailor exists
-        tailor = Tailor.query.filter_by(id=msg_id).one_or_none()
+       
+        m_user = current_user.to_dict()
+        
+        
         
         if not msg1 and not msg2:
             if not tailor:
                 return redirect(url_for('app_views.messages'))
+            if modal:
+                m_tailor = tailor.to_dict() 
+                del m_tailor['cac_number'],m_tailor['account_number'], m_user['message_list']  
+                print(m_user)  
+                return jsonify({"current_user": m_user, "messages":None, "other_user":m_tailor})
+            
             return render_template("/pages/chat.html", user=current_user.to_dict(), msg=[], other_user=tailor)
         
         else:
             # Display the previous conversations with the tailor
             message = sorted(msg1 + msg2, key=lambda msg: msg.created_at)
+            
+           
+          
+            # retrun json data for model message pop up
+            if modal:
+                for m in message:
+                    if m.product_id:
+                       product = Product.query.filter_by(id=m.product_id).one_or_none()
+                       m.m_product = product.to_dict()
+                       m.m_product['image'] = product.img
+                    if m.media_url:
+                       m.m_image= m.image
+                
+                
+                    
+
+                json_message = [msg.to_dict() for msg in message]
+
+                m_user = current_user.to_dict()
+                del m_user['message_list']
+                return jsonify({"current_user": m_user, "messages":json_message, "other_user":tailor.to_dict()})
+            # return the normal template if no modal
             formatted_messages = [msg for msg in message]
-            print(tailor.photo)
             return render_template("pages/chat.html", user=current_user.to_dict(), msg=formatted_messages, other_user=tailor)
+    else:
+        return   redirect(url_for('app_views.messages'))

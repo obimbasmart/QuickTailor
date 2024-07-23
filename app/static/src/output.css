@@ -1111,6 +1111,10 @@ input:checked + .toggle-bg {
   position: relative;
 }
 
+.sticky {
+  position: sticky;
+}
+
 .inset-0 {
   inset: 0px;
 }
@@ -1455,6 +1459,10 @@ input:checked + .toggle-bg {
   margin-bottom: 50px;
 }
 
+.mb-\[80px\] {
+  margin-bottom: 80px;
+}
+
 .me-1 {
   margin-inline-end: 0.25rem;
 }
@@ -1485,6 +1493,10 @@ input:checked + .toggle-bg {
 
 .ml-4 {
   margin-left: 1rem;
+}
+
+.ml-\[20px\] {
+  margin-left: 20px;
 }
 
 .mr-0 {
@@ -3369,6 +3381,10 @@ input:checked + .toggle-bg {
 
 .pt-5 {
   padding-top: 1.25rem;
+}
+
+.pt-\[16px\] {
+  padding-top: 16px;
 }
 
 .text-left {
