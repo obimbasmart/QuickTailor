@@ -64,9 +64,8 @@
 
 </div>
 
-<div id="modal"></div>
 
-<button id="load-content-button" style="position: fixed; z-index: 201;">Load Content</button>
+<!-- <button id="load-content-button" style="position: fixed; z-index: 201;">Load Content</button> -->
 <script>
      const msgg = `{{message_list}}`;
     for (a of msgg){
@@ -147,7 +146,7 @@ function formatCurrency(value) {
 }
 
 // event listener for showing the chat modal on product page
-document.getElementById('load-content-button').onclick = async function() {
+document.getElementById('enquireId').onclick = async function() {
         
         let tailor_id;
         const pathname = window.location.pathname;
@@ -160,7 +159,7 @@ document.getElementById('load-content-button').onclick = async function() {
        
 
         try {
-                            const response = await fetch(`/messages/c20faad3-7680-4c81-bad6-0a67455539a7/chatseller`, {
+                            const response = await fetch(`/messages/026209c5-b426-4a23-958e-686a3d95b668/chatseller`, {
                                 method: 'GET',
                                 headers: {
                                     'Accept': 'application/json'
@@ -433,7 +432,7 @@ function loadChatHistory(msg, messagesInterface) {
     
 // Function to send the message as  POST request to indicate the message is from product page
  async function sendPostRequest(message, csrfToken) {
-                        const url = '/message/c20faad3-7680-4c81-bad6-0a67455539a7';
+                        const url = '/message/026209c5-b426-4a23-958e-686a3d95b668';
                         const messageData = { text: message };
 
                         const response = await fetch(url, {

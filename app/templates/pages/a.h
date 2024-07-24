@@ -65,7 +65,7 @@
 
 <div id="modal"></div>
 
-<button id="load-content-button" style="position: fixed; z-index: 201;">Load Content</button>
+// <button id="load-content-button" style="position: fixed; z-index: 201;">Load Content</button>
 <script>
      const msgg = `{{message_list}}`;
     for (a of msgg){

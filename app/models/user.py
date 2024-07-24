@@ -14,7 +14,7 @@ from sqlalchemy_json import NestedMutableJson
 class User(BaseModel, BaseUser):
     __tablename__ = 'users'
     first_name: Mapped[str] = mapped_column(String(128), nullable=False)
-    last_name: Mapped[str] = mapped_column(String(128), nullable=False)
+    last_name: Mapped[str] = mapped_column(String(128), nullable=True)
     email: Mapped[str] = mapped_column(String(128), nullable=False)
     password_hash: Mapped[str] = mapped_column(TEXT(), nullable=False)
     phone_no: Mapped[str] = mapped_column(String(128), nullable=False)

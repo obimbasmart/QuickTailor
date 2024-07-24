@@ -6,7 +6,7 @@ from app.models import db
 
 @app_views.route('/notifications/<id_notify>')
 @login_required
-def user_notication(id_notify=None):
+def user_notifications(id_notify=None):
 
     if id_notify is None:
         return render_template('pages/notification.html', current_user = current_user.to_dict())
@@ -24,7 +24,7 @@ def user_notication(id_notify=None):
             return render_template('pages/notification.html', current_user = current_user.to_dict())
 @app_views.route('/notifications')
 @login_required
-def notication():
+def notifications():
         a = current_user.notification
         
         for e in a :

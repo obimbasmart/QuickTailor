@@ -24,6 +24,7 @@ class Message(BaseModel):
     sender_tailor = relationship('Tailor', foreign_keys=[sender_tailor_id], back_populates='message_sent')
     reciever_tailor = relationship('Tailor',foreign_keys=[reciever_tailor_id], back_populates='message_recieved')
 
+
     @property
     def image(self):
         from app import s3_client
