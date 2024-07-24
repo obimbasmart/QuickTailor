@@ -1,145 +1,564 @@
 {% extends 'base.html' %}
 
 {% from 'macros/messageProfile.html' import messageTop   %}
+{% from 'macros/messageProfile.html' import messageBottom   %}
 {% from 'macros/messageProfile.html' import messages   %}
 
 {% block content %}
 
-<style>
-
-#chat-container {
-    background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-}
-
-#messages {
-    border: 1px solid #ccc;
-    padding: 10px;
-    height: 200px;
-    overflow-y: scroll;
-    margin-bottom: 10px;
-}
-
-#message-input {
-    width: calc(100% - 60px);
-    padding: 10px;
-}
-
-#send-button {
-    width: 50px;
-    padding: 10px;
-}
-</style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+    <style>
+        /* Style for the overlay */
+        .overlay {
+            position: fixed;
+            top: 8%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.50); /* Semi-transparent background */
 
-<div class"" style="width:90%; margin:auto; margin-top: 70px; background:var(--White, #FFF);">
+            z-index: 198; /* Below the preview div */
+            display: none; /* Initially hidden */
+            justify-content: right;
+            padding: 20px;
+        }
+
+        /* Style for the preview div */
+        #preview {
+            position: fixed;
+            bottom: 50px;
+            right: 0px;
+            left: 0px;
+            z-index: 199; /* Above the overlay */
+            
+            margin-bottom: 20px;
+            margin:auto;
+            text-align: center; /* Center the image */
+            bottom: 27%;
+        }
+
+        /* Style for the image */
+        #preview img {
+            display: none; /* Initially hidden */
+            height: 429px;
+            border-radius: 0.375rem; /* Tailwind's rounded-md */
+            width: 100%;
+        }
+    </style>
+
+<div id="message-Interface"  class="" style="width:90%; margin:auto; margin-top: 70px; background:var(--White, #FFF);">
   
 	{% set reciever %}
-
+           {% set default_name="Alemaghens" %}
 	 <div class="">
-		 <p class="leading-[21px] font-normal font-roboto tracking-[1.5px] text-gray-800  text-[10px]" style="color: var(--Grey-Dark, #606060);"> Consultation with </p>
-		 <p class="leading-[21px] font-normal font-roboto tracking-[0.25px] text-gray-800  text-[14px]" style="color: var(--Grey-Darker, #2D2D2D);"> ChicChisel Creations </p>
+		 <p class="leading-[21px] font-normal font-roboto tracking-[1.5px] text-gray-800  text-[10px]" style="color: var(--Grey-Dark, #606060);"> {{ other_user.first_name }} </p>
+		 <p class="leading-[21px] font-normal font-roboto tracking-[0.25px] text-gray-800  text-[14px]" style="color: var(--Grey-Darker, #2D2D2D);"> {{ other_user.last_name }} </p>
         </div>
        {% endset %}
 
        {% set image_profile %}
         <div class="">
-		<a href="/products">  <img src="{{ url_for('static', filename='images/product_image_3.png' ) }}" class="h-[40px] rounded-full w-[40px]" alt="...">  </a>
+		{% if other_user.is_tailor %}
+		<a href= "{{ '/' ~ other_user.business_name }}">  <img src="{{ other_user.photo }}" class="w-8 h-8 rounded-full" alt="...">  </a>
+               {% else %}
+                   <div  class="w-12 h-12 flex items-center  p-2 justify-center  text-sm bg-pc-teal-light rounded-full   dark:focus:ring-gray-600">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            width="40"
+                            height="40"
+                            viewBox="0 0 18 18"
+                            fill="none">
+                           <path d="M9.15037 9C11.2214 9 12.9004 7.32106 12.9004 5.25C12.9004 3.17893 11.2214 1.5 9.15037 1.5C7.07932 1.5 5.40039 3.17893 5.40039 5.25C5.40039 7.32106 7.07932 9 9.15037 9Z" stroke="#006060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M2.25 16.5C2.67778 15.0249 3.56097 13.7228 4.7733 12.7799C5.98562 11.837 7.46501 11.3015 9 11.25C12.09 11.25 14.7225 13.4325 15.75 16.5" stroke="#006060" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                   </div>
 
+               {% endif %}
        </div>
        {% endset %}
 
-       {{ messageTop(reciever, image_profile) }}
+       {{ messageTop(reciever, image_profile, "top") }}
                     
 
-      {% set imgs %}
+      
 
-                 <div class= "flex flex-row gap-2  w-full  mb-2 p-[5px] rounded-[6px]" style="background-color:var(--White, #FFF);">
-			 <div class="">
-				 <img src="{{ url_for('static', filename='images/product_image_3.png' ) }}" class="h-[63px] rounded-md w-[63px]" alt="...">
-			</div>
-			 <div class=" flex flex-col justify-between">
-                             <p class="leading-[21px] font-normal font-roboto tracking-[0.4px] text-gray-800  text-[12px]" style="color: var(--Grey-Dark, #606060);" >Product name</p>
-                            <p class="leading-[21px] font-normal font-roboto tracking-[0.4px] text-gray-800  text-[12px]" style="color:var(--Grey-Dark, #606060);" >₦10,500</p>
-                            <p class="leading-[21px] font-normal font-roboto tracking-[0.25px] text-gray-800  text-[14px]" style="color:var(--Grey-Darker, #2D2D2D);" >Order ID: #232102</p>
+       <!-- {% set full_imgs %}
 
-                        </div>
-
-
-		 </div>
-
-
-      {% endset %}
-       {% set full_imgs %}
-
-                 <div class= " w-full  mb-1 p-[2px] rounded-[6px]">
+                 <div class= "  mb-1 p-[2px] rounded-[6px]">
                                  <img src="{{ url_for('static', filename='images/product_image_3.png' ) }}" class="h-[255px] w-full" alt="...">
 
 
                  </div>
 
 
-      {% endset %}
+      {% endset %} -->
 
-      <div class="flex flex-col mt-8 ml-1 ">
-	      
-	      {{ messages('right', "hello the virtes of life if i have the choice of life I should be able to feel everyday wi", "2:00 pm", full_imgs) }}
-	      {{ messages('left', "hello the virtes of life if i have the choice of life I should be able to feel everyday with pleasure", "2: 00 am", full_imgs) }}
-              {{ messages('right', "hello the virtes of life if i have the choice of life I should be able to feel everyday wi", "3:00 am", imgs) }}
-                 {{ messages('right', "hello the virtes of life if i have the choice of life I should be able to feel everyday wi", "2:00 pm") }}
-              {{ messages('left', "hello the virtes of life if i have the choice of life I should be able to feel everyday wi", "2: 00 am", imgs) }}
-              {{ messages('right', "hello the virtes of life if i have the choice of life I should be able to feel everyday wi", "3:00 am") }}
+      <div id="messages"  class="flex flex-col  pt-16  ml-1 ">
+	    
+	     
+	    {% for message in msg %}
+            {% if message.media_url %}
+                    {% set full_imgs %}
+                    <a href="{{ message.image}}" target="_blank">     
+                         <div class= "  mb-1 p-[2px] rounded-[6px]">
+                                 <img src="{{ message.image }}" class="h-[255px] w-full" alt="...">
+
+
+                         </div>
+                    </a>
+
+
+                    {% endset %}
+
+                    {% if  current_user.is_tailor %}
+                         {% if message.sender_tailor_id %}
+                              {%if message.message %}
+                                    {{ messages('right', message.message, message.created_at | custom_timeago, full_imgs) }}
+                              {% else %}
+                                    {{ messages('right', None, message.created_at | custom_timeago, full_imgs) }}
+                              {% endif %}
+                   
+                         {% else %}
+                              {%if message.message %}
+                                   {{ messages('left', message.message, message.created_at | custom_timeago, full_imgs) }}
+                              {% else %}
+                                   {{ messages('left', None, message.created_at | custom_timeago, full_imgs) }}
+                              {% endif %}
+          
+                         {% endif %}
+           
+                   {% else %}
+                         {% if message.sender_user_id %}
+                              {%if message.message %}
+                                   {{ messages('right', message.message, message.created_at | custom_timeago, full_imgs) }}
+                              {% else %}
+                                   {{ messages('right', None, message.created_at | custom_timeago, full_imgs) }}
+                              {% endif %}
+        
+                   
+                        {% else %}
+                              {%if message.message %}
+                                   {{ messages('left', message.message, message.created_at | custom_timeago, full_imgs) }}
+                              {% else %}
+                                   {{ messages('left', None, message.created_at | custom_timeago, full_imgs) }}
+                              {% endif %}
+       
+                       {% endif %}
+  
+                    
+                    {% endif %}
+                       
+            {% elif message.product %}
+               {% set imgs %}
+
+                 <a href="{{ '/products/' ~ message.product.id}}">     
+                    <div class= "flex flex-row gap-2  w-full  mb-2 p-[5px] rounded-[6px]" style="background-color:var(--White, #FFF);">
+                         <div class="">
+                                <img src="{{ message.product.img }}" class="h-[63px] rounded-md w-[63px]" alt="...">
+                         </div>
+                         <div class=" flex flex-col justify-between">
+                             <p class="leading-[21px] font-normal font-roboto tracking-[0.4px] text-gray-800  text-[12px]" style="color: var(--Grey-Dark, #606060);" >{{message.product.name}}</p>
+                            <p class="leading-[21px] font-normal font-roboto tracking-[0.4px] text-gray-800  text-[12px]" style="color:var(--Grey-Dark, #606060);" >{{message.product.price |currency }}</p>
+                            <p class="leading-[21px] font-normal font-roboto tracking-[0.25px] text-gray-800  text-[14px]" style="color:var(--Grey-Darker, #2D2D2D);" >Order ID: #232102</p>
+
+                         </div> 
+
+
+                     </div>
+                </a>
+
+               {% endset %}
+                {% if  current_user.is_tailor %}
+                  {% if message.sender_tailor_id %}
+		             {{ messages('right', message.message, message.created_at | custom_timeago, imgs) }}
+                 
+		          {% else %}
+		             {{ messages('left', message.message, message.created_at | custom_timeago, imgs) }}  
+		          {% endif %}
+         
+               {% else %}
+	              {% if message.sender_user_id %}
+		              {{ messages('right', message.message, message.created_at | custom_timeago, imgs) }}
+                 
+                  {% else %}
+                       {{ messages('left', message.message, message.created_at | custom_timeago, imgs) }} 
+                  {% endif %}
+
+                  
+	           {% endif %}
+                     
+
+
+               
+            {% else %}
+	           {% if  current_user.is_tailor %}
+                  {% if message.sender_tailor_id %}
+		             {{ messages('right', message.message, message.created_at | custom_timeago) }}
+                 
+		          {% else %}
+		             {{ messages('left', message.message, message.created_at | custom_timeago) }}  
+		          {% endif %}
+         
+               {% else %}
+	              {% if message.sender_user_id %}
+		              {{ messages('right', message.message, message.created_at | custom_timeago) }}
+                 
+                  {% else %}
+                       {{ messages('left', message.message, message.created_at | custom_timeago) }} 
+                  {% endif %}
+
+                  
+	           {% endif %}
+                     
+
+
+            {% endif %}
+	    {% endfor %}
+          
 
 
       </div>
-
+      <div class="mt-[100px]">
+      </div>
       {% set  plus %}
 
-           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
+           <svg id="attach-button" xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none" style=" cursor: pointer;">
                  <path d="M1 7.5H7M7 7.5H13M7 7.5V13.5M7 7.5V1.5" stroke="#2D2D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
+          <input type="file" id="file-input" style="display: none;" accept="image/*" multiple="false">
+
       {% endset %}
-      
+ 
       {% set input_message %}
-                 <input id="message-input" type="text" placeholder="Type a message..." autocomplete="off" style="border: 1px solid var(--grey-light-active, #D8D8D8); w-[430px]">
+
+          <div >
+		  <input id="message-input" type="text" id="msg" class="rounded-lg placeholder-black   focus:outline-none focus:ring-0 focus:border-[white]  peer w-full" placeholder="Type here...." autocomplete="off">
+         </div>
 
       {% endset %}
-
+     
       {% set send_btn %}
-             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+      <div id="send" class="">   <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 25" fill="none">
                           <path d="M11.5003 12.5H5.41872M5.24634 13.2972L4.24158 16.2986C3.69128 17.9424 3.41613 18.7643 3.61359 19.2704C3.78506 19.71 4.15335 20.0432 4.6078 20.1701C5.13111 20.3161 5.92151 19.9604 7.50231 19.2491L17.6367 14.6886C19.1797 13.9942 19.9512 13.6471 20.1896 13.1648C20.3968 12.7458 20.3968 12.2541 20.1896 11.8351C19.9512 11.3529 19.1797 11.0057 17.6367 10.3114L7.48483 5.74303C5.90879 5.03382 5.12078 4.67921 4.59799 4.82468C4.14397 4.95101 3.77572 5.28336 3.60365 5.72209C3.40551 6.22728 3.67772 7.04741 4.22215 8.68767L5.24829 11.7793C5.34179 12.061 5.38855 12.2019 5.407 12.3459C5.42338 12.4738 5.42321 12.6032 5.40651 12.731C5.38768 12.875 5.34057 13.0157 5.24634 13.2972Z" stroke="#2D2D2D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
+	  </div>
       {% endset %}
+       {{ messageBottom(input_message, send_btn,"buttom",  plus) }}
+       <div class="overlay" id="overlay"><svg id="close-image" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+<path d="M6.75781 17.2426L12.0004 12M12.0004 12L17.243 6.75732M12.0004 12L6.75781 6.75732M12.0004 12L17.243 17.2426" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+</svg></div>
+       <div  id="preview" >
 
-       {{ messageTop(input_message, send_btn, plus) }}
-
-     <div id="chat-container">
-        <div id="messages"></div>
-        <input id="message-input" type="text" placeholder="Type a message..." autocomplete="off">
-        <button id="send-button">Send</button>
-    </div>
+        <img style=" display: none;" src="" class="h-[300px] rounded-md w-[180%]" alt="Image preview">
+       </div>
+     
 </div>
 
 
     <script>
-        const socket = io();
 
-        socket.on('message', function(msg){
-            const messages = document.getElementById('messages');
-            const messageElement = document.createElement('div');
-            messageElement.textContent = msg;
-            messages.appendChild(messageElement);
-        });
+// get current time for new message
+function getCurrentTime24() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            return `${hours}:${minutes}`;
 
-        document.getElementById('send-button').onclick = function() {
-            const input = document.getElementById('message-input');
-            const message = input.value;
-            socket.send(message);
-            input.value = '';
-        };
+        
+}
+
+// currency format function
+function formatCurrency(value) {
+                return new Intl.NumberFormat('en-NG', {
+                    style: 'currency',
+                    currency: 'NGN'
+                }).format(value);
+}
+// for auto scrolling on page load
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// function that auto scroll to the last message
+async function scroll_Down() {
+   // Sleep for number of seconds
+    await sleep(0);
+   window.scrollBy(0, document.body.offsetHeight)
+		   
+}
+
+// event for initiating the chat feature and emiting in realtime
+document.addEventListener('DOMContentLoaded', (event) => {
+scroll_Down();
+
+	    });
+	    // Establish a connection to the server using Socket.IO
+const socket = io.connect();
+
+// Event listener for successful connection
+socket.on('connect', () => {
+    console.log('Connected to the server');
+});
+
+// Event listener for disconnection
+socket.on('disconnect', () => {
+    console.log('Disconnected from the server');
+});
+
+// Event listener for receiving a message from the server
+socket.on('recieve_message', (data) => {
+    console.log("Message received event fired",  data);
+    if (data.message == null){
+        data.message = ' ';
+    }
+   
+    // Select the messages container in the DOM
+    const messagesContainer = document.getElementById('messages');
+    
+     
+     if (data.image_url) 
+     {
+        const msg_img = `<a href="${data.image_url}" target="_blank">     
+                    <div class= "  mb-1 p-[2px] rounded-[6px]">
+                        <img src="${data.image_url}" class="h-[255px] w-full" alt="...">
+
+                  </div>
+                   </a>`;
+    
+        const messageHTML = `{{ messages('left', '${data.message}', '${getCurrentTime24()}', '${msg_img}') }}`;
+        messagesContainer.scrollBottom = messagesContainer.scrollHeight;
+        messagesContainer.innerHTML += messageHTML;
+        
+     }  
+     else if (data.product){
+        console.log(data.product)
+
+        const productMsg=  `<a href=" /products/${data.product.data.id}">     
+                                                <div class= "flex flex-row gap-2  w-full  mb-2 p-[5px] rounded-[6px]" style="background-color:var(--White, #FFF);">
+                                                <div class="">
+                                                        <img src="${data.product.data.image }" class="h-[63px] rounded-md w-[63px]" alt="...">
+                                                </div>
+                                                <div class=" flex flex-col justify-between">
+                                                    <p class="leading-[21px] font-normal font-roboto tracking-[0.4px] text-gray-800  text-[12px]" style="color: var(--Grey-Dark, #606060);" >${data.product.data.name}</p>
+                                                    <p class="leading-[21px] font-normal font-roboto tracking-[0.4px] text-gray-800  text-[12px]" style="color:var(--Grey-Dark, #606060);" > ${formatCurrency(data.product.data.price)}</p>
+                                                    <p class="leading-[21px] font-normal font-roboto tracking-[0.25px] text-gray-800  text-[14px]" style="color:var(--Grey-Darker, #2D2D2D);" >Order ID: #232102</p>
+
+                                                </div> 
+
+
+                                                </div>
+                                            </a>`;
+        const messageHTML = `{{ messages('left', '${data.message}', '${getCurrentTime24()}', '${productMsg}') }}`;
+        messagesContainer.scrollBottom = messagesContainer.scrollHeight;
+        messagesContainer.innerHTML += messageHTML;
+
+     }
+     else {
+        const messageHTML = `{{ messages('left', '${data.message}', '${getCurrentTime24()}') }}`;
+        messagesContainer.scrollBottom = messagesContainer.scrollHeight;
+        messagesContainer.innerHTML += messageHTML;
+       
+
+     }        
+
+
+  
+   
+});
+
+
+
+// Event listener for error handling
+socket.on('error', (data) => {
+    alert(data.error);
+});
+
+
+
+
+ //event listener for closing the image preview manually
+document.getElementById('close-image').onclick = function() {
+            hidePreview();
+};
+
+//event listener for opening the user gallery when  the plus sign is clicked
+document.getElementById('attach-button').addEventListener('click', function() {
+        document.getElementById('file-input').click();
+});
+
+//event listener for changing the value of the file input when 
+document.getElementById('file-input').addEventListener('change', function(event) {
+  const file = event.target.files[0];
+  const maxSize = 50 * 1024 * 1024; // 50 MB in bytes
+  const msgg = document.getElementById('btm-msg');
+
+  //ensure that file size do not exceed the required file size
+  if (file) {
+    if (file.size > maxSize) {
+      alert('File size exceeds 50 MB. Please select a smaller file.');
+      // Clear the file input
+      document.getElementById('file-input').value = '';
+      hidePreview();
+      return;
+    }
+
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        showPreview(e.target.result);
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
+// Function and event listener to handle sending a message when the send button is clicked
+document.getElementById('send').onclick = async function() {
+    console.log("Send button clicked event fired");
+
+    const messageInput = document.getElementById('message-input');
+    const fileInput = document.getElementById('file-input');
+    const messageText = messageInput.value;
+    const fileImg = fileInput.files[0];
+    const trimmedMessageText = messageText.trim();
+
+    //prevent emmpty message or image 
+    if (!messageText && !fileImg) {
+        alert('Message and image cannot both be empty');
+    }
+    else if (trimmedMessageText === "" && !fileImg) {
+        // Check if the trimmed message text is only whitespace
+        alert('Message cannot contain only spaces');
+    } 
+    else {
+        try {
+            //get csrf token for making image upload
+            const csrfToken = await getCSRFToken();
+
+            if (fileImg) {
+                const formData = new FormData();
+                formData.append('file', fileImg);
+
+                const response = await fetch('/upload_file', {
+                  method: 'POST',
+                  headers: {
+                'X-CSRFToken': csrfToken
+                  
+                    },
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // After successful file upload, emit the message with the file URL
+                    appendMessageToContainer(messageText, data.the_image);
+
+                    // Clear the message input field and empty the file input field
+                    messageInput.value = '';
+                    fileInput.value = '';
+                    hidePreview();
+
+                    //semit messag ein realtime
+                    socket.emit('send_message', {
+                        reciever_id: '{{ other_user.id }}',
+                        message: messageText ? messageText : null,
+                        image_url: data.file_url,
+                        the_image: data.the_image
+                    });
+
+                   
+                } else {
+                    console.error('File upload failed:', data.error);
+                }
+            } else {
+                // Emit the message without file
+                socket.emit('send_message', {
+                    reciever_id: '{{ other_user.id }}',
+                    message: messageText ? messageText : null,
+                    image_url: null,
+                    the_image: null
+                });
+
+                appendMessageToContainer(messageText, null);
+
+                // Clear the message input field and empty the file input field
+                messageInput.value = '';
+                fileInput.value = '';
+                hidePreview();
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+    
+};
+
+//in realtime,  add the newly sent message to current user messages screen for live messaging
+function appendMessageToContainer(message, imageUrl) {
+   
+   const messagesContainer = document.getElementById('messages'); 
+
+   
+   const msg_img = `<a href="${imageUrl}" target="_blank">     
+                   <div class= "  mb-1 p-[2px] rounded-[6px]">
+                       <img src="${imageUrl}" class="h-[255px] w-full" alt="...">
+
+                 </div>
+                  </a>`;
+    
+    if (imageUrl) 
+    {
+       
+       const messageHTML = `{{ messages('right', '${message}', '${getCurrentTime24()}', '${msg_img}') }}`;
+       messagesContainer.innerHTML += messageHTML;
+       scroll_Down();
+    }  
+    else {
+       const messageHTML = `{{ messages('right', '${message}', '${getCurrentTime24()}') }}`;
+       messagesContainer.innerHTML += messageHTML;
+       scroll_Down();
+
+    }        
+
+       
+   }
+// function for getting csrf token from the server for making  a request other than default "GET"
+async function getCSRFToken() {
+    const response = await fetch('/get_csrf_token', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+    return data.csrf_token;
+}
+// show image sending preveiw function
+function showPreview(imageUrl) {
+            const overlay = document.getElementById('overlay');
+            const previewImg = document.querySelector('#preview img');
+
+            // Set the image URL
+            previewImg.src = imageUrl;
+            previewImg.style.display = 'block';
+
+            // Show the overlay
+            overlay.style.display = 'flex';
+ }
+//function to hide image preview
+function hidePreview() {
+            const overlay = document.getElementById('overlay');
+            const previewImg = document.querySelector('#preview img');
+
+            // Hide the image and overlay
+            previewImg.style.display = 'none';
+            overlay.style.display = 'none';
+ }
+
     </script>
 {% endblock %}
 

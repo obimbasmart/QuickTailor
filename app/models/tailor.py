@@ -12,6 +12,9 @@ from app.models.order import Order
 from app.models.review import Review
 import json
 import base64
+from app.models.message import Message
+from app.models.message import MessageList
+from app.models.notification import Notification
 
 class Tailor(BaseUser, BaseModel):
     __tablename__ = 'tailors'
@@ -44,6 +47,15 @@ class Tailor(BaseUser, BaseModel):
 
     # relationships
     products = relationship(Product, back_populates="tailor")
+    
+    message_sent = relationship('Message',foreign_keys= "Message.sender_tailor_id", back_populates='sender_tailor')
+    message_recieved = relationship('Message', foreign_keys= "Message.reciever_tailor_id",  back_populates='reciever_tailor')
+    message_list = relationship('MessageList',   back_populates='tailor')
+
+    notification_sent = relationship('Notification',foreign_keys= "Notification.sender_tailor_id", back_populates='sender_tailor')
+    notification = relationship('Notification',foreign_keys="Notification.tailor_id",  back_populates='tailor_notification')
+
+
 
     # Password reset attributes
     reset_token: Mapped[str] = mapped_column(String(128), nullable=True)

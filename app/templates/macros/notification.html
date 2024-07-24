@@ -1,0 +1,53 @@
+
+{% macro top_style( is_click) %}
+    {% if  is_click == '1' %}
+         class="flex w-full flex-col gap-1 bg-[white] mb-[16px]  p-[8px]  justify-between " 
+        style="border-radius: 6px;"
+    {% else  %}
+        class="flex w-full flex-col gap-1  bg-[var(--Primary-Color-Teal-Light, #E6F2F2)] p-[8px] mb-[16px]  justify-between " 
+        style=" background-color: var(--Primary-Color-Teal-Light, #E6F2F2); border-radius: 6px; "
+    {% endif %}
+{% endmacro %}
+
+
+{% macro notify(is_clicked, content, time_stamp, sender) %}
+<div  {{ top_style(is_clicked) }}>
+   <div class=" leading-[21px] font-normal font-roboto tracking-[0.25px] text-gray-800  text-[14px]" style="  color: var(--Grey-Darker, #2D2D2D);">      
+            {{ content }}
+   </div>
+   <div class=" flex flex-row justify-between" >     
+	   {% if sender %}
+          <div class="self-start self-end leading-[21px] font-normal font-roboto tracking-[1.5px] text-gray-800  text-[10px]" >
+		  {{ sender }}
+	  </div>
+          {% endif %}
+	  <div class="self-end leading-[21px] font-normal font-roboto tracking-[1.5px] text-gray-800  text-[10px]" style="color: var(--Grey-Dark, #606060);">
+		  
+		  {{ time_stamp }}
+	  </div>
+   </div>
+
+</div>
+
+{% endmacro %}
+
+{% macro messageList(left, middle, right) %}
+<div  class="flex flex-row w-full gap-2 justify-between items-center" >
+   <div class=" self-start w-[20%]" style="">
+            {{ left }}
+   </div>
+ <div class=" self-end w-[80%]  " style=" ">
+            {{ middle }}
+   </div>
+
+ <div class=" self-start  leading-[21px] w-[30%] font-normal font-roboto tracking-[0.25px] text-gray-800  text-[12px]" style="  color:var(--Grey-Dark, #606060);">
+            {{ right }}
+   </div>
+
+
+</div>
+
+{% endmacro %}
+
+
+
