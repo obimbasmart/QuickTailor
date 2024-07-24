@@ -1,248 +1,278 @@
 {% extends 'page_wrapper.html' %}
+
 {% from 'macros/tailor/metricCard.html' import metricCard %}
 
 {% block page_content %}
 
-{% set user_svg %}
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path
-        d="M15.7148 11.0557C15.5484 10.983 15.382 10.9174 15.2133 10.8564C16.3805 9.91191 17.1258 8.47051 17.1258 6.85801C17.1258 4.02207 14.8195 1.71582 11.9836 1.71582C9.14766 1.71582 6.84141 4.02207 6.84141 6.85801C6.84141 8.47285 7.58906 9.9166 8.75625 10.8588C5.14219 12.1783 2.55469 15.6518 2.55469 19.7182H4.26797C4.26797 15.4643 7.72969 12.0049 11.9813 12.0049C13.043 12.0049 14.0695 12.2158 15.0328 12.6307L15.7148 11.0557ZM11.9836 3.4291C13.875 3.4291 15.4125 4.9666 15.4125 6.85801C15.4125 8.74941 13.875 10.2869 11.9836 10.2869C10.0922 10.2869 8.55469 8.74707 8.55469 6.85801C8.55469 4.96895 10.0922 3.4291 11.9836 3.4291ZM14.3555 14.9182C14.3555 15.1572 14.4867 15.3752 14.6977 15.4854L17.6977 17.0697C17.7914 17.1189 17.8945 17.1447 17.9977 17.1447C18.1008 17.1447 18.2039 17.1189 18.2977 17.0697L21.2977 15.4854C21.5086 15.3729 21.6398 15.1549 21.6398 14.9182C21.6398 14.6814 21.5086 14.4611 21.2977 14.351L18.2977 12.7643C18.1102 12.6658 17.8852 12.6658 17.6977 12.7643L14.6977 14.351C14.4867 14.4611 14.3555 14.6791 14.3555 14.9182ZM17.9977 14.0604L19.6219 14.9182L17.9977 15.776L16.3734 14.9182L17.9977 14.0604Z"
-        fill="#752BDF" />
-    <path
-        d="M17.9975 17.8924L14.5521 16.0713L13.9521 17.208L17.9975 19.3455L22.0264 17.2174L21.4264 16.0807L17.9975 17.8924Z"
-        fill="#752BDF" />
-    <path
-        d="M17.9975 19.9545L14.5521 18.1357L13.9521 19.2701L17.9975 21.41L22.0123 19.2865L21.4123 18.1498L17.9975 19.9545Z"
-        fill="#752BDF" />
-</svg>
-{% endset %}
-
-{% set dollar_svg %}
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path
-        d="M21.9999 3.55019V7.00019C21.9999 7.26541 21.8946 7.51976 21.707 7.7073C21.5195 7.89483 21.2652 8.00019 20.9999 8.00019H17.4999C17.355 8.00183 17.2114 7.97194 17.0791 7.91258C16.9469 7.85323 16.8291 7.76582 16.734 7.65643C16.6389 7.54704 16.5687 7.41828 16.5283 7.27907C16.4878 7.13985 16.4782 6.99351 16.4999 6.85019C16.547 6.60761 16.678 6.38938 16.8701 6.23391C17.0621 6.07844 17.3029 5.99568 17.5499 6.00019H18.6999C17.5352 4.70308 16.0188 3.77216 14.335 3.32055C12.6512 2.86894 10.8724 2.91607 9.21492 3.45622C7.55739 3.99637 6.09242 5.00629 4.998 6.36327C3.90357 7.72025 3.22681 9.36587 3.04994 11.1002C3.02506 11.3477 2.90882 11.5771 2.72391 11.7435C2.539 11.9099 2.2987 12.0014 2.04994 12.0002C1.90976 12.0009 1.771 11.9721 1.64266 11.9157C1.51432 11.8593 1.39928 11.7766 1.30498 11.6729C1.21069 11.5692 1.13925 11.4468 1.09532 11.3136C1.05138 11.1805 1.03592 11.0397 1.04994 10.9002C1.25995 8.80075 2.06934 6.80601 3.38158 5.1538C4.69381 3.50159 6.45354 2.26164 8.45093 1.58179C10.4483 0.901941 12.5991 0.810879 14.6468 1.31946C16.6945 1.82805 18.5527 2.91482 19.9999 4.45019V3.50019C19.9983 3.35524 20.0282 3.21166 20.0875 3.07941C20.1469 2.94715 20.2343 2.82938 20.3437 2.73426C20.4531 2.63914 20.5818 2.56894 20.7211 2.52852C20.8603 2.4881 21.0066 2.47844 21.1499 2.50019C21.3925 2.54722 21.6107 2.67829 21.7662 2.87034C21.9217 3.0624 22.0045 3.30313 21.9999 3.55019Z"
-        fill="#48B9FF" />
-    <path
-        d="M2.00018 20.45V17C2.00018 16.7348 2.10553 16.4804 2.29307 16.2929C2.48061 16.1054 2.73496 16 3.00018 16H6.50018C6.64513 15.9984 6.78871 16.0283 6.92096 16.0876C7.05322 16.147 7.17098 16.2344 7.2661 16.3438C7.36123 16.4532 7.43143 16.5819 7.47185 16.7211C7.51226 16.8604 7.52193 17.0067 7.50018 17.15C7.45315 17.3926 7.32208 17.6108 7.13002 17.7663C6.93797 17.9218 6.69723 18.0045 6.45018 18H5.30018C6.46493 19.2971 7.98133 20.228 9.66514 20.6797C11.3489 21.1313 13.1277 21.0841 14.7852 20.544C16.4427 20.0038 17.9077 18.9939 19.0021 17.6369C20.0965 16.28 20.7733 14.6343 20.9502 12.9C20.975 12.6525 21.0913 12.4231 21.2762 12.2567C21.4611 12.0903 21.7014 11.9988 21.9502 12C22.0904 11.9993 22.2291 12.0281 22.3574 12.0845C22.4858 12.1409 22.6008 12.2236 22.6951 12.3273C22.7894 12.4311 22.8609 12.5534 22.9048 12.6866C22.9487 12.8197 22.9642 12.9605 22.9502 13.1C22.7402 15.1995 21.9308 17.1942 20.6185 18.8464C19.3063 20.4986 17.5466 21.7386 15.5492 22.4184C13.5518 23.0983 11.401 23.1893 9.35332 22.6807C7.30561 22.1722 5.44737 21.0854 4.00018 19.55V20.5C4.00182 20.645 3.97192 20.7885 3.91257 20.9208C3.85321 21.0531 3.76581 21.1708 3.65642 21.2659C3.54703 21.3611 3.41827 21.4313 3.27905 21.4717C3.13984 21.5121 2.9935 21.5218 2.85018 21.5C2.60759 21.453 2.38937 21.3219 2.23389 21.1299C2.07842 20.9378 1.99566 20.6971 2.00018 20.45Z"
-        fill="#48B9FF" />
-    <path
-        d="M12.3504 11C10.6004 10.65 10.6004 10.35 10.6004 10.1C10.6004 9.85 10.7004 9.8 10.8504 9.65C11.1262 9.5017 11.4377 9.43249 11.7504 9.45C12.3313 9.44496 12.9024 9.6007 13.4004 9.9C13.5016 9.9826 13.6196 10.0422 13.7461 10.0746C13.8727 10.107 14.0048 10.1115 14.1333 10.0877C14.2617 10.0639 14.3835 10.0124 14.49 9.93682C14.5966 9.86124 14.6854 9.76337 14.7504 9.65C14.8361 9.54775 14.8993 9.4286 14.9359 9.30031C14.9725 9.17201 14.9816 9.03744 14.9628 8.90537C14.9439 8.7733 14.8974 8.64668 14.8264 8.53376C14.7553 8.42084 14.6613 8.32416 14.5504 8.25C14.0749 7.95653 13.5495 7.75314 13.0004 7.65V6.5C13.0004 6.23478 12.895 5.98043 12.7075 5.79289C12.5199 5.60536 12.2656 5.5 12.0004 5.5C11.7352 5.5 11.4808 5.60536 11.2933 5.79289C11.1057 5.98043 11.0004 6.23478 11.0004 6.5V7.6C9.50037 7.85 8.50037 8.85 8.50037 10.2C8.50037 11.55 10.1504 12.65 11.7504 12.95C13.3504 13.25 13.4004 13.6 13.4004 13.85C13.4004 14.1 12.8504 14.55 12.1504 14.55C11.4142 14.5645 10.6937 14.3361 10.1004 13.9C9.98926 13.8261 9.8645 13.7752 9.73342 13.7503C9.60234 13.7254 9.4676 13.727 9.33714 13.7549C9.20667 13.7829 9.08312 13.8366 8.97376 13.9131C8.8644 13.9895 8.77145 14.0871 8.70037 14.2C8.62153 14.2938 8.56266 14.4027 8.52738 14.52C8.4921 14.6373 8.48115 14.7606 8.49519 14.8823C8.50923 15.004 8.54798 15.1216 8.60905 15.2278C8.67013 15.334 8.75224 15.4266 8.85037 15.5C9.49375 15.9515 10.2272 16.2585 11.0004 16.4V17.5C11.0004 17.7652 11.1057 18.0196 11.2933 18.2071C11.4808 18.3946 11.7352 18.5 12.0004 18.5C12.2656 18.5 12.5199 18.3946 12.7075 18.2071C12.895 18.0196 13.0004 17.7652 13.0004 17.5V16.4C13.5489 16.3191 14.0663 16.0949 14.5004 15.75C14.8138 15.5199 15.068 15.2185 15.2418 14.8707C15.4157 14.523 15.5043 14.1388 15.5004 13.75C15.5004 11.9 13.8004 11.3 12.3504 11Z"
-        fill="#48B9FF" />
-</svg>
-{% endset %}
-
-
-{% set box_svg %}
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path d="M12.0005 22.2203L21.7705 17.3403V6.59027L12.0005 1.78027L2.23047 6.59027V17.3403L12.0005 22.2203Z"
-        stroke="#FF8B4F" stroke-width="1.5" stroke-miterlimit="10" />
-    <path d="M2.23047 6.58984L12.0005 11.3898V22.2198" stroke="#FF8B4F" stroke-width="1.5" stroke-miterlimit="10" />
-    <path d="M12 22.2198V11.3898L21.77 6.58984" stroke="#FF8B4F" stroke-width="1.5" stroke-miterlimit="10" />
-    <path d="M21.7705 6.58984L12.0005 11.3898L2.23047 6.58984" stroke="#FF8B4F" stroke-width="1.5"
-        stroke-miterlimit="10" />
-</svg>
-{% endset %}
-
-
-
-<div class="space-y-5">
-    <div class="font-roboto flex items-center justify-between border-b border-sc-gray-light-active">
-        <div class="space-y-1">
-            <p class="text-base text-sc-gray-dark">
-                {{'' | today_date}}
-            </p>
-            <p class="font-montserrat text-xl font-medium text-sc-gray-darker">
-                {{ '' | time_now }}
-            </p>
-        </div>
-
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-            <path
-                d="M8 12.5C7.44772 12.5 7 12.9477 7 13.5C7 14.0523 7.44772 14.5 8 14.5H16C16.5523 14.5 17 14.0523 17 13.5C17 12.9477 16.5523 12.5 16 12.5H8Z"
-                fill="#006060" />
-            <path
-                d="M7 17.5C7 16.9477 7.44772 16.5 8 16.5H12C12.5523 16.5 13 16.9477 13 17.5C13 18.0523 12.5523 18.5 12 18.5H8C7.44772 18.5 7 18.0523 7 17.5Z"
-                fill="#006060" />
-            <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M7 2.5C7.55228 2.5 8 2.94772 8 3.5V4.5H16V3.5C16 2.94772 16.4477 2.5 17 2.5C17.5523 2.5 18 2.94772 18 3.5V4.60002C20.2822 5.06329 22 7.08104 22 9.5V17.5C22 20.2614 19.7614 22.5 17 22.5H7C4.23858 22.5 2 20.2614 2 17.5V9.5C2 7.08104 3.71776 5.06329 6 4.60002V3.5C6 2.94772 6.44772 2.5 7 2.5ZM20 10.5H4V17.5C4 19.1569 5.34315 20.5 7 20.5H17C18.6569 20.5 20 19.1569 20 17.5V10.5Z"
-                fill="#006060" />
+    {% set user_svg %}
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="24"
+             height="24"
+             viewBox="0 0 24 24"
+             fill="none">
+            <path d="M15.7148 11.0557C15.5484 10.983 15.382 10.9174 15.2133 10.8564C16.3805 9.91191 17.1258 8.47051 17.1258 6.85801C17.1258 4.02207 14.8195 1.71582 11.9836 1.71582C9.14766 1.71582 6.84141 4.02207 6.84141 6.85801C6.84141 8.47285 7.58906 9.9166 8.75625 10.8588C5.14219 12.1783 2.55469 15.6518 2.55469 19.7182H4.26797C4.26797 15.4643 7.72969 12.0049 11.9813 12.0049C13.043 12.0049 14.0695 12.2158 15.0328 12.6307L15.7148 11.0557ZM11.9836 3.4291C13.875 3.4291 15.4125 4.9666 15.4125 6.85801C15.4125 8.74941 13.875 10.2869 11.9836 10.2869C10.0922 10.2869 8.55469 8.74707 8.55469 6.85801C8.55469 4.96895 10.0922 3.4291 11.9836 3.4291ZM14.3555 14.9182C14.3555 15.1572 14.4867 15.3752 14.6977 15.4854L17.6977 17.0697C17.7914 17.1189 17.8945 17.1447 17.9977 17.1447C18.1008 17.1447 18.2039 17.1189 18.2977 17.0697L21.2977 15.4854C21.5086 15.3729 21.6398 15.1549 21.6398 14.9182C21.6398 14.6814 21.5086 14.4611 21.2977 14.351L18.2977 12.7643C18.1102 12.6658 17.8852 12.6658 17.6977 12.7643L14.6977 14.351C14.4867 14.4611 14.3555 14.6791 14.3555 14.9182ZM17.9977 14.0604L19.6219 14.9182L17.9977 15.776L16.3734 14.9182L17.9977 14.0604Z" fill="#752BDF" />
+            <path d="M17.9975 17.8924L14.5521 16.0713L13.9521 17.208L17.9975 19.3455L22.0264 17.2174L21.4264 16.0807L17.9975 17.8924Z" fill="#752BDF" />
+            <path d="M17.9975 19.9545L14.5521 18.1357L13.9521 19.2701L17.9975 21.41L22.0123 19.2865L21.4123 18.1498L17.9975 19.9545Z" fill="#752BDF" />
         </svg>
-    </div>
+    {% endset %}
 
-    <!-- Icon and profile and name -->
-    <div class="flex items-center gap-4 font-roboto">
-        <div class="relative">
-            <img class="w-16 h-16 rounded-full rounded-md-full object-cover object-center"
-                src="{{ current_user.photo }}" alt="" />
-            <span
-                class="-bottom-1 left-11 absolute  w-3.5 h-3.5 bg-[#42CF00] border-1 border-white dark:border-gray-800 rounded-full"></span>
+    {% set dollar_svg %}
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="24"
+             height="24"
+             viewBox="0 0 24 24"
+             fill="none">
+            <path d="M21.9999 3.55019V7.00019C21.9999 7.26541 21.8946 7.51976 21.707 7.7073C21.5195 7.89483 21.2652 8.00019 20.9999 8.00019H17.4999C17.355 8.00183 17.2114 7.97194 17.0791 7.91258C16.9469 7.85323 16.8291 7.76582 16.734 7.65643C16.6389 7.54704 16.5687 7.41828 16.5283 7.27907C16.4878 7.13985 16.4782 6.99351 16.4999 6.85019C16.547 6.60761 16.678 6.38938 16.8701 6.23391C17.0621 6.07844 17.3029 5.99568 17.5499 6.00019H18.6999C17.5352 4.70308 16.0188 3.77216 14.335 3.32055C12.6512 2.86894 10.8724 2.91607 9.21492 3.45622C7.55739 3.99637 6.09242 5.00629 4.998 6.36327C3.90357 7.72025 3.22681 9.36587 3.04994 11.1002C3.02506 11.3477 2.90882 11.5771 2.72391 11.7435C2.539 11.9099 2.2987 12.0014 2.04994 12.0002C1.90976 12.0009 1.771 11.9721 1.64266 11.9157C1.51432 11.8593 1.39928 11.7766 1.30498 11.6729C1.21069 11.5692 1.13925 11.4468 1.09532 11.3136C1.05138 11.1805 1.03592 11.0397 1.04994 10.9002C1.25995 8.80075 2.06934 6.80601 3.38158 5.1538C4.69381 3.50159 6.45354 2.26164 8.45093 1.58179C10.4483 0.901941 12.5991 0.810879 14.6468 1.31946C16.6945 1.82805 18.5527 2.91482 19.9999 4.45019V3.50019C19.9983 3.35524 20.0282 3.21166 20.0875 3.07941C20.1469 2.94715 20.2343 2.82938 20.3437 2.73426C20.4531 2.63914 20.5818 2.56894 20.7211 2.52852C20.8603 2.4881 21.0066 2.47844 21.1499 2.50019C21.3925 2.54722 21.6107 2.67829 21.7662 2.87034C21.9217 3.0624 22.0045 3.30313 21.9999 3.55019Z" fill="#48B9FF" />
+            <path d="M2.00018 20.45V17C2.00018 16.7348 2.10553 16.4804 2.29307 16.2929C2.48061 16.1054 2.73496 16 3.00018 16H6.50018C6.64513 15.9984 6.78871 16.0283 6.92096 16.0876C7.05322 16.147 7.17098 16.2344 7.2661 16.3438C7.36123 16.4532 7.43143 16.5819 7.47185 16.7211C7.51226 16.8604 7.52193 17.0067 7.50018 17.15C7.45315 17.3926 7.32208 17.6108 7.13002 17.7663C6.93797 17.9218 6.69723 18.0045 6.45018 18H5.30018C6.46493 19.2971 7.98133 20.228 9.66514 20.6797C11.3489 21.1313 13.1277 21.0841 14.7852 20.544C16.4427 20.0038 17.9077 18.9939 19.0021 17.6369C20.0965 16.28 20.7733 14.6343 20.9502 12.9C20.975 12.6525 21.0913 12.4231 21.2762 12.2567C21.4611 12.0903 21.7014 11.9988 21.9502 12C22.0904 11.9993 22.2291 12.0281 22.3574 12.0845C22.4858 12.1409 22.6008 12.2236 22.6951 12.3273C22.7894 12.4311 22.8609 12.5534 22.9048 12.6866C22.9487 12.8197 22.9642 12.9605 22.9502 13.1C22.7402 15.1995 21.9308 17.1942 20.6185 18.8464C19.3063 20.4986 17.5466 21.7386 15.5492 22.4184C13.5518 23.0983 11.401 23.1893 9.35332 22.6807C7.30561 22.1722 5.44737 21.0854 4.00018 19.55V20.5C4.00182 20.645 3.97192 20.7885 3.91257 20.9208C3.85321 21.0531 3.76581 21.1708 3.65642 21.2659C3.54703 21.3611 3.41827 21.4313 3.27905 21.4717C3.13984 21.5121 2.9935 21.5218 2.85018 21.5C2.60759 21.453 2.38937 21.3219 2.23389 21.1299C2.07842 20.9378 1.99566 20.6971 2.00018 20.45Z" fill="#48B9FF" />
+            <path d="M12.3504 11C10.6004 10.65 10.6004 10.35 10.6004 10.1C10.6004 9.85 10.7004 9.8 10.8504 9.65C11.1262 9.5017 11.4377 9.43249 11.7504 9.45C12.3313 9.44496 12.9024 9.6007 13.4004 9.9C13.5016 9.9826 13.6196 10.0422 13.7461 10.0746C13.8727 10.107 14.0048 10.1115 14.1333 10.0877C14.2617 10.0639 14.3835 10.0124 14.49 9.93682C14.5966 9.86124 14.6854 9.76337 14.7504 9.65C14.8361 9.54775 14.8993 9.4286 14.9359 9.30031C14.9725 9.17201 14.9816 9.03744 14.9628 8.90537C14.9439 8.7733 14.8974 8.64668 14.8264 8.53376C14.7553 8.42084 14.6613 8.32416 14.5504 8.25C14.0749 7.95653 13.5495 7.75314 13.0004 7.65V6.5C13.0004 6.23478 12.895 5.98043 12.7075 5.79289C12.5199 5.60536 12.2656 5.5 12.0004 5.5C11.7352 5.5 11.4808 5.60536 11.2933 5.79289C11.1057 5.98043 11.0004 6.23478 11.0004 6.5V7.6C9.50037 7.85 8.50037 8.85 8.50037 10.2C8.50037 11.55 10.1504 12.65 11.7504 12.95C13.3504 13.25 13.4004 13.6 13.4004 13.85C13.4004 14.1 12.8504 14.55 12.1504 14.55C11.4142 14.5645 10.6937 14.3361 10.1004 13.9C9.98926 13.8261 9.8645 13.7752 9.73342 13.7503C9.60234 13.7254 9.4676 13.727 9.33714 13.7549C9.20667 13.7829 9.08312 13.8366 8.97376 13.9131C8.8644 13.9895 8.77145 14.0871 8.70037 14.2C8.62153 14.2938 8.56266 14.4027 8.52738 14.52C8.4921 14.6373 8.48115 14.7606 8.49519 14.8823C8.50923 15.004 8.54798 15.1216 8.60905 15.2278C8.67013 15.334 8.75224 15.4266 8.85037 15.5C9.49375 15.9515 10.2272 16.2585 11.0004 16.4V17.5C11.0004 17.7652 11.1057 18.0196 11.2933 18.2071C11.4808 18.3946 11.7352 18.5 12.0004 18.5C12.2656 18.5 12.5199 18.3946 12.7075 18.2071C12.895 18.0196 13.0004 17.7652 13.0004 17.5V16.4C13.5489 16.3191 14.0663 16.0949 14.5004 15.75C14.8138 15.5199 15.068 15.2185 15.2418 14.8707C15.4157 14.523 15.5043 14.1388 15.5004 13.75C15.5004 11.9 13.8004 11.3 12.3504 11Z" fill="#48B9FF" />
+        </svg>
+    {% endset %}
+
+
+    {% set box_svg %}
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="24"
+             height="24"
+             viewBox="0 0 24 24"
+             fill="none">
+            <path d="M12.0005 22.2203L21.7705 17.3403V6.59027L12.0005 1.78027L2.23047 6.59027V17.3403L12.0005 22.2203Z" stroke="#FF8B4F" stroke-width="1.5" stroke-miterlimit="10" />
+            <path d="M2.23047 6.58984L12.0005 11.3898V22.2198" stroke="#FF8B4F" stroke-width="1.5" stroke-miterlimit="10" />
+            <path d="M12 22.2198V11.3898L21.77 6.58984" stroke="#FF8B4F" stroke-width="1.5" stroke-miterlimit="10" />
+            <path d="M21.7705 6.58984L12.0005 11.3898L2.23047 6.58984" stroke="#FF8B4F" stroke-width="1.5" stroke-miterlimit="10" />
+        </svg>
+    {% endset %}
+
+
+
+    <div class="space-y-5">
+        <div class="font-roboto flex items-center justify-between border-b border-sc-gray-light-active">
+            <div class="space-y-1">
+                <p class="text-base text-sc-gray-dark">
+                    {{'' | today_date}}
+                </p>
+                <p class="font-montserrat text-xl font-medium text-sc-gray-darker">
+                    {{ '' | time_now }}
+                </p>
+            </div>
+
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="24"
+                 height="25"
+                 viewBox="0 0 24 25"
+                 fill="none">
+                <path d="M8 12.5C7.44772 12.5 7 12.9477 7 13.5C7 14.0523 7.44772 14.5 8 14.5H16C16.5523 14.5 17 14.0523 17 13.5C17 12.9477 16.5523 12.5 16 12.5H8Z" fill="#008080" />
+                <path d="M7 17.5C7 16.9477 7.44772 16.5 8 16.5H12C12.5523 16.5 13 16.9477 13 17.5C13 18.0523 12.5523 18.5 12 18.5H8C7.44772 18.5 7 18.0523 7 17.5Z" fill="#008080" />
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M7 2.5C7.55228 2.5 8 2.94772 8 3.5V4.5H16V3.5C16 2.94772 16.4477 2.5 17 2.5C17.5523 2.5 18 2.94772 18 3.5V4.60002C20.2822 5.06329 22 7.08104 22 9.5V17.5C22 20.2614 19.7614 22.5 17 22.5H7C4.23858 22.5 2 20.2614 2 17.5V9.5C2 7.08104 3.71776 5.06329 6 4.60002V3.5C6 2.94772 6.44772 2.5 7 2.5ZM20 10.5H4V17.5C4 19.1569 5.34315 20.5 7 20.5H17C18.6569 20.5 20 19.1569 20 17.5V10.5Z" fill="#008080" />
+            </svg>
         </div>
 
-        <div class="dark:text-white">
-            <div class="text-base text-black">
-                {{current_user.first_name}}
+        <!-- Icon and profile and name -->
+        <div class="flex items-center gap-4 font-roboto">
+            <div class="relative">
+                <img class="w-16 h-16 rounded-full rounded-md-full object-cover object-center"
+                     src="{{ current_user.photo }}"
+                     alt="" />
+                <span class="-bottom-1 left-11 absolute  w-3.5 h-3.5 bg-[#42CF00] border-1 border-white dark:border-gray-800 rounded-full"></span>
             </div>
-            <div class="text-xs text-sc-gray-dark dark:text-gray-400">
-                Welcome back
-            </div>
-        </div>
-    </div>
 
-    <!-- Metrics -->
-    <section class="grid grid-cols-2 gap-x-2 gap-y-3">
-        {{
-        metricCard(value="23,000", percent_incr=6, title="Total customers", icon_bg='#CFB9EE4D', svg_icon=user_svg)
-        }}
-
-        {{
-        metricCard(value="₦124,000", percent_incr=22, title="Sales", icon_bg="#DAF1FF4D", svg_icon=dollar_svg)
-        }}
-
-        {{
-        metricCard(value=421, percent_incr=3, title="Active products", icon_bg="#FFDDCC4D", svg_icon=box_svg)
-        }}
-
-        {{
-        metricCard(value="₦99,000", title="Profit", icon_bg="#DAF1FF4D", percent_incr=33, svg_icon=dollar_svg)
-        }}
-    </section>
-
-
-    <!-- filter button -->
-    <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between">
-        <div>
-            <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio"
-                class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                type="button">
-                <svg class="w-3 h-3 text-gray-500 dark:text-gray-400 me-3" aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                        d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z" />
-                </svg>
-                Last 30 days
-                <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 10 6">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="m1 1 4 4 4-4" />
-                </svg>
-            </button>
-            <!-- Dropdown menu -->
-            <div id="dropdownRadio"
-                class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
-                data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top"
-                style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(522.5px, 3847.5px, 0px);">
-                <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
-                    aria-labelledby="dropdownRadioButton">
-                    <li>
-                        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                            <input id="filter-radio-example-1" type="radio" value="" name="filter-radio"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="filter-radio-example-1"
-                                class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last
-                                day</label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                            <input checked="" id="filter-radio-example-2" type="radio" value="" name="filter-radio"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="filter-radio-example-2"
-                                class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last 7
-                                days</label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                            <input id="filter-radio-example-3" type="radio" value="" name="filter-radio"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="filter-radio-example-3"
-                                class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last 30
-                                days</label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                            <input id="filter-radio-example-4" type="radio" value="" name="filter-radio"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="filter-radio-example-4"
-                                class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last
-                                month</label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                            <input id="filter-radio-example-5" type="radio" value="" name="filter-radio"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="filter-radio-example-5"
-                                class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last
-                                year</label>
-                        </div>
-                    </li>
-                </ul>
+            <div class="dark:text-white">
+                <div class="text-base text-black">
+                    {{ current_user.first_name }}
+                </div>
+                <div class="text-xs text-sc-gray-dark dark:text-gray-400">
+                    Welcome back
+                </div>
             </div>
         </div>
+
+        <!-- Metrics -->
+        <section class="grid grid-cols-2 gap-x-2 gap-y-3">
+            {{ metricCard(value="23,000", percent_incr=6, title="Total customers", icon_bg='#CFB9EE4D', svg_icon=user_svg) 
+            }}
+
+            {{ metricCard(value="₦124,000", percent_incr=22, title="Sales", icon_bg="#DAF1FF4D", svg_icon=dollar_svg) 
+            }}
+
+            {{ metricCard(value=421, percent_incr=3, title="Active products", icon_bg="#FFDDCC4D", svg_icon=box_svg) 
+            }}
+
+            {{ metricCard(value="₦99,000", title="Profit", icon_bg="#DAF1FF4D", percent_incr=33, svg_icon=dollar_svg) 
+            }}
+        </section>
+
+
+        <!-- filter button -->
+        <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between">
+            <div>
+                <button id="dropdownRadioButton"
+                        data-dropdown-toggle="dropdownRadio"
+                        class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                        type="button">
+                    <svg class="w-3 h-3 text-gray-500 dark:text-gray-400 me-3"
+                         aria-hidden="true"
+                         xmlns="http://www.w3.org/2000/svg"
+                         fill="currentColor"
+                         viewBox="0 0 20 20">
+                        <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z" />
+                    </svg>
+                    Last 30 days
+                    <svg class="w-2.5 h-2.5 ms-2.5"
+                         aria-hidden="true"
+                         xmlns="http://www.w3.org/2000/svg"
+                         fill="none"
+                         viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                    </svg>
+                </button>
+                <!-- Dropdown menu -->
+                <div id="dropdownRadio"
+                     class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+                     data-popper-reference-hidden=""
+                     data-popper-escaped=""
+                     data-popper-placement="top"
+                     style="position: absolute;
+                            inset: auto auto 0px 0px;
+                            margin: 0px;
+                            transform: translate3d(522.5px, 3847.5px, 0px)">
+                    <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
+                        aria-labelledby="dropdownRadioButton">
+                        <li>
+                            <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                <input id="filter-radio-example-1"
+                                       type="radio"
+                                       value=""
+                                       name="filter-radio"
+                                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                                <label for="filter-radio-example-1"
+                                       class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
+                                    Last
+                                    day
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                <input checked=""
+                                       id="filter-radio-example-2"
+                                       type="radio"
+                                       value=""
+                                       name="filter-radio"
+                                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                                <label for="filter-radio-example-2"
+                                       class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
+                                    Last 7
+                                    days
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                <input id="filter-radio-example-3"
+                                       type="radio"
+                                       value=""
+                                       name="filter-radio"
+                                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                                <label for="filter-radio-example-3"
+                                       class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
+                                    Last 30
+                                    days
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                <input id="filter-radio-example-4"
+                                       type="radio"
+                                       value=""
+                                       name="filter-radio"
+                                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                                <label for="filter-radio-example-4"
+                                       class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
+                                    Last
+                                    month
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                <input id="filter-radio-example-5"
+                                       type="radio"
+                                       value=""
+                                       name="filter-radio"
+                                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                                <label for="filter-radio-example-5"
+                                       class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
+                                    Last
+                                    year
+                                </label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="font-roboto rounded-t-lg  relative overflow-x-auto sm:rounded-lg">
+
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="capitalize text-xs text-white font-normal bg-pc-teal-normal dark:bg-gray-700 dark:text-gray-400">
+                    <tr class="text-sm font-normal">
+                        <th scope="col" class="font-normal px-2 py-4">
+                            Order ID
+                        </th>
+                        <th scope="col" class="font-normal px-2 py-4">
+                            Status
+                        </th>
+                        <th scope="col" class="font-normal px-2 py-4 text-right">
+                            Customer email
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="text-xs leading-5">
+                    {% for order in orders %}
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <th scope="row"
+                                class="px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
+                                <a href="/orders/{{ order.id }}" class="block"> #{{ order.id[:7] }}</a>
+
+                            </th>
+
+                            <th scope="row"
+                                class="px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
+                                <a href="/orders/{{ order.id }}">
+                                    {% if order.stages[0]['status'] == 'completed' and order.stages[4]['status'] == 'pending' %}
+                                        {% set color = "#E28835" %}
+                                        {% set bgcolor = "#E2883510" %}
+                                    {% elif order.stages[4]['status'] == 'completed' %}
+                                        {% set color = "#138F27" %}
+                                        {% set bgcolor = "#138F2710" %}
+                                    {% else %}
+                                        {% set color = "#6E6E6E" %}
+                                        {% set bgcolor = "#6E6E6E10" %}
+                                    {% endif %}
+
+                                    <span style="background-color: {{ bgcolor }};
+                                                 color: {{ color }}"
+                                          class="ms-2 !capitalize tracking-wider bg-[#6E6E6E]/10 max-w-20 text-[#6E6E6E] text-xs px-4 py-1 rounded-md dark:bg-blue-900 dark:text-blue-300">{{order.status
+                                    | lower }}</span>
+
+                                </a>
+                            </th>
+
+                            <th scope="row"
+                                class="text-right px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
+                                <a href="/orders/{{ order.id }}">
+                                    {{ order.user.email }}
+                                </a>
+                            </th>
+
+                        </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
     </div>
-
-    <div class="font-roboto rounded-t-lg  relative overflow-x-auto sm:rounded-lg">
-
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead
-                class="capitalize text-xs text-white font-normal bg-pc-teal-normal dark:bg-gray-700 dark:text-gray-400">
-                <tr class="text-sm font-normal">
-                    <th scope="col" class="font-normal px-2 py-4">
-                        Order ID
-                    </th>
-                    <th scope="col" class="font-normal px-2 py-4">
-                        Status
-                    </th>
-                    <th scope="col" class="font-normal px-2 py-4 text-right">
-                        Customer email
-                    </th>
-                </tr>
-            </thead>
-            <tbody class="text-xs leading-5">
-                {% for order in orders %}
-                <tr
-                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th scope="row" class="px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
-                        <a href="/orders/{{order.id}}" class="block"> #{{order.id[:7]}}</a>
-
-                    </th>
-
-                    <th scope="row" class="px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
-                        <a href="/orders/{{order.id}}">
-                            {% if order.stages[0]['status'] == 'completed' and order.stages[4]['status'] == 'pending' %}
-                            {% set color = '#E28835' %}
-                            {% set bgcolor = '#E2883510' %}
-                            {% elif order.stages[4]['status'] == 'completed' %}
-                            {% set color = '#138F27' %}
-                            {% set bgcolor = '#138F2710' %}
-                            {% else %}
-                            {% set color = '#6E6E6E' %}
-                            {% set bgcolor = '#6E6E6E10' %}
-                            {% endif %}
-
-                            <span style="background-color: {{ bgcolor }}; color: {{color}};"
-                                class="ms-2 !capitalize tracking-wider bg-[#6E6E6E]/10 max-w-20 text-[#6E6E6E] text-xs px-4 py-1 rounded-md dark:bg-blue-900 dark:text-blue-300">{{order.status
-                                | lower }}</span>
-
-                        </a>
-                    </th>
-
-                    <th scope="row"
-                        class="text-right px-2 py-4  text-sc-gray-dark font-normal whitespace-nowrap dark:text-white">
-                        <a href="/orders/{{order.id}}">
-                            {{order.user.email}}
-                        </a>
-                    </th>
-
-                </tr>
-                {% endfor %}
-
-            </tbody>
-        </table>
-    </div>
-
-</div>
 
 {% endblock %}

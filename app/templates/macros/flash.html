@@ -1,17 +1,17 @@
-{% set class = "z-50 text-xs w-full font-Roboto font-medium h-fit flex items-center  px-4 p-2 bg-[#3ff85e]   text-sc-gray-darker" %}
+{% set class = "z-50 text-xs  w-full text-center font-Roboto font-medium h-fit flex items-center justify-center px-4 p-2 bg-pc-teal-normal   text-sc-gray-darker" %}
 
 {% macro toast_success(message) %}
     <div id="toast-success" class="{{ class }}" role="alert">
-        <div class="inline-flex items-center justify-center flex-shrink-0  dark:bg-green-800 dark:text-green-200">
+        <span class="inline-flex items-center justify-center flex-shrink-0  dark:bg-green-800 dark:text-green-200">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
                 <path d="M8.99984 15.4802C12.678 15.4802 15.6598 12.4983 15.6598 8.82016C15.6598 5.14194 12.678 2.16016 8.99984 2.16016C5.32163 2.16016 2.33984 5.14194 2.33984 8.82016C2.33984 12.4983 5.32163 15.4802 8.99984 15.4802Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M9.67103 5.86834C9.66721 6.04277 9.59478 6.20867 9.46943 6.32999C9.34401 6.45132 9.17582 6.51826 9.00136 6.51632C8.87421 6.51208 8.75116 6.47052 8.64748 6.39679C8.54373 6.32306 8.4641 6.22041 8.41838 6.1017C8.37258 5.98298 8.36279 5.85342 8.39022 5.72917C8.41758 5.60492 8.48094 5.49153 8.57238 5.40305C8.66382 5.31458 8.77924 5.25497 8.9043 5.23167C9.02937 5.20836 9.15861 5.22239 9.27575 5.27201C9.3929 5.32163 9.49283 5.40463 9.5631 5.51068C9.63345 5.61672 9.67096 5.74112 9.67103 5.86834ZM8.49023 11.902V8.02838C8.48829 7.96034 8.5001 7.89259 8.52501 7.8293C8.54992 7.76601 8.58736 7.70841 8.63517 7.66003C8.6829 7.61157 8.74 7.57327 8.80293 7.54749C8.86586 7.52172 8.93339 7.5089 9.00136 7.50991C9.06846 7.50984 9.13492 7.52337 9.19662 7.54972C9.25833 7.576 9.31413 7.61452 9.36057 7.66298C9.40701 7.71144 9.44308 7.76875 9.46677 7.83153C9.49046 7.89432 9.50111 7.96128 9.49816 8.02838V11.902C9.49816 11.9681 9.48513 12.0337 9.45986 12.0948C9.43451 12.1559 9.39736 12.2115 9.35056 12.2583C9.30376 12.3051 9.24825 12.3422 9.18712 12.3675C9.12592 12.3929 9.0604 12.4059 8.99423 12.4059C8.92806 12.4059 8.86247 12.3929 8.80134 12.3675C8.74022 12.3422 8.68463 12.3051 8.63783 12.2583C8.59103 12.2115 8.55388 12.1559 8.52861 12.0948C8.50326 12.0337 8.49023 11.9681 8.49023 11.902Z" fill="white"/>
               </svg>
             <span class="sr-only">Check icon</span>
-        </div>
-        <div class="ms-3  text-sc-gray-darker leading-5">
+        </span>
+        <span class="ms-3 tracking-wider text-white leading-5">
             {{ message }}
-        </div>
+        </span>
     </div>
 {% endmacro %}
 

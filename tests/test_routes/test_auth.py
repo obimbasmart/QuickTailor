@@ -13,7 +13,7 @@ def test_register_user(client, new_user: User, _db):
     assert res.status_code == 200
 
     res = client.post('/register/user', data={
-        'first_name': new_user.first_name,
+        'full_name': new_user.first_name + ' ' + new_user.last_name,
         'email': new_user.email,
         'phone_number': new_user.phone_no,
         'password': new_user.password
@@ -26,7 +26,7 @@ def test_register_user(client, new_user: User, _db):
     assert user.first_name == new_user.first_name
 
     # TODO: last name should be from form data not 'good name'
-    assert user.last_name ==  'good name'
+    assert user.last_name ==  'byonic'
     assert user.phone_no == new_user.phone_no
     assert user.email == new_user.email
 

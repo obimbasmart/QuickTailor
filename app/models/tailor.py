@@ -21,7 +21,7 @@ class Tailor(BaseUser, BaseModel):
 
     #basic attrs
     first_name: Mapped[str] = mapped_column(String(128), nullable=False)
-    last_name: Mapped[str] = mapped_column(String(128), nullable=False)
+    last_name: Mapped[str] = mapped_column(String(128), nullable=True)
     email: Mapped[str] = mapped_column(String(128), nullable=False)
     password_hash: Mapped[str] = mapped_column(TEXT(), nullable=False)
     phone_no: Mapped[str] = mapped_column(String
@@ -60,6 +60,7 @@ class Tailor(BaseUser, BaseModel):
     # Password reset attributes
     reset_token: Mapped[str] = mapped_column(String(128), nullable=True)
     reset_token_expires: Mapped[DateTime] = mapped_column(DateTime, nullable=True)
+    otp: Mapped[int] = mapped_column(Integer, nullable=True)
 
     @property
     def is_tailor(self):

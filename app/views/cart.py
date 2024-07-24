@@ -107,7 +107,6 @@ def save_item(product_id=None):
 
     product = Product.query.filter_by(id=product_id).one_or_404()
     saved_items = current_user.saved_items
-    print(current_user.saved_items)
     if saved_items:
         if not product_id in saved_items:
             current_user.saved_items.append(product_id)
@@ -116,6 +115,5 @@ def save_item(product_id=None):
     else:
         current_user.saved_items = [product_id]
 
-    print(current_user.saved_items)
     db.session.commit()
     return "Success"

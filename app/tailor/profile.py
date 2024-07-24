@@ -8,7 +8,6 @@ from flask_login import current_user
 @tailor_required
 def update_availability():
     current_user.is_available = not current_user.is_available
-    print(current_user.is_available)
     db.session.commit()
     return ""
     

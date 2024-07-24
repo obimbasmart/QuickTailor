@@ -28,8 +28,7 @@ class LoginForm(FlaskForm):
             raise ValidationError("Email not registered")
 
 class RegistrationForm(FlaskForm):
-    first_name = StringField('First Name', validators=[DataRequired()])
-    # last_name = StringField('Last Name', validators=[DataRequired()])
+    full_name = StringField('Full Name', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
     phone_number = StringField('Phone Number', validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])

@@ -5,12 +5,18 @@ USER_SIDEBAR_LINKS = [
         "is_protected": 0, "icon_name": "home"},
     {"name": "products", "link": "app_views.get_all_products",
         "is_protected": 0, "icon_name": "products"},
-    {"name": "orders", "link": "app_views.orders",
-        "is_protected": 1, "icon_name": "orders"},
     {"name": "cart", "link": "app_views.view_cart",
         "is_protected": 0, "icon_name": "cart"},
     {"name": "saved", "link": "app_views.saved",
         "is_protected": 0, "icon_name": "saved"},
+    {"name": "orders", "link": "app_views.orders",
+        "is_protected": 1, "icon_name": "orders"},
+    {"name": "notification", "link": "app_views.notifications",
+        "is_protected": 1, "icon_name": "notifications"},
+    {"name": "measurement", "link": "app_views.measurement",
+        "is_protected": 1, "icon_name": "measurements"},
+    {"name": "messages", "link": "app_views.measurement",
+     "is_protected": 1, "icon_name": "messages"},
     {"name": "about us", "link": "app_views.about_us",
         "is_protected": 0, "icon_name": "aboutus"},
     {"name": "how it works", "link": "app_views.how_it_works",
@@ -48,8 +54,8 @@ ADMIN_SIDEBAR_LINKS = [
         "is_protected": 0, "icon_name": "messages"},
     {"name": "account", "link": "tailor_views.account",
         "is_protected": 0, "icon_name": "account"},
-    {"name": "logout", "link": "auth_views.logout",
-        "is_protected": 0, "icon_name": "logout"}
+    # {"name": "logout", "link": "auth_views.logout",
+    #     "is_protected": 0, "icon_name": "logout"}
     # Add more "link"s as needed
 ]
 

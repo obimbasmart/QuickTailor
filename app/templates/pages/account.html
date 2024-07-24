@@ -1,0 +1,468 @@
+{% extends 'page_wrapper.html' %}
+
+{% block page_content %}
+
+    {% set input_styles = "tracking-wider leading-5 font-roboto block p-3  w-full text-sm text-sc-gray-dark bg-transparent rounded-md border-1 border-[#888] appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" %}
+    {% set label_styles = "tracking-wider font-roboto leading-5 absolute text-sm text-sc-gray-darker dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 start-1 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto" %}
+
+
+    {% macro info() %}
+        <h2 class="mb-2 font-roboto tracking-wider text-sc-gray-darker text-sm dark:text-white">
+            Didn't recieve OTP ?
+        </h2>
+
+        <div class="">
+            <ol class="list-decimal list-inside font-roboto text-xs text-sc-gray-dark tracking-wider leading-5">
+                <li class="py-1">
+                    Your email code might take up to 10 minutes to arrive. Please be patient and avoid multiple clicks
+                </li>
+
+                <li class="py-1">
+                    Check your spam/trash folder and ensure your inbox isn't full
+                </li>
+
+                <li class="py-1">
+                    Network issues can delay emails. If needed, resubmit your request or try again after few minutes
+                </li>
+
+                <li class="py-1">
+                    Contact support if issue persist
+                </li>
+            </ol>
+
+        </div>
+    {% endmacro %}
+
+    <div class="font-roboto w-full mb-6  dark:border-gray-700">
+        <ul data-tabs-active-classes="bg-white nav-shadow text-pc-teal-normal hover:text-pc-teal-normal dark:text-purple-500 dark:hover:text-purple-500 border-purple-600 dark:border-purple-500"
+            class="rounded-lg p-1 text-sc-gray-dark grid grid-cols-3 gap-1 text-sm font-medium text-center bg-sc-gray-light"
+            id="default-tab"
+            data-tabs-toggle="#default-tab-content"
+            role="tablist">
+            <li class="" role="presentation">
+                <button class="tracking-wider rounded-md inline-block py-2.5 w-full"
+                        id="profile-tab"
+                        data-tabs-target="#profile"
+                        type="button"
+                        role="tab"
+                        aria-controls="profile"
+                        aria-selected="false">
+                    Account
+                </button>
+            </li>
+            <li class="" role="presentation">
+                <button class="w-full tracking-wider inline-block py-2.5 rounded-md  hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                        id="dashboard-tab"
+                        data-tabs-target="#dashboard"
+                        type="button"
+                        role="tab"
+                        aria-controls="dashboard"
+                        aria-selected="false">
+                    Email
+                </button>
+            </li>
+            <li class="" role="presentation">
+                <button class="w-full rounded-md tracking-wider inline-block py-2.5  hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                        id="settings-tab"
+                        data-tabs-target="#settings"
+                        type="button"
+                        role="tab"
+                        aria-controls="settings"
+                        aria-selected="false">
+                    Password
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div id="default-tab-content">
+        <div class="hidden rounded-lg dark:bg-gray-800"
+             id="profile"
+             role="tabpanel"
+             aria-labelledby="profile-tab">
+            <form novalidate action="" method="post">
+                {{ form.hidden_tag() }}
+
+                <div class="grid grid-cols-1 gap-3">
+                    {% for field in form %}
+                        {% if field.type != 'CSRFTokenField' and field.type != 'SubmitField' and field.type != 'BooleanField' %}
+                            <p class="relative">
+                                <!--  input -->
+                                {% if field.name == 'email' %}
+                                    {{ field(class=input_styles, value=field.default, disabled=True) }}
+                                {% else %}
+                                    {{ field(class=input_styles, value=field.default) }}
+                                {% endif %}
+                                <!-- label -->
+                                {{ field.label(class=label_styles, for="default_outlined") }}
+                                <!-- error message on validate -->
+                                {% for msg in field.errors %}
+                                    {{ error(msg) }}
+                                {% endfor %}
+                            </p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                {{ form.submit(class="my-5 inline-block  text-white  text-sm tracking-wider  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center") }}
+
+
+            </form>
+            {{ info() }}
+        </div>
+        <div class="w-full hidden rounded-lg  dark:bg-gray-800"
+             id="dashboard"
+             role="tabpanel"
+             aria-labelledby="dashboard-tab">
+            <div class="items-center justify-center text-center w-full">
+                <p class="mb-2 text-sc-gray-dark font-roboto text-xs tracking-wider w-full text-center">
+                    Please make sure that your new email address works
+                </p>
+
+
+                <form class="w-full text-center  max-w-sm mx-auto" action="/account/email" method="post" x-data="initForm()">
+                    
+                    {{form.hidden_tag()}}
+                    <div class="grid grid-cols-1">
+                        {% for field in email_reset_form %}
+                            {% if  field.name != 'otp' and field.type != 'CSRFTokenField' and field.type != 'SubmitField' and field.type != 'BooleanField' %}
+                            <p class="relative">
+                                    <!--  input -->
+                                    {{ field(class=input_styles, value=current_user.email) }}
+                                    <!-- label -->
+                                    {{ field.label(class=label_styles, for="default_outlined") }}
+                                    <!-- error message on validate -->
+                                    {% for msg in field.errors %}
+                                        {{ error(msg) }}
+                                    {% endfor %}
+                            </p>
+                            {% endif %}
+                        {% endfor %}
+
+                        <p class="relative">
+                                <input type="hidden" name="otp"  class="{{input_styles}}" :value="code_1 + code_2 + code_3 + code_4 + code_5 + code_6">
+                        </p>
+
+                    </div>
+
+
+                    <button type="button"
+                            id="request-email-code"
+                            hx-post="/account/user/code"
+                            hx-trigger="click"
+                            hx-swap="innerHTML swap:2s"
+                            class="my-5 inline-block   text-pc-teal-normal border-1 border-pc-teal-normal  text-sm tracking-wider hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center">
+                        Request Code
+                    </button>
+
+
+                    <p id="helper-text-explanation"
+                       class="mb-2 text-sc-gray-dark font-roboto text-xs tracking-wider w-full text-center">
+                        Please input the 6 digit code we sent via email.
+                    </p>
+
+                    <div class="grid grid-cols-6 gap-1 mb-2">
+                        <div class="ml-1">
+                            <label for="code-1" class="sr-only">
+                                First code
+                            </label>
+                            <input type="number"
+                                   maxlength="1"
+                                   data-focus-input-init
+                                   data-focus-input-next="code-2"
+                                   x-model="code_1"
+                                   id="code-1"
+                                   class="block w-12 h-10 py-3 text-sm font-extrabold text-center text-sc-gray-dark bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                   required />
+                        </div>
+                        <div>
+                            <label for="code-2" class="sr-only">
+                                Second code
+                            </label>
+                            <input type="number"
+                                   maxlength="1"
+                                   data-focus-input-init
+                                   data-focus-input-prev="code-1"
+                                   data-focus-input-next="code-3"
+                                   x-model="code_2"
+                                   id="code-2"
+                                   class="block w-12 h-10 py-3 text-sm font-extrabold text-center text-sc-gray-dark bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                   required />
+                        </div>
+                        <div>
+                            <label for="code-3" class="sr-only">
+                                Third code
+                            </label>
+                            <input type="number"
+                                   maxlength="1"
+                                   data-focus-input-init
+                                   data-focus-input-prev="code-2"
+                                   data-focus-input-next="code-4"
+                                   x-model="code_3"
+                                   id="code-3"
+                                   class="block w-12 h-10 py-3 text-sm font-extrabold text-center text-sc-gray-dark bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                   required />
+                        </div>
+                        <div>
+                            <label for="code-4" class="sr-only">
+                                Fourth code
+                            </label>
+                            <input type="number"
+                                   maxlength="1"
+                                   data-focus-input-init
+                                   data-focus-input-prev="code-3"
+                                   data-focus-input-next="code-5"
+                                   id="code-4"
+                                   x-model="code_4"
+                                   maxlength="1"
+                                   class="block w-12 h-10 py-3 text-sm font-extrabold text-center text-sc-gray-dark bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                   required />
+                        </div>
+                        <div>
+                            <label for="code-5" class="sr-only">
+                                Fifth code
+                            </label>
+                            <input type="number"
+                                   maxlength="1"
+                                   data-focus-input-init
+                                   data-focus-input-prev="code-4"
+                                   data-focus-input-next="code-6"
+                                   id="code-5"
+                                   x-model="code_5"
+                                   class="block w-12 h-10 py-3 text-sm font-extrabold text-center text-sc-gray-dark bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                   required />
+                        </div>
+                        <div>
+                            <label for="code-6" class="sr-only">
+                                Sixth code
+                            </label>
+                            <input type="number"
+                                   maxlength="1"
+                                   data-focus-input-init
+                                   data-focus-input-prev="code-5"
+                                   x-model="code_6"
+                                   id="code-6"
+                                   class="block w-12 h-10 py-3 text-sm font-extrabold text-center text-sc-gray-dark bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                   required />
+                        </div>
+                    </div>
+
+                    {{ email_reset_form.submit(class="my-5 inline-block  text-white  text-sm tracking-wider  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center") }}
+
+                </form>
+
+
+
+            </div>
+            {{ info() }}
+        </div>
+        <div class="hidden rounded-lg dark:bg-gray-800"
+             id="settings"
+             role="tabpanel"
+             aria-labelledby="settings-tab">
+             <div class="items-center justify-center text-center w-full">
+                <p class="mb-2 text-sc-gray-dark font-roboto text-xs tracking-wider w-full text-center">
+                    Input new password
+                </p>
+
+
+                <form class="w-full text-center  max-w-sm mx-auto" action="/account/password" method="post" x-data="initForm()">
+                    {{password_reset_form.hidden_tag()}}
+                    <div class="grid grid-cols-1 gap-y-2">
+                        {% for field in password_reset_form %}
+                            {% if field.name != 'otp' and field.type != 'CSRFTokenField' and field.type != 'SubmitField' and field.type != 'BooleanField' %}
+                                <p class="relative">
+                                    <!--  input -->
+                                    {{ field(class=input_styles) }}
+                                    <!-- label -->
+                                    {{ field.label(class=label_styles, for="default_outlined") }}
+                                    <!-- error message on validate -->
+                                    {% for msg in field.errors %}
+                                        {{ error(msg) }}
+                                    {% endfor %}
+                                </p>
+                            {% endif %}
+                        {% endfor %}
+
+                        <p class="relative">
+                            <input type="hidden" name="otp"  class="{{input_styles}}" :value="code_21 + code_22 + code_23 + code_24 + code_25 + code_26">
+                    </p>
+
+                    </div>
+
+
+                    <button type="button"
+                            id="request-pwd-code"
+                            hx-post="/account/user/code"
+                            hx-trigger="click"
+                            hx-swap="innerHTML swap:2s"
+                            class="my-5 inline-block   text-pc-teal-normal border-1 border-pc-teal-normal  text-sm tracking-wider hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center">
+                        Request Code
+                    </button>
+
+
+                    <p id="helper-text-explanation"
+                       class="mb-2 text-sc-gray-dark font-roboto text-xs tracking-wider w-full text-center">
+                        Please input the 6 digit code we sent via email.
+                    </p>
+
+                    <div class="grid grid-cols-6 gap-1 mb-2">
+                        <div class="ml-1">
+                            <label for="code-21" class="sr-only">
+                                First code
+                            </label>
+                            <input type="number"
+                                   maxlength="1"
+                                   data-focus-input-init
+                                   data-focus-input-next="code-22"
+                                   x-model="code_21"
+                                   id="code-21"
+                                   class="block w-12 h-10 py-3 text-sm font-extrabold text-center text-sc-gray-dark bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                   required />
+                        </div>
+                        <div>
+                            <label for="code-22" class="sr-only">
+                                Second code
+                            </label>
+                            <input type="number"
+                                   maxlength="1"
+                                   data-focus-input-init
+                                   data-focus-input-prev="code-21"
+                                   data-focus-input-next="code-23"
+                                   x-model="code_22"
+                                   id="code-22"
+                                   class="block w-12 h-10 py-3 text-sm font-extrabold text-center text-sc-gray-dark bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                   required />
+                        </div>
+                        <div>
+                            <label for="code-23" class="sr-only">
+                                Third code
+                            </label>
+                            <input type="number"
+                                   maxlength="1"
+                                   data-focus-input-init
+                                   data-focus-input-prev="code-22"
+                                   data-focus-input-next="code-24"
+                                   x-model="code_23"
+                                   id="code-23"
+                                   class="block w-12 h-10 py-3 text-sm font-extrabold text-center text-sc-gray-dark bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                   required />
+                        </div>
+                        <div>
+                            <label for="code-24" class="sr-only">
+                                Fourth code
+                            </label>
+                            <input type="number"
+                                   maxlength="1"
+                                   data-focus-input-init
+                                   data-focus-input-prev="code-23"
+                                   data-focus-input-next="code-25"
+                                   id="code-24"
+                                   x-model="code_24"
+                                   maxlength="1"
+                                   class="block w-12 h-10 py-3 text-sm font-extrabold text-center text-sc-gray-dark bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                   required />
+                        </div>
+                        <div>
+                            <label for="code-25" class="sr-only">
+                                Fifth code
+                            </label>
+                            <input type="number"
+                                   maxlength="1"
+                                   data-focus-input-init
+                                   data-focus-input-prev="code-24"
+                                   data-focus-input-next="code-26"
+                                   id="code-25"
+                                   x-model="code_25"
+                                   class="block w-12 h-10 py-3 text-sm font-extrabold text-center text-sc-gray-dark bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                   required />
+                        </div>
+                        <div>
+                            <label for="code-26" class="sr-only">
+                                Sixth code
+                            </label>
+                            <input type="number"
+                                   maxlength="1"
+                                   data-focus-input-init
+                                   data-focus-input-prev="code-25"
+                                   x-model="code_26"
+                                   id="code-26"
+                                   class="block w-12 h-10 py-3 text-sm font-extrabold text-center text-sc-gray-dark bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                   required />
+                        </div>
+                    </div>
+
+                    {{ password_reset_form.submit(class="my-5 inline-block  text-white  text-sm tracking-wider  w-full bg-gradient-to-r from-pc-teal-normal to-pc-teal-normal  hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center") }}
+
+
+                </form>
+
+
+
+            </div>
+            {{ info() }}
+        </div>
+    </div>
+
+    <script>
+
+            function initForm() {
+                return {
+                    code_1: '',
+                    code_2: '',
+                    code_3: '',
+                    code_4: '',
+                    code_5: '',
+                    code_6: '',
+                    code_21: '',
+                    code_22: '',
+                    code_23: '',
+                    code_24: '',
+                    code_25: '',
+                    code_26: '',
+
+                    getCode() {
+                        return code_1 + code_2 + code_3 + code_4 + code_5 + code_6
+                    }
+                }
+            }
+
+            // use this simple function to automatically focus on the next input
+            function focusNextInput(el, prevId, nextId) {
+                if (el.value.length === 0) {
+                    if (prevId) {
+                        document.getElementById(prevId).focus();
+                    }
+                } else {
+                    if (nextId) {
+                        document.getElementById(nextId).focus();
+                    }
+                }
+            }
+
+            document.querySelectorAll('[data-focus-input-init]').forEach(function(element) {
+                element.addEventListener('keyup', function() {
+                    const prevId = this.getAttribute('data-focus-input-prev');
+                    const nextId = this.getAttribute('data-focus-input-next');
+                    focusNextInput(this, prevId, nextId);
+                });
+            });
+
+            document.body.addEventListener('htmx:beforeRequest', function(event) {
+            const targetId = event.target.id;
+            if ( targetId === 'request-email-code' || targetId === 'request-pwd-code') {
+                event.target.innerHTML = `<div>
+                        <svg aria-hidden="true"
+                            class="w-5 h-5 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                            viewBox="0 0 100 101"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
+                            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
+                        </svg>
+                    </div>`;
+            }
+            });
+
+    </script>
+
+{% endblock %}

@@ -2,7 +2,7 @@
 
 """ Password reset routes """
 from app.auth import auth_views
-from app.forms.reset_forms import ResetForm,  ResetPasswordForm
+from app.forms.reset_forms import ResetEmailForm,  ResetPasswordForm
 from app.models.user import User
 from app.models.tailor import Tailor
 from flask import (render_template, flash,  redirect, url_for)
@@ -15,7 +15,7 @@ from email_service.sendgrid import send_password_reset_email
 @auth_views.route("/password_reset", methods=["GET", "POST"])
 def password_reset():
     """ first route for reseting password """
-    form = ResetForm()
+    form = ResetEmailForm()
     if form.validate_on_submit():
 
         email = form.email.data

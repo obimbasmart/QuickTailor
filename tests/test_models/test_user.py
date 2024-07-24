@@ -9,7 +9,7 @@ def test_new_user(new_user):
     """
     assert new_user.email == 'obimbasmartchukwunenye@gmail.com'
     assert new_user.first_name == 'oleg'
-    assert new_user.last_name ==  'byonic'
+    assert new_user.last_name ==  "byonic"
     assert new_user.is_tailor == False
     assert new_user.password_hash != 'very_strong_pwd'
     

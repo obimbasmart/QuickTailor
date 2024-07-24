@@ -51,7 +51,3 @@ def register():
 @app_views.route('/about')
 def about_us():
     return render_template('pages/about_us.html')
-
-
-
-

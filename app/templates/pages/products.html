@@ -26,7 +26,7 @@
                xmlns="http://www.w3.org/2000/svg"
                fill="none"
                viewBox="0 0 20 20">
-            <path stroke="#006060" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+            <path stroke="#008080" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
           </svg>
         </button>
       </div>
@@ -52,10 +52,9 @@
 
   {{ loadingState() }}
 
-  {{
-    promotion("Create Your Perfect Outfit!",
+  {{ promotion("Create Your Perfect Outfit!",
     "Connect with top tailors for custom designs",
-    bg_img="bg-tailor-img-3", button_name="Discover more", opacity=40, with_button=False)
+    bg_img="bg-tailor-img-3", button_name="Discover more", opacity=40, with_button=False) 
   }}
 
   {{ productsContainer("", products, form=crsf, current_user=current_user) 
@@ -64,8 +63,8 @@
 
   <section class="mt-4">
     {{ promotion("Delightful Kids' Styles",
-    "Explore custom outfits for children, tailored to fit perfectly and keep them looking adorable.",
-    'bg-kids-img') }}
+        "Explore custom outfits for children, tailored to fit perfectly and keep them looking adorable.",
+        'bg-kids-img') }}
   </section>
 
 {% endblock %}
